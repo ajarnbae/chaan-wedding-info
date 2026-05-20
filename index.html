@@ -4,89 +4,204 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Chaan Wedding — สถานที่จัดงานแต่งงาน</title>
-<meta name="description" content="Chaan Wedding Venue — สถานที่จัดงานแต่งงานในฝัน 3 โซน 3 บรรยากาศ">
+<meta name="description" content="Chaan Wedding Venue — สถานที่จัดงานแต่งงาน 3 โซน 3 บรรยากาศ">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./css/style.css">
+<style>
+  /* Page-specific minimal-homepage styles */
+  .hero-mini {
+    background: linear-gradient(180deg, #FFFCF7 0%, #FBF6EF 60%, #F4EBDC 100%);
+    padding: 80px 16px 60px;
+    text-align: center;
+    position: relative;
+  }
+  .hero-mini::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 20% 20%, rgba(216, 180, 115, 0.10) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 80%, rgba(216, 180, 115, 0.10) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-mini__content { position: relative; max-width: 720px; margin: 0 auto; z-index: 1; }
+  .hero-mini__script { font-family: var(--font-script); font-size: clamp(2.5rem, 7vw, 3.6rem); color: var(--color-gold); line-height: 1; margin-bottom: -8px; }
+  .hero-mini h1 { font-size: clamp(2.2rem, 5.5vw, 3.4rem); letter-spacing: 3px; margin-bottom: 8px; }
+  .hero-mini__sub { color: var(--color-text-muted); font-size: 1.05rem; max-width: 560px; margin: 0 auto 28px; }
+  .hero-mini__ctas { display:flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+  /* Quick category cards — minimal, icon + text, no big images */
+  .cat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  @media (min-width: 720px) { .cat-grid { grid-template-columns: repeat(4, 1fr); } }
+  .cat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 26px 14px;
+    background: var(--color-ivory);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: inherit;
+  }
+  .cat-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-gold);
+    box-shadow: var(--shadow-md);
+    color: inherit;
+  }
+  .cat-card__icon {
+    width: 52px; height: 52px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-cream-warm), var(--color-gold-light));
+    border-radius: 50%;
+    color: var(--color-brown-dark);
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+  .cat-card__title { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 500; color: var(--color-brown-dark); margin-bottom: 4px; }
+  .cat-card__hint { font-size: 0.82rem; color: var(--color-text-muted); margin: 0; }
+
+  /* Featured strip — single highlight card */
+  .featured-strip {
+    background: var(--color-ivory);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-line);
+  }
+  @media (min-width: 720px) { .featured-strip { grid-template-columns: 0.9fr 1.1fr; } }
+  .featured-strip__img { aspect-ratio: 16/10; background: var(--color-line); }
+  .featured-strip__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .featured-strip__body { padding: 28px 24px; display: flex; flex-direction: column; justify-content: center; }
+  .featured-strip__badge { display: inline-block; background: var(--color-gold); color: #fff; font-size: 0.7rem; letter-spacing: 2px; padding: 4px 10px; border-radius: 999px; text-transform: uppercase; font-weight: 600; align-self: flex-start; margin-bottom: 10px; }
+  .featured-strip__price { font-family: var(--font-serif); font-size: 1.7rem; color: var(--color-brown-dark); margin: 8px 0 16px; }
+  .featured-strip__price small { font-family: var(--font-sans); font-size: 0.8rem; color: var(--color-text-muted); display:block; }
+
+  /* "Why us" strip — text-based, no extra imagery */
+  .why-strip {
+    background: var(--color-brown-dark);
+    color: var(--color-cream);
+    padding: 48px 16px;
+    margin-top: 24px;
+  }
+  .why-grid {
+    max-width: 960px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    text-align: center;
+  }
+  @media (min-width: 640px) { .why-grid { grid-template-columns: repeat(3, 1fr); } }
+  .why-num { font-family: var(--font-script); color: var(--color-gold-light); font-size: 2.5rem; line-height: 1; margin-bottom: 6px; }
+  .why-h { font-family: var(--font-serif); font-size: 1.2rem; color: #fff; margin-bottom: 6px; }
+  .why-p { color: rgba(251, 246, 239, 0.78); font-size: 0.95rem; margin: 0; line-height: 1.6; }
+</style>
 </head>
 <body>
 
 <div id="nav-mount"></div>
 
-<!-- HERO -->
-<section class="hero" id="hero">
-  <div class="hero__content">
-    <span class="hero__eyebrow">Welcome to</span>
-    <h1>Chaan Wedding Venue</h1>
-    <p id="heroTagline">สถานที่จัดงานแต่งงานในฝัน 3 โซน 3 บรรยากาศ พร้อมให้คุณวาดฝันวันสำคัญ</p>
-    <div style="margin-top: 24px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+<!-- HERO (minimal, no background image — clean gradient) -->
+<section class="hero-mini">
+  <div class="hero-mini__content">
+    <div class="hero-mini__script">Chaan</div>
+    <h1>WEDDING VENUE</h1>
+    <p class="hero-mini__sub" id="heroSub">สถานที่จัดงานแต่งงาน 3 โซน 3 บรรยากาศ พร้อมบริการครบครันในที่เดียว</p>
+    <div class="hero-mini__ctas">
       <a href="./packages/" class="btn btn--primary">ดูแพ็คเกจทั้งหมด</a>
-      <a href="./gallery/" class="btn btn--light">ดูบรรยากาศสถานที่</a>
+      <a href="#categories" class="btn btn--ghost">เริ่มต้น</a>
     </div>
   </div>
 </section>
 
-<!-- FEATURED HOT PACKAGE -->
+<!-- QUICK NAVIGATION (4 category cards, icon-based, no large images) -->
+<section class="section--tight" id="categories">
+  <div class="container">
+    <div class="section-title" style="margin-bottom: 24px;">
+      <span class="eyebrow">Explore</span>
+      <h2>เลือกข้อมูลที่คุณสนใจ</h2>
+    </div>
+    <div class="cat-grid">
+      <a href="./packages/" class="cat-card">
+        <span class="cat-card__icon">💐</span>
+        <div class="cat-card__title">แพ็คเกจ</div>
+        <p class="cat-card__hint">งานแต่ง / สัมมนา</p>
+      </a>
+      <a href="./venue-fees.html" class="cat-card">
+        <span class="cat-card__icon">🏛️</span>
+        <div class="cat-card__title">ค่าเช่า / บริการเสริม</div>
+        <p class="cat-card__hint">เช่าสถานที่ + add-on</p>
+      </a>
+      <a href="./menu/" class="cat-card">
+        <span class="cat-card__icon">🍽️</span>
+        <div class="cat-card__title">เมนูอาหาร</div>
+        <p class="cat-card__hint">บุฟเฟต์ · จีน · ไทย</p>
+      </a>
+      <a href="./gallery/" class="cat-card">
+        <span class="cat-card__icon">📸</span>
+        <div class="cat-card__title">รูปภาพ</div>
+        <p class="cat-card__hint">3 โซน · 7 พิธี</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PACKAGE (only one image on whole homepage) -->
 <section class="section">
   <div class="container">
     <div class="section-title">
       <span class="eyebrow">Most Popular</span>
       <h2>แพ็คเกจฮิตประจำเดือน</h2>
-      <p class="text-center" style="color:var(--color-text-muted); margin-top:16px;">เลือกแพ็คเกจที่ลูกค้าบ่าวสาวเลือกมากที่สุด พร้อมรายละเอียดครบในที่เดียว</p>
     </div>
-    <div id="featuredMount" class="loading">กำลังโหลดแพ็คเกจ...</div>
+    <div id="featuredMount" class="loading">กำลังโหลด...</div>
   </div>
 </section>
 
-<!-- CATEGORIES -->
-<section class="section" style="background: var(--color-cream-warm);">
-  <div class="container">
-    <div class="section-title">
-      <span class="eyebrow">Explore</span>
-      <h2>หมวดหมู่ข้อมูลทั้งหมด</h2>
+<!-- WHY US — text-based, no images, dark band for visual variety -->
+<section class="why-strip">
+  <div class="why-grid">
+    <div>
+      <div class="why-num">3</div>
+      <div class="why-h">โซนสถานที่</div>
+      <p class="why-p">ในอาคาร · สวนหินสไตล์อังกฤษ · สวนน้ำตก</p>
     </div>
-    <div class="grid grid--2 grid--4">
-      <a href="./packages/" class="card" style="text-decoration:none;color:inherit;">
-        <div class="card__img"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80" alt="Packages"></div>
-        <div class="card__body">
-          <h3 class="card__title">แพ็คเกจ</h3>
-          <p class="card__desc">แพ็คเกจงานแต่งและสัมมนา พร้อมรายละเอียดและการคำนวณราคาตามจำนวนแขก</p>
-        </div>
-      </a>
-      <a href="./venue-fees.html" class="card" style="text-decoration:none;color:inherit;">
-        <div class="card__img"><img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80" alt="Venue Fees"></div>
-        <div class="card__body">
-          <h3 class="card__title">ค่าเช่า / บริการเสริม</h3>
-          <p class="card__desc">เช่าเฉพาะสถานที่ ค่าใช้จ่ายเพิ่มเติม เช่นดอกไม้สด LED ดนตรีสด ฯลฯ</p>
-        </div>
-      </a>
-      <a href="./menu/" class="card" style="text-decoration:none;color:inherit;">
-        <div class="card__img"><img src="https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=80" alt="Menu"></div>
-        <div class="card__body">
-          <h3 class="card__title">เมนูอาหาร</h3>
-          <p class="card__desc">บุฟเฟต์ · โต๊ะจีน · โต๊ะจันทร์ พร้อมรายการอาหารและรูปตัวอย่าง</p>
-        </div>
-      </a>
-      <a href="./gallery/" class="card" style="text-decoration:none;color:inherit;">
-        <div class="card__img"><img src="https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=800&q=80" alt="Gallery"></div>
-        <div class="card__body">
-          <h3 class="card__title">รูปภาพสถานที่</h3>
-          <p class="card__desc">3 โซน: ในอาคาร · สวนหินอังกฤษ · สวนน้ำตก พร้อม filter ตามมุมและเดือน</p>
-        </div>
-      </a>
+    <div>
+      <div class="why-num">5</div>
+      <div class="why-h">ช่วงเวลาให้เลือก</div>
+      <p class="why-p">งานเช้า · เช้าเที่ยง · บ่ายเย็น · เช้าเย็น · เย็น</p>
+    </div>
+    <div>
+      <div class="why-num">50–500</div>
+      <div class="why-h">รองรับจำนวนแขก</div>
+      <p class="why-p">เลือกได้ 13 ขั้น ตั้งแต่งานเล็กถึงงานใหญ่</p>
     </div>
   </div>
 </section>
 
-<!-- ZONES -->
-<section class="section">
-  <div class="container">
+<!-- FINAL CTA — text-based -->
+<section class="section text-center">
+  <div class="container" style="max-width: 600px;">
     <div class="section-title">
-      <span class="eyebrow">Our Venue</span>
-      <h2>3 โซน 3 บรรยากาศ</h2>
+      <span class="eyebrow">Get in touch</span>
+      <h2>พร้อมให้ปรึกษา</h2>
     </div>
-    <div id="zonesMount" class="grid grid--3"></div>
+    <p style="color: var(--color-text-muted); margin-bottom: 24px;">สนใจสอบถามข้อมูลเพิ่มเติม จองเข้าชมสถานที่ หรือเลือกแพ็คเกจที่เหมาะกับงานคุณ</p>
+    <div id="finalCtas" style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;"></div>
   </div>
 </section>
 
@@ -98,10 +213,7 @@
   const data = await CW.mountChrome('home');
   if (!data) return;
 
-  // hero tagline
-  if (data.site?.tagline) document.getElementById('heroTagline').textContent = data.site.description || data.site.tagline;
-  // hero background
-  if (data.site?.heroImage) document.getElementById('hero').style.backgroundImage = `url('${data.site.heroImage}')`;
+  if (data.site?.description) document.getElementById('heroSub').textContent = data.site.description;
 
   // Featured package
   const featuredId = data.featuredPackageId;
@@ -110,22 +222,26 @@
   const featuredMount = document.getElementById('featuredMount');
   if (featured) {
     const season = CW.currentSeason(data.seasonInfo);
-    const price = featured.guestPricing?.['100']?.[season] ?? featured.basePrice100;
+    const cat = CW.findPackageCategory(data, featured.id);
+    const primarySlot = featured.availableTimeSlots?.[0]
+      || data.timeSlots?.[cat]?.[0]?.id;
+    const price = CW.computePrice(featured, primarySlot, season, 100);
+    const slotMeta = (data.timeSlots?.[cat] || []).find(s => s.id === primarySlot);
     featuredMount.classList.remove('loading');
     featuredMount.innerHTML = `
-      <div class="featured">
-        <div class="featured__img"><img src="${CW.escape(featured.image)}" alt="${CW.escape(featured.name)}"></div>
-        <div class="featured__body">
-          <span class="featured__eyebrow">Featured Package</span>
-          <h2 style="margin-top:8px;">${CW.escape(featured.name)}</h2>
-          <p style="color:var(--color-gold-dark); font-style:italic;">${CW.escape(featured.subtitle || '')}</p>
-          <p style="color:var(--color-text-muted);">${CW.escape(featured.longDescription || featured.shortDescription || '')}</p>
-          <div class="featured__price">
-            ${CW.fmtBaht(price)}
-            <small>เริ่มต้นที่ 100 ท่าน · ${season === 'low' ? 'Low Season' : 'High Season'}</small>
+      <div class="featured-strip">
+        <div class="featured-strip__img"><img src="${CW.escape(featured.image)}" alt="${CW.escape(featured.name)}" loading="lazy"></div>
+        <div class="featured-strip__body">
+          <span class="featured-strip__badge">FEATURED</span>
+          <h2 style="margin: 4px 0 6px;">${CW.escape(featured.name)}</h2>
+          <p style="color: var(--color-gold-dark); font-style: italic; margin-bottom: 8px;">${CW.escape(featured.subtitle || '')}</p>
+          <p style="color: var(--color-text-muted); font-size: 0.95rem;">${CW.escape(featured.shortDescription || '')}</p>
+          <div class="featured-strip__price">
+            เริ่ม ${CW.fmtBaht(price)}
+            <small>100 ท่าน · ${slotMeta ? slotMeta.name : ''} · ${season === 'low' ? 'Low Season' : 'High Season'}</small>
           </div>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;">
-            <a href="./packages/detail.html?id=${encodeURIComponent(featured.id)}" class="btn btn--primary">ดูรายละเอียดแพ็คเกจ →</a>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a href="./packages/detail.html?id=${encodeURIComponent(featured.id)}" class="btn btn--primary">ดูรายละเอียด →</a>
             <a href="./packages/" class="btn btn--ghost">ดูแพ็คเกจอื่น</a>
           </div>
         </div>
@@ -134,20 +250,16 @@
     featuredMount.innerHTML = '<div class="empty-state">ยังไม่มีแพ็คเกจฮิต</div>';
   }
 
-  // Zones
-  const zonesMount = document.getElementById('zonesMount');
-  zonesMount.innerHTML = (data.gallery?.zones || []).map(z => {
-    const photo = (data.gallery?.photos || []).find(p => p.zone === z.id);
-    return `
-      <a href="./gallery/?zone=${encodeURIComponent(z.id)}" class="card" style="text-decoration:none;color:inherit;">
-        <div class="card__img"><img src="${CW.escape(photo?.url || data.site.heroImage)}" alt="${CW.escape(z.name)}"></div>
-        <div class="card__body">
-          <h3 class="card__title">${CW.escape(z.name)}</h3>
-          <p class="card__desc">${CW.escape(z.description)}</p>
-          <span style="color:var(--color-gold-dark); font-size:0.9rem;">ดูรูปทั้งหมด →</span>
-        </div>
-      </a>`;
-  }).join('');
+  // Final CTAs (phone, line, facebook)
+  const c = data.site?.contact || {};
+  const ctas = [];
+  if (c.phone) ctas.push(`<a href="tel:${CW.escape(c.phone.replace(/[^\d+]/g, ''))}" class="btn btn--primary">☎ ${CW.escape(c.phone)}</a>`);
+  if (c.line) {
+    const url = c.line.startsWith('http') ? c.line : `https://line.me/R/ti/p/${encodeURIComponent(c.line)}`;
+    ctas.push(`<a href="${CW.escape(url)}" class="btn btn--ghost" target="_blank">💬 LINE</a>`);
+  }
+  if (c.facebook) ctas.push(`<a href="${CW.escape(c.facebook)}" class="btn btn--ghost" target="_blank">f Facebook</a>`);
+  document.getElementById('finalCtas').innerHTML = ctas.join('');
 })();
 </script>
 

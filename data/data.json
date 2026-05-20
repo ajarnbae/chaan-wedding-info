@@ -5,13 +5,13 @@
     "description": "บรรยากาศสุดโรแมนติก พร้อม 3 โซนสไตล์ที่แตกต่าง",
     "logoText": "Chaan",
     "contact": {
-      "phone": "08X-XXX-XXXX",
-      "line": "@chaanwedding",
-      "facebook": "https://facebook.com/chaanwedding",
-      "instagram": "https://instagram.com/chaanwedding",
-      "email": "info@chaanwedding.com",
-      "address": "ที่อยู่ของสถานที่จัดงาน",
-      "mapLink": "https://maps.google.com/?q=Chaan+Wedding"
+      "phone": "090-888-2363",
+      "line": "",
+      "facebook": "https://www.facebook.com/chaandecafewedding/",
+      "instagram": "",
+      "email": "",
+      "address": "Chaan de Cafe & Wedding",
+      "mapLink": "https://share.google/NJtFnLAAq8Vek0JJX"
     },
     "heroImage": "https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80"
   },
@@ -20,8 +20,31 @@
     "lowSeasonLabel": "Low Season (เม.ย. - ก.ค.)",
     "highSeasonLabel": "High Season (ส.ค. - มี.ค.)"
   },
+  "timeSlots": {
+    "wedding": [
+      { "id": "morning",           "name": "งานเช้า",       "hours": "06:00 - 11:00" },
+      { "id": "morning_lunch",     "name": "งานเช้าเที่ยง", "hours": "06:00 - 15:00" },
+      { "id": "afternoon_evening", "name": "งานบ่ายเย็น",   "hours": "14:00 - 22:00" },
+      { "id": "morning_evening",   "name": "งานเช้าเย็น",   "hours": "06:00 - 22:00" },
+      { "id": "evening",           "name": "งานเย็น",       "hours": "18:00 - 22:00" }
+    ],
+    "seminar": [
+      { "id": "half_day", "name": "ครึ่งวัน", "hours": "4 ชั่วโมง" },
+      { "id": "full_day", "name": "เต็มวัน",  "hours": "8 ชั่วโมง" }
+    ]
+  },
+  "ceremonies": [
+    { "id": "sangha",       "name": "พิธีสงฆ์ ตักบาตร" },
+    { "id": "khan_mak",     "name": "พิธีแห่ขันหมาก" },
+    { "id": "ring_elder",   "name": "พิธีสวมแหวน-ไหว้ผู้ใหญ่" },
+    { "id": "bride_pickup", "name": "พิธีรับตัวเจ้าสาว" },
+    { "id": "blessing",     "name": "พิธีรดน้ำสังข์" },
+    { "id": "sending",      "name": "พิธีส่งตัว" },
+    { "id": "reception",    "name": "พิธีฉลองมงคลสมรส" }
+  ],
   "featuredPackageId": "wedding_signature",
   "guestCountTiers": [50, 60, 70, 80, 100, 150, 200, 250, 300, 350, 400, 450, 500],
+  "pricingNote": "ราคาฐานเป็น 100 ท่าน · ระบบจะปรับราคาให้อัตโนมัติตามจำนวนแขกที่เลือก (สามารถใส่ราคาเจาะจงต่อ tier ในหน้า Admin เพื่อ override)",
   "packages": {
     "wedding": [
       {
@@ -29,14 +52,13 @@
         "name": "Signature Wedding Package",
         "subtitle": "แพ็คเกจฮิตที่สุด ครบจบในที่เดียว",
         "shortDescription": "แพ็คเกจงานแต่งสุดพิเศษ ครอบคลุมพิธีทั้งวัน",
-        "longDescription": "แพ็คเกจ Signature ของเรา เหมาะกับคู่บ่าวสาวที่ต้องการประสบการณ์งานแต่งครบทุกพิธีในสถานที่เดียว",
+        "longDescription": "แพ็คเกจ Signature ของเรา เหมาะกับคู่บ่าวสาวที่ต้องการประสบการณ์งานแต่งครบทุกพิธี",
         "image": "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&q=80",
         "isFeatured": true,
         "season": "all",
-        "basePrice100": 250000,
-        "basePrice100Low": 220000,
+        "availableTimeSlots": ["morning", "morning_lunch", "afternoon_evening", "morning_evening", "evening"],
         "includedItems": [
-          "ใช้สถานที่จัดงานทั้งวัน",
+          "ใช้สถานที่จัดงานตามช่วงเวลาที่เลือก",
           "ซุ้มดอกไม้สด หน้างาน",
           "ระบบเสียง + LED Screen",
           "อาหารและเครื่องดื่มสำหรับ 100 ท่าน",
@@ -45,28 +67,22 @@
           "ของชำร่วย 100 ชิ้น"
         ],
         "rituals": [
-          { "id": "morning_ceremony", "name": "พิธีตอนเช้า (สงฆ์/หมั้น/รดน้ำสังข์)", "deductIfRemoved": 15000 },
-          { "id": "thai_procession", "name": "ขบวนแห่ขันหมาก", "deductIfRemoved": 8000 },
-          { "id": "evening_reception", "name": "งานเลี้ยงตอนเย็น", "deductIfRemoved": 30000 },
-          { "id": "champagne_tower", "name": "หอชนแก้ว Champagne Tower", "deductIfRemoved": 5000 }
+          { "id": "morning_ceremony",  "name": "พิธีตอนเช้า (สงฆ์/หมั้น/รดน้ำสังข์)", "deductIfRemoved": 15000 },
+          { "id": "thai_procession",   "name": "ขบวนแห่ขันหมาก",                       "deductIfRemoved": 8000  },
+          { "id": "evening_reception", "name": "งานเลี้ยงตอนเย็น",                    "deductIfRemoved": 30000 },
+          { "id": "champagne_tower",   "name": "หอชนแก้ว Champagne Tower",            "deductIfRemoved": 5000  }
         ],
-        "guestPricing": {
-          "50":  { "high": 150000, "low": 130000 },
-          "60":  { "high": 170000, "low": 150000 },
-          "70":  { "high": 190000, "low": 170000 },
-          "80":  { "high": 210000, "low": 190000 },
-          "100": { "high": 250000, "low": 220000 },
-          "150": { "high": 340000, "low": 300000 },
-          "200": { "high": 430000, "low": 380000 },
-          "250": { "high": 520000, "low": 460000 },
-          "300": { "high": 610000, "low": 540000 },
-          "350": { "high": 700000, "low": 620000 },
-          "400": { "high": 790000, "low": 700000 },
-          "450": { "high": 880000, "low": 780000 },
-          "500": { "high": 970000, "low": 860000 }
+        "basePricing": {
+          "morning":           { "high": 175000, "low": 154000 },
+          "morning_lunch":     { "high": 212500, "low": 187000 },
+          "afternoon_evening": { "high": 237500, "low": 209000 },
+          "morning_evening":   { "high": 250000, "low": 220000 },
+          "evening":           { "high": 200000, "low": 176000 }
         },
+        "guestPricingOverrides": {},
         "availableMenus": ["buffet", "chinese", "thai"],
-        "notes": "ราคาอาจปรับเปลี่ยนได้ตามความต้องการเพิ่มเติม"
+        "availableAddons": ["addon_fresh_flowers", "addon_aisle_flowers", "addon_led_wall", "addon_drone", "addon_live_band", "addon_photographer", "addon_makeup", "addon_drink_unlimited"],
+        "notes": "ราคาเป็นตัวเลขประมาณ จะอัปเดตเป็นราคาจริงเมื่อได้รับข้อมูลจากเจ้าของกิจการ"
       },
       {
         "id": "wedding_classic",
@@ -77,10 +93,9 @@
         "image": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1200&q=80",
         "isFeatured": false,
         "season": "all",
-        "basePrice100": 180000,
-        "basePrice100Low": 160000,
+        "availableTimeSlots": ["morning", "morning_lunch", "afternoon_evening", "morning_evening", "evening"],
         "includedItems": [
-          "ใช้สถานที่จัดงาน 1 วัน",
+          "ใช้สถานที่จัดงาน",
           "ซุ้มดอกไม้",
           "ระบบเสียง",
           "อาหารและเครื่องดื่มสำหรับ 100 ท่าน",
@@ -88,26 +103,20 @@
           "ทีมงานต้อนรับ 2 ท่าน"
         ],
         "rituals": [
-          { "id": "morning_ceremony", "name": "พิธีตอนเช้า", "deductIfRemoved": 10000 },
-          { "id": "thai_procession", "name": "ขบวนแห่ขันหมาก", "deductIfRemoved": 6000 },
-          { "id": "evening_reception", "name": "งานเลี้ยงเย็น", "deductIfRemoved": 25000 }
+          { "id": "morning_ceremony",  "name": "พิธีตอนเช้า",        "deductIfRemoved": 10000 },
+          { "id": "thai_procession",   "name": "ขบวนแห่ขันหมาก",   "deductIfRemoved": 6000  },
+          { "id": "evening_reception", "name": "งานเลี้ยงเย็น",      "deductIfRemoved": 25000 }
         ],
-        "guestPricing": {
-          "50":  { "high": 110000, "low": 95000 },
-          "60":  { "high": 124000, "low": 108000 },
-          "70":  { "high": 138000, "low": 121000 },
-          "80":  { "high": 152000, "low": 134000 },
-          "100": { "high": 180000, "low": 160000 },
-          "150": { "high": 250000, "low": 220000 },
-          "200": { "high": 320000, "low": 280000 },
-          "250": { "high": 390000, "low": 340000 },
-          "300": { "high": 460000, "low": 400000 },
-          "350": { "high": 530000, "low": 460000 },
-          "400": { "high": 600000, "low": 520000 },
-          "450": { "high": 670000, "low": 580000 },
-          "500": { "high": 740000, "low": 640000 }
+        "basePricing": {
+          "morning":           { "high": 126000, "low": 112000 },
+          "morning_lunch":     { "high": 153000, "low": 136000 },
+          "afternoon_evening": { "high": 171000, "low": 152000 },
+          "morning_evening":   { "high": 180000, "low": 160000 },
+          "evening":           { "high": 144000, "low": 128000 }
         },
+        "guestPricingOverrides": {},
         "availableMenus": ["buffet", "chinese"],
+        "availableAddons": ["addon_fresh_flowers", "addon_aisle_flowers", "addon_live_band", "addon_drink_unlimited"],
         "notes": ""
       },
       {
@@ -119,10 +128,9 @@
         "image": "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&q=80",
         "isFeatured": true,
         "season": "low",
-        "basePrice100": 140000,
-        "basePrice100Low": 140000,
+        "availableTimeSlots": ["morning_lunch", "morning_evening", "evening"],
         "includedItems": [
-          "ใช้สถานที่ 1 วัน",
+          "ใช้สถานที่ตามช่วงเวลาที่เลือก",
           "ดอกไม้สดเพิ่มพิเศษ",
           "ระบบเสียง",
           "อาหารและเครื่องดื่ม 100 ท่าน",
@@ -130,25 +138,17 @@
           "ฟรี! Champagne Tower"
         ],
         "rituals": [
-          { "id": "morning_ceremony", "name": "พิธีตอนเช้า", "deductIfRemoved": 10000 },
+          { "id": "morning_ceremony",  "name": "พิธีตอนเช้า",    "deductIfRemoved": 10000 },
           { "id": "evening_reception", "name": "งานเลี้ยงเย็น", "deductIfRemoved": 20000 }
         ],
-        "guestPricing": {
-          "50":  { "high": 140000, "low": 90000 },
-          "60":  { "high": 140000, "low": 100000 },
-          "70":  { "high": 140000, "low": 110000 },
-          "80":  { "high": 140000, "low": 120000 },
-          "100": { "high": 140000, "low": 140000 },
-          "150": { "high": 200000, "low": 195000 },
-          "200": { "high": 260000, "low": 250000 },
-          "250": { "high": 320000, "low": 305000 },
-          "300": { "high": 380000, "low": 360000 },
-          "350": { "high": 440000, "low": 415000 },
-          "400": { "high": 500000, "low": 470000 },
-          "450": { "high": 560000, "low": 525000 },
-          "500": { "high": 620000, "low": 580000 }
+        "basePricing": {
+          "morning_lunch":   { "high": 119000, "low": 119000 },
+          "morning_evening": { "high": 140000, "low": 140000 },
+          "evening":         { "high": 112000, "low": 112000 }
         },
+        "guestPricingOverrides": {},
         "availableMenus": ["buffet", "thai"],
+        "availableAddons": ["addon_fresh_flowers", "addon_drone", "addon_makeup"],
         "notes": "เฉพาะการจองในเดือน เม.ย. - ก.ค. เท่านั้น"
       }
     ],
@@ -162,8 +162,7 @@
         "image": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1200&q=80",
         "isFeatured": false,
         "season": "all",
-        "basePrice100": 35000,
-        "basePrice100Low": 35000,
+        "availableTimeSlots": ["half_day"],
         "includedItems": [
           "ห้องประชุม 4 ชม.",
           "โต๊ะเก้าอี้",
@@ -173,23 +172,13 @@
           "WiFi"
         ],
         "rituals": [],
-        "guestPricing": {
-          "50":  { "high": 25000, "low": 25000 },
-          "60":  { "high": 27000, "low": 27000 },
-          "70":  { "high": 29000, "low": 29000 },
-          "80":  { "high": 31000, "low": 31000 },
-          "100": { "high": 35000, "low": 35000 },
-          "150": { "high": 47000, "low": 47000 },
-          "200": { "high": 60000, "low": 60000 },
-          "250": { "high": 72000, "low": 72000 },
-          "300": { "high": 84000, "low": 84000 },
-          "350": { "high": 96000, "low": 96000 },
-          "400": { "high": 108000, "low": 108000 },
-          "450": { "high": 120000, "low": 120000 },
-          "500": { "high": 132000, "low": 132000 }
+        "basePricing": {
+          "half_day": { "high": 35000, "low": 35000 }
         },
+        "guestPricingOverrides": {},
         "availableMenus": ["buffet"],
-        "notes": "เพิ่ม coffee break ต่อมื้อ +120 บาท/ท่าน"
+        "availableAddons": ["addon_drink_unlimited"],
+        "notes": "ราคาไม่แยกฤดูกาล · เพิ่ม coffee break ต่อมื้อ +120 บาท/ท่าน"
       },
       {
         "id": "seminar_fullday",
@@ -200,8 +189,7 @@
         "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80",
         "isFeatured": false,
         "season": "all",
-        "basePrice100": 65000,
-        "basePrice100Low": 65000,
+        "availableTimeSlots": ["full_day"],
         "includedItems": [
           "ห้องประชุม 8 ชม.",
           "โต๊ะเก้าอี้",
@@ -209,121 +197,35 @@
           "ระบบเสียง + ไมค์ลอย 4 ตัว",
           "Coffee break 2 มื้อ",
           "อาหารกลางวัน 1 มื้อ (บุฟเฟต์)",
-          "WiFi + Notepad+ปากกา"
+          "WiFi + Notepad + ปากกา"
         ],
         "rituals": [],
-        "guestPricing": {
-          "50":  { "high": 45000, "low": 45000 },
-          "60":  { "high": 49000, "low": 49000 },
-          "70":  { "high": 53000, "low": 53000 },
-          "80":  { "high": 57000, "low": 57000 },
-          "100": { "high": 65000, "low": 65000 },
-          "150": { "high": 90000, "low": 90000 },
-          "200": { "high": 115000, "low": 115000 },
-          "250": { "high": 140000, "low": 140000 },
-          "300": { "high": 165000, "low": 165000 },
-          "350": { "high": 190000, "low": 190000 },
-          "400": { "high": 215000, "low": 215000 },
-          "450": { "high": 240000, "low": 240000 },
-          "500": { "high": 265000, "low": 265000 }
+        "basePricing": {
+          "full_day": { "high": 65000, "low": 65000 }
         },
+        "guestPricingOverrides": {},
         "availableMenus": ["buffet", "chinese"],
-        "notes": ""
+        "availableAddons": ["addon_drink_unlimited", "addon_photographer"],
+        "notes": "ราคาไม่แยกฤดูกาล"
       }
     ]
   },
   "venueFees": {
     "rental": [
-      {
-        "id": "venue_only_indoor",
-        "name": "เช่าสถานที่ในอาคาร (เฉพาะสถานที่)",
-        "duration": "1 วัน (8 ชม.)",
-        "price": 50000,
-        "description": "ไม่รวมอาหาร เครื่องดื่ม และอุปกรณ์",
-        "image": "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80"
-      },
-      {
-        "id": "venue_only_english",
-        "name": "เช่าสวนหินสไตล์อังกฤษ",
-        "duration": "1 วัน (8 ชม.)",
-        "price": 40000,
-        "description": "เฉพาะการใช้สถานที่ outdoor",
-        "image": "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&q=80"
-      },
-      {
-        "id": "venue_only_waterfall",
-        "name": "เช่าสวนน้ำตก",
-        "duration": "1 วัน (8 ชม.)",
-        "price": 45000,
-        "description": "เฉพาะการใช้สถานที่ พร้อมน้ำตกธรรมชาติ",
-        "image": "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=800&q=80"
-      },
-      {
-        "id": "prewedding_shoot",
-        "name": "เช่าสถานที่ถ่าย Pre-wedding",
-        "duration": "4 ชม.",
-        "price": 8000,
-        "description": "เช่าใช้พื้นที่ทุกโซน สำหรับการถ่ายภาพ pre-wedding",
-        "image": "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80"
-      }
+      { "id": "venue_only_indoor",    "name": "เช่าสถานที่ในอาคาร (เฉพาะสถานที่)", "duration": "1 วัน (8 ชม.)", "price": 50000, "description": "ไม่รวมอาหาร เครื่องดื่ม และอุปกรณ์", "image": "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80" },
+      { "id": "venue_only_english",   "name": "เช่าสวนหินสไตล์อังกฤษ",                "duration": "1 วัน (8 ชม.)", "price": 40000, "description": "เฉพาะการใช้สถานที่ outdoor", "image": "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&q=80" },
+      { "id": "venue_only_waterfall", "name": "เช่าสวนน้ำตก",                          "duration": "1 วัน (8 ชม.)", "price": 45000, "description": "เฉพาะการใช้สถานที่ พร้อมน้ำตกธรรมชาติ", "image": "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=800&q=80" },
+      { "id": "prewedding_shoot",     "name": "เช่าสถานที่ถ่าย Pre-wedding",         "duration": "4 ชม.",        "price": 8000,  "description": "เช่าใช้พื้นที่ทุกโซน สำหรับการถ่ายภาพ pre-wedding", "image": "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80" }
     ],
     "addons": [
-      {
-        "id": "addon_fresh_flowers",
-        "name": "ดอกไม้สดเพิ่มเติม (ซุ้มใหญ่)",
-        "unit": "ชุด",
-        "price": 15000,
-        "description": "อัปเกรดดอกไม้สดสำหรับซุ้มหน้างาน เพิ่มความหรูหรา"
-      },
-      {
-        "id": "addon_aisle_flowers",
-        "name": "ดอกไม้ประดับทางเดิน",
-        "unit": "ชุด",
-        "price": 8000,
-        "description": "ตกแต่งทางเดินด้วยดอกไม้สดและกลีบกุหลาบ"
-      },
-      {
-        "id": "addon_led_wall",
-        "name": "LED Wall (3x4 ม.)",
-        "unit": "วัน",
-        "price": 25000,
-        "description": "จอ LED ขนาดใหญ่สำหรับฉายภาพ/วิดีโอบ่าวสาว"
-      },
-      {
-        "id": "addon_drone",
-        "name": "ถ่าย Drone",
-        "unit": "ครั้ง",
-        "price": 5000,
-        "description": "ถ่ายภาพมุมสูงด้วย drone professional"
-      },
-      {
-        "id": "addon_live_band",
-        "name": "วง Live Band",
-        "unit": "ชุด",
-        "price": 18000,
-        "description": "วงดนตรีสด 3 ชั่วโมง"
-      },
-      {
-        "id": "addon_photographer",
-        "name": "ช่างภาพและวิดีโอ",
-        "unit": "วัน",
-        "price": 20000,
-        "description": "ทีมช่างภาพและวิดีโอเต็มวัน"
-      },
-      {
-        "id": "addon_makeup",
-        "name": "ช่างแต่งหน้าทำผม",
-        "unit": "ครั้ง",
-        "price": 7000,
-        "description": "ช่างแต่งหน้าทำผมเจ้าสาว+ครอบครัว"
-      },
-      {
-        "id": "addon_drink_unlimited",
-        "name": "เครื่องดื่ม Unlimited 4 ชม.",
-        "unit": "ท่าน",
-        "price": 350,
-        "description": "Soft drink, ชา-กาแฟ, น้ำผลไม้ ไม่จำกัด"
-      }
+      { "id": "addon_fresh_flowers",   "name": "ดอกไม้สดเพิ่มเติม (ซุ้มใหญ่)", "unit": "ชุด",   "price": 15000, "description": "อัปเกรดดอกไม้สดสำหรับซุ้มหน้างาน" },
+      { "id": "addon_aisle_flowers",   "name": "ดอกไม้ประดับทางเดิน",          "unit": "ชุด",   "price": 8000,  "description": "ตกแต่งทางเดินด้วยดอกไม้สดและกลีบกุหลาบ" },
+      { "id": "addon_led_wall",        "name": "LED Wall (3x4 ม.)",            "unit": "วัน",   "price": 25000, "description": "จอ LED ขนาดใหญ่สำหรับฉายภาพ/วิดีโอบ่าวสาว" },
+      { "id": "addon_drone",           "name": "ถ่าย Drone",                    "unit": "ครั้ง", "price": 5000,  "description": "ถ่ายภาพมุมสูงด้วย drone professional" },
+      { "id": "addon_live_band",       "name": "วง Live Band",                  "unit": "ชุด",   "price": 18000, "description": "วงดนตรีสด 3 ชั่วโมง" },
+      { "id": "addon_photographer",    "name": "ช่างภาพและวิดีโอ",              "unit": "วัน",   "price": 20000, "description": "ทีมช่างภาพและวิดีโอเต็มวัน" },
+      { "id": "addon_makeup",          "name": "ช่างแต่งหน้าทำผม",              "unit": "ครั้ง", "price": 7000,  "description": "ช่างแต่งหน้าทำผมเจ้าสาว+ครอบครัว" },
+      { "id": "addon_drink_unlimited", "name": "เครื่องดื่ม Unlimited 4 ชม.",   "unit": "ท่าน",  "price": 350,   "description": "Soft drink, ชา-กาแฟ, น้ำผลไม้ ไม่จำกัด" }
     ]
   },
   "menus": {
@@ -334,80 +236,12 @@
       "icon": "🍽️",
       "image": "https://images.unsplash.com/photo-1555244162-803834f70033?w=1200&q=80",
       "sets": [
-        {
-          "id": "buffet_a",
-          "name": "Buffet Set A",
-          "pricePerPerson": 550,
-          "description": "เซ็ตเริ่มต้น 12 รายการ + ของหวาน",
-          "image": "https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=80",
-          "items": [
-            "ยำสามกรอบ",
-            "ต้มยำกุ้งน้ำข้น",
-            "ผัดไทยกุ้งสด",
-            "ข้าวผัดปู",
-            "แกงเขียวหวานไก่",
-            "ปลาทอดราดน้ำสามรส",
-            "ผัดผักรวมมิตร",
-            "ไก่ทอดเกาหลี",
-            "ขนมจีนน้ำยา",
-            "ของหวานไทยรวม",
-            "ผลไม้ตามฤดูกาล",
-            "น้ำสมุนไพร"
-          ]
-        },
-        {
-          "id": "buffet_b",
-          "name": "Buffet Set B",
-          "pricePerPerson": 750,
-          "description": "เซ็ตพรีเมียม 15 รายการ + ซีฟู้ด",
-          "image": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80",
-          "items": [
-            "สลัดกุ้งย่าง",
-            "ปลาแซลมอนย่างซอสเทอริยากิ",
-            "หอยเชลล์ผัดเนย",
-            "ต้มยำทะเล",
-            "ข้าวอบสับปะรด",
-            "ผัดซีอิ๊วทะเล",
-            "แกงมัสมั่นเนื้อ",
-            "ปูนิ่มทอดกระเทียม",
-            "สเต็กไก่ซอสเห็ด",
-            "พิซซ่าหน้ารวม",
-            "ของหวานนานาชาติ",
-            "ไอศกรีม 3 รสชาติ",
-            "ผลไม้สดรวม",
-            "น้ำผลไม้",
-            "น้ำสมุนไพร"
-          ]
-        },
-        {
-          "id": "buffet_c",
-          "name": "Buffet Set C - Luxury",
-          "pricePerPerson": 1050,
-          "description": "เซ็ตหรู 20 รายการ + Live station + ไวน์",
-          "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80",
-          "items": [
-            "ออร์เดิร์ฟนานาชาติ",
-            "ซุปกุ้งล็อบสเตอร์",
-            "สเต็ก Wagyu A5",
-            "ปลาดิบและซูชิ Premium",
-            "Live station - ผัดไทย",
-            "Live station - ก๋วยเตี๋ยวเรือ",
-            "หอยนางรมสด",
-            "ปูม้าต้ม",
-            "ล็อบสเตอร์อบเนย",
-            "เป็ดปักกิ่ง",
-            "Pasta Truffle",
-            "Risotto ซีฟู้ด",
-            "Cheese platter",
-            "Chocolate fountain",
-            "Crepe station",
-            "Macaron นานาชาติ",
-            "ไอศกรีมพรีเมียม",
-            "ผลไม้สดและแห้ง",
-            "Wine red & white",
-            "Coffee & Tea premium"
-          ]
-        }
+        { "id": "buffet_a", "name": "Buffet Set A",           "pricePerPerson": 550,  "description": "เซ็ตเริ่มต้น 12 รายการ + ของหวาน",      "image": "https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=80",
+          "items": ["ยำสามกรอบ","ต้มยำกุ้งน้ำข้น","ผัดไทยกุ้งสด","ข้าวผัดปู","แกงเขียวหวานไก่","ปลาทอดราดน้ำสามรส","ผัดผักรวมมิตร","ไก่ทอดเกาหลี","ขนมจีนน้ำยา","ของหวานไทยรวม","ผลไม้ตามฤดูกาล","น้ำสมุนไพร"] },
+        { "id": "buffet_b", "name": "Buffet Set B",           "pricePerPerson": 750,  "description": "เซ็ตพรีเมียม 15 รายการ + ซีฟู้ด",         "image": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80",
+          "items": ["สลัดกุ้งย่าง","ปลาแซลมอนย่างซอสเทอริยากิ","หอยเชลล์ผัดเนย","ต้มยำทะเล","ข้าวอบสับปะรด","ผัดซีอิ๊วทะเล","แกงมัสมั่นเนื้อ","ปูนิ่มทอดกระเทียม","สเต็กไก่ซอสเห็ด","พิซซ่าหน้ารวม","ของหวานนานาชาติ","ไอศกรีม 3 รส","ผลไม้สดรวม","น้ำผลไม้","น้ำสมุนไพร"] },
+        { "id": "buffet_c", "name": "Buffet Set C - Luxury",  "pricePerPerson": 1050, "description": "เซ็ตหรู 20 รายการ + Live station + ไวน์", "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80",
+          "items": ["ออร์เดิร์ฟนานาชาติ","ซุปกุ้งล็อบสเตอร์","สเต็ก Wagyu","ซูชิ Premium","Live station - ผัดไทย","Live station - ก๋วยเตี๋ยวเรือ","หอยนางรมสด","ปูม้าต้ม","ล็อบสเตอร์อบเนย","เป็ดปักกิ่ง","Pasta Truffle","Risotto ซีฟู้ด","Cheese platter","Chocolate fountain","Crepe station","Macaron","ไอศกรีมพรีเมียม","ผลไม้สดและแห้ง","Wine red & white","Coffee & Tea premium"] }
       ]
     },
     "chinese": {
@@ -417,163 +251,47 @@
       "icon": "🥢",
       "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=1200&q=80",
       "sets": [
-        {
-          "id": "chinese_a",
-          "name": "โต๊ะจีน Set A",
-          "pricePerTable": 5500,
-          "tableSize": 10,
-          "description": "8 รายการ พร้อมของหวาน",
-          "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
-          "items": [
-            "ออร์เดิร์ฟรวม 4 อย่าง",
-            "ซุปกระเพาะปลา",
-            "ปลานึ่งซีอิ๊ว",
-            "กุ้งทอดมายองเนส",
-            "ไก่ปูพันปีกบาง",
-            "หูฉลามน้ำแดง",
-            "ข้าวผัดปู / บะหมี่อายุยืน",
-            "ของหวานบัวหิมะ"
-          ]
-        },
-        {
-          "id": "chinese_b",
-          "name": "โต๊ะจีน Set B",
-          "pricePerTable": 7500,
-          "tableSize": 10,
-          "description": "10 รายการ มี ซีฟู้ด",
-          "image": "https://images.unsplash.com/photo-1525755662778-989d0524087e?w=800&q=80",
-          "items": [
-            "ออร์เดิร์ฟรวม 5 อย่าง",
-            "ซุปกระเพาะปลาน้ำแดง",
-            "หอยเชลล์อบเนยกระเทียม",
-            "ปลาเก๋านึ่งซีอิ๊ว",
-            "กุ้งล็อบสเตอร์อบเนย",
-            "เป็ดย่างพร้อมแป้ง",
-            "หูฉลามน้ำแดงพิเศษ",
-            "ผัดผักจักรพรรดิ",
-            "ข้าวผัดปู / บะหมี่อายุยืน",
-            "ของหวานนานาชาติรวม"
-          ]
-        },
-        {
-          "id": "chinese_c",
-          "name": "โต๊ะจีน Set C - Premium",
-          "pricePerTable": 9500,
-          "tableSize": 10,
-          "description": "12 รายการ Premium ระดับโรงแรมห้าดาว",
-          "image": "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80",
-          "items": [
-            "ออร์เดิร์ฟพรีเมียม 6 อย่าง",
-            "ซุปรังนกหูฉลาม",
-            "หอยเป๋าฮื้อนึ่ง",
-            "ล็อบสเตอร์อบเนยกระเทียม",
-            "ปลาเก๋าฮ่องกง 2 รส",
-            "เป็ดปักกิ่งสไตล์ Premium",
-            "หูฉลามแห้งพิเศษ",
-            "ไก่จักรพรรดิ",
-            "ผัดผักห้าสี",
-            "ข้าวผัดทะเล / บะหมี่อายุยืน",
-            "ของหวานบัวหิมะ-รังนก",
-            "ผลไม้พรีเมียม"
-          ]
-        }
+        { "id": "chinese_a", "name": "โต๊ะจีน Set A",          "pricePerTable": 5500, "tableSize": 10, "description": "8 รายการ พร้อมของหวาน",          "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
+          "items": ["ออร์เดิร์ฟรวม 4 อย่าง","ซุปกระเพาะปลา","ปลานึ่งซีอิ๊ว","กุ้งทอดมายองเนส","ไก่ปูพันปีกบาง","หูฉลามน้ำแดง","ข้าวผัดปู / บะหมี่อายุยืน","ของหวานบัวหิมะ"] },
+        { "id": "chinese_b", "name": "โต๊ะจีน Set B",          "pricePerTable": 7500, "tableSize": 10, "description": "10 รายการ มีซีฟู้ด",            "image": "https://images.unsplash.com/photo-1525755662778-989d0524087e?w=800&q=80",
+          "items": ["ออร์เดิร์ฟรวม 5 อย่าง","ซุปกระเพาะปลาน้ำแดง","หอยเชลล์อบเนยกระเทียม","ปลาเก๋านึ่งซีอิ๊ว","กุ้งล็อบสเตอร์อบเนย","เป็ดย่างพร้อมแป้ง","หูฉลามน้ำแดงพิเศษ","ผัดผักจักรพรรดิ","ข้าวผัดปู","ของหวานนานาชาติรวม"] },
+        { "id": "chinese_c", "name": "โต๊ะจีน Set C - Premium", "pricePerTable": 9500, "tableSize": 10, "description": "12 รายการ Premium ระดับ 5 ดาว", "image": "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80",
+          "items": ["ออร์เดิร์ฟพรีเมียม 6 อย่าง","ซุปรังนกหูฉลาม","หอยเป๋าฮื้อนึ่ง","ล็อบสเตอร์อบเนยกระเทียม","ปลาเก๋าฮ่องกง 2 รส","เป็ดปักกิ่ง Premium","หูฉลามแห้งพิเศษ","ไก่จักรพรรดิ","ผัดผักห้าสี","ข้าวผัดทะเล","ของหวานบัวหิมะ-รังนก","ผลไม้พรีเมียม"] }
       ]
     },
     "thai": {
       "name": "โต๊ะจันทร์ (อาหารไทย)",
       "shortDescription": "อาหารไทยสไตล์สำรับโบราณ",
-      "description": "โต๊ะจันทร์ - สำรับอาหารไทยโบราณ จัดเสิร์ฟแบบดั้งเดิม 1 สำรับ 8-10 ท่าน",
+      "description": "สำรับอาหารไทยโบราณ จัดเสิร์ฟแบบดั้งเดิม 1 สำรับ 8-10 ท่าน",
       "icon": "🍛",
       "image": "https://images.unsplash.com/photo-1559314809-0d155014e29e?w=1200&q=80",
       "sets": [
-        {
-          "id": "thai_a",
-          "name": "โต๊ะจันทร์ Set A",
-          "pricePerTable": 4500,
-          "tableSize": 10,
-          "description": "สำรับไทยพื้นบ้าน 7 รายการ",
-          "image": "https://images.unsplash.com/photo-1559314809-0d155014e29e?w=800&q=80",
-          "items": [
-            "เมี่ยงคำ",
-            "ต้มข่าไก่",
-            "แกงเขียวหวานเนื้อ",
-            "หมูสะเต๊ะ",
-            "ปลานึ่งมะนาว",
-            "ผัดผักรวม",
-            "ของหวานทับทิมกรอบ"
-          ]
-        },
-        {
-          "id": "thai_b",
-          "name": "โต๊ะจันทร์ Set B",
-          "pricePerTable": 6000,
-          "tableSize": 10,
-          "description": "สำรับไทยภาคกลางคลาสสิก 9 รายการ",
-          "image": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
-          "items": [
-            "ม้าฮ่อ",
-            "ซุปเห็ดหอม",
-            "แกงมัสมั่นเนื้อ",
-            "ฉู่ฉี่กุ้ง",
-            "ผัดเปรี้ยวหวานปลา",
-            "ห่อหมกทะเล",
-            "ผัดผักบุ้งไฟแดง",
-            "ข้าวสวย / ข้าวคลุกกะปิ",
-            "ของหวาน 3 อย่าง"
-          ]
-        }
+        { "id": "thai_a", "name": "โต๊ะจันทร์ Set A", "pricePerTable": 4500, "tableSize": 10, "description": "สำรับไทยพื้นบ้าน 7 รายการ",        "image": "https://images.unsplash.com/photo-1559314809-0d155014e29e?w=800&q=80",
+          "items": ["เมี่ยงคำ","ต้มข่าไก่","แกงเขียวหวานเนื้อ","หมูสะเต๊ะ","ปลานึ่งมะนาว","ผัดผักรวม","ของหวานทับทิมกรอบ"] },
+        { "id": "thai_b", "name": "โต๊ะจันทร์ Set B", "pricePerTable": 6000, "tableSize": 10, "description": "สำรับไทยภาคกลาง 9 รายการ",        "image": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+          "items": ["ม้าฮ่อ","ซุปเห็ดหอม","แกงมัสมั่นเนื้อ","ฉู่ฉี่กุ้ง","ผัดเปรี้ยวหวานปลา","ห่อหมกทะเล","ผัดผักบุ้งไฟแดง","ข้าวสวย","ของหวาน"] }
       ]
     }
   },
   "gallery": {
     "zones": [
-      {
-        "id": "indoor",
-        "name": "ในอาคาร",
-        "description": "ห้องจัดเลี้ยงในร่ม บรรยากาศหรูหรา รองรับได้ถึง 500 ท่าน",
-        "angles": [
-          { "id": "backdrop", "name": "แบ็คดร็อป" },
-          { "id": "stage", "name": "เวที" },
-          { "id": "table", "name": "การจัดโต๊ะ" },
-          { "id": "decor", "name": "การตกแต่งทั่วไป" }
-        ]
-      },
-      {
-        "id": "english-garden",
-        "name": "สวนหินสไตล์อังกฤษ",
-        "description": "สวน outdoor สไตล์ English Garden พร้อมหินตกแต่งและดอกไม้",
-        "angles": [
-          { "id": "backdrop", "name": "แบ็คดร็อป" },
-          { "id": "stage", "name": "เวที" },
-          { "id": "aisle", "name": "ทางเดิน" },
-          { "id": "decor", "name": "การตกแต่งทั่วไป" }
-        ]
-      },
-      {
-        "id": "waterfall-garden",
-        "name": "สวนน้ำตก",
-        "description": "สวน outdoor พร้อมน้ำตกธรรมชาติ บรรยากาศโรแมนติก",
-        "angles": [
-          { "id": "backdrop", "name": "แบ็คดร็อปน้ำตก" },
-          { "id": "stage", "name": "เวทีริมน้ำ" },
-          { "id": "aisle", "name": "ทางเดินสู่น้ำตก" },
-          { "id": "decor", "name": "การตกแต่งทั่วไป" }
-        ]
-      }
+      { "id": "indoor",            "name": "ในอาคาร",          "description": "ห้องจัดเลี้ยงในร่ม บรรยากาศหรูหรา รองรับได้ถึง 500 ท่าน" },
+      { "id": "english-garden",    "name": "สวนหินสไตล์อังกฤษ", "description": "สวน outdoor สไตล์ English Garden พร้อมหินตกแต่งและดอกไม้" },
+      { "id": "waterfall-garden",  "name": "สวนน้ำตก",          "description": "สวน outdoor พร้อมน้ำตกธรรมชาติ บรรยากาศโรแมนติก" }
     ],
     "photos": [
-      { "id": "p1",  "url": "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&q=80", "caption": "แบ็คดร็อปในอาคาร โทนทอง", "zone": "indoor", "angle": "backdrop", "month": "2025-01" },
-      { "id": "p2",  "url": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1200&q=80", "caption": "เวทีในอาคาร", "zone": "indoor", "angle": "stage", "month": "2025-02" },
-      { "id": "p3",  "url": "https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80", "caption": "การจัดโต๊ะแบบกลม", "zone": "indoor", "angle": "table", "month": "2025-02" },
-      { "id": "p4",  "url": "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&q=80", "caption": "ตกแต่งดอกไม้สีพาสเทล", "zone": "indoor", "angle": "decor", "month": "2025-03" },
-      { "id": "p5",  "url": "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1200&q=80", "caption": "สวนหินอังกฤษ ทางเดินดอกไม้", "zone": "english-garden", "angle": "aisle", "month": "2025-04" },
-      { "id": "p6",  "url": "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1200&q=80", "caption": "แบ็คดร็อปสวนอังกฤษ", "zone": "english-garden", "angle": "backdrop", "month": "2025-05" },
-      { "id": "p7",  "url": "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=1200&q=80", "caption": "เวทีสวน outdoor", "zone": "english-garden", "angle": "stage", "month": "2025-05" },
-      { "id": "p8",  "url": "https://images.unsplash.com/photo-1521543387106-b6c43fa70a83?w=1200&q=80", "caption": "บรรยากาศตกแต่งสวน", "zone": "english-garden", "angle": "decor", "month": "2025-06" },
-      { "id": "p9",  "url": "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=1200&q=80", "caption": "น้ำตกธรรมชาติริมเวที", "zone": "waterfall-garden", "angle": "backdrop", "month": "2025-04" },
-      { "id": "p10", "url": "https://images.unsplash.com/photo-1454179083322-198bb4daae41?w=1200&q=80", "caption": "เวทีริมน้ำตก", "zone": "waterfall-garden", "angle": "stage", "month": "2025-07" },
-      { "id": "p11", "url": "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1200&q=80", "caption": "ทางเดินสู่น้ำตก", "zone": "waterfall-garden", "angle": "aisle", "month": "2025-07" },
-      { "id": "p12", "url": "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=1200&q=80", "caption": "การจัดสวนน้ำตก", "zone": "waterfall-garden", "angle": "decor", "month": "2025-08" }
+      { "id": "p1",  "url": "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&q=80", "caption": "ฉลองมงคลสมรสในอาคาร",     "zone": "indoor",           "ceremony": "reception" },
+      { "id": "p2",  "url": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1200&q=80", "caption": "พิธีรดน้ำสังข์ในร่ม",      "zone": "indoor",           "ceremony": "blessing" },
+      { "id": "p3",  "url": "https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80", "caption": "พิธีสงฆ์ในอาคาร",            "zone": "indoor",           "ceremony": "sangha" },
+      { "id": "p4",  "url": "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&q=80", "caption": "พิธีสวมแหวน",                "zone": "indoor",           "ceremony": "ring_elder" },
+      { "id": "p5",  "url": "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1200&q=80", "caption": "พิธีแห่ขันหมาก",             "zone": "english-garden",   "ceremony": "khan_mak" },
+      { "id": "p6",  "url": "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1200&q=80", "caption": "ฉลองมงคลสมรสในสวน",        "zone": "english-garden",   "ceremony": "reception" },
+      { "id": "p7",  "url": "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=1200&q=80", "caption": "พิธีรับตัวเจ้าสาว",          "zone": "english-garden",   "ceremony": "bride_pickup" },
+      { "id": "p8",  "url": "https://images.unsplash.com/photo-1521543387106-b6c43fa70a83?w=1200&q=80", "caption": "พิธีรดน้ำสังข์กลางสวน",      "zone": "english-garden",   "ceremony": "blessing" },
+      { "id": "p9",  "url": "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=1200&q=80", "caption": "ฉลองมงคลสมรสริมน้ำตก",     "zone": "waterfall-garden", "ceremony": "reception" },
+      { "id": "p10", "url": "https://images.unsplash.com/photo-1454179083322-198bb4daae41?w=1200&q=80", "caption": "พิธีส่งตัว",                  "zone": "waterfall-garden", "ceremony": "sending" },
+      { "id": "p11", "url": "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1200&q=80", "caption": "พิธีแห่ขันหมากสวนน้ำตก",     "zone": "waterfall-garden", "ceremony": "khan_mak" },
+      { "id": "p12", "url": "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=1200&q=80", "caption": "พิธีรดน้ำสังข์ริมน้ำตก",       "zone": "waterfall-garden", "ceremony": "blessing" }
     ]
   }
 }

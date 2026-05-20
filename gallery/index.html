@@ -20,7 +20,7 @@
       <span class="eyebrow">Gallery</span>
       <h2>บรรยากาศสถานที่</h2>
       <p class="text-center" style="color:var(--color-text-muted); max-width:640px; margin: 16px auto 0;">
-        เลือกชมรูปภาพตามโซน, มุม, และเดือนของงานจริงที่ผ่านมา
+        เลือกชมรูปภาพตามโซนและประเภทพิธี (เฉพาะพิธีที่มีรูปในโซนนั้นเท่านั้น)
       </p>
     </div>
 
@@ -28,15 +28,9 @@
     <div style="margin-bottom: 8px; font-size:0.85rem; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:1px;">โซน</div>
     <div class="gallery-filters" id="zoneChips"></div>
 
-    <!-- Angle filter (shown when a specific zone is picked) -->
-    <div id="angleSection" style="display:none;">
-      <div style="margin-bottom: 8px; font-size:0.85rem; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:1px;">มุม</div>
-      <div class="gallery-filters" id="angleChips"></div>
-    </div>
-
-    <!-- Month filter -->
-    <div style="margin-bottom: 8px; font-size:0.85rem; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:1px;">เดือน</div>
-    <div class="gallery-filters" id="monthChips"></div>
+    <!-- Ceremony filter -->
+    <div style="margin-bottom: 8px; font-size:0.85rem; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:1px;">ประเภทพิธี</div>
+    <div class="gallery-filters" id="ceremonyChips"></div>
 
     <div id="photoCount" style="color:var(--color-text-muted); font-size:0.9rem; margin-bottom:16px;"></div>
 
@@ -58,71 +52,64 @@
   if (!data) return;
   const photos = data.gallery?.photos || [];
   const zones = data.gallery?.zones || [];
+  const ceremonies = data.ceremonies || [];
 
   let activeZone = CW.qs('zone') || 'all';
-  let activeAngle = 'all';
-  let activeMonth = 'all';
+  let activeCeremony = 'all';
 
+  // Render zone chips
   const zoneChipsEl = document.getElementById('zoneChips');
-  zoneChipsEl.innerHTML = `<button class="chip ${activeZone === 'all' ? 'active' : ''}" data-zone="all">ทั้งหมด</button>` +
+  zoneChipsEl.innerHTML = `<button class="chip ${activeZone === 'all' ? 'active' : ''}" data-zone="all">ทุกโซน</button>` +
     zones.map(z => `<button class="chip ${activeZone === z.id ? 'active' : ''}" data-zone="${z.id}">${CW.escape(z.name)}</button>`).join('');
   zoneChipsEl.querySelectorAll('button').forEach(b => {
     b.addEventListener('click', () => {
       activeZone = b.dataset.zone;
-      activeAngle = 'all';
+      activeCeremony = 'all';
       zoneChipsEl.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
-      renderAngles();
+      renderCeremonyChips();
       render();
     });
   });
 
-  function renderAngles() {
-    const angleSection = document.getElementById('angleSection');
-    if (activeZone === 'all') {
-      angleSection.style.display = 'none';
+  function renderCeremonyChips() {
+    const ceremonyChipsEl = document.getElementById('ceremonyChips');
+    // Find which ceremonies actually have photos in the active zone (or anywhere)
+    const relevantPhotos = activeZone === 'all'
+      ? photos
+      : photos.filter(p => p.zone === activeZone);
+    const ceremoniesWithPhotos = new Set(relevantPhotos.map(p => p.ceremony).filter(Boolean));
+
+    // Only show ceremony chips that have at least 1 photo in this zone
+    const availableCeremonies = ceremonies.filter(c => ceremoniesWithPhotos.has(c.id));
+
+    if (availableCeremonies.length === 0) {
+      ceremonyChipsEl.innerHTML = `<div style="color:var(--color-text-muted); font-size:0.85rem; padding: 4px 0;">ไม่มีรูปในโซนนี้</div>`;
       return;
     }
-    const zone = zones.find(z => z.id === activeZone);
-    if (!zone || !zone.angles?.length) { angleSection.style.display = 'none'; return; }
-    angleSection.style.display = 'block';
-    const angleChipsEl = document.getElementById('angleChips');
-    angleChipsEl.innerHTML = `<button class="chip ${activeAngle === 'all' ? 'active' : ''}" data-angle="all">ทุกมุม</button>` +
-      zone.angles.map(a => `<button class="chip ${activeAngle === a.id ? 'active' : ''}" data-angle="${a.id}">${CW.escape(a.name)}</button>`).join('');
-    angleChipsEl.querySelectorAll('button').forEach(b => {
+
+    ceremonyChipsEl.innerHTML = `<button class="chip ${activeCeremony === 'all' ? 'active' : ''}" data-ceremony="all">ทุกพิธี</button>` +
+      availableCeremonies.map(c => `<button class="chip ${activeCeremony === c.id ? 'active' : ''}" data-ceremony="${c.id}">${CW.escape(c.name)}</button>`).join('');
+
+    ceremonyChipsEl.querySelectorAll('button').forEach(b => {
       b.addEventListener('click', () => {
-        activeAngle = b.dataset.angle;
-        angleChipsEl.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+        activeCeremony = b.dataset.ceremony;
+        ceremonyChipsEl.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
         render();
       });
     });
   }
 
-  // Month chips: derive unique months from photos
-  const allMonths = Array.from(new Set(photos.map(p => p.month).filter(Boolean))).sort();
-  const monthChipsEl = document.getElementById('monthChips');
-  monthChipsEl.innerHTML = `<button class="chip active" data-month="all">ทุกเดือน</button>` +
-    allMonths.map(m => `<button class="chip" data-month="${m}">${formatMonth(m)}</button>`).join('');
-  monthChipsEl.querySelectorAll('button').forEach(b => {
-    b.addEventListener('click', () => {
-      activeMonth = b.dataset.month;
-      monthChipsEl.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
-      render();
-    });
-  });
-
-  function formatMonth(ym) {
-    if (!ym) return ym;
-    const [y, m] = ym.split('-');
-    const monthNames = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
-    const idx = parseInt(m, 10) - 1;
-    return (monthNames[idx] || m) + ' ' + y;
+  function ceremonyName(id) {
+    return ceremonies.find(c => c.id === id)?.name || '';
+  }
+  function zoneName(id) {
+    return zones.find(z => z.id === id)?.name || '';
   }
 
   function render() {
     const filtered = photos.filter(p => {
       if (activeZone !== 'all' && p.zone !== activeZone) return false;
-      if (activeAngle !== 'all' && p.angle !== activeAngle) return false;
-      if (activeMonth !== 'all' && p.month !== activeMonth) return false;
+      if (activeCeremony !== 'all' && p.ceremony !== activeCeremony) return false;
       return true;
     });
     document.getElementById('photoCount').textContent = `แสดง ${filtered.length} รูป`;
@@ -134,7 +121,7 @@
     grid.innerHTML = filtered.map(p => `
       <div class="photo" data-url="${CW.escape(p.url)}">
         <img src="${CW.escape(p.url)}" alt="${CW.escape(p.caption || '')}" loading="lazy">
-        <div class="photo__cap">${CW.escape(p.caption || '')}${p.month ? ' · ' + formatMonth(p.month) : ''}</div>
+        <div class="photo__cap">${CW.escape(p.caption || '')}${p.ceremony ? ' · ' + CW.escape(ceremonyName(p.ceremony)) : ''}</div>
       </div>
     `).join('');
     grid.querySelectorAll('.photo').forEach(el => {
@@ -145,7 +132,7 @@
     });
   }
 
-  renderAngles();
+  renderCeremonyChips();
   render();
 
   document.getElementById('lightbox').addEventListener('click', (e) => {

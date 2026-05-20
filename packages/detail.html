@@ -39,11 +39,20 @@
     return;
   }
 
-  // Determine category
-  const isWedding = (data.packages?.wedding || []).some(p => p.id === pkg.id);
-  let season = CW.qs('season') || CW.currentSeason(data.seasonInfo);
+  const cat = CW.findPackageCategory(data, pkg.id);
+  const isWedding = cat === 'wedding';
+  const allSlots = data.timeSlots?.[cat] || [];
+  const slots = allSlots.filter(s => (pkg.availableTimeSlots || []).includes(s.id));
+
+  let season = (cat === 'seminar') ? 'high' : (CW.qs('season') || CW.currentSeason(data.seasonInfo));
+  let timeSlot = slots[0]?.id;
   let guestCount = '100';
   const removedRituals = new Set();
+
+  // Build addon lookup from venueFees
+  const addonMap = {};
+  (data.venueFees?.addons || []).forEach(a => { addonMap[a.id] = a; });
+  const pkgAddons = (pkg.availableAddons || []).map(id => addonMap[id]).filter(Boolean);
 
   mount.classList.remove('loading');
   mount.innerHTML = `
@@ -76,36 +85,22 @@
             </div>
 
             <div class="panel">
-              <h3><span class="num">2</span> รายการในแพ็คเกจ</h3>
+              <h3><span class="num">2</span> สิ่งที่ได้รับในแพ็คเกจ</h3>
               <ul class="list-check">
                 ${(pkg.includedItems || []).map(i => `<li>${CW.escape(i)}</li>`).join('')}
               </ul>
             </div>
 
             <div class="panel">
-              <h3><span class="num">3</span> ตารางราคาตามจำนวนแขก</h3>
-              <p style="color:var(--color-text-muted); font-size:0.9rem;">
-                คลิกเลือกจำนวนแขกในกล่องคำนวณราคาด้านขวา หรือดูตารางราคาทั้งหมดด้านล่าง
-              </p>
-              <div style="overflow-x:auto;">
-                <table class="t">
-                  <thead><tr>
-                    <th>จำนวนแขก</th>
-                    <th class="num">High Season</th>
-                    <th class="num">Low Season (เม.ย.-ก.ค.)</th>
-                  </tr></thead>
-                  <tbody>
-                    ${(data.guestCountTiers || []).map(n => {
-                      const row = pkg.guestPricing?.[String(n)];
-                      if (!row) return '';
-                      return `<tr>
-                        <td>${n} ท่าน${n === 100 ? ' <span class="badge badge--gold" style="vertical-align:baseline;">ราคาฐาน</span>' : ''}</td>
-                        <td class="num">${CW.fmtBaht(row.high)}</td>
-                        <td class="num">${CW.fmtBaht(row.low)}</td>
-                      </tr>`;
-                    }).join('')}
-                  </tbody>
-                </table>
+              <h3><span class="num">3</span> ช่วงเวลาที่จัดได้</h3>
+              <p style="color:var(--color-text-muted); font-size:0.9rem;">เลือกช่วงเวลาในกล่องคำนวณราคา ราคาจะปรับตามช่วงเวลา</p>
+              <div style="display:grid;grid-template-columns:1fr;gap:8px;">
+                ${slots.map(s => `
+                  <div style="background: var(--color-cream); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--color-line); display:flex; justify-content:space-between; gap: 12px; flex-wrap:wrap;">
+                    <strong>${CW.escape(s.name)}</strong>
+                    <span style="color: var(--color-text-muted);">${CW.escape(s.hours)}</span>
+                  </div>
+                `).join('')}
               </div>
             </div>
 
@@ -113,8 +108,7 @@
               <div class="panel">
                 <h3><span class="num">4</span> ตัดพิธีออก = ลดราคา</h3>
                 <p style="color:var(--color-text-muted);font-size:0.95rem;">
-                  หากต้องการตัดบางพิธีออก สามารถลดราคาตามรายการด้านล่างได้
-                  (เลือกในกล่องคำนวณราคาด้านขวา)
+                  ติ๊กเลือกในกล่องคำนวณราคาด้านขวาเพื่อตัดพิธีและลดราคาทันที
                 </p>
                 <table class="t">
                   <thead><tr><th>พิธี</th><th class="num">ลดราคาเมื่อตัดออก</th></tr></thead>
@@ -129,16 +123,37 @@
               </div>
             ` : ''}
 
+            ${pkgAddons.length ? `
+              <div class="panel">
+                <h3><span class="num">${pkg.rituals?.length ? '5' : '4'}</span> บริการเสริม (เพิ่มได้ตามต้องการ)</h3>
+                <p style="color:var(--color-text-muted);font-size:0.95rem;">บริการเสริมสำหรับแพ็คเกจนี้ — เลือกได้หลายรายการ</p>
+                <div style="display:grid; grid-template-columns: 1fr; gap: 10px;">
+                  ${pkgAddons.map(a => `
+                    <div style="background: var(--color-cream); padding: 14px 16px; border-radius: var(--radius-md); border: 1px solid var(--color-line); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+                      <div>
+                        <strong>${CW.escape(a.name)}</strong>
+                        <div style="font-size:0.85rem; color: var(--color-text-muted);">${CW.escape(a.description || '')}</div>
+                      </div>
+                      <div style="text-align:right; min-width: 120px;">
+                        <div style="color: var(--color-gold-dark); font-weight: 500;">+ ${CW.fmtBaht(a.price)}</div>
+                        <div style="font-size:0.75rem; color: var(--color-text-muted);">ต่อ ${CW.escape(a.unit || 'รายการ')}</div>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            ` : ''}
+
             ${pkg.availableMenus && pkg.availableMenus.length ? `
               <div class="panel">
-                <h3><span class="num">${pkg.rituals?.length ? '5' : '4'}</span> เมนูอาหารที่เลือกได้</h3>
+                <h3><span class="num">${(pkg.rituals?.length ? 1 : 0) + (pkgAddons.length ? 1 : 0) + 4}</span> เมนูอาหารที่เลือกได้</h3>
                 <div style="display:flex;flex-wrap:wrap;gap:12px;">
                   ${pkg.availableMenus.map(m => {
                     const menu = data.menus?.[m];
                     if (!menu) return '';
                     return `
                       <a href="../menu/?type=${encodeURIComponent(m)}" class="card" style="flex:1 1 200px;text-decoration:none;color:inherit;">
-                        <div class="card__img" style="aspect-ratio:4/3;"><img src="${CW.escape(menu.image)}" alt="${CW.escape(menu.name)}"></div>
+                        <div class="card__img" style="aspect-ratio:4/3;"><img src="${CW.escape(menu.image)}" alt="${CW.escape(menu.name)}" loading="lazy"></div>
                         <div class="card__body" style="padding:16px;">
                           <h4 style="margin:0 0 4px;">${menu.icon || ''} ${CW.escape(menu.name)}</h4>
                           <p style="font-size:0.85rem;color:var(--color-text-muted);margin:0;">${CW.escape(menu.shortDescription || '')}</p>
@@ -154,13 +169,24 @@
           <div>
             <div class="price-box" id="priceBox">
               <h4>คำนวณราคา</h4>
+
               <div class="field" style="margin-bottom:12px;">
-                <label style="color:#FFFCF7;opacity:0.85;">ฤดูกาล</label>
-                <div class="toggle" id="seasonTog" style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.25);">
-                  <button data-season="high" style="color:#fff;">High</button>
-                  <button data-season="low" style="color:#fff;">Low</button>
-                </div>
+                <label style="color:#FFFCF7;opacity:0.85;">ช่วงเวลา</label>
+                <select id="slotSelect" style="background: rgba(255,255,255,0.95); color: var(--color-text);">
+                  ${slots.map(s => `<option value="${CW.escape(s.id)}">${CW.escape(s.name)} (${CW.escape(s.hours)})</option>`).join('')}
+                </select>
               </div>
+
+              ${cat === 'wedding' ? `
+                <div class="field" style="margin-bottom:12px;">
+                  <label style="color:#FFFCF7;opacity:0.85;">ฤดูกาล</label>
+                  <div class="toggle" id="seasonTog" style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.25);">
+                    <button data-season="high" style="color:#fff;">High</button>
+                    <button data-season="low" style="color:#fff;">Low</button>
+                  </div>
+                </div>
+              ` : `<div style="font-size:0.85rem; color: var(--color-gold-light); margin-bottom: 12px;">ราคาสัมมนา · ไม่แยก Season</div>`}
+
               <div class="field" style="margin-bottom:12px;">
                 <label style="color:#FFFCF7;opacity:0.85;">จำนวนแขก</label>
                 <select id="guestSelect" style="background: rgba(255,255,255,0.95);color:var(--color-text)">
@@ -189,8 +215,9 @@
               <div class="price-meta">รวมสุทธิ</div>
               <div class="price-num" id="totalPrice" style="color: var(--color-gold-light);">-</div>
 
-              <a class="btn btn--primary btn--block mt-md" href="${CW.escape(data.site?.contact?.line ? 'https://line.me/R/ti/p/' + data.site.contact.line : '#')}" target="_blank">💬 สอบถาม / จองผ่าน LINE</a>
-              ${data.site?.contact?.phone ? `<a class="btn btn--ghost btn--block mt-md" href="tel:${CW.escape(data.site.contact.phone)}" style="border-color:rgba(255,255,255,0.4);color:#fff;">☎ ${CW.escape(data.site.contact.phone)}</a>` : ''}
+              ${data.site?.contact?.line ? `<a class="btn btn--primary btn--block mt-md" href="${CW.escape(data.site.contact.line.startsWith('http') ? data.site.contact.line : 'https://line.me/R/ti/p/' + encodeURIComponent(data.site.contact.line))}" target="_blank">💬 สอบถาม / จองผ่าน LINE</a>` : ''}
+              ${data.site?.contact?.phone ? `<a class="btn ${data.site?.contact?.line ? 'btn--ghost' : 'btn--primary'} btn--block mt-md" href="tel:${CW.escape(data.site.contact.phone.replace(/[^\\d+]/g, ''))}" style="${data.site?.contact?.line ? 'border-color:rgba(255,255,255,0.4);color:#fff;' : ''}">☎ ${CW.escape(data.site.contact.phone)}</a>` : ''}
+              ${data.site?.contact?.facebook ? `<a class="btn btn--ghost btn--block mt-md" href="${CW.escape(data.site.contact.facebook)}" target="_blank" style="border-color:rgba(255,255,255,0.4);color:#fff;">f Facebook</a>` : ''}
             </div>
           </div>
         </div>
@@ -199,13 +226,19 @@
   `;
 
   // Wire up calculator
-  document.querySelectorAll('#seasonTog button').forEach(b => {
-    b.classList.toggle('active', b.dataset.season === season);
-    b.addEventListener('click', () => {
-      season = b.dataset.season;
-      document.querySelectorAll('#seasonTog button').forEach(x => x.classList.toggle('active', x === b));
-      recalc();
+  if (cat === 'wedding') {
+    document.querySelectorAll('#seasonTog button').forEach(b => {
+      b.classList.toggle('active', b.dataset.season === season);
+      b.addEventListener('click', () => {
+        season = b.dataset.season;
+        document.querySelectorAll('#seasonTog button').forEach(x => x.classList.toggle('active', x === b));
+        recalc();
+      });
     });
+  }
+  document.getElementById('slotSelect').addEventListener('change', e => {
+    timeSlot = e.target.value;
+    recalc();
   });
   document.getElementById('guestSelect').addEventListener('change', e => {
     guestCount = e.target.value;
@@ -216,8 +249,7 @@
   });
 
   function recalc() {
-    const row = pkg.guestPricing?.[guestCount];
-    const base = row ? row[season] : 0;
+    const base = CW.computePrice(pkg, timeSlot, season, Number(guestCount));
     let total = base;
     document.querySelectorAll('#priceBox [data-ritual]:checked').forEach(cb => {
       total -= Number(cb.dataset.deduct || 0);
