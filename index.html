@@ -4,16 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Chaan Wedding — สถานที่จัดงานแต่งงาน</title>
-<meta name="description" content="Chaan Wedding Venue — สถานที่จัดงานแต่งงาน 3 โซน 3 บรรยากาศ">
+<meta name="description" content="Chaan de Cafe &amp; Wedding · สถานที่จัดงานแต่งงาน 3 โซน · โปรร้อนนี้ 99,999 บาท">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./css/style.css">
 <style>
-  /* Page-specific minimal-homepage styles */
   .hero-mini {
     background: linear-gradient(180deg, #FFFCF7 0%, #FBF6EF 60%, #F4EBDC 100%);
-    padding: 80px 16px 60px;
+    padding: 64px 16px 48px;
     text-align: center;
     position: relative;
   }
@@ -26,12 +25,103 @@
     pointer-events: none;
   }
   .hero-mini__content { position: relative; max-width: 720px; margin: 0 auto; z-index: 1; }
-  .hero-mini__script { font-family: var(--font-script); font-size: clamp(2.5rem, 7vw, 3.6rem); color: var(--color-gold); line-height: 1; margin-bottom: -8px; }
-  .hero-mini h1 { font-size: clamp(2.2rem, 5.5vw, 3.4rem); letter-spacing: 3px; margin-bottom: 8px; }
-  .hero-mini__sub { color: var(--color-text-muted); font-size: 1.05rem; max-width: 560px; margin: 0 auto 28px; }
+  .hero-mini__script { font-family: var(--font-script); font-size: clamp(2.4rem, 6.5vw, 3.4rem); color: var(--color-gold); line-height: 1; margin-bottom: -8px; }
+  .hero-mini h1 { font-size: clamp(2rem, 5vw, 3rem); letter-spacing: 3px; margin-bottom: 8px; }
+  .hero-mini__sub { color: var(--color-text-muted); font-size: 1rem; max-width: 560px; margin: 0 auto 24px; }
   .hero-mini__ctas { display:flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 
-  /* Quick category cards — minimal, icon + text, no big images */
+  /* HOT PROMO SPOTLIGHT */
+  .hot-promo {
+    background: linear-gradient(135deg, #5C4534 0%, #8C6C2E 100%);
+    color: #fff;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr;
+    box-shadow: 0 20px 60px rgba(60, 38, 16, 0.25);
+    position: relative;
+  }
+  .hot-promo__badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 3;
+    background: var(--color-rose);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 12px rgba(194, 143, 123, 0.4);
+  }
+  .hot-promo__img { aspect-ratio: 16/10; position: relative; }
+  .hot-promo__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hot-promo__img::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(92,69,52,0) 50%, rgba(92,69,52,0.7) 100%);
+  }
+  .hot-promo__body {
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hot-promo__eyebrow {
+    font-family: var(--font-script);
+    color: var(--color-gold-light);
+    font-size: 1.6rem;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .hot-promo__title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    margin: 0 0 8px;
+    color: #fff;
+  }
+  .hot-promo__sub {
+    color: rgba(255,255,255,0.8);
+    margin: 0 0 16px;
+    font-size: 0.95rem;
+  }
+  .hot-promo__price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin: 8px 0 20px;
+    flex-wrap: wrap;
+  }
+  .hot-promo__price {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--color-gold-light);
+    line-height: 1;
+  }
+  .hot-promo__price-meta {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.75);
+  }
+  .hot-promo__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  .hot-promo__pill {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.9);
+  }
+  .hot-promo__ctas { display: flex; gap: 10px; flex-wrap: wrap; }
+  @media (min-width: 720px) { .hot-promo { grid-template-columns: 1.1fr 1fr; } .hot-promo__img { aspect-ratio: auto; } }
+
+  /* Category cards (minimal) */
   .cat-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -45,7 +135,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 26px 14px;
+    padding: 24px 14px;
     background: var(--color-ivory);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-lg);
@@ -60,43 +150,23 @@
     color: inherit;
   }
   .cat-card__icon {
-    width: 52px; height: 52px;
+    width: 48px; height: 48px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, var(--color-cream-warm), var(--color-gold-light));
     border-radius: 50%;
     color: var(--color-brown-dark);
-    font-size: 1.5rem;
-    margin-bottom: 12px;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
   }
-  .cat-card__title { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 500; color: var(--color-brown-dark); margin-bottom: 4px; }
-  .cat-card__hint { font-size: 0.82rem; color: var(--color-text-muted); margin: 0; }
+  .cat-card__title { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 500; color: var(--color-brown-dark); margin-bottom: 4px; }
+  .cat-card__hint { font-size: 0.78rem; color: var(--color-text-muted); margin: 0; }
 
-  /* Featured strip — single highlight card */
-  .featured-strip {
-    background: var(--color-ivory);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: 1fr;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--color-line);
-  }
-  @media (min-width: 720px) { .featured-strip { grid-template-columns: 0.9fr 1.1fr; } }
-  .featured-strip__img { aspect-ratio: 16/10; background: var(--color-line); }
-  .featured-strip__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .featured-strip__body { padding: 28px 24px; display: flex; flex-direction: column; justify-content: center; }
-  .featured-strip__badge { display: inline-block; background: var(--color-gold); color: #fff; font-size: 0.7rem; letter-spacing: 2px; padding: 4px 10px; border-radius: 999px; text-transform: uppercase; font-weight: 600; align-self: flex-start; margin-bottom: 10px; }
-  .featured-strip__price { font-family: var(--font-serif); font-size: 1.7rem; color: var(--color-brown-dark); margin: 8px 0 16px; }
-  .featured-strip__price small { font-family: var(--font-sans); font-size: 0.8rem; color: var(--color-text-muted); display:block; }
-
-  /* "Why us" strip — text-based, no extra imagery */
   .why-strip {
     background: var(--color-brown-dark);
     color: var(--color-cream);
     padding: 48px 16px;
-    margin-top: 24px;
   }
   .why-grid {
     max-width: 960px;
@@ -116,21 +186,28 @@
 
 <div id="nav-mount"></div>
 
-<!-- HERO (minimal, no background image — clean gradient) -->
+<!-- HERO -->
 <section class="hero-mini">
   <div class="hero-mini__content">
     <div class="hero-mini__script">Chaan</div>
     <h1>WEDDING VENUE</h1>
-    <p class="hero-mini__sub" id="heroSub">สถานที่จัดงานแต่งงาน 3 โซน 3 บรรยากาศ พร้อมบริการครบครันในที่เดียว</p>
+    <p class="hero-mini__sub" id="heroSub">Chaan de Cafe &amp; Wedding · สถานที่จัดงานแต่งงาน 3 โซน 3 บรรยากาศ</p>
     <div class="hero-mini__ctas">
-      <a href="./packages/" class="btn btn--primary">ดูแพ็คเกจทั้งหมด</a>
-      <a href="#categories" class="btn btn--ghost">เริ่มต้น</a>
+      <a href="#promo" class="btn btn--primary">ดูโปรร้อนนี้ 99,999 →</a>
+      <a href="./packages/" class="btn btn--ghost">แพ็คเกจทั้งหมด</a>
     </div>
   </div>
 </section>
 
-<!-- QUICK NAVIGATION (4 category cards, icon-based, no large images) -->
-<section class="section--tight" id="categories">
+<!-- HOT PROMO SPOTLIGHT -->
+<section class="section" id="promo">
+  <div class="container">
+    <div id="featuredMount" class="loading">กำลังโหลดโปรโมชั่น...</div>
+  </div>
+</section>
+
+<!-- QUICK NAVIGATION -->
+<section class="section--tight" style="background: var(--color-cream-warm);">
   <div class="container">
     <div class="section-title" style="margin-bottom: 24px;">
       <span class="eyebrow">Explore</span>
@@ -140,7 +217,7 @@
       <a href="./packages/" class="cat-card">
         <span class="cat-card__icon">💐</span>
         <div class="cat-card__title">แพ็คเกจ</div>
-        <p class="cat-card__hint">งานแต่ง / สัมมนา</p>
+        <p class="cat-card__hint">7 แพ็คเกจงานแต่ง + สัมมนา</p>
       </a>
       <a href="./venue-fees.html" class="cat-card">
         <span class="cat-card__icon">🏛️</span>
@@ -150,7 +227,7 @@
       <a href="./menu/" class="cat-card">
         <span class="cat-card__icon">🍽️</span>
         <div class="cat-card__title">เมนูอาหาร</div>
-        <p class="cat-card__hint">บุฟเฟต์ · จีน · ไทย</p>
+        <p class="cat-card__hint">บุฟเฟต์ · จีน · จันทร์</p>
       </a>
       <a href="./gallery/" class="cat-card">
         <span class="cat-card__icon">📸</span>
@@ -161,18 +238,7 @@
   </div>
 </section>
 
-<!-- FEATURED PACKAGE (only one image on whole homepage) -->
-<section class="section">
-  <div class="container">
-    <div class="section-title">
-      <span class="eyebrow">Most Popular</span>
-      <h2>แพ็คเกจฮิตประจำเดือน</h2>
-    </div>
-    <div id="featuredMount" class="loading">กำลังโหลด...</div>
-  </div>
-</section>
-
-<!-- WHY US — text-based, no images, dark band for visual variety -->
+<!-- WHY US -->
 <section class="why-strip">
   <div class="why-grid">
     <div>
@@ -183,24 +249,24 @@
     <div>
       <div class="why-num">5</div>
       <div class="why-h">ช่วงเวลาให้เลือก</div>
-      <p class="why-p">งานเช้า · เช้าเที่ยง · บ่ายเย็น · เช้าเย็น · เย็น</p>
+      <p class="why-p">งานเช้า · เช้าเที่ยง · บ่ายเย็น · เช้าเย็น · เลี้ยงเย็น</p>
     </div>
     <div>
-      <div class="why-num">50–500</div>
-      <div class="why-h">รองรับจำนวนแขก</div>
-      <p class="why-p">เลือกได้ 13 ขั้น ตั้งแต่งานเล็กถึงงานใหญ่</p>
+      <div class="why-num">7</div>
+      <div class="why-h">แพ็คเกจงานแต่ง</div>
+      <p class="why-p">โปรร้อนนี้ + แพ็คเกจมาตรฐาน + จองข้ามปี</p>
     </div>
   </div>
 </section>
 
-<!-- FINAL CTA — text-based -->
+<!-- FINAL CTA -->
 <section class="section text-center">
   <div class="container" style="max-width: 600px;">
     <div class="section-title">
       <span class="eyebrow">Get in touch</span>
       <h2>พร้อมให้ปรึกษา</h2>
     </div>
-    <p style="color: var(--color-text-muted); margin-bottom: 24px;">สนใจสอบถามข้อมูลเพิ่มเติม จองเข้าชมสถานที่ หรือเลือกแพ็คเกจที่เหมาะกับงานคุณ</p>
+    <p style="color: var(--color-text-muted); margin-bottom: 24px;">สนใจสอบถามหรือจองเข้าชมสถานที่ ติดต่อทางช่องทางด้านล่าง</p>
     <div id="finalCtas" style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;"></div>
   </div>
 </section>
@@ -215,42 +281,52 @@
 
   if (data.site?.description) document.getElementById('heroSub').textContent = data.site.description;
 
-  // Featured package
+  // Featured = the 99,999 promo by default
   const featuredId = data.featuredPackageId;
   const all = [...(data.packages?.wedding || []), ...(data.packages?.seminar || [])];
   const featured = all.find(p => p.id === featuredId) || all[0];
   const featuredMount = document.getElementById('featuredMount');
   if (featured) {
-    const season = CW.currentSeason(data.seasonInfo);
     const cat = CW.findPackageCategory(data, featured.id);
-    const primarySlot = featured.availableTimeSlots?.[0]
-      || data.timeSlots?.[cat]?.[0]?.id;
-    const price = CW.computePrice(featured, primarySlot, season, 100);
-    const slotMeta = (data.timeSlots?.[cat] || []).find(s => s.id === primarySlot);
+    const primarySlot = featured.availableTimeSlots?.[0] || data.timeSlots?.[cat]?.[0]?.id;
+    const season = featured.season === 'low' ? 'low' : 'high';
+    const price = featured.basePricing?.[primarySlot]?.[season] ?? 0;
+    const guestBase = featured.guestBase || 100;
+
+    // Build time slot pills
+    const slots = (data.timeSlots?.[cat] || []).filter(s => (featured.availableTimeSlots || []).includes(s.id));
+
     featuredMount.classList.remove('loading');
     featuredMount.innerHTML = `
-      <div class="featured-strip">
-        <div class="featured-strip__img"><img src="${CW.escape(featured.image)}" alt="${CW.escape(featured.name)}" loading="lazy"></div>
-        <div class="featured-strip__body">
-          <span class="featured-strip__badge">FEATURED</span>
-          <h2 style="margin: 4px 0 6px;">${CW.escape(featured.name)}</h2>
-          <p style="color: var(--color-gold-dark); font-style: italic; margin-bottom: 8px;">${CW.escape(featured.subtitle || '')}</p>
-          <p style="color: var(--color-text-muted); font-size: 0.95rem;">${CW.escape(featured.shortDescription || '')}</p>
-          <div class="featured-strip__price">
-            เริ่ม ${CW.fmtBaht(price)}
-            <small>100 ท่าน · ${slotMeta ? slotMeta.name : ''} · ${season === 'low' ? 'Low Season' : 'High Season'}</small>
+      <div class="hot-promo">
+        <span class="hot-promo__badge">🔥 HOT PROMO</span>
+        <div class="hot-promo__img"><img src="${CW.escape(featured.image)}" alt="${CW.escape(featured.name)}"></div>
+        <div class="hot-promo__body">
+          <span class="hot-promo__eyebrow">โปร ร้อนนี้มาแต่งงานกันเถอะ</span>
+          <h2 class="hot-promo__title">${CW.escape(featured.name)}</h2>
+          <p class="hot-promo__sub">${CW.escape(featured.longDescription || featured.shortDescription || '')}</p>
+          <div class="hot-promo__price-row">
+            <div class="hot-promo__price">${CW.fmtBaht(price)}</div>
+            <div class="hot-promo__price-meta">
+              เริ่ม ${guestBase} ท่าน<br>
+              <small>${CW.escape(featured.notes || '').split('·')[0]}</small>
+            </div>
           </div>
-          <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <a href="./packages/detail.html?id=${encodeURIComponent(featured.id)}" class="btn btn--primary">ดูรายละเอียด →</a>
-            <a href="./packages/" class="btn btn--ghost">ดูแพ็คเกจอื่น</a>
+          <div class="hot-promo__pills">
+            ${slots.map(s => `<span class="hot-promo__pill">${CW.escape(s.name)} · ${CW.escape(s.hours)}</span>`).join('')}
+          </div>
+          <div class="hot-promo__ctas">
+            <a href="./packages/detail.html?id=${encodeURIComponent(featured.id)}" class="btn btn--primary">ดูรายละเอียดเต็ม →</a>
+            <a href="./packages/" class="btn btn--ghost" style="border-color: var(--color-gold-light); color: var(--color-gold-light);">แพ็คเกจอื่น ๆ</a>
           </div>
         </div>
-      </div>`;
+      </div>
+    `;
   } else {
-    featuredMount.innerHTML = '<div class="empty-state">ยังไม่มีแพ็คเกจฮิต</div>';
+    featuredMount.innerHTML = '<div class="empty-state">ยังไม่มีโปรโมชั่น</div>';
   }
 
-  // Final CTAs (phone, line, facebook)
+  // Final CTAs
   const c = data.site?.contact || {};
   const ctas = [];
   if (c.phone) ctas.push(`<a href="tel:${CW.escape(c.phone.replace(/[^\d+]/g, ''))}" class="btn btn--primary">☎ ${CW.escape(c.phone)}</a>`);
@@ -259,6 +335,7 @@
     ctas.push(`<a href="${CW.escape(url)}" class="btn btn--ghost" target="_blank">💬 LINE</a>`);
   }
   if (c.facebook) ctas.push(`<a href="${CW.escape(c.facebook)}" class="btn btn--ghost" target="_blank">f Facebook</a>`);
+  if (c.mapLink) ctas.push(`<a href="${CW.escape(c.mapLink)}" class="btn btn--ghost" target="_blank">📍 แผนที่</a>`);
   document.getElementById('finalCtas').innerHTML = ctas.join('');
 })();
 </script>

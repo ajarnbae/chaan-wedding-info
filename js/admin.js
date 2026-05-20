@@ -174,11 +174,16 @@ function renderPackages(root, type, title) {
       id: type + '_' + Date.now(),
       name: 'แพ็คเกจใหม่',
       subtitle: '', shortDescription: '', longDescription: '',
-      image: '', isFeatured: false, season: 'all',
+      image: '', isFeatured: false, isPromo: false, season: 'all',
       availableTimeSlots: defaultSlots,
-      includedItems: [], rituals: [],
-      basePricing, guestPricingOverrides: {},
-      availableMenus: [], availableAddons: [],
+      guestBase: 100,
+      includedSections: [], rituals: [],
+      basePricing,
+      crossYearDiscount: 0,
+      overflowPricing: {},
+      freeBonuses: [],
+      customerProvides: [],
+      availableMenus: [], allowedMenuSetIds: [], availableAddons: [],
       notes: ''
     });
     persist(); render();
@@ -250,40 +255,30 @@ function renderPackages(root, type, title) {
         </table>
       </details>
 
-      <details style="margin-top:8px;">
-        <summary style="cursor:pointer;color:var(--color-gold-dark);font-weight:500;">🎯 Override ราคาเฉพาะ tier (เลือกใช้)</summary>
-        <p style="color:var(--color-text-muted); font-size: 0.85rem; margin: 8px 0;">เว้นว่าง = ให้ระบบคำนวณจาก base × (n/100) อัตโนมัติ · ใส่ตัวเลขเพื่อ override</p>
-        <div style="overflow-x:auto;">
-          <table class="t" style="font-size: 0.85rem;">
-            <thead><tr>
-              <th>จำนวน</th>
-              ${allSlots.filter(s => (p.availableTimeSlots||[]).includes(s.id)).map(s => `<th colspan="2">${esc(s.name)}<br><small style="color:var(--color-text-muted);">H · L</small></th>`).join('')}
-            </tr></thead>
-            <tbody>
-              ${(DATA.guestCountTiers || []).map(n => {
-                const slotCells = allSlots.filter(s => (p.availableTimeSlots||[]).includes(s.id)).map(s => {
-                  const ov = (p.guestPricingOverrides||{})[s.id]?.[n] || {};
-                  return `
-                    <td><input type="number" style="width:90px;" placeholder="auto" value="${ov.high ?? ''}" oninput="setOverride('${type}', ${idx}, '${s.id}', ${n}, 'high', this.value)"></td>
-                    <td><input type="number" style="width:90px;" placeholder="auto" value="${ov.low ?? ''}" oninput="setOverride('${type}', ${idx}, '${s.id}', ${n}, 'low', this.value)"></td>`;
-                }).join('');
-                return `<tr><td>${n}</td>${slotCells}</tr>`;
-              }).join('')}
-            </tbody>
-          </table>
+      <div class="row" style="margin-top:12px;">
+        <div class="field" style="flex:0 0 200px;"><label>จำนวนแขกเริ่มต้น (guestBase)</label><input type="number" value="${p.guestBase||100}" oninput="DATA.packages['${type}'][${idx}].guestBase = Number(this.value); persist()"></div>
+        <div class="field" style="flex:0 0 200px;"><label>ส่วนลดจองข้ามปี (บาท)</label><input type="number" value="${p.crossYearDiscount||0}" oninput="DATA.packages['${type}'][${idx}].crossYearDiscount = Number(this.value); persist()"></div>
+        <div class="field" style="flex:0 0 120px;"><label>Promo</label>
+          <select onchange="DATA.packages['${type}'][${idx}].isPromo = this.value === 'true'; persist()">
+            <option value="false" ${!p.isPromo?'selected':''}>ไม่</option>
+            <option value="true" ${p.isPromo?'selected':''}>ใช่</option>
+          </select>
         </div>
-      </details>
+      </div>
+      <div class="alert" style="margin-top:12px;font-size:0.85rem;">
+        💡 ข้อมูลซับซ้อน (includedSections, freeBonuses, customerProvides, overflowPricing, allowedMenuSetIds) แก้ผ่าน <strong>{ } JSON ทั้งหมด</strong> ใน sidebar
+      </div>
 
       <details style="margin-top:8px;">
-        <summary style="cursor:pointer;color:var(--color-gold-dark);font-weight:500;">📋 สิ่งที่ได้รับ (${(p.includedItems||[]).length})</summary>
+        <summary style="cursor:pointer;color:var(--color-gold-dark);font-weight:500;">📋 หมวดสิ่งที่ได้รับ (${(p.includedSections||[]).length} หมวด)</summary>
+        <p style="color:var(--color-text-muted);font-size:0.85rem;">รายการอ่านอย่างเดียว — แก้ไขผ่าน Raw JSON</p>
         <div style="margin-top:12px;">
-          ${(p.includedItems || []).map((it, i) => `
-            <div class="row" style="margin-bottom:6px;">
-              <div class="field" style="margin:0;"><input value="${esc(it)}" oninput="DATA.packages['${type}'][${idx}].includedItems[${i}] = this.value; persist()"></div>
-              <button class="btn btn--ghost btn--sm" onclick="delInclItem('${type}', ${idx}, ${i})">×</button>
+          ${(p.includedSections || []).map(sec => `
+            <div style="background:var(--color-cream);padding:10px 14px;border-radius:6px;margin-bottom:6px;border:1px solid var(--color-line);">
+              <strong>${esc(sec.title)}</strong>
+              <div style="font-size:0.8rem;color:var(--color-text-muted);">${(sec.items||[]).length} รายการ</div>
             </div>
-          `).join('')}
-          <button class="btn btn--ghost btn--sm" onclick="addInclItem('${type}', ${idx})">+ เพิ่ม</button>
+          `).join('') || '<div style="color:var(--color-text-muted);">ยังไม่มีหมวด — เพิ่มผ่าน Raw JSON</div>'}
         </div>
       </details>
 

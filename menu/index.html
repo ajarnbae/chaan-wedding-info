@@ -8,6 +8,100 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
+<style>
+  .set-card {
+    background: var(--color-ivory);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .set-card__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .set-card__head h3 { margin: 0 0 4px; }
+  .set-card__price {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    color: var(--color-gold-dark);
+    white-space: nowrap;
+  }
+  .set-card__desc { color: var(--color-text-muted); font-size: 0.9rem; margin: 0; }
+  .selection-block {
+    background: var(--color-cream-warm);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-top: 10px;
+  }
+  .selection-block h4 {
+    margin: 0 0 6px;
+    color: var(--color-brown-dark);
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+  .selection-block h4 small {
+    background: var(--color-gold);
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .selection-block .opts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .selection-block .opt {
+    background: var(--color-ivory);
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    color: var(--color-text);
+  }
+  .selection-block .sub-cat {
+    margin-top: 8px;
+  }
+  .selection-block .sub-cat-name {
+    font-weight: 600;
+    color: var(--color-gold-dark);
+    margin-bottom: 4px;
+    font-size: 0.85rem;
+  }
+  .item-list {
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .item-list li {
+    padding: 5px 0 5px 22px;
+    position: relative;
+    font-size: 0.92rem;
+    color: var(--color-text);
+    border-bottom: 1px dashed var(--color-line);
+  }
+  .item-list li::before {
+    content: "•";
+    position: absolute;
+    left: 6px;
+    color: var(--color-gold);
+    font-size: 1.2rem;
+    top: 4px;
+  }
+  .item-list li:last-child { border-bottom: none; }
+</style>
 </head>
 <body>
 
@@ -20,14 +114,12 @@
       <span class="eyebrow">Cuisine</span>
       <h2>เมนูอาหาร</h2>
       <p class="text-center" style="color:var(--color-text-muted); max-width:640px; margin: 16px auto 0;">
-        3 ประเภทอาหาร · บุฟเฟต์ · โต๊ะจีน · โต๊ะจันทร์ (อาหารไทย) เลือกชมรายการในแต่ละ Set
+        บุฟเฟต์ · โต๊ะจีน · โต๊ะจันทร์ — เลือกชม Set รายละเอียดและรายการอาหาร
       </p>
     </div>
 
-    <!-- Type chips -->
     <div class="gallery-filters" id="typeChips" style="justify-content:center;"></div>
 
-    <!-- Menu content -->
     <div id="menuMount"></div>
   </div>
 </section>
@@ -43,7 +135,6 @@
   const types = Object.keys(menus);
   let active = CW.qs('type') && menus[CW.qs('type')] ? CW.qs('type') : types[0];
 
-  // Type chips
   const chipsEl = document.getElementById('typeChips');
   chipsEl.innerHTML = types.map(t => `
     <button class="chip ${t === active ? 'active' : ''}" data-type="${t}">
@@ -58,18 +149,56 @@
     });
   });
 
+  function priceLabel(set) {
+    if (set.pricePerPerson != null && set.pricePerPerson > 0) return CW.fmtBaht(set.pricePerPerson) + ' / ท่าน';
+    if (set.pricePerTable != null && set.pricePerTable > 0) return '+ ' + CW.fmtBaht(set.pricePerTable) + ' / โต๊ะ';
+    return 'รวมในแพ็คเกจ';
+  }
+
+  function renderSet(s) {
+    let body = '';
+    if (s.selections && s.selections.length) {
+      body = s.selections.map(sel => {
+        let inner = '';
+        if (sel.subCategories && sel.subCategories.length) {
+          inner = sel.subCategories.map(sc => `
+            <div class="sub-cat">
+              <div class="sub-cat-name">${CW.escape(sc.name)}</div>
+              <div class="opts">${sc.items.map(i => `<span class="opt">${CW.escape(i)}</span>`).join('')}</div>
+            </div>
+          `).join('');
+        } else if (sel.options) {
+          inner = `<div class="opts">${sel.options.map(o => `<span class="opt">${CW.escape(o)}</span>`).join('')}</div>`;
+        }
+        return `
+          <div class="selection-block">
+            <h4>${CW.escape(sel.category)} <small>เลือก ${sel.pickCount}</small></h4>
+            ${inner}
+          </div>`;
+      }).join('');
+    } else if (s.items && s.items.length) {
+      body = `<ul class="item-list">${s.items.map(i => `<li>${CW.escape(i)}</li>`).join('')}</ul>`;
+    }
+    return `
+      <div class="set-card">
+        <div class="set-card__head">
+          <div style="flex:1;min-width:200px;">
+            <h3>${CW.escape(s.name)}</h3>
+            <p class="set-card__desc">${CW.escape(s.description || '')}</p>
+          </div>
+          <div class="set-card__price">${priceLabel(s)}</div>
+        </div>
+        ${body}
+      </div>
+    `;
+  }
+
   function render() {
     const m = menus[active];
     if (!m) return;
     const mount = document.getElementById('menuMount');
-    const priceLabel = (set) => {
-      if (set.pricePerPerson) return CW.fmtBaht(set.pricePerPerson) + ' / ท่าน';
-      if (set.pricePerTable) return CW.fmtBaht(set.pricePerTable) + ' / โต๊ะ (' + (set.tableSize || 10) + ' ท่าน)';
-      return '-';
-    };
-
     mount.innerHTML = `
-      <div class="featured" style="margin-bottom:48px;">
+      <div class="featured" style="margin-bottom:32px;">
         <div class="featured__img"><img src="${CW.escape(m.image)}" alt="${CW.escape(m.name)}"></div>
         <div class="featured__body">
           <span class="featured__eyebrow">${CW.escape(m.shortDescription || '')}</span>
@@ -78,25 +207,7 @@
         </div>
       </div>
 
-      <h3 style="margin-bottom: 24px;">เลือก Set ที่สนใจ</h3>
-      <div class="grid grid--auto">
-        ${(m.sets || []).map(s => `
-          <div class="card">
-            <div class="card__img"><img src="${CW.escape(s.image)}" alt="${CW.escape(s.name)}"></div>
-            <div class="card__body">
-              <h3 class="card__title">${CW.escape(s.name)}</h3>
-              <p class="card__subtitle">${CW.escape(s.description || '')}</p>
-              <div class="card__price">${priceLabel(s)}</div>
-              <details style="margin-top:16px;">
-                <summary style="cursor:pointer;color:var(--color-gold-dark);font-weight:500;">ดูรายการอาหารใน Set นี้ (${(s.items || []).length} รายการ)</summary>
-                <ul class="list-check" style="margin-top:12px;">
-                  ${(s.items || []).map(i => `<li>${CW.escape(i)}</li>`).join('')}
-                </ul>
-              </details>
-            </div>
-          </div>
-        `).join('')}
-      </div>
+      ${(m.sets || []).map(renderSet).join('')}
     `;
   }
   render();

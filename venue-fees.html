@@ -8,6 +8,68 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./css/style.css">
+<style>
+  .fee-row {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background: var(--color-ivory);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    margin-bottom: 8px;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .fee-row__label { flex: 1; min-width: 200px; }
+  .fee-row__name { font-family: var(--font-serif); font-size: 1.1rem; color: var(--color-brown-dark); margin: 0 0 2px; }
+  .fee-row__sub { font-size: 0.85rem; color: var(--color-text-muted); }
+  .fee-row__price {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    color: var(--color-gold-dark);
+    text-align: right;
+    min-width: 140px;
+  }
+  .fee-row__price small {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+  .decor-block {
+    background: var(--color-cream-warm);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .decor-block h3 {
+    margin: 0 0 6px;
+    color: var(--color-brown-dark);
+  }
+  .decor-block .note {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-bottom: 16px;
+  }
+  .decor-row {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background: var(--color-ivory);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    margin-bottom: 6px;
+    gap: 12px;
+  }
+  .decor-row__price {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    color: var(--color-brown-dark);
+    white-space: nowrap;
+  }
+  .decor-row__price.free { color: var(--color-success); }
+</style>
 </head>
 <body>
 
@@ -17,18 +79,25 @@
   <div class="container">
     <div class="breadcrumb"><a href="./index.html">หน้าแรก</a> <span>/</span> ค่าเช่าและบริการเสริม</div>
     <div class="section-title">
-      <span class="eyebrow">Venue & Extras</span>
-      <h2>ค่าเช่าสถานที่ &amp; บริการเสริม</h2>
+      <span class="eyebrow">Venue Fees &amp; Extras</span>
+      <h2>ค่าเช่าสถานที่และค่าใช้จ่ายเพิ่มเติม</h2>
       <p class="text-center" style="color:var(--color-text-muted); max-width:640px; margin: 16px auto 0;">
-        สำหรับลูกค้าที่ต้องการเช่าเฉพาะสถานที่ ไม่รวมอาหาร หรือต้องการเพิ่ม option พิเศษ เช่นดอกไม้สด LED Wall ฯลฯ
+        สำหรับลูกค้าที่ต้องการเช่าเฉพาะสถานที่ หรือเพิ่มบริการ/ปรับการตกแต่ง
       </p>
     </div>
 
-    <h3 style="margin-top:48px;">เช่าสถานที่ (ไม่รวมอาหาร)</h3>
-    <div id="rentalGrid" class="grid grid--auto"></div>
+    <!-- Venue rentals -->
+    <h3 style="margin-top:32px;">เช่าสถานที่และค่านำเข้า</h3>
+    <div id="rentalList"></div>
 
-    <h3 style="margin-top:64px;">บริการเสริม / Add-ons</h3>
-    <div id="addonsGrid" class="grid grid--auto"></div>
+    <!-- Decor change fees -->
+    <h3 style="margin-top:48px;">ค่าเปลี่ยนการตกแต่ง</h3>
+    <div id="decorBlock"></div>
+
+    <!-- Add-ons library -->
+    <h3 style="margin-top:48px;">บริการเสริม (Add-ons Library)</h3>
+    <p style="color:var(--color-text-muted); font-size:0.9rem;">รายการบริการเสริมที่สามารถเพิ่มในแพ็คเกจได้ — แต่ละแพ็คเกจมี add-on ที่รองรับแตกต่างกัน ดูได้ในหน้ารายละเอียดแพ็คเกจ</p>
+    <div id="addonsGrid" class="grid grid--auto" style="margin-top:16px;"></div>
   </div>
 </section>
 
@@ -40,22 +109,50 @@
   const data = await CW.mountChrome('venue');
   if (!data) return;
 
-  const rentalGrid = document.getElementById('rentalGrid');
-  const addonsGrid = document.getElementById('addonsGrid');
-
-  rentalGrid.innerHTML = (data.venueFees?.rental || []).map(r => `
-    <div class="card">
-      <div class="card__img"><img src="${CW.escape(r.image || '')}" alt="${CW.escape(r.name)}"></div>
-      <div class="card__body">
-        <h3 class="card__title">${CW.escape(r.name)}</h3>
-        <p class="card__subtitle">${CW.escape(r.duration || '')}</p>
-        <p class="card__desc">${CW.escape(r.description || '')}</p>
-        <div class="card__price">${CW.fmtBaht(r.price)}<small>ต่อ ${CW.escape(r.duration || 'รายการ')}</small></div>
+  // Rentals
+  document.getElementById('rentalList').innerHTML = (data.venueFees?.rental || []).map(r => `
+    <div class="fee-row">
+      <div class="fee-row__label">
+        <h4 class="fee-row__name">${CW.escape(r.name)}</h4>
+        <div class="fee-row__sub">${CW.escape(r.duration || '')} · ${CW.escape(r.description || '')}</div>
+      </div>
+      <div class="fee-row__price">
+        ${CW.fmtBaht(r.price)}
+        <small>${CW.escape(r.duration || '')}</small>
       </div>
     </div>
   `).join('');
 
-  addonsGrid.innerHTML = (data.venueFees?.addons || []).map(a => `
+  // Decor changes
+  const dc = data.venueFees?.decorChanges;
+  const decorBlock = document.getElementById('decorBlock');
+  if (dc) {
+    decorBlock.innerHTML = `
+      <div class="decor-block">
+        <h3>🌸 กรณีแพ็คโปรโมชั่น</h3>
+        <p class="note">${CW.escape(dc.promoNote || '')}</p>
+        ${(dc.promo || []).map(d => `
+          <div class="decor-row">
+            <div>${CW.escape(d.name)}</div>
+            <div class="decor-row__price">${CW.fmtBaht(d.price)}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="decor-block" style="background:linear-gradient(135deg, var(--color-cream-warm) 0%, var(--color-gold-light) 100%);">
+        <h3>💎 กรณีแพ็คเต็ม หรือ จองข้ามปี</h3>
+        <p class="note">${CW.escape(dc.fullNote || '')}</p>
+        ${(dc.full || []).map(d => `
+          <div class="decor-row">
+            <div>${CW.escape(d.name)}</div>
+            <div class="decor-row__price${d.price === 0 ? ' free' : ''}">${d.displayPrice || CW.fmtBaht(d.price)}</div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  // Addons
+  document.getElementById('addonsGrid').innerHTML = (data.venueFees?.addons || []).map(a => `
     <div class="card">
       <div class="card__body" style="padding:24px;">
         <h4 style="margin-bottom:8px;">${CW.escape(a.name)}</h4>

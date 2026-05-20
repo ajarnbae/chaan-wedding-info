@@ -8,6 +8,22 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
+<style>
+  .promo-card { position: relative; }
+  .promo-card::before {
+    content: "🔥 PROMO";
+    position: absolute;
+    top: 12px; left: 12px;
+    z-index: 2;
+    background: var(--color-rose);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+  }
+</style>
 </head>
 <body>
 
@@ -20,7 +36,7 @@
       <span class="eyebrow">Our Packages</span>
       <h2>แพ็คเกจทั้งหมด</h2>
       <p class="text-center" style="color:var(--color-text-muted); max-width: 720px; margin: 16px auto 0;">
-        เลือกหมวดและฤดูกาลด้านล่าง · แต่ละแพ็คเกจสามารถปรับ <strong>ช่วงเวลา</strong>, <strong>จำนวนแขก</strong>, และ<strong>ตัดพิธี</strong>ได้ในหน้ารายละเอียด
+        เลือกหมวดและฤดูกาลด้านล่าง · แต่ละแพ็คเกจสามารถปรับ <strong>ช่วงเวลา</strong>, <strong>จำนวนแขก</strong>, และคำนวณค่าใช้จ่ายต่าง ๆ ได้
       </p>
     </div>
 
@@ -35,8 +51,8 @@
     <!-- Season toggle (hidden for seminar) -->
     <div class="text-center" style="margin-bottom: var(--space-xl);" id="seasonWrap">
       <div class="toggle" id="seasonToggle">
+        <button data-season="low">โปรร้อนนี้ (พ.ค. - ก.ค.)</button>
         <button data-season="high" class="active">High Season (ส.ค. - มี.ค.)</button>
-        <button data-season="low">Low Season (เม.ย. - ก.ค.)</button>
       </div>
     </div>
 
@@ -69,7 +85,6 @@
     b.addEventListener('click', () => {
       category = b.dataset.cat;
       document.querySelectorAll('#catToggle button').forEach(x => x.classList.toggle('active', x === b));
-      // Hide season toggle for seminar (static prices)
       document.getElementById('seasonWrap').style.display = (category === 'seminar') ? 'none' : '';
       render();
     });
@@ -77,6 +92,7 @@
 
   function render() {
     const seasonForList = (category === 'seminar') ? 'high' : season;
+    // For wedding: include packages with season=="all" or matching season
     const list = (data.packages?.[category] || []).filter(p =>
       !p.season || p.season === 'all' || p.season === seasonForList
     );
@@ -88,20 +104,24 @@
     }
     grid.innerHTML = list.map(p => {
       const primarySlot = (p.availableTimeSlots && p.availableTimeSlots[0]) || slots[0]?.id;
-      const price = CW.computePrice(p, primarySlot, seasonForList, 100);
-      const badge = p.isFeatured ? '<span class="badge badge--gold">ฮิต</span>' : '';
-      const seasonBadge = p.season === 'low' ? '<span class="badge">Low Season Only</span>' : '';
-      const slotsText = (p.availableTimeSlots || []).length;
+      const guestBase = p.guestBase || 100;
+      const price = p.basePricing?.[primarySlot]?.[seasonForList] ?? 0;
+      const promoCls = p.isPromo ? ' promo-card' : '';
+      const featBadge = p.isFeatured ? '<span class="badge badge--gold">⭐ Featured</span>' : '';
+      const seasonAllBadge = p.season === 'all' ? '<span class="badge badge--green">ใช้ได้ทั้งปี</span>' : '';
+      const crossYear = p.crossYearDiscount ? `<span style="font-size:0.75rem;color:var(--color-success);">จองข้ามปี ${CW.fmtBaht(price - p.crossYearDiscount)}</span>` : '';
       return `
-        <a href="./detail.html?id=${encodeURIComponent(p.id)}&season=${seasonForList}" class="card" style="text-decoration:none;color:inherit;">
+        <a href="./detail.html?id=${encodeURIComponent(p.id)}" class="card${promoCls}" style="text-decoration:none;color:inherit;">
           <div class="card__img"><img src="${CW.escape(p.image)}" alt="${CW.escape(p.name)}" loading="lazy"></div>
           <div class="card__body">
             <span class="card__tag">${category === 'wedding' ? 'งานแต่งงาน' : 'สัมมนา'}</span>
-            <h3 class="card__title">${CW.escape(p.name)} ${badge}${seasonBadge}</h3>
+            <h3 class="card__title">${CW.escape(p.name)} ${featBadge}${seasonAllBadge}</h3>
             <p class="card__subtitle">${CW.escape(p.subtitle || '')}</p>
             <p class="card__desc">${CW.escape(p.shortDescription || '')}</p>
-            <div class="card__price">เริ่ม ${CW.fmtBaht(price)}
-              <small>100 ท่าน · ${slotsText} ช่วงเวลาให้เลือก${category === 'wedding' ? ' · ' + (seasonForList === 'low' ? 'Low' : 'High') + ' Season' : ''}</small>
+            <div class="card__price">
+              ${CW.fmtBaht(price)}
+              <small>เริ่ม ${guestBase} ท่าน · ${(p.availableTimeSlots || []).length} ช่วงเวลา</small>
+              ${crossYear ? '<small>' + crossYear + '</small>' : ''}
             </div>
             <div class="card__actions"><span class="btn btn--ghost btn--sm">ดูรายละเอียด →</span></div>
           </div>
