@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="th" data-base="./">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chaan Wedding — สถานที่จัดงานแต่งงาน</title>
+<meta name="description" content="Chaan Wedding Venue — สถานที่จัดงานแต่งงานในฝัน 3 โซน 3 บรรยากาศ">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero__content">
+    <span class="hero__eyebrow">Welcome to</span>
+    <h1>Chaan Wedding Venue</h1>
+    <p id="heroTagline">สถานที่จัดงานแต่งงานในฝัน 3 โซน 3 บรรยากาศ พร้อมให้คุณวาดฝันวันสำคัญ</p>
+    <div style="margin-top: 24px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+      <a href="./packages/" class="btn btn--primary">ดูแพ็คเกจทั้งหมด</a>
+      <a href="./gallery/" class="btn btn--light">ดูบรรยากาศสถานที่</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED HOT PACKAGE -->
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow">Most Popular</span>
+      <h2>แพ็คเกจฮิตประจำเดือน</h2>
+      <p class="text-center" style="color:var(--color-text-muted); margin-top:16px;">เลือกแพ็คเกจที่ลูกค้าบ่าวสาวเลือกมากที่สุด พร้อมรายละเอียดครบในที่เดียว</p>
+    </div>
+    <div id="featuredMount" class="loading">กำลังโหลดแพ็คเกจ...</div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section" style="background: var(--color-cream-warm);">
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow">Explore</span>
+      <h2>หมวดหมู่ข้อมูลทั้งหมด</h2>
+    </div>
+    <div class="grid grid--2 grid--4">
+      <a href="./packages/" class="card" style="text-decoration:none;color:inherit;">
+        <div class="card__img"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80" alt="Packages"></div>
+        <div class="card__body">
+          <h3 class="card__title">แพ็คเกจ</h3>
+          <p class="card__desc">แพ็คเกจงานแต่งและสัมมนา พร้อมรายละเอียดและการคำนวณราคาตามจำนวนแขก</p>
+        </div>
+      </a>
+      <a href="./venue-fees.html" class="card" style="text-decoration:none;color:inherit;">
+        <div class="card__img"><img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80" alt="Venue Fees"></div>
+        <div class="card__body">
+          <h3 class="card__title">ค่าเช่า / บริการเสริม</h3>
+          <p class="card__desc">เช่าเฉพาะสถานที่ ค่าใช้จ่ายเพิ่มเติม เช่นดอกไม้สด LED ดนตรีสด ฯลฯ</p>
+        </div>
+      </a>
+      <a href="./menu/" class="card" style="text-decoration:none;color:inherit;">
+        <div class="card__img"><img src="https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=80" alt="Menu"></div>
+        <div class="card__body">
+          <h3 class="card__title">เมนูอาหาร</h3>
+          <p class="card__desc">บุฟเฟต์ · โต๊ะจีน · โต๊ะจันทร์ พร้อมรายการอาหารและรูปตัวอย่าง</p>
+        </div>
+      </a>
+      <a href="./gallery/" class="card" style="text-decoration:none;color:inherit;">
+        <div class="card__img"><img src="https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=800&q=80" alt="Gallery"></div>
+        <div class="card__body">
+          <h3 class="card__title">รูปภาพสถานที่</h3>
+          <p class="card__desc">3 โซน: ในอาคาร · สวนหินอังกฤษ · สวนน้ำตก พร้อม filter ตามมุมและเดือน</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ZONES -->
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow">Our Venue</span>
+      <h2>3 โซน 3 บรรยากาศ</h2>
+    </div>
+    <div id="zonesMount" class="grid grid--3"></div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+
+<script src="./js/common.js"></script>
+<script>
+(async function() {
+  const data = await CW.mountChrome('home');
+  if (!data) return;
+
+  // hero tagline
+  if (data.site?.tagline) document.getElementById('heroTagline').textContent = data.site.description || data.site.tagline;
+  // hero background
+  if (data.site?.heroImage) document.getElementById('hero').style.backgroundImage = `url('${data.site.heroImage}')`;
+
+  // Featured package
+  const featuredId = data.featuredPackageId;
+  const all = [...(data.packages?.wedding || []), ...(data.packages?.seminar || [])];
+  const featured = all.find(p => p.id === featuredId) || all[0];
+  const featuredMount = document.getElementById('featuredMount');
+  if (featured) {
+    const season = CW.currentSeason(data.seasonInfo);
+    const price = featured.guestPricing?.['100']?.[season] ?? featured.basePrice100;
+    featuredMount.classList.remove('loading');
+    featuredMount.innerHTML = `
+      <div class="featured">
+        <div class="featured__img"><img src="${CW.escape(featured.image)}" alt="${CW.escape(featured.name)}"></div>
+        <div class="featured__body">
+          <span class="featured__eyebrow">Featured Package</span>
+          <h2 style="margin-top:8px;">${CW.escape(featured.name)}</h2>
+          <p style="color:var(--color-gold-dark); font-style:italic;">${CW.escape(featured.subtitle || '')}</p>
+          <p style="color:var(--color-text-muted);">${CW.escape(featured.longDescription || featured.shortDescription || '')}</p>
+          <div class="featured__price">
+            ${CW.fmtBaht(price)}
+            <small>เริ่มต้นที่ 100 ท่าน · ${season === 'low' ? 'Low Season' : 'High Season'}</small>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <a href="./packages/detail.html?id=${encodeURIComponent(featured.id)}" class="btn btn--primary">ดูรายละเอียดแพ็คเกจ →</a>
+            <a href="./packages/" class="btn btn--ghost">ดูแพ็คเกจอื่น</a>
+          </div>
+        </div>
+      </div>`;
+  } else {
+    featuredMount.innerHTML = '<div class="empty-state">ยังไม่มีแพ็คเกจฮิต</div>';
+  }
+
+  // Zones
+  const zonesMount = document.getElementById('zonesMount');
+  zonesMount.innerHTML = (data.gallery?.zones || []).map(z => {
+    const photo = (data.gallery?.photos || []).find(p => p.zone === z.id);
+    return `
+      <a href="./gallery/?zone=${encodeURIComponent(z.id)}" class="card" style="text-decoration:none;color:inherit;">
+        <div class="card__img"><img src="${CW.escape(photo?.url || data.site.heroImage)}" alt="${CW.escape(z.name)}"></div>
+        <div class="card__body">
+          <h3 class="card__title">${CW.escape(z.name)}</h3>
+          <p class="card__desc">${CW.escape(z.description)}</p>
+          <span style="color:var(--color-gold-dark); font-size:0.9rem;">ดูรูปทั้งหมด →</span>
+        </div>
+      </a>`;
+  }).join('');
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="th" data-base="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>รายละเอียดแพ็คเกจ — Chaan Wedding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<div id="detailMount" class="loading" style="min-height: 60vh;">กำลังโหลดรายละเอียด...</div>
+
+<div id="footer-mount"></div>
+
+<script src="../js/common.js"></script>
+<script>
+(async function() {
+  const data = await CW.mountChrome('packages');
+  if (!data) return;
+
+  const id = CW.qs('id');
+  const all = [...(data.packages?.wedding || []), ...(data.packages?.seminar || [])];
+  const pkg = all.find(p => p.id === id);
+  const mount = document.getElementById('detailMount');
+
+  if (!pkg) {
+    mount.classList.remove('loading');
+    mount.innerHTML = `
+      <div class="container section">
+        <div class="empty-state">ไม่พบแพ็คเกจที่คุณมองหา
+          <div style="margin-top:16px"><a href="./" class="btn btn--ghost">← กลับหน้าแพ็คเกจ</a></div>
+        </div>
+      </div>`;
+    return;
+  }
+
+  // Determine category
+  const isWedding = (data.packages?.wedding || []).some(p => p.id === pkg.id);
+  let season = CW.qs('season') || CW.currentSeason(data.seasonInfo);
+  let guestCount = '100';
+  const removedRituals = new Set();
+
+  mount.classList.remove('loading');
+  mount.innerHTML = `
+    <div class="detail-hero">
+      <img src="${CW.escape(pkg.image)}" alt="${CW.escape(pkg.name)}">
+      <div class="detail-hero__overlay">
+        <div>
+          <div class="eyebrow">${isWedding ? 'Wedding Package' : 'Seminar Package'}</div>
+          <h1>${CW.escape(pkg.name)}</h1>
+          <p style="margin-top:8px;opacity:0.95;">${CW.escape(pkg.subtitle || '')}</p>
+        </div>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="../index.html">หน้าแรก</a> <span>/</span>
+          <a href="./">แพ็คเกจ</a> <span>/</span>
+          ${CW.escape(pkg.name)}
+        </div>
+
+        <div class="detail-grid">
+          <!-- Main content -->
+          <div>
+            <div class="panel">
+              <h3><span class="num">1</span> เกี่ยวกับแพ็คเกจ</h3>
+              <p>${CW.escape(pkg.longDescription || pkg.shortDescription || '')}</p>
+              ${pkg.notes ? `<div class="alert">${CW.escape(pkg.notes)}</div>` : ''}
+            </div>
+
+            <div class="panel">
+              <h3><span class="num">2</span> รายการในแพ็คเกจ</h3>
+              <ul class="list-check">
+                ${(pkg.includedItems || []).map(i => `<li>${CW.escape(i)}</li>`).join('')}
+              </ul>
+            </div>
+
+            <div class="panel">
+              <h3><span class="num">3</span> ตารางราคาตามจำนวนแขก</h3>
+              <p style="color:var(--color-text-muted); font-size:0.9rem;">
+                คลิกเลือกจำนวนแขกในกล่องคำนวณราคาด้านขวา หรือดูตารางราคาทั้งหมดด้านล่าง
+              </p>
+              <div style="overflow-x:auto;">
+                <table class="t">
+                  <thead><tr>
+                    <th>จำนวนแขก</th>
+                    <th class="num">High Season</th>
+                    <th class="num">Low Season (เม.ย.-ก.ค.)</th>
+                  </tr></thead>
+                  <tbody>
+                    ${(data.guestCountTiers || []).map(n => {
+                      const row = pkg.guestPricing?.[String(n)];
+                      if (!row) return '';
+                      return `<tr>
+                        <td>${n} ท่าน${n === 100 ? ' <span class="badge badge--gold" style="vertical-align:baseline;">ราคาฐาน</span>' : ''}</td>
+                        <td class="num">${CW.fmtBaht(row.high)}</td>
+                        <td class="num">${CW.fmtBaht(row.low)}</td>
+                      </tr>`;
+                    }).join('')}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            ${pkg.rituals && pkg.rituals.length ? `
+              <div class="panel">
+                <h3><span class="num">4</span> ตัดพิธีออก = ลดราคา</h3>
+                <p style="color:var(--color-text-muted);font-size:0.95rem;">
+                  หากต้องการตัดบางพิธีออก สามารถลดราคาตามรายการด้านล่างได้
+                  (เลือกในกล่องคำนวณราคาด้านขวา)
+                </p>
+                <table class="t">
+                  <thead><tr><th>พิธี</th><th class="num">ลดราคาเมื่อตัดออก</th></tr></thead>
+                  <tbody>
+                    ${pkg.rituals.map(r => `
+                      <tr>
+                        <td>${CW.escape(r.name)}</td>
+                        <td class="num">- ${CW.fmtBaht(r.deductIfRemoved)}</td>
+                      </tr>`).join('')}
+                  </tbody>
+                </table>
+              </div>
+            ` : ''}
+
+            ${pkg.availableMenus && pkg.availableMenus.length ? `
+              <div class="panel">
+                <h3><span class="num">${pkg.rituals?.length ? '5' : '4'}</span> เมนูอาหารที่เลือกได้</h3>
+                <div style="display:flex;flex-wrap:wrap;gap:12px;">
+                  ${pkg.availableMenus.map(m => {
+                    const menu = data.menus?.[m];
+                    if (!menu) return '';
+                    return `
+                      <a href="../menu/?type=${encodeURIComponent(m)}" class="card" style="flex:1 1 200px;text-decoration:none;color:inherit;">
+                        <div class="card__img" style="aspect-ratio:4/3;"><img src="${CW.escape(menu.image)}" alt="${CW.escape(menu.name)}"></div>
+                        <div class="card__body" style="padding:16px;">
+                          <h4 style="margin:0 0 4px;">${menu.icon || ''} ${CW.escape(menu.name)}</h4>
+                          <p style="font-size:0.85rem;color:var(--color-text-muted);margin:0;">${CW.escape(menu.shortDescription || '')}</p>
+                        </div>
+                      </a>`;
+                  }).join('')}
+                </div>
+              </div>
+            ` : ''}
+          </div>
+
+          <!-- Price calculator -->
+          <div>
+            <div class="price-box" id="priceBox">
+              <h4>คำนวณราคา</h4>
+              <div class="field" style="margin-bottom:12px;">
+                <label style="color:#FFFCF7;opacity:0.85;">ฤดูกาล</label>
+                <div class="toggle" id="seasonTog" style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.25);">
+                  <button data-season="high" style="color:#fff;">High</button>
+                  <button data-season="low" style="color:#fff;">Low</button>
+                </div>
+              </div>
+              <div class="field" style="margin-bottom:12px;">
+                <label style="color:#FFFCF7;opacity:0.85;">จำนวนแขก</label>
+                <select id="guestSelect" style="background: rgba(255,255,255,0.95);color:var(--color-text)">
+                  ${(data.guestCountTiers || []).map(n =>
+                    `<option value="${n}" ${n === 100 ? 'selected' : ''}>${n} ท่าน</option>`).join('')}
+                </select>
+              </div>
+
+              <hr>
+              <div class="price-meta">ราคาแพ็คเกจ</div>
+              <div class="price-num" id="basePriceShow">-</div>
+
+              ${pkg.rituals?.length ? `
+                <hr>
+                <div class="price-meta" style="margin-bottom:8px;">ตัดพิธี (เลือกเพื่อลดราคา)</div>
+                ${pkg.rituals.map(r => `
+                  <label>
+                    <input type="checkbox" data-ritual="${CW.escape(r.id)}" data-deduct="${r.deductIfRemoved}">
+                    <span>${CW.escape(r.name)}</span>
+                    <span class="ritual-deduct">- ${CW.fmtPrice(r.deductIfRemoved)}฿</span>
+                  </label>
+                `).join('')}
+              ` : ''}
+
+              <hr>
+              <div class="price-meta">รวมสุทธิ</div>
+              <div class="price-num" id="totalPrice" style="color: var(--color-gold-light);">-</div>
+
+              <a class="btn btn--primary btn--block mt-md" href="${CW.escape(data.site?.contact?.line ? 'https://line.me/R/ti/p/' + data.site.contact.line : '#')}" target="_blank">💬 สอบถาม / จองผ่าน LINE</a>
+              ${data.site?.contact?.phone ? `<a class="btn btn--ghost btn--block mt-md" href="tel:${CW.escape(data.site.contact.phone)}" style="border-color:rgba(255,255,255,0.4);color:#fff;">☎ ${CW.escape(data.site.contact.phone)}</a>` : ''}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+
+  // Wire up calculator
+  document.querySelectorAll('#seasonTog button').forEach(b => {
+    b.classList.toggle('active', b.dataset.season === season);
+    b.addEventListener('click', () => {
+      season = b.dataset.season;
+      document.querySelectorAll('#seasonTog button').forEach(x => x.classList.toggle('active', x === b));
+      recalc();
+    });
+  });
+  document.getElementById('guestSelect').addEventListener('change', e => {
+    guestCount = e.target.value;
+    recalc();
+  });
+  document.querySelectorAll('#priceBox [data-ritual]').forEach(cb => {
+    cb.addEventListener('change', recalc);
+  });
+
+  function recalc() {
+    const row = pkg.guestPricing?.[guestCount];
+    const base = row ? row[season] : 0;
+    let total = base;
+    document.querySelectorAll('#priceBox [data-ritual]:checked').forEach(cb => {
+      total -= Number(cb.dataset.deduct || 0);
+    });
+    document.getElementById('basePriceShow').textContent = CW.fmtBaht(base);
+    document.getElementById('totalPrice').textContent = CW.fmtBaht(Math.max(0, total));
+  }
+  recalc();
+})();
+</script>
+
+</body>
+</html>

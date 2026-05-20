@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="th" data-base="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>แพ็คเกจ — Chaan Wedding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<section class="section">
+  <div class="container">
+    <div class="breadcrumb"><a href="../index.html">หน้าแรก</a> <span>/</span> แพ็คเกจ</div>
+    <div class="section-title">
+      <span class="eyebrow">Our Packages</span>
+      <h2>แพ็คเกจทั้งหมด</h2>
+      <p class="text-center" style="color:var(--color-text-muted); max-width: 640px; margin: 16px auto 0;">
+        แพ็คเกจงานแต่งและสัมมนา ทุกแพ็คเกจยืนพื้น 100 ท่าน สามารถปรับจำนวนแขกได้ตั้งแต่ 50 - 500 ท่าน
+        และเลือก<strong>ตัดพิธี</strong>เพื่อปรับลดราคาได้
+      </p>
+    </div>
+
+    <!-- Season toggle -->
+    <div class="text-center" style="margin-bottom: var(--space-xl);">
+      <div class="toggle" id="seasonToggle">
+        <button data-season="high" class="active">High Season (ส.ค. - มี.ค.)</button>
+        <button data-season="low">Low Season (เม.ย. - ก.ค.)</button>
+      </div>
+    </div>
+
+    <!-- Tabs (wedding / seminar) -->
+    <div class="text-center" style="margin-bottom: var(--space-xl);">
+      <div class="toggle" id="catToggle">
+        <button data-cat="wedding" class="active">งานแต่งงาน</button>
+        <button data-cat="seminar">งานสัมมนา</button>
+      </div>
+    </div>
+
+    <div id="packagesGrid" class="grid grid--auto">
+      <div class="loading">กำลังโหลด...</div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+
+<script src="../js/common.js"></script>
+<script>
+(async function() {
+  const data = await CW.mountChrome('packages');
+  if (!data) return;
+  let season = CW.currentSeason(data.seasonInfo);
+  let category = 'wedding';
+
+  // Sync season toggle to current default
+  document.querySelectorAll('#seasonToggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.season === season);
+    b.addEventListener('click', () => {
+      season = b.dataset.season;
+      document.querySelectorAll('#seasonToggle button').forEach(x => x.classList.toggle('active', x === b));
+      render();
+    });
+  });
+
+  document.querySelectorAll('#catToggle button').forEach(b => {
+    b.addEventListener('click', () => {
+      category = b.dataset.cat;
+      document.querySelectorAll('#catToggle button').forEach(x => x.classList.toggle('active', x === b));
+      render();
+    });
+  });
+
+  function render() {
+    const list = (data.packages?.[category] || []).filter(p =>
+      !p.season || p.season === 'all' || p.season === season
+    );
+    const grid = document.getElementById('packagesGrid');
+    if (!list.length) {
+      grid.innerHTML = `<div class="empty-state">ไม่มีแพ็คเกจในช่วงนี้</div>`;
+      return;
+    }
+    grid.innerHTML = list.map(p => {
+      const price = p.guestPricing?.['100']?.[season] ?? p.basePrice100;
+      const badge = p.isFeatured ? '<span class="badge badge--gold">ฮิต</span>' : '';
+      const seasonBadge = p.season === 'low' ? '<span class="badge">Low Season Only</span>' : '';
+      return `
+        <a href="./detail.html?id=${encodeURIComponent(p.id)}&season=${season}" class="card" style="text-decoration:none;color:inherit;">
+          <div class="card__img"><img src="${CW.escape(p.image)}" alt="${CW.escape(p.name)}"></div>
+          <div class="card__body">
+            <span class="card__tag">${category === 'wedding' ? 'งานแต่งงาน' : 'สัมมนา'}</span>
+            <h3 class="card__title">${CW.escape(p.name)} ${badge}${seasonBadge}</h3>
+            <p class="card__subtitle">${CW.escape(p.subtitle || '')}</p>
+            <p class="card__desc">${CW.escape(p.shortDescription || '')}</p>
+            <div class="card__price">${CW.fmtBaht(price)}<small>เริ่มต้น 100 ท่าน · ${season === 'low' ? 'Low Season' : 'High Season'}</small></div>
+            <div class="card__actions"><span class="btn btn--ghost btn--sm">ดูรายละเอียด →</span></div>
+          </div>
+        </a>`;
+    }).join('');
+  }
+  render();
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="th" data-base="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>รูปภาพสถานที่ — Chaan Wedding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<section class="section">
+  <div class="container">
+    <div class="breadcrumb"><a href="../index.html">หน้าแรก</a> <span>/</span> รูปภาพสถานที่</div>
+    <div class="section-title">
+      <span class="eyebrow">Gallery</span>
+      <h2>บรรยากาศสถานที่</h2>
+      <p class="text-center" style="color:var(--color-text-muted); max-width:640px; margin: 16px auto 0;">
+        เลือกชมรูปภาพตามโซน, มุม, และเดือนของงานจริงที่ผ่านมา
+      </p>
+    </div>
+
+    <!-- Zone filter -->
+    <div style="margin-bottom: 8px; font-size:0.85rem; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:1px;">โซน</div>
+    <div class="gallery-filters" id="zoneChips"></div>
+
+    <!-- Angle filter (shown when a specific zone is picked) -->
+    <div id="angleSection" style="display:none;">
+      <div style="margin-bottom: 8px; font-size:0.85rem; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:1px;">มุม</div>
+      <div class="gallery-filters" id="angleChips"></div>
+    </div>
+
+    <!-- Month filter -->
+    <div style="margin-bottom: 8px; font-size:0.85rem; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:1px;">เดือน</div>
+    <div class="gallery-filters" id="monthChips"></div>
+
+    <div id="photoCount" style="color:var(--color-text-muted); font-size:0.9rem; margin-bottom:16px;"></div>
+
+    <div id="galleryGrid" class="gallery-grid"></div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox__close" onclick="document.getElementById('lightbox').classList.remove('open')">×</button>
+  <img id="lightboxImg" alt="">
+</div>
+
+<div id="footer-mount"></div>
+
+<script src="../js/common.js"></script>
+<script>
+(async function() {
+  const data = await CW.mountChrome('gallery');
+  if (!data) return;
+  const photos = data.gallery?.photos || [];
+  const zones = data.gallery?.zones || [];
+
+  let activeZone = CW.qs('zone') || 'all';
+  let activeAngle = 'all';
+  let activeMonth = 'all';
+
+  const zoneChipsEl = document.getElementById('zoneChips');
+  zoneChipsEl.innerHTML = `<button class="chip ${activeZone === 'all' ? 'active' : ''}" data-zone="all">ทั้งหมด</button>` +
+    zones.map(z => `<button class="chip ${activeZone === z.id ? 'active' : ''}" data-zone="${z.id}">${CW.escape(z.name)}</button>`).join('');
+  zoneChipsEl.querySelectorAll('button').forEach(b => {
+    b.addEventListener('click', () => {
+      activeZone = b.dataset.zone;
+      activeAngle = 'all';
+      zoneChipsEl.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+      renderAngles();
+      render();
+    });
+  });
+
+  function renderAngles() {
+    const angleSection = document.getElementById('angleSection');
+    if (activeZone === 'all') {
+      angleSection.style.display = 'none';
+      return;
+    }
+    const zone = zones.find(z => z.id === activeZone);
+    if (!zone || !zone.angles?.length) { angleSection.style.display = 'none'; return; }
+    angleSection.style.display = 'block';
+    const angleChipsEl = document.getElementById('angleChips');
+    angleChipsEl.innerHTML = `<button class="chip ${activeAngle === 'all' ? 'active' : ''}" data-angle="all">ทุกมุม</button>` +
+      zone.angles.map(a => `<button class="chip ${activeAngle === a.id ? 'active' : ''}" data-angle="${a.id}">${CW.escape(a.name)}</button>`).join('');
+    angleChipsEl.querySelectorAll('button').forEach(b => {
+      b.addEventListener('click', () => {
+        activeAngle = b.dataset.angle;
+        angleChipsEl.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+        render();
+      });
+    });
+  }
+
+  // Month chips: derive unique months from photos
+  const allMonths = Array.from(new Set(photos.map(p => p.month).filter(Boolean))).sort();
+  const monthChipsEl = document.getElementById('monthChips');
+  monthChipsEl.innerHTML = `<button class="chip active" data-month="all">ทุกเดือน</button>` +
+    allMonths.map(m => `<button class="chip" data-month="${m}">${formatMonth(m)}</button>`).join('');
+  monthChipsEl.querySelectorAll('button').forEach(b => {
+    b.addEventListener('click', () => {
+      activeMonth = b.dataset.month;
+      monthChipsEl.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+      render();
+    });
+  });
+
+  function formatMonth(ym) {
+    if (!ym) return ym;
+    const [y, m] = ym.split('-');
+    const monthNames = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+    const idx = parseInt(m, 10) - 1;
+    return (monthNames[idx] || m) + ' ' + y;
+  }
+
+  function render() {
+    const filtered = photos.filter(p => {
+      if (activeZone !== 'all' && p.zone !== activeZone) return false;
+      if (activeAngle !== 'all' && p.angle !== activeAngle) return false;
+      if (activeMonth !== 'all' && p.month !== activeMonth) return false;
+      return true;
+    });
+    document.getElementById('photoCount').textContent = `แสดง ${filtered.length} รูป`;
+    const grid = document.getElementById('galleryGrid');
+    if (!filtered.length) {
+      grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">ไม่มีรูปในเงื่อนไขที่เลือก</div>`;
+      return;
+    }
+    grid.innerHTML = filtered.map(p => `
+      <div class="photo" data-url="${CW.escape(p.url)}">
+        <img src="${CW.escape(p.url)}" alt="${CW.escape(p.caption || '')}" loading="lazy">
+        <div class="photo__cap">${CW.escape(p.caption || '')}${p.month ? ' · ' + formatMonth(p.month) : ''}</div>
+      </div>
+    `).join('');
+    grid.querySelectorAll('.photo').forEach(el => {
+      el.addEventListener('click', () => {
+        document.getElementById('lightboxImg').src = el.dataset.url;
+        document.getElementById('lightbox').classList.add('open');
+      });
+    });
+  }
+
+  renderAngles();
+  render();
+
+  document.getElementById('lightbox').addEventListener('click', (e) => {
+    if (e.target.id === 'lightbox') e.currentTarget.classList.remove('open');
+  });
+})();
+</script>
+
+</body>
+</html>

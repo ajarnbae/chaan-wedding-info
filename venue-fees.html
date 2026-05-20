@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="th" data-base="./">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ค่าเช่าและบริการเสริม — Chaan Wedding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<section class="section">
+  <div class="container">
+    <div class="breadcrumb"><a href="./index.html">หน้าแรก</a> <span>/</span> ค่าเช่าและบริการเสริม</div>
+    <div class="section-title">
+      <span class="eyebrow">Venue & Extras</span>
+      <h2>ค่าเช่าสถานที่ &amp; บริการเสริม</h2>
+      <p class="text-center" style="color:var(--color-text-muted); max-width:640px; margin: 16px auto 0;">
+        สำหรับลูกค้าที่ต้องการเช่าเฉพาะสถานที่ ไม่รวมอาหาร หรือต้องการเพิ่ม option พิเศษ เช่นดอกไม้สด LED Wall ฯลฯ
+      </p>
+    </div>
+
+    <h3 style="margin-top:48px;">เช่าสถานที่ (ไม่รวมอาหาร)</h3>
+    <div id="rentalGrid" class="grid grid--auto"></div>
+
+    <h3 style="margin-top:64px;">บริการเสริม / Add-ons</h3>
+    <div id="addonsGrid" class="grid grid--auto"></div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+
+<script src="./js/common.js"></script>
+<script>
+(async function() {
+  const data = await CW.mountChrome('venue');
+  if (!data) return;
+
+  const rentalGrid = document.getElementById('rentalGrid');
+  const addonsGrid = document.getElementById('addonsGrid');
+
+  rentalGrid.innerHTML = (data.venueFees?.rental || []).map(r => `
+    <div class="card">
+      <div class="card__img"><img src="${CW.escape(r.image || '')}" alt="${CW.escape(r.name)}"></div>
+      <div class="card__body">
+        <h3 class="card__title">${CW.escape(r.name)}</h3>
+        <p class="card__subtitle">${CW.escape(r.duration || '')}</p>
+        <p class="card__desc">${CW.escape(r.description || '')}</p>
+        <div class="card__price">${CW.fmtBaht(r.price)}<small>ต่อ ${CW.escape(r.duration || 'รายการ')}</small></div>
+      </div>
+    </div>
+  `).join('');
+
+  addonsGrid.innerHTML = (data.venueFees?.addons || []).map(a => `
+    <div class="card">
+      <div class="card__body" style="padding:24px;">
+        <h4 style="margin-bottom:8px;">${CW.escape(a.name)}</h4>
+        <p class="card__desc">${CW.escape(a.description || '')}</p>
+        <div class="card__price">${CW.fmtBaht(a.price)}<small>ต่อ ${CW.escape(a.unit || 'รายการ')}</small></div>
+      </div>
+    </div>
+  `).join('');
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="th" data-base="./">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin — แก้ไขข้อมูลเว็บไซต์ Chaan Wedding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<section class="section">
+  <div class="container">
+    <div class="breadcrumb"><a href="./index.html">หน้าแรก</a> <span>/</span> Admin</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px;">
+      <div>
+        <h1 style="margin:0;">หน้าจัดการข้อมูล</h1>
+        <p style="color:var(--color-text-muted);margin:8px 0 0;">แก้ไขข้อมูลที่แสดงบนเว็บไซต์ ทุกการแก้ไขจะเก็บอยู่ในเบราว์เซอร์จนกว่าคุณจะกด Export</p>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn btn--ghost btn--sm" id="btnReset">↺ คืนค่าเป็นไฟล์ต้นฉบับ</button>
+        <button class="btn btn--ghost btn--sm" id="btnImport">⬆ Import JSON</button>
+        <button class="btn btn--primary btn--sm" id="btnExport">⬇ Export data.json</button>
+      </div>
+    </div>
+
+    <div class="alert">
+      <strong>วิธีบันทึก:</strong> หลังแก้ไขเสร็จ กด <strong>Export data.json</strong>
+      → จะดาวน์โหลดไฟล์ <code>data.json</code> มา → นำไฟล์นี้ไปแทนที่ไฟล์ใน <code>data/data.json</code>
+      → upload เว็บไซต์ใหม่ ข้อมูลจะอัปเดตให้ลูกค้าทุกคน
+    </div>
+
+    <input type="file" id="fileInput" accept=".json" style="display:none;">
+
+    <div class="admin-shell">
+      <aside class="admin-sidebar">
+        <button class="active" data-section="site">⚙ ข้อมูลเว็บไซต์</button>
+        <button data-section="featured">⭐ แพ็คเกจฮิต (Featured)</button>
+        <button data-section="wedding">💐 แพ็คเกจงานแต่ง</button>
+        <button data-section="seminar">🎤 แพ็คเกจสัมมนา</button>
+        <button data-section="rental">🏛 ค่าเช่าสถานที่</button>
+        <button data-section="addons">✨ บริการเสริม</button>
+        <button data-section="menu-buffet">🍽️ เมนู: บุฟเฟต์</button>
+        <button data-section="menu-chinese">🥢 เมนู: โต๊ะจีน</button>
+        <button data-section="menu-thai">🍛 เมนู: โต๊ะจันทร์</button>
+        <button data-section="zones">📍 โซนสถานที่</button>
+        <button data-section="photos">🖼 รูปภาพ</button>
+        <button data-section="raw">{ } JSON ทั้งหมด</button>
+      </aside>
+
+      <main class="admin-main" id="adminMain"></main>
+    </div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+
+<script src="./js/common.js"></script>
+<script src="./js/admin.js"></script>
+
+</body>
+</html>

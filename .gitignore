@@ -1,0 +1,26 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Original reference (not part of site)
+chaan-wedding-site.zip
+
+# Build output / dependencies (in case you add tooling later)
+node_modules/
+dist/
+build/
+
+# Local env
+.env
+.env.local
