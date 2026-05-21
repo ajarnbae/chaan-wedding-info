@@ -239,7 +239,7 @@
 
   mount.innerHTML = `
     <div class="detail-hero">
-      <img src="${CW.escape(pkg.image)}" alt="${CW.escape(pkg.name)}">
+      <img src="${CW.escape(pkg.image)}" alt="${CW.escape(pkg.name)}" style="object-position:${CW.escape(pkg.imagePosition || '50% 50%')};">
       <div class="detail-hero__overlay">
         <div>
           <div class="eyebrow">${isWedding ? 'Wedding Package' : 'Seminar Package'}${pkg.isPromo ? ' · 🔥 PROMO' : ''}</div>
@@ -304,17 +304,6 @@
               </div>
             </div>` : ''}
 
-            <!-- Rituals -->
-            ${pkg.rituals && pkg.rituals.length ? `
-            <div class="panel">
-              <h3>${num()} ตัดพิธีออก = ลดราคา</h3>
-              <p style="color:var(--color-text-muted);font-size:0.95rem;">ติ๊กในกล่องคำนวณราคาด้านขวาเพื่อตัดพิธีและลดราคา</p>
-              <table class="t">
-                <thead><tr><th>พิธี</th><th class="num">ลดราคา</th></tr></thead>
-                <tbody>${pkg.rituals.map(r => `<tr><td>${CW.escape(r.name)}</td><td class="num">- ${CW.fmtBaht(r.deductIfRemoved)}</td></tr>`).join('')}</tbody>
-              </table>
-            </div>` : ''}
-
             <!-- Menu (inline with click-to-expand) -->
             ${menuGroups.length ? `
             <div class="panel">
@@ -350,7 +339,25 @@
               </div>
             </div>` : ''}
 
-            <!-- Add-ons with checkboxes (moved here, after customer provides) -->
+            <!-- Rituals: cuttable rituals list (after customer-provides, before add-ons) -->
+            ${pkg.rituals && pkg.rituals.length ? `
+            <div class="panel">
+              <h3>${num()} 🪔 งานพิธีที่ต้องการตัดออก</h3>
+              <p style="color:var(--color-text-muted);font-size:0.92rem;margin-bottom:6px;">รายการพิธีที่ตัดได้มีตามนี้ — ติ๊กในกล่องคำนวณราคาด้านขวาเพื่อลดราคา</p>
+              <p style="color:var(--color-text-muted);font-size:0.85rem;font-style:italic;margin-bottom:14px;">${CW.escape(data.ritualNote || 'บางรายการพิธีที่ถูกตัดออกจะไม่ได้ลดราคา เนื่องจากเป็นส่วนที่ทางสถานที่ไม่มีค่าใช้จ่ายเพิ่ม')}</p>
+              <div style="display:grid;grid-template-columns:1fr;gap:6px;">
+                ${pkg.rituals.map(r => `
+                  <div style="background:var(--color-cream);padding:10px 14px;border-radius:var(--radius-md);border:1px solid var(--color-line);display:flex;justify-content:space-between;gap:12px;align-items:center;">
+                    <span>${CW.escape(r.name)}</span>
+                    <span style="color:${r.deductIfRemoved > 0 ? 'var(--color-success)' : 'var(--color-text-muted)'};font-weight:500;white-space:nowrap;">
+                      ${r.deductIfRemoved > 0 ? '− ' + CW.fmtBaht(r.deductIfRemoved) : 'ไม่ลด'}
+                    </span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>` : ''}
+
+            <!-- Add-ons with checkboxes -->
             ${pkgAddons.length ? `
             <div class="panel">
               <h3>${num()} ✨ บริการเสริม (เลือกเพิ่มได้)</h3>

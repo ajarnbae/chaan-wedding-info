@@ -39,6 +39,88 @@ function persist() {
   localStorage.setItem('chaan_data_override', JSON.stringify(DATA));
 }
 
+// ============================================
+// Image position editor — reusable widget
+// Aspect: '4/3' (cards) | '16/9' (hero/featured) | '1/1' (gallery)
+// path: a JS expression string that resolves to the object owning imagePosition
+//       e.g. "DATA.packages['wedding'][0]"
+// ============================================
+function imgPosEditor(imgUrl, pathExpr, aspect) {
+  if (!imgUrl) return '';
+  const obj = (function(){ try { return eval(pathExpr); } catch(e) { return {}; } })();
+  const pos = obj.imagePosition || '50% 50%';
+  const [xStr, yStr] = pos.split(' ');
+  const x = parseInt(xStr) || 50;
+  const y = parseInt(yStr) || 50;
+  const uid = 'iposed_' + Math.random().toString(36).slice(2,9);
+  const ratioMap = { '4/3':'aspect-ratio:4/3', '16/9':'aspect-ratio:16/9', '1/1':'aspect-ratio:1/1', '21/9':'aspect-ratio:21/9' };
+  const ar = ratioMap[aspect] || ratioMap['4/3'];
+  return `
+    <div class="img-pos-editor" id="${uid}">
+      <div class="img-pos-editor__head">
+        <span>ปรับตำแหน่งรูปที่จะแสดง (อัตราส่วน ${aspect})</span>
+        <button type="button" class="btn btn--ghost btn--sm" onclick="resetImgPos('${uid}','${pathExpr}')">↺ Center</button>
+      </div>
+      <div class="img-pos-preview" style="${ar}">
+        <img id="${uid}_img" src="${imgUrl.replace(/"/g,'&quot;')}" alt="" style="object-position:${x}% ${y}%;">
+      </div>
+      <div class="img-pos-controls">
+        <label>X (ซ้าย-ขวา)</label>
+        <input type="range" min="0" max="100" value="${x}" oninput="updateImgPos('${uid}','${pathExpr}','x',this.value)">
+        <span class="val" id="${uid}_xv">${x}%</span>
+        <label>Y (บน-ล่าง)</label>
+        <input type="range" min="0" max="100" value="${y}" oninput="updateImgPos('${uid}','${pathExpr}','y',this.value)">
+        <span class="val" id="${uid}_yv">${y}%</span>
+      </div>
+    </div>
+  `;
+}
+
+function updateImgPos(uid, pathExpr, axis, val) {
+  const xVal = (axis === 'x') ? val : (document.querySelector('#' + uid + ' input[type=range]').value);
+  const allRanges = document.querySelectorAll('#' + uid + ' input[type=range]');
+  const xv = allRanges[0].value;
+  const yv = allRanges[1].value;
+  const pos = xv + '% ' + yv + '%';
+  // Save to data
+  try {
+    const obj = eval(pathExpr);
+    obj.imagePosition = pos;
+    persist();
+  } catch(e) { console.error(e); }
+  // Update preview
+  const img = document.getElementById(uid + '_img');
+  if (img) img.style.objectPosition = pos;
+  document.getElementById(uid + '_xv').textContent = xv + '%';
+  document.getElementById(uid + '_yv').textContent = yv + '%';
+}
+
+function refreshImgEditor(slotId, imgUrl, pathExpr, aspect) {
+  const slot = document.getElementById(slotId);
+  if (slot) slot.innerHTML = imgPosEditor(imgUrl, pathExpr, aspect);
+}
+
+function resetImgPos(uid, pathExpr) {
+  try {
+    const obj = eval(pathExpr);
+    obj.imagePosition = '50% 50%';
+    persist();
+  } catch(e) {}
+  const ranges = document.querySelectorAll('#' + uid + ' input[type=range]');
+  ranges[0].value = 50;
+  ranges[1].value = 50;
+  document.getElementById(uid + '_xv').textContent = '50%';
+  document.getElementById(uid + '_yv').textContent = '50%';
+  const img = document.getElementById(uid + '_img');
+  if (img) img.style.objectPosition = '50% 50%';
+}
+
+// Logout
+function adminLogout() {
+  sessionStorage.removeItem('chaan_admin_authed');
+  location.reload();
+}
+
 function exportJSON() {
   const blob = new Blob([JSON.stringify(DATA, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
@@ -119,9 +201,17 @@ function renderSite(root) {
     <p style="color:var(--color-text-muted);font-size:0.9rem;">เดือนที่ถือเป็น Low Season (1=ม.ค. ... 12=ธ.ค.) คั่นด้วยจุลภาค</p>
     <div class="field"><label>เดือน Low Season</label><input id="low_months" value="${(DATA.seasonInfo?.lowSeasonMonths || []).join(',')}"></div>
 
+    <h3 style="margin-top:32px;">🔒 บัญชีแอดมิน</h3>
+    <p style="color:var(--color-text-muted);font-size:0.9rem;">ใช้สำหรับเข้าหน้าจัดการ — เปลี่ยนแล้วต้อง Export + push เพื่ออัพเดท</p>
+    <div class="row">
+      <div class="field"><label>Username</label><input id="admin_user" value="${esc(s.admin?.username || 'chaan')}"></div>
+      <div class="field"><label>Password ใหม่ (เว้นว่างถ้าไม่เปลี่ยน)</label><input id="admin_pass" type="password" placeholder="●●●●●●●●"></div>
+    </div>
+    <div style="font-size:0.85rem;color:var(--color-text-muted);margin:-4px 0 12px;">รหัสจะถูก hash ก่อนเก็บ ปลอดภัยกว่าเก็บเป็น plain text</div>
+
     <div class="admin-actions"><button class="btn btn--primary" id="saveSite">บันทึก</button></div>
   `;
-  document.getElementById('saveSite').addEventListener('click', () => {
+  document.getElementById('saveSite').addEventListener('click', async () => {
     s.name = val('site_name'); s.logoText = val('site_logo');
     s.tagline = val('site_tagline'); s.description = val('site_desc');
     s.heroImage = val('site_hero');
@@ -130,8 +220,21 @@ function renderSite(root) {
     c.email = val('c_email'); c.address = val('c_addr'); c.mapLink = val('c_map');
     DATA.seasonInfo = DATA.seasonInfo || {};
     DATA.seasonInfo.lowSeasonMonths = val('low_months').split(',').map(x => parseInt(x.trim(), 10)).filter(Boolean);
+
+    // Admin credentials
+    s.admin = s.admin || {};
+    const newUser = val('admin_user').trim();
+    if (newUser) s.admin.username = newUser;
+    const newPass = val('admin_pass');
+    if (newPass) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(newPass));
+      s.admin.passwordHash = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+      document.getElementById('admin_pass').value = '';
+      toast('บันทึกแล้ว + Password เปลี่ยนแล้ว');
+    } else {
+      toast('บันทึกแล้ว');
+    }
     persist();
-    toast('บันทึกแล้ว');
   });
 }
 
@@ -209,7 +312,10 @@ function renderPackages(root, type, title) {
       <div class="field"><label>คำอธิบายสั้น</label><input value="${esc(p.shortDescription)}" oninput="DATA.packages['${type}'][${idx}].shortDescription = this.value; persist()"></div>
       <div class="field"><label>คำอธิบายยาว</label><textarea oninput="DATA.packages['${type}'][${idx}].longDescription = this.value; persist()">${esc(p.longDescription)}</textarea></div>
       <div class="row">
-        <div class="field"><label>URL รูป</label><input value="${esc(p.image)}" oninput="DATA.packages['${type}'][${idx}].image = this.value; persist()"></div>
+        <div class="field"><label>URL รูป</label>
+          <input value="${esc(p.image)}" oninput="DATA.packages['${type}'][${idx}].image = this.value; persist(); refreshImgEditor('imgEdSlot_${type}_${idx}', this.value, &quot;DATA.packages['${type}'][${idx}]&quot;, '4/3')">
+          <div id="imgEdSlot_${type}_${idx}">${imgPosEditor(p.image, `DATA.packages['${type}'][${idx}]`, '4/3')}</div>
+        </div>
         <div class="field" style="flex:0 0 160px;"><label>ฤดูกาล</label>
           <select onchange="DATA.packages['${type}'][${idx}].season = this.value; persist()">
             <option value="all" ${p.season==='all'?'selected':''}>ทั้งสองฤดู</option>
@@ -425,7 +531,10 @@ function renderRental(root) {
         <div class="field" style="flex:0 0 140px;"><label>ราคา (฿)</label><input type="number" value="${r.price||0}" oninput="DATA.venueFees.rental[${i}].price = Number(this.value); persist()"></div>
       </div>
       <div class="field"><label>คำอธิบาย</label><input value="${esc(r.description)}" oninput="DATA.venueFees.rental[${i}].description = this.value; persist()"></div>
-      <div class="field"><label>URL รูป</label><input value="${esc(r.image)}" oninput="DATA.venueFees.rental[${i}].image = this.value; persist()"></div>
+      <div class="field"><label>URL รูป</label>
+        <input value="${esc(r.image)}" oninput="DATA.venueFees.rental[${i}].image = this.value; persist(); refreshImgEditor('imgEdRen_${i}', this.value, &quot;DATA.venueFees.rental[${i}]&quot;, '4/3')">
+        <div id="imgEdRen_${i}">${imgPosEditor(r.image, `DATA.venueFees.rental[${i}]`, '4/3')}</div>
+      </div>
     </div>
   `).join('') || '<div class="empty-state">ยังไม่มีรายการ</div>';
 }
@@ -471,7 +580,10 @@ function renderMenu(root, type) {
     <div class="field"><label>คำอธิบายสั้น</label><input id="m_short" value="${esc(menu.shortDescription)}"></div>
     <div class="field"><label>คำอธิบาย</label><textarea id="m_desc">${esc(menu.description)}</textarea></div>
     <div class="row">
-      <div class="field"><label>URL รูปหัว</label><input id="m_img" value="${esc(menu.image)}"></div>
+      <div class="field"><label>URL รูปหัว</label>
+        <input id="m_img" value="${esc(menu.image)}" oninput="DATA.menus['${type}'].image = this.value; persist(); refreshImgEditor('imgEdMenu_${type}', this.value, &quot;DATA.menus['${type}']&quot;, '16/9')">
+        <div id="imgEdMenu_${type}">${imgPosEditor(menu.image, `DATA.menus['${type}']`, '16/9')}</div>
+      </div>
       <div class="field" style="flex:0 0 100px;"><label>Icon</label><input id="m_icon" value="${esc(menu.icon)}"></div>
     </div>
     <div class="admin-actions"><button class="btn btn--primary btn--sm" id="saveMenuMeta">บันทึกข้อมูลหมวด</button></div>
@@ -506,7 +618,10 @@ function renderMenu(root, type) {
              <div class="field" style="flex:0 0 100px;"><label>คน/โต๊ะ</label><input type="number" value="${s.tableSize||10}" oninput="DATA.menus['${type}'].sets[${i}].tableSize = Number(this.value); persist()"></div>`}
       </div>
       <div class="field"><label>คำอธิบาย</label><input value="${esc(s.description)}" oninput="DATA.menus['${type}'].sets[${i}].description = this.value; persist()"></div>
-      <div class="field"><label>URL รูป</label><input value="${esc(s.image)}" oninput="DATA.menus['${type}'].sets[${i}].image = this.value; persist()"></div>
+      <div class="field"><label>URL รูป</label>
+        <input value="${esc(s.image)}" oninput="DATA.menus['${type}'].sets[${i}].image = this.value; persist(); refreshImgEditor('imgEdSet_${type}_${i}', this.value, &quot;DATA.menus['${type}'].sets[${i}]&quot;, '4/3')">
+        <div id="imgEdSet_${type}_${i}">${imgPosEditor(s.image, `DATA.menus['${type}'].sets[${i}]`, '4/3')}</div>
+      </div>
       <details><summary style="cursor:pointer;color:var(--color-gold-dark);font-weight:500;">📋 รายการอาหาร (${(s.items||[]).length})</summary>
         <div style="margin-top:12px;">
           ${(s.items || []).map((it, j) => `
@@ -593,9 +708,9 @@ function renderPhotos(root) {
         <strong>${esc(p.caption || 'ไม่มี caption')}</strong>
         <button class="btn btn--ghost btn--sm" onclick="DATA.gallery.photos.splice(${i},1); persist(); render();">ลบ</button>
       </div>
-      <div class="row">
-        ${p.url ? `<div style="flex:0 0 100px;"><img src="${esc(p.url)}" style="width:100px;height:100px;object-fit:cover;border-radius:8px;"></div>` : ''}
-        <div class="field"><label>URL รูป</label><input value="${esc(p.url)}" oninput="DATA.gallery.photos[${i}].url = this.value; persist()"></div>
+      <div class="field"><label>URL รูป</label>
+        <input value="${esc(p.url)}" oninput="DATA.gallery.photos[${i}].url = this.value; persist(); refreshImgEditor('imgEdPhoto_${i}', this.value, 'DATA.gallery.photos[${i}]', '1/1')">
+        <div id="imgEdPhoto_${i}">${imgPosEditor(p.url, `DATA.gallery.photos[${i}]`, '1/1')}</div>
       </div>
       <div class="field"><label>Caption</label><input value="${esc(p.caption)}" oninput="DATA.gallery.photos[${i}].caption = this.value; persist()"></div>
       <div class="row">

@@ -8,8 +8,140 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./css/style.css">
+<style>
+  /* Login overlay */
+  .login-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: linear-gradient(135deg, var(--color-brown-dark), #1a1410);
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .login-card {
+    background: var(--color-ivory);
+    border-radius: var(--radius-lg);
+    padding: 40px 32px;
+    max-width: 380px; width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    text-align: center;
+  }
+  .login-card h2 {
+    font-family: var(--font-serif);
+    color: var(--color-brown-dark);
+    margin: 0 0 6px;
+  }
+  .login-card .login-sub {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+  .login-card .field { text-align: left; margin-bottom: 12px; }
+  .login-card label { font-size: 0.85rem; color: var(--color-text); }
+  .login-card input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-family: var(--font-sans);
+    background: #fff;
+  }
+  .login-card input:focus { outline: 2px solid var(--color-gold-light); border-color: var(--color-gold); }
+  .login-err {
+    color: #B23A2E;
+    font-size: 0.85rem;
+    min-height: 20px;
+    margin-top: 4px;
+  }
+  .login-card .btn { width: 100%; margin-top: 8px; }
+  body.is-authed .login-overlay { display: none; }
+
+  /* Image position editor */
+  .img-pos-editor {
+    background: var(--color-cream-warm);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 12px;
+    margin-top: 8px;
+  }
+  .img-pos-editor__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    color: var(--color-brown-dark);
+    font-weight: 500;
+  }
+  .img-pos-preview {
+    aspect-ratio: 4/3;
+    width: 100%;
+    max-width: 280px;
+    background: var(--color-line);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin: 0 auto 10px;
+  }
+  .img-pos-preview img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .img-pos-controls {
+    display: grid;
+    grid-template-columns: 60px 1fr 50px;
+    gap: 10px;
+    align-items: center;
+    font-size: 0.85rem;
+  }
+  .img-pos-controls input[type=range] {
+    width: 100%;
+    accent-color: var(--color-gold);
+  }
+  .img-pos-controls .val {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-gold-dark);
+  }
+  .img-pos-aspects {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    margin: 10px 0;
+    font-size: 0.78rem;
+  }
+  .img-pos-aspects button {
+    background: var(--color-ivory);
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    padding: 4px 10px;
+    cursor: pointer;
+    color: var(--color-text);
+  }
+  .img-pos-aspects button.active {
+    background: var(--color-gold);
+    color: #fff;
+    border-color: var(--color-gold);
+  }
+</style>
 </head>
 <body>
+
+<!-- Login overlay -->
+<div class="login-overlay" id="loginOverlay">
+  <form class="login-card" id="loginForm">
+    <div style="font-family:var(--font-script);font-size:2rem;color:var(--color-gold-dark);">Chaan</div>
+    <h2>หน้าจัดการข้อมูล</h2>
+    <p class="login-sub">กรุณาเข้าสู่ระบบ</p>
+    <div class="field">
+      <label>Username</label>
+      <input type="text" id="loginUser" autocomplete="username" required autofocus>
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="loginPass" autocomplete="current-password" required>
+    </div>
+    <div class="login-err" id="loginErr"></div>
+    <button type="submit" class="btn btn--primary">เข้าสู่ระบบ</button>
+  </form>
+</div>
 
 <div id="nav-mount"></div>
 
@@ -25,6 +157,7 @@
         <button class="btn btn--ghost btn--sm" id="btnReset">↺ คืนค่าเป็นไฟล์ต้นฉบับ</button>
         <button class="btn btn--ghost btn--sm" id="btnImport">⬆ Import JSON</button>
         <button class="btn btn--primary btn--sm" id="btnExport">⬇ Export data.json</button>
+        <button class="btn btn--ghost btn--sm" onclick="if(typeof adminLogout==='function')adminLogout();else{sessionStorage.removeItem('chaan_admin_authed');location.reload();}">🔒 ออกจากระบบ</button>
       </div>
     </div>
 
@@ -61,7 +194,60 @@
 <div id="footer-mount"></div>
 
 <script src="./js/common.js"></script>
-<script src="./js/admin.js"></script>
+<script>
+// Login gate — runs before admin.js
+(async function() {
+  async function sha256(text) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  }
+  // Check session
+  if (sessionStorage.getItem('chaan_admin_authed') === '1') {
+    document.body.classList.add('is-authed');
+    return;
+  }
+  // Load data to get expected creds
+  let expectedUser = 'chaan';
+  let expectedHash = '098d725231771f73a62e8ef5301bc83048e6573ecf3795fd8b7e5e0bf8e92e2c'; // chaan2026
+  try {
+    const r = await fetch('./data/data.json?v=' + Date.now());
+    if (r.ok) {
+      const d = await r.json();
+      const a = d?.site?.admin;
+      if (a?.username) expectedUser = a.username;
+      if (a?.passwordHash) expectedHash = a.passwordHash;
+    }
+  } catch(e) { /* fall back to defaults */ }
+
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const u = document.getElementById('loginUser').value.trim();
+    const p = document.getElementById('loginPass').value;
+    const errEl = document.getElementById('loginErr');
+    errEl.textContent = '';
+    const hash = await sha256(p);
+    if (u === expectedUser && hash === expectedHash) {
+      sessionStorage.setItem('chaan_admin_authed', '1');
+      document.body.classList.add('is-authed');
+      // Load admin.js dynamically after auth
+      const s = document.createElement('script');
+      s.src = './js/admin.js';
+      document.body.appendChild(s);
+    } else {
+      errEl.textContent = 'Username หรือ Password ไม่ถูกต้อง';
+      document.getElementById('loginPass').select();
+    }
+  });
+})();
+</script>
+<script>
+// Load admin.js only if already authed
+if (sessionStorage.getItem('chaan_admin_authed') === '1') {
+  const s = document.createElement('script');
+  s.src = './js/admin.js';
+  document.body.appendChild(s);
+}
+</script>
 
 </body>
 </html>

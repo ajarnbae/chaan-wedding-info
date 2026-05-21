@@ -14,7 +14,12 @@
       "address": "Chaan de Cafe & Wedding",
       "mapLink": "https://share.google/NJtFnLAAq8Vek0JJX"
     },
-    "heroImage": "https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80"
+    "heroImage": "https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80",
+    "admin": {
+      "username": "chaan",
+      "passwordHash": "098d725231771f73a62edeec4db43fa7c3c0d5d945f752803dad724eb9d94dff"
+    },
+    "heroImagePosition": "50% 50%"
   },
   "seasonInfo": {
     "lowSeasonMonths": [
@@ -267,9 +272,41 @@
           "addon_drone",
           "addon_makeup"
         ],
-        "rituals": [],
+        "rituals": [
+          {
+            "id": "ritual_khanmaak",
+            "name": "ขันหมาก",
+            "deductIfRemoved": 5000
+          },
+          {
+            "id": "ritual_sangha",
+            "name": "พิธีสงฆ์",
+            "deductIfRemoved": 5000
+          },
+          {
+            "id": "ritual_rabwai",
+            "name": "รับไหว้",
+            "deductIfRemoved": 0
+          },
+          {
+            "id": "ritual_ring",
+            "name": "สวมแหวน",
+            "deductIfRemoved": 0
+          },
+          {
+            "id": "ritual_yoknaamcha",
+            "name": "ยกน้ำชา",
+            "deductIfRemoved": 0
+          },
+          {
+            "id": "ritual_chalongmongkol",
+            "name": "พิธีฉลองมงคล",
+            "deductIfRemoved": 3000
+          }
+        ],
         "notes": "ใช้ได้เฉพาะเดือนพฤษภาคม, มิถุนายน, กรกฎาคม · เปลี่ยนสีดอกไม้ไม่ได้ (หากเปลี่ยน มีค่าใช้จ่ายเพิ่ม) · ไม่มีอาหารเช้า",
-        "decorChangeCategory": "promo"
+        "decorChangeCategory": "promo",
+        "imagePosition": "50% 50%"
       },
       {
         "id": "wedding_summerpromo_full",
@@ -423,9 +460,41 @@
           "addon_drone",
           "addon_makeup"
         ],
-        "rituals": [],
+        "rituals": [
+          {
+            "id": "ritual_khanmaak",
+            "name": "ขันหมาก",
+            "deductIfRemoved": 5000
+          },
+          {
+            "id": "ritual_sangha",
+            "name": "พิธีสงฆ์",
+            "deductIfRemoved": 5000
+          },
+          {
+            "id": "ritual_rabwai",
+            "name": "รับไหว้",
+            "deductIfRemoved": 0
+          },
+          {
+            "id": "ritual_ring",
+            "name": "สวมแหวน",
+            "deductIfRemoved": 0
+          },
+          {
+            "id": "ritual_yoknaamcha",
+            "name": "ยกน้ำชา",
+            "deductIfRemoved": 0
+          },
+          {
+            "id": "ritual_chalongmongkol",
+            "name": "พิธีฉลองมงคล",
+            "deductIfRemoved": 3000
+          }
+        ],
         "notes": "ใช้ได้เฉพาะเดือนพฤษภาคม, มิถุนายน, กรกฎาคม · เปลี่ยนสีดอกไม้ไม่ได้ (หากเปลี่ยน มีค่าใช้จ่ายเพิ่ม) · ไม่มีอาหารเช้า",
-        "decorChangeCategory": "promo"
+        "decorChangeCategory": "promo",
+        "imagePosition": "50% 50%"
       },
       {
         "id": "wedding_summerpromo_evening",
@@ -513,7 +582,8 @@
         ],
         "rituals": [],
         "notes": "ใช้ได้วันธรรมดาทุกเดือน และวันเสาร์-อาทิตย์เฉพาะเดือนพฤษภาคม-กรกฎาคม · สีของดอกไม้และการตกแต่งไม่สามารถเปลี่ยนแปลงได้",
-        "decorChangeCategory": "promo"
+        "decorChangeCategory": "promo",
+        "imagePosition": "50% 50%"
       },
       {
         "id": "wedding_morning_only",
@@ -629,9 +699,41 @@
           "addon_makeup",
           "addon_drone"
         ],
-        "rituals": [],
+        "rituals": [
+          {
+            "id": "ritual_khanmaak",
+            "name": "ขันหมาก",
+            "deductIfRemoved": 5000
+          },
+          {
+            "id": "ritual_sangha",
+            "name": "พิธีสงฆ์",
+            "deductIfRemoved": 5000
+          },
+          {
+            "id": "ritual_rabwai",
+            "name": "รับไหว้",
+            "deductIfRemoved": 0
+          },
+          {
+            "id": "ritual_ring",
+            "name": "สวมแหวน",
+            "deductIfRemoved": 0
+          },
+          {
+            "id": "ritual_yoknaamcha",
+            "name": "ยกน้ำชา",
+            "deductIfRemoved": 0
+          },
+          {
+            "id": "ritual_chalongmongkol",
+            "name": "พิธีฉลองมงคล",
+            "deductIfRemoved": 3000
+          }
+        ],
         "notes": "อาหารเช้าบุฟเฟต์รวมในแพ็คเกจ · ส่วนเกินจาก 50 ท่าน คิดท่านละ 50 บาท",
-        "decorChangeCategory": null
+        "decorChangeCategory": null,
+        "imagePosition": "50% 50%"
       },
       {
         "id": "wedding_standard_lunch",
@@ -828,9 +930,41 @@
           "addon_chair_veil",
           "addon_organizer"
         ],
-        "rituals": [],
+        "rituals": [
+          {
+            "id": "ritual_khanmaak",
+            "name": "ขันหมาก",
+            "deductIfRemoved": 5000
+          },
+          {
+            "id": "ritual_sangha",
+            "name": "พิธีสงฆ์",
+            "deductIfRemoved": 5000
+          },
+          {
+            "id": "ritual_rabwai",
+            "name": "รับไหว้",
+            "deductIfRemoved": 0
+          },
+          {
+            "id": "ritual_ring",
+            "name": "สวมแหวน",
+            "deductIfRemoved": 0
+          },
+          {
+            "id": "ritual_yoknaamcha",
+            "name": "ยกน้ำชา",
+            "deductIfRemoved": 0
+          },
+          {
+            "id": "ritual_chalongmongkol",
+            "name": "พิธีฉลองมงคล",
+            "deductIfRemoved": 3000
+          }
+        ],
         "notes": "ราคาด้านบนเป็นราคามาตรฐาน · ลูกค้าจองข้ามปีรับส่วนลด 20,000 บาท",
-        "decorChangeCategory": "full"
+        "decorChangeCategory": "full",
+        "imagePosition": "50% 50%"
       },
       {
         "id": "wedding_standard_full",
@@ -1022,9 +1156,41 @@
           "addon_chair_veil",
           "addon_organizer"
         ],
-        "rituals": [],
+        "rituals": [
+          {
+            "id": "ritual_khanmaak",
+            "name": "ขันหมาก",
+            "deductIfRemoved": 5000
+          },
+          {
+            "id": "ritual_sangha",
+            "name": "พิธีสงฆ์",
+            "deductIfRemoved": 5000
+          },
+          {
+            "id": "ritual_rabwai",
+            "name": "รับไหว้",
+            "deductIfRemoved": 0
+          },
+          {
+            "id": "ritual_ring",
+            "name": "สวมแหวน",
+            "deductIfRemoved": 0
+          },
+          {
+            "id": "ritual_yoknaamcha",
+            "name": "ยกน้ำชา",
+            "deductIfRemoved": 0
+          },
+          {
+            "id": "ritual_chalongmongkol",
+            "name": "พิธีฉลองมงคล",
+            "deductIfRemoved": 3000
+          }
+        ],
         "notes": "ราคาด้านบนเป็นราคามาตรฐาน · ลูกค้าจองข้ามปีรับส่วนลด 20,000 บาท",
-        "decorChangeCategory": "full"
+        "decorChangeCategory": "full",
+        "imagePosition": "50% 50%"
       },
       {
         "id": "wedding_standard_evening",
@@ -1136,7 +1302,8 @@
         ],
         "rituals": [],
         "notes": "ราคาด้านบนเป็นราคามาตรฐาน · จองข้ามปีลด 20,000 บาท",
-        "decorChangeCategory": "full"
+        "decorChangeCategory": "full",
+        "imagePosition": "50% 50%"
       }
     ],
     "seminar": [
@@ -1221,7 +1388,8 @@
         ],
         "rituals": [],
         "notes": "ราคาไม่แยกฤดูกาล · ใช้ได้ตลอดทั้งปี",
-        "decorChangeCategory": null
+        "decorChangeCategory": null,
+        "imagePosition": "50% 50%"
       }
     ]
   },
@@ -1487,7 +1655,8 @@
                 "ผลไม้รวม"
               ]
             }
-          ]
+          ],
+          "imagePosition": "50% 50%"
         },
         {
           "id": "buffet_b",
@@ -1602,9 +1771,11 @@
                 "ผลไม้รวม"
               ]
             }
-          ]
+          ],
+          "imagePosition": "50% 50%"
         }
-      ]
+      ],
+      "imagePosition": "50% 50%"
     },
     "chinese": {
       "name": "โต๊ะจีน",
@@ -1705,7 +1876,8 @@
                 "เต้าหู้นมสด"
               ]
             }
-          ]
+          ],
+          "imagePosition": "50% 50%"
         },
         {
           "id": "chinese_b",
@@ -1810,7 +1982,8 @@
                 "เต้าหู้นมสด"
               ]
             }
-          ]
+          ],
+          "imagePosition": "50% 50%"
         },
         {
           "id": "chinese_c",
@@ -1916,9 +2089,11 @@
                 "เต้าหู้นมสด"
               ]
             }
-          ]
+          ],
+          "imagePosition": "50% 50%"
         }
-      ]
+      ],
+      "imagePosition": "50% 50%"
     },
     "thai": {
       "name": "โต๊ะจันทร์ (อาหารไทย)",
@@ -2004,7 +2179,8 @@
                 "ผลไม้สด"
               ]
             }
-          ]
+          ],
+          "imagePosition": "50% 50%"
         },
         {
           "id": "thai_a",
@@ -2103,7 +2279,8 @@
                 "ผลไม้สด"
               ]
             }
-          ]
+          ],
+          "imagePosition": "50% 50%"
         },
         {
           "id": "thai_b",
@@ -2203,9 +2380,11 @@
                 "ไอศกรีม"
               ]
             }
-          ]
+          ],
+          "imagePosition": "50% 50%"
         }
-      ]
+      ],
+      "imagePosition": "50% 50%"
     }
   },
   "gallery": {
@@ -2232,85 +2411,98 @@
         "url": "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&q=80",
         "caption": "ฉลองมงคลสมรสในอาคาร",
         "zone": "indoor",
-        "ceremony": "reception"
+        "ceremony": "reception",
+        "imagePosition": "50% 50%"
       },
       {
         "id": "p2",
         "url": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1200&q=80",
         "caption": "พิธีรดน้ำสังข์ในร่ม",
         "zone": "indoor",
-        "ceremony": "blessing"
+        "ceremony": "blessing",
+        "imagePosition": "50% 50%"
       },
       {
         "id": "p3",
         "url": "https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80",
         "caption": "พิธีสงฆ์ในอาคาร",
         "zone": "indoor",
-        "ceremony": "sangha"
+        "ceremony": "sangha",
+        "imagePosition": "50% 50%"
       },
       {
         "id": "p4",
         "url": "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&q=80",
         "caption": "พิธีสวมแหวน",
         "zone": "indoor",
-        "ceremony": "ring_elder"
+        "ceremony": "ring_elder",
+        "imagePosition": "50% 50%"
       },
       {
         "id": "p5",
         "url": "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1200&q=80",
         "caption": "พิธีแห่ขันหมาก",
         "zone": "english-garden",
-        "ceremony": "khan_mak"
+        "ceremony": "khan_mak",
+        "imagePosition": "50% 50%"
       },
       {
         "id": "p6",
         "url": "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1200&q=80",
         "caption": "ฉลองมงคลสมรสในสวน",
         "zone": "english-garden",
-        "ceremony": "reception"
+        "ceremony": "reception",
+        "imagePosition": "50% 50%"
       },
       {
         "id": "p7",
         "url": "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=1200&q=80",
         "caption": "พิธีรับตัวเจ้าสาว",
         "zone": "english-garden",
-        "ceremony": "bride_pickup"
+        "ceremony": "bride_pickup",
+        "imagePosition": "50% 50%"
       },
       {
         "id": "p8",
         "url": "https://images.unsplash.com/photo-1521543387106-b6c43fa70a83?w=1200&q=80",
         "caption": "พิธีรดน้ำสังข์กลางสวน",
         "zone": "english-garden",
-        "ceremony": "blessing"
+        "ceremony": "blessing",
+        "imagePosition": "50% 50%"
       },
       {
         "id": "p9",
         "url": "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=1200&q=80",
         "caption": "ฉลองมงคลสมรสริมน้ำตก",
         "zone": "waterfall-garden",
-        "ceremony": "reception"
+        "ceremony": "reception",
+        "imagePosition": "50% 50%"
       },
       {
         "id": "p10",
         "url": "https://images.unsplash.com/photo-1454179083322-198bb4daae41?w=1200&q=80",
         "caption": "พิธีส่งตัว",
         "zone": "waterfall-garden",
-        "ceremony": "sending"
+        "ceremony": "sending",
+        "imagePosition": "50% 50%"
       },
       {
         "id": "p11",
         "url": "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1200&q=80",
         "caption": "พิธีแห่ขันหมากสวนน้ำตก",
         "zone": "waterfall-garden",
-        "ceremony": "khan_mak"
+        "ceremony": "khan_mak",
+        "imagePosition": "50% 50%"
       },
       {
         "id": "p12",
         "url": "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=1200&q=80",
         "caption": "พิธีรดน้ำสังข์ริมน้ำตก",
         "zone": "waterfall-garden",
-        "ceremony": "blessing"
+        "ceremony": "blessing",
+        "imagePosition": "50% 50%"
       }
     ]
-  }
+  },
+  "ritualNote": "บางรายการพิธีที่ถูกตัดออกจะไม่ได้ลดราคา เนื่องจากเป็นส่วนที่ทางสถานที่ไม่มีค่าใช้จ่ายเพิ่ม"
 }

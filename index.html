@@ -300,7 +300,7 @@
     featuredMount.innerHTML = `
       <div class="hot-promo">
         <span class="hot-promo__badge">🔥 HOT PROMO</span>
-        <div class="hot-promo__img"><img src="${CW.escape(featured.image)}" alt="${CW.escape(featured.name)}"></div>
+        <div class="hot-promo__img"><img src="${CW.escape(featured.image)}" alt="${CW.escape(featured.name)}" style="object-position:${CW.escape(featured.imagePosition || '50% 50%')};"></div>
         <div class="hot-promo__body">
           <span class="hot-promo__eyebrow">โปร ร้อนนี้มาแต่งงานกันเถอะ</span>
           <h2 class="hot-promo__title">${CW.escape(featured.name)}</h2>

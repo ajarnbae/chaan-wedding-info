@@ -112,7 +112,7 @@
       const crossYear = p.crossYearDiscount ? `<span style="font-size:0.75rem;color:var(--color-success);">จองข้ามปี ${CW.fmtBaht(price - p.crossYearDiscount)}</span>` : '';
       return `
         <a href="./detail.html?id=${encodeURIComponent(p.id)}" class="card${promoCls}" style="text-decoration:none;color:inherit;">
-          <div class="card__img"><img src="${CW.escape(p.image)}" alt="${CW.escape(p.name)}" loading="lazy"></div>
+          <div class="card__img"><img src="${CW.escape(p.image)}" alt="${CW.escape(p.name)}" loading="lazy" style="object-position:${CW.escape(p.imagePosition || '50% 50%')};"></div>
           <div class="card__body">
             <span class="card__tag">${category === 'wedding' ? 'งานแต่งงาน' : 'สัมมนา'}</span>
             <h3 class="card__title">${CW.escape(p.name)} ${featBadge}${seasonAllBadge}</h3>
