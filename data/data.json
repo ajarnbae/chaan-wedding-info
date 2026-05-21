@@ -1505,7 +1505,7 @@
       "shortDescription": "เลือกอาหารทานเล่น อาหารหลัก และของหวานได้",
       "description": "อาหารบุฟเฟต์ เลือกได้ตามใจชอบ",
       "icon": "🍽️",
-      "image": "https://lh3.googleusercontent.com/pw/AP1GczO6991dbXK2a0Q3La91bZvxmL6DweRbIXA79RdwdaNGjUKvpyhflnD3TQYVWrBTIn93WYvD5QVnqyZ4P4PpsvfEFDXCYo3qUkcrtbyF_CkcMroqy7n43HpAJRqp2xPR2fr7n8yLuWxVJZP5F_pH6xan=w613-h919-s-no-gm?authuser=0",
+      "image": "https://lh3.googleusercontent.com/pw/AP1GczOAvhk9stCKr1-dGFiFF_4vsGDbFS8SpaR8L5ycZ7Ly6BLI44FaE08u_TcWoHwmuwzF1myrw1wwQyn_HwPSKcGG70ed05x9ooQyHIh3MKgmT227yuqZkTNdlN5HR1L-W9UMgokXEB5E0udzWo-zgQ5O=w613-h919-s-no-gm?authuser=0",
       "sets": [
         {
           "id": "buffet_a",
@@ -1731,14 +1731,14 @@
           "imagePosition": "50% 50%"
         }
       ],
-      "imagePosition": "34.5% 83.7%"
+      "imagePosition": "30.1% 57.7%"
     },
     "chinese": {
       "name": "โต๊ะจีน",
       "shortDescription": "อาหารจีนสไตล์งานมงคล",
       "description": "อาหารจีน 1 โต๊ะ นั่งได้ 8-9 ท่าน",
       "icon": "🥢",
-      "image": "https://lh3.googleusercontent.com/pw/AP1GczOT5NI-duLhl8lWg6fmnkgKdYIsvJcYnkygwki-MwiD9xPHD_NbhymCPVtykJI4MNBE0z-A5b7NMSZaMm6uE0tAGZY-f6NENqOQitf9U9fMpOKdF_cMiwZ_0YwhA28WvKiuTacWWJwuxVQqGt3GMK86=w613-h919-s-no-gm?authuser=0",
+      "image": "https://lh3.googleusercontent.com/pw/AP1GczO2_YXNgbckJ1n7OswQDFWZR3L1WKGquI2PuhjZvIu-u53J6KQ6SIR7RwJRONSwE0DzCTJ_5kN6CpwGKhJhjFXoiRQ9CEGHTxOuuoNERqtRHklEF7xDY2lG8eI4CXJTxxyDXGv7KwT5z2LIFZE0ZVFz=w613-h919-s-no-gm?authuser=0",
       "sets": [
         {
           "id": "chinese_a",
@@ -1746,7 +1746,7 @@
           "pricePerTable": 3900,
           "tableSize": 9,
           "description": "เลือกได้ฟรีในช่วง All Year Long (ไม่มีในช่วง Hot Season)",
-          "image": "https://lh3.googleusercontent.com/pw/AP1GczOT5NI-duLhl8lWg6fmnkgKdYIsvJcYnkygwki-MwiD9xPHD_NbhymCPVtykJI4MNBE0z-A5b7NMSZaMm6uE0tAGZY-f6NENqOQitf9U9fMpOKdF_cMiwZ_0YwhA28WvKiuTacWWJwuxVQqGt3GMK86=w613-h919-s-no-gm?authuser=0",
+          "image": "https://lh3.googleusercontent.com/pw/AP1GczO2_YXNgbckJ1n7OswQDFWZR3L1WKGquI2PuhjZvIu-u53J6KQ6SIR7RwJRONSwE0DzCTJ_5kN6CpwGKhJhjFXoiRQ9CEGHTxOuuoNERqtRHklEF7xDY2lG8eI4CXJTxxyDXGv7KwT5z2LIFZE0ZVFz=w613-h919-s-no-gm?authuser=0",
           "selections": [
             {
               "category": "ออเดิร์ฟร้อน 5 อย่าง",
