@@ -1724,7 +1724,7 @@
       "shortDescription": "อาหารจีนสไตล์งานมงคล",
       "description": "อาหารจีน 1 โต๊ะ นั่งได้ 8-9 ท่าน",
       "icon": "🥢",
-      "image": "https://lh3.googleusercontent.com/pw/AP1GczPE0301nnEYQl-FA9ZSmlvI_ynBYKKOmfivZYqTVGXmTeqS7ykx-5v1VqSU_spGRExIsJNYoxy5uZ8MpEvKi71URduTpmm2EV1Q_hNAGuVp1M-xLWXJeHmJZR8Nsx8W83QrS5JQXhWjJYdFQZgb48zE=w613-h919-s-no-gm?authuser=0",
+      "image": "https://lh3.googleusercontent.com/pw/AP1GczOT5NI-duLhl8lWg6fmnkgKdYIsvJcYnkygwki-MwiD9xPHD_NbhymCPVtykJI4MNBE0z-A5b7NMSZaMm6uE0tAGZY-f6NENqOQitf9U9fMpOKdF_cMiwZ_0YwhA28WvKiuTacWWJwuxVQqGt3GMK86=w613-h919-s-no-gm?authuser=0",
       "sets": [
         {
           "id": "chinese_a",
@@ -2397,14 +2397,6 @@
         "zone": "english-garden",
         "ceremony": "reception",
         "imagePosition": "55% 60%"
-      },
-      {
-        "id": "p7",
-        "url": "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=1200&q=80",
-        "caption": "https://lh3.googleusercontent.com/pw/AP1GczP_ZYDZ2n7RM5tZiD1vwrLA1cckJlFMhFL8k7j3iJYfdVG9xEBc0qbpVyoiAnh8iLPY1lzZyVCq3PkOlk1qD-IJ7jdNeCofaBfvAbLzFTg-2x5O6YTtYyv1nrKdVLL7mlwbz3IUYzhjnv4jZB_-tvIG=w1379-h919-s-no-gm?authuser=0",
-        "zone": "english-garden",
-        "ceremony": "bride_pickup",
-        "imagePosition": "50% 50%"
       },
       {
         "id": "p8",
