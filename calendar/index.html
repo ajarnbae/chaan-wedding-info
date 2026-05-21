@@ -396,4 +396,18 @@ function parseCSV(text) {
     if (bks.length) {
       html += `<div class="day-detail__row"><strong>มีงานจองแล้ว</strong><span>${bks.length} งาน</span></div>`;
       bks.forEach(b => {
-        html += `<div class="day-detail__row"><span>${CW.escape(b.customer || '(ไม่ระบุชื่อ)')}</span><span style="color:var(--color-text-muted);font-size:0.85rem;">${CW.escape(b.timeSlot || '')}</sp
+        html += `<div class="day-detail__row"><span>${CW.escape(b.customer || '(ไม่ระบุชื่อ)')}</span><span style="color:var(--color-text-muted);font-size:0.85rem;">${CW.escape(b.timeSlot || '')}</span></div>`;
+      });
+    } else {
+      html += `<div class="day-detail__row"><strong>สถานะ</strong><span style="color:var(--color-success);">ว่าง · ติดต่อจองได้</span></div>`;
+    }
+    detail.innerHTML = html;
+    detail.classList.add('show');
+    detail.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+})();
+</script>
+
+</body>
+</html>
