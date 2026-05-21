@@ -1743,9 +1743,9 @@
         {
           "id": "chinese_a",
           "name": "โต๊ะจีน เซต A",
-          "pricePerTable": 0,
+          "pricePerTable": 3900,
           "tableSize": 9,
-          "description": "ฟรีในแพ็คเกจ High Season · ส่วนเกินคิดโต๊ะละ 3,900 บาท",
+          "description": "เลือกได้ฟรีในช่วง All Year Long (ไม่มีในช่วง Hot Season)",
           "image": "https://lh3.googleusercontent.com/pw/AP1GczOT5NI-duLhl8lWg6fmnkgKdYIsvJcYnkygwki-MwiD9xPHD_NbhymCPVtykJI4MNBE0z-A5b7NMSZaMm6uE0tAGZY-f6NENqOQitf9U9fMpOKdF_cMiwZ_0YwhA28WvKiuTacWWJwuxVQqGt3GMK86=w613-h919-s-no-gm?authuser=0",
           "selections": [
             {
@@ -1838,9 +1838,9 @@
         {
           "id": "chinese_b",
           "name": "โต๊ะจีน เซต B",
-          "pricePerTable": 600,
+          "pricePerTable": 4500,
           "tableSize": 9,
-          "description": "อัปเกรดเซต A เพิ่มโต๊ะละ 600 บาท · 10 รายการ + ออเดิร์ฟทะเล",
+          "description": "อัปเกรดเพิ่มโต๊ะละ 600 บาท · เลือกอัปเกรดได้ในช่วง All Year Long (ไม่มีในช่วง Hot Season)",
           "image": "https://lh3.googleusercontent.com/pw/AP1GczObh9jbf0PlI0G1rtLzC0QuLtcjTqfvJTwBq4rl-3CUgKdQ-zyY_568SWsO5K-LqM1kKL__9GSujoIgyIbGKTtRRmrlZzdFRG6kapHMGXAEwz9nW01voAXt2wsp7_jj6UgdEvMbaYRwuknFZya_pKDv=w613-h919-s-no-gm?authuser=0",
           "selections": [
             {
@@ -1946,7 +1946,7 @@
           "name": "โต๊ะจีน เซต C - Premium",
           "pricePerTable": 1000,
           "tableSize": 9,
-          "description": "อัปเกรดเซต A เพิ่มโต๊ะละ 1,000 บาท · Premium",
+          "description": "อัปเกรดเพิ่มโต๊ะละ 1,000 บาท · เลือกอัปเกรดได้ในช่วง All Year Long (ไม่มีในช่วง Hot Season)",
           "image": "https://lh3.googleusercontent.com/pw/AP1GczNAZPxdTplVCfKp094Ul7HkRG4GFIEhGSD6CVo485JZGh3hwTNBrSP8XO62hcX_mQPd_iKPKkmEz98XQduajxuyWbYIdu5l6nGkghzj7C0r1uwOFBeEBxFLH9ruu8m-HACFWn24MwjQe91-S-aKGniX=w613-h919-s-no-gm?authuser=0",
           "selections": [
             {
@@ -2062,7 +2062,7 @@
         {
           "id": "thai_sp",
           "name": "โต๊ะจันทร์ เซต SP",
-          "pricePerTable": 0,
+          "pricePerTable": 3500,
           "tableSize": 9,
           "description": "เซตพิเศษสำหรับแพ็คเกจโปรโมชั่นและสัมมนา",
           "image": "https://lh3.googleusercontent.com/pw/AP1GczMUuP_N97t1JZ8gSFawli8JnN43cZkod6wq75PbH6KWXtpE9BbSM0Srxjfku9qZesn5HwXEXZz7XLoHVJXN79-bUalSEDgRRpCbfG13K6TWaVNTigoQ5wehYc5Boyla8TQsdVMBNH9lYLttmitUian2=w613-h919-s-no-gm?authuser=0",
@@ -2142,9 +2142,9 @@
         {
           "id": "thai_a",
           "name": "โต๊ะจันทร์ เซต A",
-          "pricePerTable": 0,
+          "pricePerTable": 3900,
           "tableSize": 9,
-          "description": "ฟรีในแพ็คเกจ High Season · ส่วนเกินคิดโต๊ะละ 3,900 บาท",
+          "description": "เลือกได้ฟรีในช่วง All Year Long (ไม่มีในช่วง Hot Season)",
           "image": "https://lh3.googleusercontent.com/pw/AP1GczNCRoWKaE06p8XvRW3Ye_QgaQX1F4rGvZqAvcqwDoZEBBu9-rcJddihi4khwB40TaDlHe_8BIbw96vIahbS0nEdx3694DCUnm3RQsw_7N_8GFQ8egZ3bY-IYKz4bLdDfKUD5dqw7i7KrgHMa-r2u3_e=w613-h919-s-no-gm?authuser=0",
           "selections": [
             {
@@ -2242,9 +2242,9 @@
         {
           "id": "thai_b",
           "name": "โต๊ะจันทร์ เซต B",
-          "pricePerTable": 600,
+          "pricePerTable": 4500,
           "tableSize": 9,
-          "description": "อัปเกรดจาก เซต A เพิ่มโต๊ะละ 600 บาท · พรีเมียม",
+          "description": "อัปเกรดจาก เซต A เพิ่มโต๊ะละ 600 บาท · เลือกอัปเกรดได้ในช่วง All Year Long ",
           "image": "https://lh3.googleusercontent.com/pw/AP1GczPlZbbktrVmO78c4g-4c0w1fsRDx_t-YybuvOee7_d0v_xpGvWADyPL7qbMWN1x9RNFvVcp3Vo1GyPpi8PnYOD0MW_L8huW6LOAvG2XknrRkwmgTAdo2jQSdSlFYm2uOoUr1-r0_bcuU-2YygwqidwR=w613-h919-s-no-gm?authuser=0",
           "selections": [
             {
