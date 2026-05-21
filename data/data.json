@@ -118,10 +118,10 @@
       {
         "id": "wedding_summerpromo_lunch",
         "name": "โปรร้อนนี้! งานเช้าเที่ยง / งานบ่ายเย็น",
-        "subtitle": "โปร ร้อนนี้มาแต่งงานกันเถอะ · Low Season",
+        "subtitle": "โปร ร้อนนี้มาแต่งงานกันเถอะ · Hot Season",
         "shortDescription": "99,999 บาท · เริ่ม 100 ท่าน · เม.ย. - ก.ค. เท่านั้น",
         "longDescription": "แพ็คเกจโปรร้อนนี้ คุ้มสุด ๆ! งานเช้าเที่ยง (06:00-15:00) หรือ งานบ่ายเย็น (14:00-22:00) ราคาเดียวกัน อาหารโต๊ะจันทร์เซต SP สำหรับ 100 ท่าน",
-        "image": "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&q=80",
+        "image": "https://lh3.googleusercontent.com/pw/AP1GczPO7qoMqgmQuAGjt5QplCvU6ihjBr4kml36v3Wl4SZhePKYJxiUEUErqgNdppn5YVdsqU4AnKIba16NGpgkbMHzoSY2oHh7RWBHMET2K33RhY3WvUIsg2OybEvNBYKfIdzT9VUU83NEGs65WmXA6qqO=w1378-h919-s-no-gm?authuser=0",
         "isFeatured": true,
         "isPromo": true,
         "promoLabel": "🔥 Hot Promo",
@@ -314,7 +314,7 @@
         "subtitle": "โปร ร้อนนี้มาแต่งงานกันเถอะ · เต็มวัน 06:00-22:00",
         "shortDescription": "139,999 บาท · เริ่ม 100 ท่าน · เม.ย. - ก.ค. เท่านั้น",
         "longDescription": "แพ็คเกจโปรร้อนนี้ จัดเต็มวัน 06:00-22:00 ทั้งพิธีเช้าและงานเลี้ยงเย็น อาหารโต๊ะจันทร์เซต SP",
-        "image": "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&q=80",
+        "image": "https://lh3.googleusercontent.com/pw/AP1GczPTzCA3YATiS3c-WDsH5kOoOXDqgyJhH4js3Pcsv4c0GdRc_VACL97We-DAuHp3cfo-JG0CvyzBh9mjqI-YlQJuFmNkY6lH7_Qn4OouSMgEbyeMg5fFe6trcn5ZA0AS9LIDjU4bmJXiShs3XX_NmNGl=w1379-h919-s-no-gm?authuser=0",
         "isFeatured": true,
         "isPromo": true,
         "promoLabel": "🔥 Hot Promo",
@@ -498,11 +498,11 @@
       },
       {
         "id": "wedding_summerpromo_evening",
-        "name": "โปรพิเศษ! งานเลี้ยงเย็น (Low Season)",
+        "name": "โปรพิเศษ! งานเลี้ยงเย็น (Hot Season)",
         "subtitle": "ราคาดี แต่งได้ทุกวัน · 18:00-22:00",
         "shortDescription": "89,999 บาท · เริ่ม 100 ท่าน",
         "longDescription": "แพ็คเกจงานเลี้ยงเย็น 18:00-22:00 อาหารโต๊ะจันทร์เซต SP สำหรับ 100 ท่าน · ใช้ได้วันธรรมดาทุกเดือน และวันเสาร์-อาทิตย์เฉพาะเดือน พ.ค.-ก.ค.",
-        "image": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1200&q=80",
+        "image": "https://lh3.googleusercontent.com/pw/AP1GczPWzGPK48wE9H-O-cwIChDTil_SSG-VbRVSrPqoxKUkw55CVQLBsTHJLAiG-7QwfYbFwDKWApFqirpl-mV0nFa1lV-INsMmCxyMnjKX7Vlg8dkvvpBpUbXtFeHg3WMHbgRqKjVo1z404lRm-58p0NxP=w1378-h919-s-no-gm?authuser=0",
         "isFeatured": false,
         "isPromo": true,
         "promoLabel": "Evening Promo",
@@ -591,7 +591,7 @@
         "subtitle": "พิธีเช้าครบครัน 06:00-12:00 · ใช้ได้ทุกเดือน",
         "shortDescription": "70,000 บาท · เริ่ม 50 ท่าน · ใช้ได้ทั้งปี",
         "longDescription": "แพ็คเกจเฉพาะพิธีเช้า รวมพิธีสงฆ์ตักบาตร แห่ขันหมาก พิธีหลั่งน้ำสังข์ พิธีส่งตัว พร้อมอาหารเช้าบุฟเฟต์สำหรับ 50 ท่าน",
-        "image": "https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80",
+        "image": "https://lh3.googleusercontent.com/pw/AP1GczMj9wQ8HrDjFtZc28mwbe9jO4i6QsFV-_zgcxn40ght0pqm3_Ai4dUzOfl8-UzQGWNy6cHjt2szeYGC5DFuFyIVA7WxUGUh0xw-mmfnn3-XH7OaPM703MpCwOBpmgpagwmz5WbKyV8Qzq7io9QziV7J=w1378-h919-s-no-gm?authuser=0",
         "isFeatured": false,
         "isPromo": false,
         "season": "all",
@@ -737,11 +737,11 @@
       },
       {
         "id": "wedding_standard_lunch",
-        "name": "งานเช้าเที่ยง / งานบ่ายเย็น (High Season)",
+        "name": "งานเช้าเที่ยง / งานบ่ายเย็น (All Year Long)",
         "subtitle": "แพ็คเกจมาตรฐาน · ส.ค. - มี.ค.",
         "shortDescription": "160,000 บาท · จองข้ามปีลด 20,000 เหลือ 140,000",
         "longDescription": "แพ็คเกจมาตรฐาน 06:00-15:00 หรือ 14:00-22:00 อาหารเลือกได้ บุฟเฟต์ / โต๊ะจีน / โต๊ะจันทร์ เซต A พร้อมของแถมฟรีมูลค่ากว่า 200,000 บาท",
-        "image": "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&q=80",
+        "image": "https://lh3.googleusercontent.com/pw/AP1GczMiUWhMbcu-uyyNcxkTamUB7RKAEo8jx7i2p-IXHoTXvPQlLUojlalfXmzQcFge8NmFMbvJ54s7zCX7NZkAgAfJXzXwh7SW5RYH5G_o9pKLYgXxrPtr1e7HeCVLYxc0e4KZztHncEfdeH6n_Oirowld=w1379-h919-s-no-gm?authuser=0",
         "isFeatured": false,
         "isPromo": false,
         "season": "high",
@@ -968,11 +968,11 @@
       },
       {
         "id": "wedding_standard_full",
-        "name": "งานเช้าเย็น เต็มวัน (High Season)",
+        "name": "งานเช้าเย็น เต็มวัน (All Year Long)",
         "subtitle": "แพ็คเกจมาตรฐานเต็มวัน · 06:00-22:00",
         "shortDescription": "190,000 บาท · จองข้ามปีลด 20,000 เหลือ 170,000",
         "longDescription": "แพ็คเกจมาตรฐานเต็มวัน 06:00-22:00 ทั้งพิธีเช้าและงานเลี้ยงเย็น พร้อมอาหารเช้า อาหารหลัก และของแถมฟรีมูลค่ากว่า 200,000 บาท",
-        "image": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1200&q=80",
+        "image": "https://lh3.googleusercontent.com/pw/AP1GczNSSmDTfwd_BUv-CVZD0jK_cRhmRZlLqgOs0m0sdLtiNJl3qBwqoWquA0vaKAjIhuan2fN6DvcIy1UWgzhzsUlEE57mi6x1luSpQPpOI9tPm317Fa5T0Aaz70FZ4OP6gUzVC5QZMcm3vATJrXtvB2j3=w1379-h919-s-no-gm?authuser=0",
         "isFeatured": false,
         "isPromo": false,
         "season": "high",
@@ -1194,11 +1194,11 @@
       },
       {
         "id": "wedding_standard_evening",
-        "name": "งานเลี้ยงเย็น (High Season)",
+        "name": "งานเลี้ยงเย็น (All Year Long)",
         "subtitle": "โปรพิเศษ คุ้มค่าราคาดี · 18:00-22:00",
         "shortDescription": "110,000 บาท · จองข้ามปีลด 20,000 เหลือ 90,000",
         "longDescription": "งานเลี้ยงเย็น 18:00-22:00 อาหารบุฟเฟต์ / โต๊ะจีน / โต๊ะจันทร์ เซต A พร้อมของแถมฟรี 6 รายการรวมผ้าผูกเก้าอี้",
-        "image": "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&q=80",
+        "image": "https://lh3.googleusercontent.com/pw/AP1GczPWgwtuMJGm6vCRZwQws2-L8xW4KSF7q91rX9UvnIZuz8oK1QACDn9sAO_Ov04ZVBVRMrroYHdo7N6eV0C0bsdg4oD81MGJUA1a25gMSWeobujfuAdW4PZS_zXJY635yFYLl6ogNiMqqVXEHE8dvlVU=w1379-h919-s-no-gm?authuser=0",
         "isFeatured": false,
         "isPromo": false,
         "season": "high",
@@ -2505,39 +2505,37 @@
     ]
   },
   "ritualNote": "บางรายการพิธีที่ถูกตัดออกจะไม่ได้ลดราคา เนื่องจากเป็นส่วนที่ทางสถานที่ไม่มีค่าใช้จ่ายเพิ่ม",
+  "github": {
+    "owner": "ajarnbae",
+    "repo": "chaan-wedding-info",
+    "branch": "main",
+    "dataPath": "data/data.json"
+  },
   "auspiciousDates": {
     "2569": {
-      "01": [
-        1,
-        11,
-        13,
-        17,
-        25,
-        31
-      ],
-      "02": [
+      "10": [
+        4,
         6,
         10,
-        12,
-        16,
-        23,
-        26
+        18,
+        24,
+        30
       ],
-      "03": [
-        1,
-        7,
-        13,
-        17,
-        28,
-        31
-      ],
-      "04": [
-        6,
-        10,
-        12,
+      "11": [
+        3,
+        5,
+        9,
         16,
-        23,
-        26
+        19,
+        22,
+        28
+      ],
+      "12": [
+        4,
+        8,
+        19,
+        22,
+        28
       ],
       "05": [
         5,
@@ -2579,120 +2577,21 @@
         18,
         21,
         24
-      ],
-      "10": [
-        4,
-        6,
-        10,
-        18,
-        24,
-        30
-      ],
-      "11": [
-        3,
-        5,
-        9,
-        16,
-        19,
-        22,
-        28
-      ],
-      "12": [
-        4,
-        8,
-        19,
-        22,
-        28
       ]
     },
     "2570": {
-      "01": [
-        1,
-        3,
-        7,
-        9,
-        14,
-        17,
-        26,
-        30
-      ],
-      "02": [
-        1,
-        5,
-        13,
-        16,
-        19,
-        25
-      ],
-      "03": [
-        1,
-        7,
-        14,
-        20,
-        26
-      ],
-      "04": [
-        1,
-        5,
-        13,
-        16,
-        19,
-        25,
-        29
-      ],
-      "05": [
-        1,
-        15,
-        18,
-        28,
-        30
-      ],
-      "06": [
-        3,
-        11,
-        14,
-        17,
-        27
-      ],
-      "07": [
-        3,
-        10,
-        13,
-        16,
-        22,
-        26
-      ],
-      "08": [
-        1,
-        9,
-        12,
-        14,
-        15,
-        21,
-        27,
-        30,
-        31
-      ],
-      "09": [
-        7,
-        10,
-        13,
-        19,
-        23,
-        25
-      ],
       "10": [
         7,
         10,
         19,
         23,
+        25,
         29
       ],
       "11": [
         5,
         8,
         11,
-        15,
         21,
         23,
         27
@@ -2704,88 +2603,83 @@
         21,
         23,
         27
-      ]
-    },
-    "2571": {
+      ],
       "01": [
+        1,
         3,
-        6,
+        7,
         9,
-        15,
-        21,
-        25
+        14,
+        17,
+        26,
+        30
       ],
       "02": [
+        1,
         5,
-        8,
-        14,
-        18,
-        20,
-        24
+        13,
+        16,
+        19,
+        25
       ],
       "03": [
         1,
-        2,
-        5,
+        7,
         14,
-        15,
-        18,
         20,
-        24
+        26
       ],
       "04": [
         1,
-        4,
-        7,
+        5,
         13,
-        17,
-        23,
-        30
+        16,
+        19,
+        25,
+        29
       ],
       "05": [
-        6,
-        12,
-        16,
+        1,
+        15,
         18,
-        22,
+        28,
         30
       ],
       "06": [
-        2,
         3,
-        5,
         11,
         14,
         17,
-        21,
-        28
-      ],
-      "07": [
-        1,
-        4,
-        10,
-        14,
-        16,
-        20,
-        28,
-        31
-      ],
-      "08": [
-        3,
-        13,
-        15,
-        19,
-        26,
+        27,
         29
       ],
-      "09": [
-        1,
-        7,
-        11,
-        17,
-        25,
-        28
+      "07": [
+        3,
+        10,
+        13,
+        16,
+        22,
+        26
       ],
+      "08": [
+        1,
+        9,
+        12,
+        15,
+        21,
+        27,
+        31
+      ],
+      "09": [
+        7,
+        10,
+        13,
+        19,
+        23,
+        25
+      ]
+    },
+    "2571": {
       "10": [
         1,
         7,
@@ -2793,8 +2687,7 @@
         17,
         24,
         27,
-        30,
-        31
+        30
       ],
       "11": [
         5,
@@ -2808,23 +2701,95 @@
       "12": [
         5,
         9,
+        11,
         15,
         22,
+        25,
+        28
+      ],
+      "01": [
+        3,
+        6,
+        9,
+        15,
+        21,
+        25
+      ],
+      "02": [
+        5,
+        8,
+        14,
+        18,
+        20,
+        24
+      ],
+      "03": [
+        2,
+        5,
+        14,
+        15,
+        18,
+        20,
+        24
+      ],
+      "04": [
+        1,
+        4,
+        7,
+        13,
+        17,
+        23,
+        30
+      ],
+      "05": [
+        6,
+        12,
+        16,
+        18,
+        22,
+        30
+      ],
+      "06": [
+        2,
+        5,
+        11,
+        17,
+        21,
+        28
+      ],
+      "07": [
+        1,
+        4,
+        10,
+        14,
+        16,
+        20,
+        28,
+        31
+      ],
+      "08": [
+        3,
+        13,
+        15,
+        19,
+        26,
+        29
+      ],
+      "09": [
+        1,
+        7,
+        11,
+        17,
+        25,
         28
       ]
     }
   },
   "bookingsSheet": {
-    "csvUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLgOFJQEINV128lPUVEQ4e04Evxc5obxg1RekqWsn2AMxaD42pzNfNXbI4jl_qDQ_/pub?gid=413968682&single=true&output=csv",
+    "csvUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLgOFJQEINV128lPUVEQ4e04Evxc5obxg1RekqWsn2AMxaD42pzNfNXbI4jl_qDQ/pub?gid=413968682&single=true&output=csv",
     "dateColumn": "วันจัดงาน",
     "customerColumn": "ชื่อลูกค้า",
     "packageColumn": "แพ็คเกจ",
     "timeSlotColumn": "ช่วงเวลา"
-  },
-  "github": {
-    "owner": "ajarnbae",
-    "repo": "chaan-wedding-info",
-    "branch": "main",
-    "dataPath": "data/data.json"
   }
 }
