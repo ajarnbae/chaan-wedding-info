@@ -268,9 +268,7 @@
         ],
         "availableAddons": [
           "addon_dryice",
-          "addon_bubble",
-          "addon_drone",
-          "addon_makeup"
+          "addon_bubble"
         ],
         "rituals": [
           {
@@ -306,7 +304,8 @@
         ],
         "notes": "ใช้ได้เฉพาะเดือนพฤษภาคม, มิถุนายน, กรกฎาคม · เปลี่ยนสีดอกไม้ไม่ได้ (หากเปลี่ยน มีค่าใช้จ่ายเพิ่ม) · ไม่มีอาหารเช้า",
         "decorChangeCategory": "promo",
-        "imagePosition": "50% 50%"
+        "imagePosition": "50% 50%",
+        "imageZoom": 100
       },
       {
         "id": "wedding_summerpromo_full",
@@ -456,9 +455,7 @@
         ],
         "availableAddons": [
           "addon_dryice",
-          "addon_bubble",
-          "addon_drone",
-          "addon_makeup"
+          "addon_bubble"
         ],
         "rituals": [
           {
@@ -575,10 +572,7 @@
         ],
         "availableAddons": [
           "addon_dryice",
-          "addon_bubble",
-          "addon_drone",
-          "addon_makeup",
-          "addon_live_band"
+          "addon_bubble"
         ],
         "rituals": [],
         "notes": "ใช้ได้วันธรรมดาทุกเดือน และวันเสาร์-อาทิตย์เฉพาะเดือนพฤษภาคม-กรกฎาคม · สีของดอกไม้และการตกแต่งไม่สามารถเปลี่ยนแปลงได้",
@@ -695,10 +689,7 @@
         },
         "availableMenus": [],
         "allowedMenuSetIds": [],
-        "availableAddons": [
-          "addon_makeup",
-          "addon_drone"
-        ],
+        "availableAddons": [],
         "rituals": [
           {
             "id": "ritual_khanmaak",
@@ -920,16 +911,7 @@
           "chinese_a",
           "thai_a"
         ],
-        "availableAddons": [
-          "addon_dryice",
-          "addon_bubble",
-          "addon_drone",
-          "addon_live_band",
-          "addon_makeup",
-          "addon_photographer",
-          "addon_chair_veil",
-          "addon_organizer"
-        ],
+        "availableAddons": [],
         "rituals": [
           {
             "id": "ritual_khanmaak",
@@ -1146,16 +1128,7 @@
           "chinese_a",
           "thai_a"
         ],
-        "availableAddons": [
-          "addon_dryice",
-          "addon_bubble",
-          "addon_drone",
-          "addon_live_band",
-          "addon_makeup",
-          "addon_photographer",
-          "addon_chair_veil",
-          "addon_organizer"
-        ],
+        "availableAddons": [],
         "rituals": [
           {
             "id": "ritual_khanmaak",
@@ -1290,16 +1263,7 @@
           "chinese_a",
           "thai_a"
         ],
-        "availableAddons": [
-          "addon_dryice",
-          "addon_bubble",
-          "addon_drone",
-          "addon_live_band",
-          "addon_makeup",
-          "addon_photographer",
-          "addon_chair_veil",
-          "addon_organizer"
-        ],
+        "availableAddons": [],
         "rituals": [],
         "notes": "ราคาด้านบนเป็นราคามาตรฐาน · จองข้ามปีลด 20,000 บาท",
         "decorChangeCategory": "full",
@@ -1313,7 +1277,7 @@
         "subtitle": "ระยะเวลาการจัดเลี้ยง 5 ชั่วโมง · 100 ท่าน",
         "shortDescription": "85,000 บาท · ไม่แยกฤดูกาล",
         "longDescription": "แพ็คเกจสำหรับงานจัดเลี้ยงบริษัท ประชุม สัมมนา ระยะเวลา 5 ชั่วโมง · อาหารบุฟเฟต์ เซต A หรือโต๊ะจันทร์ เซต SP",
-        "image": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1200&q=80",
+        "image": "https://lh3.googleusercontent.com/pw/AP1GczPy_9K33CHWNd5-RPKFc4YWNgKBGJIRLlf8kGHPwk_54kgJ_k4JcVzzA4d9JtbbAAxoiHRrG3w7bNb_zsPqc_UdaUyK_rmOuFzrmUf4US1ikXQkARIC_umAUxebRzHXUatY2ZINQ1R0CGwIu_Nh_jTU=w613-h919-s-no-gm?authuser=0",
         "isFeatured": false,
         "isPromo": false,
         "season": "all",
@@ -1383,13 +1347,12 @@
         ],
         "availableAddons": [
           "addon_dryice",
-          "addon_organizer",
-          "addon_drone"
+          "addon_bubble"
         ],
         "rituals": [],
         "notes": "ราคาไม่แยกฤดูกาล · ใช้ได้ตลอดทั้งปี",
         "decorChangeCategory": null,
-        "imagePosition": "50% 50%"
+        "imagePosition": "48.9% 59.8%"
       }
     ]
   },
@@ -1401,7 +1364,7 @@
         "duration": "06:00-15:00 หรือ 14:00-22:00",
         "price": 50000,
         "description": "เช่าเฉพาะสถานที่ (ไม่รวมอาหาร อุปกรณ์ และตกแต่ง)",
-        "image": "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80"
+        "image": "https://lh3.googleusercontent.com/pw/AP1GczPKkKhdJYFV3yf_aNVOU8CWU9MPiytbBXGD0Sh28pdgW4s3ZyqaxQOGSBfJdFoZSA6OZO1hQGgtIEpxHsFyoiejs4I4237Oz-yepz6SQwi4HqTd5Z9LO4SKyt5ch3SSJnz_TjW4UNPUEwivMi6fxLs-=w1379-h919-s-no-gm?authuser=0"
       },
       {
         "id": "venue_full_day",
@@ -1409,7 +1372,7 @@
         "duration": "06:00-22:00",
         "price": 70000,
         "description": "เช่าเฉพาะสถานที่ทั้งวัน (ไม่รวมอาหาร อุปกรณ์ และตกแต่ง)",
-        "image": "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&q=80"
+        "image": "https://lh3.googleusercontent.com/pw/AP1GczPKkKhdJYFV3yf_aNVOU8CWU9MPiytbBXGD0Sh28pdgW4s3ZyqaxQOGSBfJdFoZSA6OZO1hQGgtIEpxHsFyoiejs4I4237Oz-yepz6SQwi4HqTd5Z9LO4SKyt5ch3SSJnz_TjW4UNPUEwivMi6fxLs-=w1379-h919-s-no-gm?authuser=0"
       },
       {
         "id": "organizer_import",
@@ -1425,7 +1388,7 @@
         "duration": "ต่อโต๊ะ",
         "price": 1000,
         "description": "ทางเราเตรียมโต๊ะ เก้าอี้ และผ้าคลุมให้ · เฉพาะกรณีที่ลูกค้านำอาหารโต๊ะจีนภายนอกเข้ามา",
-        "image": "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=800&q=80"
+        "image": "https://lh3.googleusercontent.com/pw/AP1GczPGaAyPIGuPgR-YofC9Z0CT-BCasocf1ozXipntKU59erLCEAx2bjwjf-P9s72w0ZeQhWI2qvdbMveenwknvYW1QSpJh_Ye9jMG8QBcps8UU3z-HoFni9lZwyXTbswDBu2GgGVEkb6Wk3jyXHvwPH_4sQ=w1379-h919-s-no-gm?authuser=0"
       }
     ],
     "addons": [
@@ -1433,22 +1396,15 @@
         "id": "addon_dryice",
         "name": "เครื่องพ่นดรายไอซ์",
         "unit": "งาน",
-        "price": 8000,
+        "price": 5000,
         "description": "Dry Ice effect บนเวที"
       },
       {
         "id": "addon_bubble",
         "name": "เครื่องพ่นบับเบิ้ล",
         "unit": "งาน",
-        "price": 5000,
+        "price": 3000,
         "description": "Bubble effect สำหรับเปิดงาน"
-      },
-      {
-        "id": "addon_drone",
-        "name": "ถ่าย Drone",
-        "unit": "ครั้ง",
-        "price": 5000,
-        "description": "ถ่ายภาพมุมสูง professional"
       },
       {
         "id": "addon_live_band",
@@ -1468,22 +1424,8 @@
         "id": "addon_makeup",
         "name": "ช่างแต่งหน้าทำผม",
         "unit": "ครั้ง",
-        "price": 7000,
-        "description": "ช่างแต่งหน้าทำผมเจ้าสาวและครอบครัว"
-      },
-      {
-        "id": "addon_chair_veil",
-        "name": "ผ้าผูกเก้าอี้ Chair Veil",
-        "unit": "ตัว",
-        "price": 50,
-        "description": "ผ้าผูกเก้าอี้ พร้อมดอกไม้ตกแต่ง"
-      },
-      {
-        "id": "addon_organizer",
-        "name": "ทีมออแกไนซ์ภายในสถานที่",
-        "unit": "งาน",
-        "price": 25000,
-        "description": "ทีมจัดงานของ Chaan Wedding ดูแลทุกขั้นตอน"
+        "price": 8000,
+        "description": "ช่างแต่งหน้าทำผมเจ้าสาวและเจ้าบ่าว"
       }
     ],
     "decorChanges": {
@@ -1549,14 +1491,14 @@
       "shortDescription": "เลือกอาหารทานเล่น อาหารหลัก และของหวานได้",
       "description": "อาหารบุฟเฟต์ เลือกได้ตามใจชอบ",
       "icon": "🍽️",
-      "image": "https://images.unsplash.com/photo-1555244162-803834f70033?w=1200&q=80",
+      "image": "https://lh3.googleusercontent.com/pw/AP1GczO6991dbXK2a0Q3La91bZvxmL6DweRbIXA79RdwdaNGjUKvpyhflnD3TQYVWrBTIn93WYvD5QVnqyZ4P4PpsvfEFDXCYo3qUkcrtbyF_CkcMroqy7n43HpAJRqp2xPR2fr7n8yLuWxVJZP5F_pH6xan=w613-h919-s-no-gm?authuser=0",
       "sets": [
         {
           "id": "buffet_a",
           "name": "บุฟเฟต์ เซต A",
           "pricePerPerson": 390,
           "description": "เลือกอาหารทานเล่น 1 อย่าง, อาหารหลัก 4 อย่าง, ขนมหวาน 2 อย่าง",
-          "image": "https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=80",
+          "image": "https://lh3.googleusercontent.com/pw/AP1GczOAvhk9stCKr1-dGFiFF_4vsGDbFS8SpaR8L5ycZ7Ly6BLI44FaE08u_TcWoHwmuwzF1myrw1wwQyn_HwPSKcGG70ed05x9ooQyHIh3MKgmT227yuqZkTNdlN5HR1L-W9UMgokXEB5E0udzWo-zgQ5O=w613-h919-s-no-gm?authuser=0",
           "selections": [
             {
               "category": "อาหารทานเล่น",
@@ -1656,14 +1598,14 @@
               ]
             }
           ],
-          "imagePosition": "50% 50%"
+          "imagePosition": "48.4% 59.1%"
         },
         {
           "id": "buffet_b",
           "name": "บุฟเฟต์ เซต B",
           "pricePerPerson": 590,
           "description": "เลือกอาหารทานเล่น 2 อย่าง, อาหารหลัก 6 อย่าง, ขนมหวาน 2 อย่าง · อัปเกรดจาก เซต A เพิ่มท่านละ 200 บาท",
-          "image": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80",
+          "image": "https://lh3.googleusercontent.com/pw/AP1GczORIixyNAtaCFF4dmrvEfZd7TjKaKZexYqy2acES5Sx3xEf-lcoHOozqZBcsLEDnQacdNvENtQavPiXge-TLZaup9Mz4tS3zCM97o8U2FKS6yvcbZt4umFUUcIAKUMH-9x9HDE3mdXG90glHDXJxz2G=w1226-h919-s-no-gm?authuser=0",
           "selections": [
             {
               "category": "อาหารทานเล่น",
@@ -1775,14 +1717,14 @@
           "imagePosition": "50% 50%"
         }
       ],
-      "imagePosition": "50% 50%"
+      "imagePosition": "34.5% 83.7%"
     },
     "chinese": {
       "name": "โต๊ะจีน",
       "shortDescription": "อาหารจีนสไตล์งานมงคล",
       "description": "อาหารจีน 1 โต๊ะ นั่งได้ 8-9 ท่าน",
       "icon": "🥢",
-      "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=1200&q=80",
+      "image": "https://lh3.googleusercontent.com/pw/AP1GczPE0301nnEYQl-FA9ZSmlvI_ynBYKKOmfivZYqTVGXmTeqS7ykx-5v1VqSU_spGRExIsJNYoxy5uZ8MpEvKi71URduTpmm2EV1Q_hNAGuVp1M-xLWXJeHmJZR8Nsx8W83QrS5JQXhWjJYdFQZgb48zE=w613-h919-s-no-gm?authuser=0",
       "sets": [
         {
           "id": "chinese_a",
@@ -1790,7 +1732,7 @@
           "pricePerTable": 0,
           "tableSize": 9,
           "description": "ฟรีในแพ็คเกจ High Season · ส่วนเกินคิดโต๊ะละ 3,900 บาท",
-          "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80",
+          "image": "https://lh3.googleusercontent.com/pw/AP1GczOT5NI-duLhl8lWg6fmnkgKdYIsvJcYnkygwki-MwiD9xPHD_NbhymCPVtykJI4MNBE0z-A5b7NMSZaMm6uE0tAGZY-f6NENqOQitf9U9fMpOKdF_cMiwZ_0YwhA28WvKiuTacWWJwuxVQqGt3GMK86=w613-h919-s-no-gm?authuser=0",
           "selections": [
             {
               "category": "ออเดิร์ฟร้อน 5 อย่าง",
@@ -1877,7 +1819,7 @@
               ]
             }
           ],
-          "imagePosition": "50% 50%"
+          "imagePosition": "27.8% 58.1%"
         },
         {
           "id": "chinese_b",
@@ -1885,7 +1827,7 @@
           "pricePerTable": 600,
           "tableSize": 9,
           "description": "อัปเกรดเซต A เพิ่มโต๊ะละ 600 บาท · 10 รายการ + ออเดิร์ฟทะเล",
-          "image": "https://images.unsplash.com/photo-1525755662778-989d0524087e?w=800&q=80",
+          "image": "https://lh3.googleusercontent.com/pw/AP1GczObh9jbf0PlI0G1rtLzC0QuLtcjTqfvJTwBq4rl-3CUgKdQ-zyY_568SWsO5K-LqM1kKL__9GSujoIgyIbGKTtRRmrlZzdFRG6kapHMGXAEwz9nW01voAXt2wsp7_jj6UgdEvMbaYRwuknFZya_pKDv=w613-h919-s-no-gm?authuser=0",
           "selections": [
             {
               "category": "ข้อ 1 — ข้าวเกรียบทอด",
@@ -1983,7 +1925,7 @@
               ]
             }
           ],
-          "imagePosition": "50% 50%"
+          "imagePosition": "51.3% 70.4%"
         },
         {
           "id": "chinese_c",
@@ -1991,7 +1933,7 @@
           "pricePerTable": 1000,
           "tableSize": 9,
           "description": "อัปเกรดเซต A เพิ่มโต๊ะละ 1,000 บาท · Premium",
-          "image": "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80",
+          "image": "https://lh3.googleusercontent.com/pw/AP1GczNAZPxdTplVCfKp094Ul7HkRG4GFIEhGSD6CVo485JZGh3hwTNBrSP8XO62hcX_mQPd_iKPKkmEz98XQduajxuyWbYIdu5l6nGkghzj7C0r1uwOFBeEBxFLH9ruu8m-HACFWn24MwjQe91-S-aKGniX=w613-h919-s-no-gm?authuser=0",
           "selections": [
             {
               "category": "ข้อ 1 — ข้าวเกรียบทอด",
@@ -2090,17 +2032,18 @@
               ]
             }
           ],
-          "imagePosition": "50% 50%"
+          "imagePosition": "47.1% 80%"
         }
       ],
-      "imagePosition": "50% 50%"
+      "imagePosition": "6.4% 60.2%",
+      "imageZoom": 100
     },
     "thai": {
       "name": "โต๊ะจันทร์ (อาหารไทย)",
       "shortDescription": "อาหารไทยสไตล์สำรับ",
       "description": "อาหารไทยจัดเสิร์ฟแบบสำรับ 1 โต๊ะ นั่งได้ 8-9 ท่าน",
       "icon": "🍛",
-      "image": "https://images.unsplash.com/photo-1559314809-0d155014e29e?w=1200&q=80",
+      "image": "https://lh3.googleusercontent.com/pw/AP1GczO9unfwXJbO6i-99OSloAjla-DUNAaiEOoPqb6npujFunROynbawtrkgTjevDM8TF_p-ukU5Gi_04PlwaVA4QnsXaynKBZbGzG8NBLtI_Qmey_8JNfsWROq2myaT7VN0dqTDHxO-PbbpEYuQON0TK7u=w613-h919-s-no-gm?authuser=0",
       "sets": [
         {
           "id": "thai_sp",
@@ -2108,7 +2051,7 @@
           "pricePerTable": 0,
           "tableSize": 9,
           "description": "เซตพิเศษสำหรับแพ็คเกจโปรโมชั่นและสัมมนา",
-          "image": "https://images.unsplash.com/photo-1559314809-0d155014e29e?w=800&q=80",
+          "image": "https://lh3.googleusercontent.com/pw/AP1GczMUuP_N97t1JZ8gSFawli8JnN43cZkod6wq75PbH6KWXtpE9BbSM0Srxjfku9qZesn5HwXEXZz7XLoHVJXN79-bUalSEDgRRpCbfG13K6TWaVNTigoQ5wehYc5Boyla8TQsdVMBNH9lYLttmitUian2=w613-h919-s-no-gm?authuser=0",
           "selections": [
             {
               "category": "ออเดิร์ฟร้อน 4 อย่าง",
@@ -2180,7 +2123,7 @@
               ]
             }
           ],
-          "imagePosition": "50% 50%"
+          "imagePosition": "44.2% 64.7%"
         },
         {
           "id": "thai_a",
@@ -2188,7 +2131,7 @@
           "pricePerTable": 0,
           "tableSize": 9,
           "description": "ฟรีในแพ็คเกจ High Season · ส่วนเกินคิดโต๊ะละ 3,900 บาท",
-          "image": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+          "image": "https://lh3.googleusercontent.com/pw/AP1GczNCRoWKaE06p8XvRW3Ye_QgaQX1F4rGvZqAvcqwDoZEBBu9-rcJddihi4khwB40TaDlHe_8BIbw96vIahbS0nEdx3694DCUnm3RQsw_7N_8GFQ8egZ3bY-IYKz4bLdDfKUD5dqw7i7KrgHMa-r2u3_e=w613-h919-s-no-gm?authuser=0",
           "selections": [
             {
               "category": "ออเดิร์ฟร้อน 4 อย่าง",
@@ -2280,7 +2223,7 @@
               ]
             }
           ],
-          "imagePosition": "50% 50%"
+          "imagePosition": "46.8% 63.7%"
         },
         {
           "id": "thai_b",
@@ -2288,7 +2231,7 @@
           "pricePerTable": 600,
           "tableSize": 9,
           "description": "อัปเกรดจาก เซต A เพิ่มโต๊ะละ 600 บาท · พรีเมียม",
-          "image": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+          "image": "https://lh3.googleusercontent.com/pw/AP1GczPlZbbktrVmO78c4g-4c0w1fsRDx_t-YybuvOee7_d0v_xpGvWADyPL7qbMWN1x9RNFvVcp3Vo1GyPpi8PnYOD0MW_L8huW6LOAvG2XknrRkwmgTAdo2jQSdSlFYm2uOoUr1-r0_bcuU-2YygwqidwR=w613-h919-s-no-gm?authuser=0",
           "selections": [
             {
               "category": "ออเดิร์ฟร้อน 4 อย่าง",
@@ -2381,10 +2324,11 @@
               ]
             }
           ],
-          "imagePosition": "50% 50%"
+          "imagePosition": "51.3% 66.1%"
         }
       ],
-      "imagePosition": "50% 50%"
+      "imagePosition": "4.3% 68.2%",
+      "imageZoom": 100
     }
   },
   "gallery": {
@@ -2408,15 +2352,15 @@
     "photos": [
       {
         "id": "p1",
-        "url": "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&q=80",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczMocJ1d4beoe75L_5n_f3nvIManzXJDJ6JjdxZLnKb0u4IQGATD51ecfmHxzuMSHWo1ORDH5tzeontT-UtWyA-m4zBbibqjMLADS0IKRXQ3N04LIqU864WUkRiX1Zkrd-eHBW3cCCNhR1uHxLjIhb_4=w613-h919-s-no-gm?authuser=0",
         "caption": "ฉลองมงคลสมรสในอาคาร",
         "zone": "indoor",
         "ceremony": "reception",
-        "imagePosition": "50% 50%"
+        "imagePosition": "49.5% 88.7%"
       },
       {
         "id": "p2",
-        "url": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1200&q=80",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczOV1HfStSx3PndqByPNpIpTO_p0DBgAt-_ZwFT5lzJAeI_gPj33kA9WmVSAuxyfiQgv-_5l7tpE4B6KfZYuX4aKpzd39Ugj8ALPQo5gFIE1n1PS6n3qoJo-M9jMjqEJkd1C1BP7q6T4Cl3LOlTJbAaq=w1379-h919-s-no-gm?authuser=0",
         "caption": "พิธีรดน้ำสังข์ในร่ม",
         "zone": "indoor",
         "ceremony": "blessing",
@@ -2424,47 +2368,47 @@
       },
       {
         "id": "p3",
-        "url": "https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczPfD1uK-80-vM_HULQrV0PJ-gEdgcvrUCGsGHpw20zIKC0DPVajE4k5m_cITgK09M0BrqKHpbAuRdmr6cgLUPKQ6Lb3aFe0DaBoIFUAxwwgiKGS8T2m4ZmZSNf6megbryhh2YrDN3T7Y7RoYFNmE2FL=w1378-h919-s-no-gm?authuser=0",
         "caption": "พิธีสงฆ์ในอาคาร",
         "zone": "indoor",
         "ceremony": "sangha",
-        "imagePosition": "50% 50%"
+        "imagePosition": "79.7% 60.3%"
       },
       {
         "id": "p4",
-        "url": "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&q=80",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczNnm468aYIMg1Mj72jZAr7ET5mNm4-ieIyd_hI9iR7uoPHHc5yB-kANx1ebEVYckEfNqWREzWZyCxnyhip0DkA_OPUkHFOY_Njw68nHgmLzJZuxoPyTDDX2roOxkMKiYw9AKardzPZ7ZTpYXvweQzK-=w1378-h919-s-no-gm?authuser=0",
         "caption": "พิธีสวมแหวน",
         "zone": "indoor",
         "ceremony": "ring_elder",
-        "imagePosition": "50% 50%"
+        "imagePosition": "49.7% 54.2%"
       },
       {
         "id": "p5",
-        "url": "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1200&q=80",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczNWFYxET6bbgBZfk5-uJg4YoJZSSi2VXa5XNNPwjAJDE4O7lRyK0OVn5euWrm-6bx0fNp5nnCx54ni9DaWaEmjljsyJ5VwIyYr3u2HBm3D3xH-32X9D6kBVm4pDXvjDQueDOoIhag3D-dk6Yn2nxvNB=w1379-h919-s-no-gm?authuser=0",
         "caption": "พิธีแห่ขันหมาก",
-        "zone": "english-garden",
+        "zone": "indoor",
         "ceremony": "khan_mak",
         "imagePosition": "50% 50%"
       },
       {
         "id": "p6",
-        "url": "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1200&q=80",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczPWjPgJ0j4VgXPNq50X_dA8NeQVOUijKVcJ34ZCCZowERfpaJEYyfv3ofHqAGppjHm5DjDnUbwRZ17WU3l4D4Yb8IKAkRk0DvOvwNGR29MQSao39x6UgfQqP2CODkI4F928VND3cdEFUHZdf8MXB4YM=w1379-h919-s-no-gm?authuser=0",
         "caption": "ฉลองมงคลสมรสในสวน",
         "zone": "english-garden",
         "ceremony": "reception",
-        "imagePosition": "50% 50%"
+        "imagePosition": "55% 60%"
       },
       {
         "id": "p7",
         "url": "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=1200&q=80",
-        "caption": "พิธีรับตัวเจ้าสาว",
+        "caption": "https://lh3.googleusercontent.com/pw/AP1GczP_ZYDZ2n7RM5tZiD1vwrLA1cckJlFMhFL8k7j3iJYfdVG9xEBc0qbpVyoiAnh8iLPY1lzZyVCq3PkOlk1qD-IJ7jdNeCofaBfvAbLzFTg-2x5O6YTtYyv1nrKdVLL7mlwbz3IUYzhjnv4jZB_-tvIG=w1379-h919-s-no-gm?authuser=0",
         "zone": "english-garden",
         "ceremony": "bride_pickup",
         "imagePosition": "50% 50%"
       },
       {
         "id": "p8",
-        "url": "https://images.unsplash.com/photo-1521543387106-b6c43fa70a83?w=1200&q=80",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczMLXxwS4yZlZ4SfraC1n14FxHgneFQUPabYyYZn1tJQ5m4ZmJKgcq3rhNQpfYv7gW2ag4fGM_cghRzVj6eN7zw1vmnfkR4yKLi412oLIyD4t3bsB_TeoezTwGJbQiIfeQgjk5el_df2XhzljK07qzYi=w1379-h919-s-no-gm?authuser=0",
         "caption": "พิธีรดน้ำสังข์กลางสวน",
         "zone": "english-garden",
         "ceremony": "blessing",
@@ -2472,35 +2416,19 @@
       },
       {
         "id": "p9",
-        "url": "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=1200&q=80",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczMZrM-WXKH_u0RYrO1gYXRaX2QMJti3QdVXNrBVg3AOXOa5R-NIdkur3nmpPNLzipUieTj_dFGBNdgttyZL46b9YkBmDuszo6UmiJsBmpH4U2rAUuGMMOdpKN9N5cqaio5F-R5HAegT0nEyZdKDEvbb=w1634-h919-s-no-gm?authuser=0",
         "caption": "ฉลองมงคลสมรสริมน้ำตก",
         "zone": "waterfall-garden",
         "ceremony": "reception",
         "imagePosition": "50% 50%"
       },
       {
-        "id": "p10",
-        "url": "https://images.unsplash.com/photo-1454179083322-198bb4daae41?w=1200&q=80",
-        "caption": "พิธีส่งตัว",
-        "zone": "waterfall-garden",
-        "ceremony": "sending",
-        "imagePosition": "50% 50%"
-      },
-      {
-        "id": "p11",
-        "url": "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1200&q=80",
-        "caption": "พิธีแห่ขันหมากสวนน้ำตก",
-        "zone": "waterfall-garden",
-        "ceremony": "khan_mak",
-        "imagePosition": "50% 50%"
-      },
-      {
         "id": "p12",
-        "url": "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=1200&q=80",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczN5dUKCtP2IMjANPi0N74863uQ2IxAMCu_fIvRI_zcsvsEr6AGV6sY6WRPvxM1CDoGAhuIg6RHv1T8a_nOor1kRyYibvQE8Xw6SQvT11m_kCSrLStAjVQvTzqlDXquQuZ-hnjkKrHeWxO9xJlOtHsTd=w1379-h919-s-no-gm?authuser=0",
         "caption": "พิธีรดน้ำสังข์ริมน้ำตก",
         "zone": "waterfall-garden",
         "ceremony": "blessing",
-        "imagePosition": "50% 50%"
+        "imagePosition": "100% 52.1%"
       }
     ]
   },
