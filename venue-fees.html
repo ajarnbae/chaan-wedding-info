@@ -90,10 +90,6 @@
     <h3 style="margin-top:32px;">เช่าสถานที่และค่านำเข้า</h3>
     <div id="rentalList"></div>
 
-    <!-- Decor change fees -->
-    <h3 style="margin-top:48px;">ค่าเปลี่ยนการตกแต่ง</h3>
-    <div id="decorBlock"></div>
-
     <!-- Add-ons library -->
     <h3 style="margin-top:48px;">บริการเสริม (Add-ons Library)</h3>
     <p style="color:var(--color-text-muted); font-size:0.9rem;">รายการบริการเสริมที่สามารถเพิ่มในแพ็คเกจได้ — แต่ละแพ็คเกจมี add-on ที่รองรับแตกต่างกัน ดูได้ในหน้ารายละเอียดแพ็คเกจ</p>
@@ -122,34 +118,6 @@
       </div>
     </div>
   `).join('');
-
-  // Decor changes
-  const dc = data.venueFees?.decorChanges;
-  const decorBlock = document.getElementById('decorBlock');
-  if (dc) {
-    decorBlock.innerHTML = `
-      <div class="decor-block">
-        <h3>🌸 กรณีแพ็คโปรโมชั่น</h3>
-        <p class="note">${CW.escape(dc.promoNote || '')}</p>
-        ${(dc.promo || []).map(d => `
-          <div class="decor-row">
-            <div>${CW.escape(d.name)}</div>
-            <div class="decor-row__price">${CW.fmtBaht(d.price)}</div>
-          </div>
-        `).join('')}
-      </div>
-      <div class="decor-block" style="background:linear-gradient(135deg, var(--color-cream-warm) 0%, var(--color-gold-light) 100%);">
-        <h3>💎 กรณีแพ็คเต็ม หรือ จองข้ามปี</h3>
-        <p class="note">${CW.escape(dc.fullNote || '')}</p>
-        ${(dc.full || []).map(d => `
-          <div class="decor-row">
-            <div>${CW.escape(d.name)}</div>
-            <div class="decor-row__price${d.price === 0 ? ' free' : ''}">${d.displayPrice || CW.fmtBaht(d.price)}</div>
-          </div>
-        `).join('')}
-      </div>
-    `;
-  }
 
   // Addons
   document.getElementById('addonsGrid').innerHTML = (data.venueFees?.addons || []).map(a => `

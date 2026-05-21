@@ -9,66 +9,145 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
 <style>
-  .section-card {
-    background: var(--color-ivory);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-md);
-    padding: 16px 20px;
-    margin-bottom: 12px;
-  }
-  .section-card h4 {
-    margin: 0 0 10px;
-    color: var(--color-brown-dark);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 1.05rem;
-  }
+  .section-card { background: var(--color-ivory); border: 1px solid var(--color-line); border-radius: var(--radius-md); padding: 16px 20px; margin-bottom: 12px; }
+  .section-card h4 { margin: 0 0 10px; color: var(--color-brown-dark); display: flex; align-items: center; gap: 8px; font-size: 1.05rem; }
   .section-card ul { list-style: none; padding: 0; margin: 0; }
-  .section-card li {
-    padding: 5px 0 5px 22px;
-    position: relative;
-    font-size: 0.95rem;
-    color: var(--color-text);
-  }
-  .section-card li::before {
-    content: "•";
-    position: absolute;
-    left: 6px;
-    color: var(--color-gold);
-    font-size: 1.2rem;
-    line-height: 1;
-    top: 8px;
-  }
-  .freebonus {
-    background: linear-gradient(135deg, #FBF6EF 0%, var(--color-gold-light) 100%);
-    border: 1px solid var(--color-gold);
-    border-radius: var(--radius-md);
-    padding: 18px 20px;
-    margin-bottom: 12px;
-  }
+  .section-card li { padding: 5px 0 5px 22px; position: relative; font-size: 0.95rem; color: var(--color-text); }
+  .section-card li::before { content: "•"; position: absolute; left: 6px; color: var(--color-gold); font-size: 1.2rem; line-height: 1; top: 8px; }
+  .freebonus { background: linear-gradient(135deg, #FBF6EF 0%, var(--color-gold-light) 100%); border: 1px solid var(--color-gold); border-radius: var(--radius-md); padding: 18px 20px; margin-bottom: 12px; }
   .freebonus h4 { color: var(--color-brown-dark); margin: 0 0 10px; }
   .freebonus li::before { content: "🎁"; left: 0; top: 6px; font-size: 0.95rem; }
   .freebonus li { padding-left: 26px; }
-  .overflow-note {
-    background: var(--color-cream-warm);
-    border-left: 4px solid var(--color-gold);
-    padding: 10px 14px;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    margin-top: 8px;
-    color: var(--color-brown-dark);
-  }
-  .customer-provides {
-    background: var(--color-brown-dark);
-    color: var(--color-cream);
-    padding: 18px 20px;
-    border-radius: var(--radius-md);
-    margin-bottom: 12px;
-  }
+  .overflow-note { background: var(--color-cream-warm); border-left: 4px solid var(--color-gold); padding: 10px 14px; border-radius: 4px; font-size: 0.9rem; margin-top: 8px; color: var(--color-brown-dark); }
+  .customer-provides { background: var(--color-brown-dark); color: var(--color-cream); padding: 18px 20px; border-radius: var(--radius-md); margin-bottom: 12px; }
   .customer-provides h4 { color: var(--color-gold-light); margin: 0 0 10px; }
   .customer-provides li { color: var(--color-cream); }
   .customer-provides li::before { color: var(--color-gold-light); content: "✓"; }
+
+  /* Add-on checkbox cards */
+  .addon-card {
+    background: var(--color-cream);
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-line);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .addon-card:hover { border-color: var(--color-gold-light); }
+  .addon-card input[type="checkbox"] {
+    width: 20px; height: 20px;
+    accent-color: var(--color-gold);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .addon-card__body { flex: 1; }
+  .addon-card__name { font-weight: 500; color: var(--color-brown-dark); }
+  .addon-card__desc { font-size: 0.85rem; color: var(--color-text-muted); margin-top: 2px; }
+  .addon-card__price { text-align: right; min-width: 110px; }
+  .addon-card__price .num { color: var(--color-gold-dark); font-weight: 500; }
+  .addon-card__price .unit { font-size: 0.75rem; color: var(--color-text-muted); }
+  .addon-card.is-checked { background: linear-gradient(135deg, var(--color-cream-warm) 0%, var(--color-ivory) 100%); border-color: var(--color-gold); }
+
+  /* Menu set expandable */
+  .menu-group { margin-bottom: 16px; }
+  .menu-group__title {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--color-brown-dark);
+    margin: 0 0 6px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid var(--color-gold-light);
+  }
+  .menu-set { background: var(--color-ivory); border: 1px solid var(--color-line); border-radius: var(--radius-md); margin-bottom: 8px; overflow: hidden; }
+  .menu-set summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .menu-set summary::-webkit-details-marker { display: none; }
+  .menu-set summary::after {
+    content: "▼";
+    color: var(--color-gold);
+    font-size: 0.8rem;
+    transition: transform 0.2s;
+  }
+  .menu-set[open] summary::after { transform: rotate(180deg); }
+  .menu-set summary:hover { background: var(--color-cream); }
+  .menu-set__title { font-weight: 500; color: var(--color-brown-dark); flex: 1; min-width: 200px; }
+  .menu-set__price { color: var(--color-gold-dark); font-weight: 500; }
+  .menu-set__body { padding: 14px 18px 18px; border-top: 1px solid var(--color-line); background: var(--color-cream); }
+  .selection-block {
+    background: var(--color-ivory);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    margin-bottom: 8px;
+  }
+  .selection-block h5 {
+    margin: 0 0 8px;
+    color: var(--color-brown-dark);
+    font-family: var(--font-serif);
+    font-size: 0.98rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .selection-block h5 small {
+    background: var(--color-gold);
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-family: var(--font-sans);
+  }
+  .selection-block .opts { display: flex; flex-wrap: wrap; gap: 6px; }
+  .selection-block .opt { background: var(--color-cream-warm); border: 1px solid var(--color-line); border-radius: 999px; padding: 4px 12px; font-size: 0.83rem; color: var(--color-text); }
+
+  /* Decor change radio */
+  .decor-row {
+    background: var(--color-cream);
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-line);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+    cursor: pointer;
+  }
+  .decor-row:hover { border-color: var(--color-gold-light); }
+  .decor-row input[type="radio"] {
+    width: 18px; height: 18px;
+    accent-color: var(--color-gold);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .decor-row__name { flex: 1; }
+  .decor-row__price { color: var(--color-gold-dark); font-weight: 500; }
+  .decor-row.is-selected { background: linear-gradient(135deg, var(--color-cream-warm) 0%, var(--color-ivory) 100%); border-color: var(--color-gold); }
+
+  /* Calculator line items */
+  .calc-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.92);
+  }
+  .calc-line .label { flex: 1; }
+  .calc-line .amount { color: var(--color-gold-light); font-weight: 500; }
+  .calc-line.deduct .amount { color: #FFB39E; }
 </style>
 </head>
 <body>
@@ -92,12 +171,7 @@
 
   if (!pkg) {
     mount.classList.remove('loading');
-    mount.innerHTML = `
-      <div class="container section">
-        <div class="empty-state">ไม่พบแพ็คเกจ
-          <div style="margin-top:16px"><a href="./" class="btn btn--ghost">← กลับหน้าแพ็คเกจ</a></div>
-        </div>
-      </div>`;
+    mount.innerHTML = `<div class="container section"><div class="empty-state">ไม่พบแพ็คเกจ<div style="margin-top:16px"><a href="./" class="btn btn--ghost">← กลับ</a></div></div></div>`;
     return;
   }
 
@@ -106,34 +180,63 @@
   const allSlots = data.timeSlots?.[cat] || [];
   const slots = allSlots.filter(s => (pkg.availableTimeSlots || []).includes(s.id));
   const guestBase = pkg.guestBase || 100;
+  const isMorning = pkg.id === 'wedding_morning_only';
 
   let season = (cat === 'seminar' || pkg.season === 'low') ? (pkg.season === 'low' ? 'low' : 'high') : (CW.qs('season') || CW.currentSeason(data.seasonInfo));
   let timeSlot = slots[0]?.id;
   let guestCount = String(guestBase);
   let crossYear = false;
+  let selectedDecorId = null;
 
   // Build addon lookup
   const addonMap = {};
   (data.venueFees?.addons || []).forEach(a => { addonMap[a.id] = a; });
   const pkgAddons = (pkg.availableAddons || []).map(id => addonMap[id]).filter(Boolean);
 
-  // Build available menu sets
-  const menuOpts = [];
+  // Decor changes available for this package
+  const decorCat = pkg.decorChangeCategory;
+  const decorOptions = decorCat && data.venueFees?.decorChanges?.[decorCat] ? data.venueFees.decorChanges[decorCat] : [];
+  const decorNote = decorCat === 'promo' ? data.venueFees?.decorChanges?.promoNote : (decorCat === 'full' ? data.venueFees?.decorChanges?.fullNote : '');
+  if (decorOptions.length) selectedDecorId = decorOptions[0].id; // default = first (typically "ไม่เปลี่ยน")
+
+  // Build available menu groups
+  const menuGroups = [];
   (pkg.availableMenus || []).forEach(mKey => {
     const menu = data.menus?.[mKey];
     if (!menu) return;
     const sets = (menu.sets || []).filter(s => !pkg.allowedMenuSetIds?.length || pkg.allowedMenuSetIds.includes(s.id));
-    if (sets.length) menuOpts.push({ key: mKey, menu, sets });
+    if (sets.length) menuGroups.push({ key: mKey, menu, sets });
   });
+  const totalSetCount = menuGroups.reduce((sum, g) => sum + g.sets.length, 0);
 
-  function escapeAttr(s) { return CW.escape(s); }
   function priceLabel(set) {
     if (set.pricePerPerson != null && set.pricePerPerson > 0) return CW.fmtBaht(set.pricePerPerson) + ' / ท่าน';
     if (set.pricePerTable != null && set.pricePerTable > 0) return '+ ' + CW.fmtBaht(set.pricePerTable) + ' / โต๊ะ';
     return 'รวมในแพ็คเกจ';
   }
+  function renderSelectionBlock(sel) {
+    const small = sel.pickCount === 'all' ? 'เสิร์ฟทั้งหมด' : (typeof sel.pickCount === 'number' ? `เลือก ${sel.pickCount}` : sel.pickCount);
+    return `
+      <div class="selection-block">
+        <h5>${CW.escape(sel.category)} <small>${CW.escape(String(small))}</small></h5>
+        <div class="opts">${(sel.options || []).map(o => `<span class="opt">${CW.escape(o)}</span>`).join('')}</div>
+      </div>`;
+  }
+  function renderSetBody(set) {
+    if (set.selections && set.selections.length) {
+      return set.selections.map(renderSelectionBlock).join('');
+    }
+    if (set.items && set.items.length) {
+      return `<ul class="section-card" style="margin:0;border:none;padding:0;">${set.items.map(i => `<li>${CW.escape(i)}</li>`).join('')}</ul>`;
+    }
+    return '';
+  }
 
   mount.classList.remove('loading');
+  // section numbering
+  let n = 0;
+  const num = () => `<span class="num">${++n}</span>`;
+
   mount.innerHTML = `
     <div class="detail-hero">
       <img src="${CW.escape(pkg.image)}" alt="${CW.escape(pkg.name)}">
@@ -148,25 +251,23 @@
 
     <section class="section">
       <div class="container">
-        <div class="breadcrumb">
-          <a href="../index.html">หน้าแรก</a> <span>/</span>
-          <a href="./">แพ็คเกจ</a> <span>/</span>
-          ${CW.escape(pkg.name)}
-        </div>
+        <div class="breadcrumb"><a href="../index.html">หน้าแรก</a> <span>/</span><a href="./">แพ็คเกจ</a> <span>/</span> ${CW.escape(pkg.name)}</div>
 
         <div class="detail-grid">
           <!-- LEFT: content -->
           <div>
+            <!-- About -->
             <div class="panel">
-              <h3><span class="num">1</span> เกี่ยวกับแพ็คเกจ</h3>
+              <h3>${num()} เกี่ยวกับแพ็คเกจ</h3>
               <p>${CW.escape(pkg.longDescription || pkg.shortDescription || '')}</p>
               ${pkg.notes ? `<div class="alert">${CW.escape(pkg.notes)}</div>` : ''}
               ${pkg.crossYearDiscount ? `<div class="alert" style="background:#FFF8E7;border-left-color:var(--color-success);">💰 <strong>จองข้ามปี ลด ${CW.fmtBaht(pkg.crossYearDiscount)}</strong> · ติ๊กในกล่องคำนวณราคาด้านขวา</div>` : ''}
             </div>
 
+            <!-- Time slots -->
             ${slots.length ? `
             <div class="panel">
-              <h3><span class="num">2</span> ช่วงเวลาที่จัดได้</h3>
+              <h3>${num()} ช่วงเวลาที่จัดได้</h3>
               <div style="display:grid;grid-template-columns:1fr;gap:8px;">
                 ${slots.map(s => `
                   <div style="background: var(--color-cream); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--color-line); display:flex; justify-content:space-between; gap: 12px; flex-wrap:wrap;">
@@ -177,16 +278,15 @@
               </div>
             </div>` : ''}
 
+            <!-- Inclusion sections -->
             ${(pkg.includedSections || []).length ? `
             <div class="panel">
-              <h3><span class="num">3</span> สิ่งที่ได้รับในแพ็คเกจ</h3>
+              <h3>${num()} สิ่งที่ได้รับในแพ็คเกจ</h3>
               <div>
                 ${pkg.includedSections.map(sec => `
                   <div class="section-card">
                     <h4>${CW.escape(sec.title)}</h4>
-                    <ul>
-                      ${(sec.items || []).map(i => `<li>${CW.escape(i)}</li>`).join('')}
-                    </ul>
+                    <ul>${(sec.items || []).map(i => `<li>${CW.escape(i)}</li>`).join('')}</ul>
                   </div>
                 `).join('')}
               </div>
@@ -194,68 +294,98 @@
               ${pkg.snackOverflow?.label ? `<div class="overflow-note">⚠ ${CW.escape(pkg.snackOverflow.label)}</div>` : ''}
             </div>` : ''}
 
+            <!-- Free bonuses -->
             ${pkg.freeBonuses && pkg.freeBonuses.length ? `
             <div class="panel">
-              <h3><span class="num">4</span> 🎁 ของแถมฟรี</h3>
+              <h3>${num()} 🎁 ของแถมฟรี</h3>
               <div class="freebonus">
                 <h4>${CW.escape(pkg.freeBonusLabel || 'พิเศษ! แถมฟรี')}</h4>
                 <ul>${pkg.freeBonuses.map(b => `<li>${CW.escape(b)}</li>`).join('')}</ul>
               </div>
             </div>` : ''}
 
+            <!-- Rituals -->
             ${pkg.rituals && pkg.rituals.length ? `
             <div class="panel">
-              <h3><span class="num">${pkg.freeBonuses?.length ? 5 : 4}</span> ตัดพิธีออก = ลดราคา</h3>
-              <p style="color:var(--color-text-muted);font-size:0.95rem;">ติ๊กในกล่องคำนวณราคาด้านขวาเพื่อตัดพิธีและลดราคาทันที</p>
+              <h3>${num()} ตัดพิธีออก = ลดราคา</h3>
+              <p style="color:var(--color-text-muted);font-size:0.95rem;">ติ๊กในกล่องคำนวณราคาด้านขวาเพื่อตัดพิธีและลดราคา</p>
               <table class="t">
-                <thead><tr><th>พิธี</th><th class="num">ลดราคาเมื่อตัด</th></tr></thead>
+                <thead><tr><th>พิธี</th><th class="num">ลดราคา</th></tr></thead>
                 <tbody>${pkg.rituals.map(r => `<tr><td>${CW.escape(r.name)}</td><td class="num">- ${CW.fmtBaht(r.deductIfRemoved)}</td></tr>`).join('')}</tbody>
               </table>
             </div>` : ''}
 
+            <!-- Menu (inline with click-to-expand) -->
+            ${menuGroups.length ? `
+            <div class="panel">
+              <h3>${num()} 🍽️ เมนูอาหาร</h3>
+              ${totalSetCount > 1 ? `<p style="color:var(--color-text-muted);font-size:0.9rem;margin-bottom:14px;">เลือกประเภทอาหารได้ 1 ประเภท · คลิกเซตเพื่อดูรายการอาหาร</p>` : ''}
+              ${pkg.allowedMenuSetIds?.length ? `<p style="color:var(--color-gold-dark);font-size:0.9rem;">⚡ แพ็คเกจนี้รองรับเฉพาะเซตที่กำหนด</p>` : ''}
+              ${menuGroups.map(g => `
+                <div class="menu-group">
+                  <h4 class="menu-group__title">${g.menu.icon || ''} ${CW.escape(g.menu.name)}</h4>
+                  ${g.sets.map(s => `
+                    <details class="menu-set">
+                      <summary>
+                        <div class="menu-set__title">${CW.escape(s.name)}</div>
+                        <div class="menu-set__price">${priceLabel(s)}</div>
+                      </summary>
+                      <div class="menu-set__body">
+                        ${s.description ? `<p style="color:var(--color-text-muted);font-size:0.9rem;margin:0 0 12px;">${CW.escape(s.description)}</p>` : ''}
+                        ${renderSetBody(s)}
+                      </div>
+                    </details>
+                  `).join('')}
+                </div>
+              `).join('')}
+            </div>` : ''}
+
+            <!-- Customer provides -->
+            ${pkg.customerProvides && pkg.customerProvides.length ? `
+            <div class="panel">
+              <h3>${num()} 📋 สิ่งที่เจ้าภาพต้องเตรียมเอง</h3>
+              <div class="customer-provides">
+                <h4>เตรียมล่วงหน้า</h4>
+                <ul>${pkg.customerProvides.map(c => `<li>${CW.escape(c)}</li>`).join('')}</ul>
+              </div>
+            </div>` : ''}
+
+            <!-- Add-ons with checkboxes (moved here, after customer provides) -->
             ${pkgAddons.length ? `
             <div class="panel">
-              <h3><span class="num">${[pkg.freeBonuses?.length, pkg.rituals?.length].filter(Boolean).length + 4}</span> ✨ บริการเสริม (เพิ่มได้ตามต้องการ)</h3>
-              <p style="color:var(--color-text-muted);font-size:0.95rem;">บริการเสริมสำหรับแพ็คเกจนี้ — เลือกได้หลายรายการ</p>
-              <div style="display:grid; grid-template-columns: 1fr; gap: 10px;">
+              <h3>${num()} ✨ บริการเสริม (เลือกเพิ่มได้)</h3>
+              <p style="color:var(--color-text-muted);font-size:0.95rem;">ติ๊กเลือก add-on ที่ต้องการ — ราคาจะรวมในกล่องคำนวณด้านขวาทันที</p>
+              <div>
                 ${pkgAddons.map(a => `
-                  <div style="background: var(--color-cream); padding: 14px 16px; border-radius: var(--radius-md); border: 1px solid var(--color-line); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
-                    <div>
-                      <strong>${CW.escape(a.name)}</strong>
-                      <div style="font-size:0.85rem; color: var(--color-text-muted);">${CW.escape(a.description || '')}</div>
+                  <label class="addon-card" data-addon-id="${CW.escape(a.id)}">
+                    <input type="checkbox" data-addon="${CW.escape(a.id)}" data-price="${a.price}">
+                    <div class="addon-card__body">
+                      <div class="addon-card__name">${CW.escape(a.name)}</div>
+                      <div class="addon-card__desc">${CW.escape(a.description || '')}</div>
                     </div>
-                    <div style="text-align:right; min-width: 120px;">
-                      <div style="color: var(--color-gold-dark); font-weight: 500;">+ ${CW.fmtBaht(a.price)}</div>
-                      <div style="font-size:0.75rem; color: var(--color-text-muted);">ต่อ ${CW.escape(a.unit || 'รายการ')}</div>
+                    <div class="addon-card__price">
+                      <div class="num">+ ${CW.fmtBaht(a.price)}</div>
+                      <div class="unit">ต่อ ${CW.escape(a.unit || 'รายการ')}</div>
                     </div>
-                  </div>
+                  </label>
                 `).join('')}
               </div>
             </div>` : ''}
 
-            ${menuOpts.length ? `
+            <!-- Decor change options (radio) -->
+            ${decorOptions.length ? `
             <div class="panel">
-              <h3><span class="num">${[pkgAddons.length, pkg.freeBonuses?.length, pkg.rituals?.length].filter(Boolean).length + 4}</span> 🍽️ เมนูอาหาร</h3>
-              ${pkg.allowedMenuSetIds?.length ? `<p style="color:var(--color-gold-dark);font-size:0.9rem;">⚡ แพ็คเกจนี้รองรับเฉพาะเซตที่กำหนด</p>` : ''}
-              <div style="display:flex;flex-wrap:wrap;gap:12px;">
-                ${menuOpts.map(opt => `
-                  <a href="../menu/?type=${encodeURIComponent(opt.key)}" class="card" style="flex:1 1 220px;text-decoration:none;color:inherit;">
-                    <div class="card__img" style="aspect-ratio:4/3;"><img src="${CW.escape(opt.menu.image)}" alt="${CW.escape(opt.menu.name)}" loading="lazy"></div>
-                    <div class="card__body" style="padding:16px;">
-                      <h4 style="margin:0 0 4px;">${opt.menu.icon || ''} ${CW.escape(opt.menu.name)}</h4>
-                      <div style="font-size:0.8rem;color:var(--color-text-muted);margin:0;">
-                        ${opt.sets.map(s => `${CW.escape(s.name)} (${priceLabel(s)})`).join('<br>')}
-                      </div>
-                    </div>
-                  </a>
+              <h3>${num()} 🌸 ค่าเปลี่ยนการตกแต่ง</h3>
+              <p style="color:var(--color-text-muted);font-size:0.9rem;">${CW.escape(decorNote || '')} · เลือกได้ 1 รายการ</p>
+              <div>
+                ${decorOptions.map((d, i) => `
+                  <label class="decor-row${i === 0 ? ' is-selected' : ''}" data-decor-id="${CW.escape(d.id)}">
+                    <input type="radio" name="decorChange" value="${CW.escape(d.id)}" data-price="${d.price}" ${i === 0 ? 'checked' : ''}>
+                    <div class="decor-row__name">${CW.escape(d.name)}</div>
+                    <div class="decor-row__price">${d.displayPrice || (d.price > 0 ? '+ ' + CW.fmtBaht(d.price) : 'ไม่เพิ่ม')}</div>
+                  </label>
                 `).join('')}
               </div>
-            </div>` : ''}
-
-            ${pkg.customerProvides && pkg.customerProvides.length ? `
-            <div class="customer-provides">
-              <h4>📋 สิ่งที่เจ้าภาพต้องเตรียมเอง</h4>
-              <ul>${pkg.customerProvides.map(c => `<li>${CW.escape(c)}</li>`).join('')}</ul>
             </div>` : ''}
           </div>
 
@@ -271,25 +401,23 @@
                   ${slots.map(s => `<option value="${CW.escape(s.id)}">${CW.escape(s.name)} (${CW.escape(s.hours)})</option>`).join('')}
                 </select>
               </div>` : (slots.length === 1 ? `
-              <div style="font-size:0.85rem; color: var(--color-gold-light); margin-bottom: 12px;">
-                ⏰ ${CW.escape(slots[0].name)} · ${CW.escape(slots[0].hours)}
-              </div>` : '')}
+              <div style="font-size:0.85rem; color: var(--color-gold-light); margin-bottom: 12px;">⏰ ${CW.escape(slots[0].name)} · ${CW.escape(slots[0].hours)}</div>` : '')}
 
               <div class="field" style="margin-bottom:12px;">
-                <label style="color:#FFFCF7;opacity:0.85;">จำนวนแขก (เริ่ม ${guestBase})</label>
+                <label style="color:#FFFCF7;opacity:0.85;">จำนวนแขก</label>
                 <select id="guestSelect" style="background: rgba(255,255,255,0.95);color:var(--color-text)">
-                  ${(data.guestCountTiers || []).filter(n => n >= guestBase).map(n =>
-                    `<option value="${n}" ${n === guestBase ? 'selected' : ''}>${n} ท่าน</option>`).join('')}
+                  ${(data.guestCountTiers || []).filter(n => isMorning ? n >= 50 : n >= 50).map(n =>
+                    `<option value="${n}" ${n === guestBase ? 'selected' : ''}>${n} ท่าน${n === guestBase ? ' (ราคาฐาน)' : ''}</option>`).join('')}
                 </select>
               </div>
 
               ${(pkg.overflowPricing?.buffet || pkg.overflowPricing?.chinese || pkg.overflowPricing?.thai) ? `
               <div class="field" id="overflowMenuField" style="margin-bottom:12px; display:none;">
-                <label style="color:#FFFCF7;opacity:0.85;">ประเภทเมนู (สำหรับคำนวณคนเกิน)</label>
+                <label style="color:#FFFCF7;opacity:0.85;">ประเภทเมนู (สำหรับคำนวณแขกต่ำ/เกิน base)</label>
                 <select id="overflowMenuSelect" style="background: rgba(255,255,255,0.95); color: var(--color-text);">
-                  ${pkg.overflowPricing?.buffet ? `<option value="buffet">บุฟเฟต์ (+${pkg.overflowPricing.buffet.perPerson}/ท่าน)</option>` : ''}
-                  ${pkg.overflowPricing?.chinese ? `<option value="chinese">โต๊ะจีน (+${pkg.overflowPricing.chinese.perTable}/โต๊ะ ${pkg.overflowPricing.chinese.tableSize}ท่าน)</option>` : ''}
-                  ${pkg.overflowPricing?.thai ? `<option value="thai">โต๊ะจันทร์ (+${pkg.overflowPricing.thai.perTable}/โต๊ะ ${pkg.overflowPricing.thai.tableSize}ท่าน)</option>` : ''}
+                  ${pkg.overflowPricing?.buffet ? `<option value="buffet">บุฟเฟต์</option>` : ''}
+                  ${pkg.overflowPricing?.chinese ? `<option value="chinese">โต๊ะจีน (${pkg.overflowPricing.chinese.tableSize} ท่าน/โต๊ะ)</option>` : ''}
+                  ${pkg.overflowPricing?.thai ? `<option value="thai">โต๊ะจันทร์ (${pkg.overflowPricing.thai.tableSize} ท่าน/โต๊ะ)</option>` : ''}
                 </select>
               </div>` : ''}
 
@@ -302,29 +430,16 @@
               </div>` : ''}
 
               <hr>
-              <div class="price-meta">ราคาฐาน (${guestBase} ท่าน)</div>
-              <div class="price-num" id="basePriceShow" style="font-size:1.5rem;">-</div>
-
-              <div id="overflowRow" style="display:none;">
-                <hr>
-                <div class="price-meta">ส่วนเกิน <span id="overflowCount">0</span> ท่าน</div>
-                <div class="price-num" id="overflowAmount" style="font-size:1.2rem;color:var(--color-gold-light);">-</div>
-              </div>
-
-              <div id="crossYearRow" style="display:none;">
-                <hr>
-                <div class="price-meta">ส่วนลดจองข้ามปี</div>
-                <div class="price-num" id="crossYearAmount" style="font-size:1.2rem;color:var(--color-gold-light);">-</div>
-              </div>
+              <div id="calcLines"></div>
 
               ${pkg.rituals?.length ? `
                 <hr>
                 <div class="price-meta" style="margin-bottom:8px;">ตัดพิธี</div>
                 ${pkg.rituals.map(r => `
                   <label style="display:flex;align-items:center;gap:10px;padding:4px 0;">
-                    <input type="checkbox" data-ritual="${escapeAttr(r.id)}" data-deduct="${r.deductIfRemoved}">
+                    <input type="checkbox" data-ritual="${CW.escape(r.id)}" data-deduct="${r.deductIfRemoved}">
                     <span style="flex:1;font-size:0.88rem;">${CW.escape(r.name)}</span>
-                    <span style="color:var(--color-gold-light);font-size:0.85rem;">- ${CW.fmtPrice(r.deductIfRemoved)}฿</span>
+                    <span style="color:#FFB39E;font-size:0.85rem;">- ${CW.fmtPrice(r.deductIfRemoved)}฿</span>
                   </label>
                 `).join('')}
               ` : ''}
@@ -333,7 +448,7 @@
               <div class="price-meta">รวมสุทธิ</div>
               <div class="price-num" id="totalPrice" style="color: var(--color-gold-light);">-</div>
 
-              ${data.site?.contact?.line ? `<a class="btn btn--primary btn--block mt-md" href="${CW.escape(data.site.contact.line.startsWith('http') ? data.site.contact.line : 'https://line.me/R/ti/p/' + encodeURIComponent(data.site.contact.line))}" target="_blank">💬 จอง/สอบถามผ่าน LINE</a>` : ''}
+              ${data.site?.contact?.line ? `<a class="btn btn--primary btn--block mt-md" href="${CW.escape(data.site.contact.line.startsWith('http') ? data.site.contact.line : 'https://line.me/R/ti/p/' + encodeURIComponent(data.site.contact.line))}" target="_blank">💬 จอง/สอบถาม LINE</a>` : ''}
               ${data.site?.contact?.phone ? `<a class="btn ${data.site?.contact?.line ? 'btn--ghost' : 'btn--primary'} btn--block mt-md" href="tel:${CW.escape(data.site.contact.phone.replace(/[^\\d+]/g, ''))}" style="${data.site?.contact?.line ? 'border-color:rgba(255,255,255,0.4);color:#fff;' : ''}">☎ ${CW.escape(data.site.contact.phone)}</a>` : ''}
               ${data.site?.contact?.facebook ? `<a class="btn btn--ghost btn--block mt-md" href="${CW.escape(data.site.contact.facebook)}" target="_blank" style="border-color:rgba(255,255,255,0.4);color:#fff;">f Facebook</a>` : ''}
             </div>
@@ -343,7 +458,7 @@
     </section>
   `;
 
-  // Wire up calculator
+  // Wire up
   const slotSel = document.getElementById('slotSelect');
   if (slotSel) slotSel.addEventListener('change', e => { timeSlot = e.target.value; recalc(); });
   document.getElementById('guestSelect').addEventListener('change', e => { guestCount = e.target.value; recalc(); });
@@ -353,71 +468,107 @@
   if (cyChk) cyChk.addEventListener('change', e => { crossYear = e.target.checked; recalc(); });
   document.querySelectorAll('#priceBox [data-ritual]').forEach(cb => cb.addEventListener('change', recalc));
 
+  // Addon checkboxes
+  document.querySelectorAll('.addon-card input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', e => {
+      e.target.closest('.addon-card').classList.toggle('is-checked', e.target.checked);
+      recalc();
+    });
+  });
+
+  // Decor radios
+  document.querySelectorAll('.decor-row input[type="radio"]').forEach(r => {
+    r.addEventListener('change', e => {
+      document.querySelectorAll('.decor-row').forEach(x => x.classList.remove('is-selected'));
+      e.target.closest('.decor-row').classList.add('is-selected');
+      selectedDecorId = e.target.value;
+      recalc();
+    });
+  });
+
   function recalc() {
+    const lines = [];
     const base = pkg.basePricing?.[timeSlot]?.[season] ?? 0;
     let total = base;
+    lines.push({ label: `ราคาฐาน (${guestBase} ท่าน)`, amount: base, type: 'base' });
 
-    // Overflow
+    // Guest overflow/underflow
     const guests = Number(guestCount);
-    const extra = Math.max(0, guests - guestBase);
+    const delta = guests - guestBase;
     const overflowField = document.getElementById('overflowMenuField');
-    const overflowRow = document.getElementById('overflowRow');
-    let overflowAmt = 0;
-    let overflowCountText = '';
-    if (extra > 0 && pkg.overflowPricing) {
+    if (delta !== 0 && pkg.overflowPricing) {
       const op = pkg.overflowPricing;
       const has3 = op.buffet || op.chinese || op.thai;
+      let amt = 0, desc = '';
       if (has3) {
-        // Need a menu type selector
         if (overflowField) overflowField.style.display = '';
         const choice = overflowMenuSel?.value || (op.buffet ? 'buffet' : (op.chinese ? 'chinese' : 'thai'));
         const rule = op[choice];
         if (rule?.perPerson) {
-          overflowAmt = extra * rule.perPerson;
-          overflowCountText = `${extra} ท่าน × ${rule.perPerson} = `;
+          amt = delta * rule.perPerson;
+          desc = `${delta > 0 ? 'ส่วนเกิน' : 'ลดแขก'} ${Math.abs(delta)} ท่าน (${choice === 'buffet' ? 'บุฟเฟต์' : choice === 'chinese' ? 'โต๊ะจีน' : 'โต๊ะจันทร์'}) × ${rule.perPerson}`;
         } else if (rule?.perTable) {
-          const tables = Math.ceil(extra / (rule.tableSize || 9));
-          overflowAmt = tables * rule.perTable;
-          overflowCountText = `${extra} ท่าน → ${tables} โต๊ะ × ${rule.perTable} = `;
+          const tables = Math.ceil(Math.abs(delta) / (rule.tableSize || 9)) * Math.sign(delta);
+          amt = tables * rule.perTable;
+          desc = `${delta > 0 ? 'ส่วนเกิน' : 'ลดแขก'} ${Math.abs(delta)} ท่าน → ${Math.abs(tables)} โต๊ะ × ${rule.perTable}`;
         }
       } else if (op.perPerson) {
-        overflowAmt = extra * op.perPerson;
-        overflowCountText = `${extra} ท่าน × ${op.perPerson} = `;
+        amt = delta * op.perPerson;
+        desc = `${delta > 0 ? 'ส่วนเกิน' : 'ลดแขก'} ${Math.abs(delta)} ท่าน × ${op.perPerson}`;
       } else if (op.thai?.perTable) {
-        const tables = Math.ceil(extra / (op.thai.tableSize || 9));
-        overflowAmt = tables * op.thai.perTable;
-        overflowCountText = `${extra} ท่าน → ${tables} โต๊ะ × ${op.thai.perTable} = `;
+        const tables = Math.ceil(Math.abs(delta) / (op.thai.tableSize || 9)) * Math.sign(delta);
+        amt = tables * op.thai.perTable;
+        desc = `${delta > 0 ? 'ส่วนเกิน' : 'ลดแขก'} ${Math.abs(delta)} ท่าน → ${Math.abs(tables)} โต๊ะ × ${op.thai.perTable}`;
+      }
+      if (amt !== 0) {
+        lines.push({ label: desc, amount: amt, type: amt > 0 ? 'add' : 'deduct' });
+        total += amt;
       }
     } else {
       if (overflowField) overflowField.style.display = 'none';
     }
-    if (overflowAmt > 0) {
-      overflowRow.style.display = '';
-      document.getElementById('overflowCount').textContent = `(${overflowCountText.trim()})`;
-      document.getElementById('overflowAmount').textContent = '+ ' + CW.fmtBaht(overflowAmt);
-    } else {
-      overflowRow.style.display = 'none';
-    }
-    total += overflowAmt;
 
-    // Cross-year discount
-    const cyRow = document.getElementById('crossYearRow');
+    // Cross-year
     if (crossYear && pkg.crossYearDiscount) {
       total -= pkg.crossYearDiscount;
-      if (cyRow) {
-        cyRow.style.display = '';
-        document.getElementById('crossYearAmount').textContent = '- ' + CW.fmtBaht(pkg.crossYearDiscount);
+      lines.push({ label: 'ส่วนลดจองข้ามปี', amount: -pkg.crossYearDiscount, type: 'deduct' });
+    }
+
+    // Add-ons
+    document.querySelectorAll('.addon-card input[type="checkbox"]:checked').forEach(cb => {
+      const addonId = cb.dataset.addon;
+      const addon = addonMap[addonId];
+      if (addon) {
+        total += addon.price;
+        lines.push({ label: `✨ ${addon.name}`, amount: addon.price, type: 'add' });
       }
-    } else if (cyRow) {
-      cyRow.style.display = 'none';
+    });
+
+    // Decor change
+    if (selectedDecorId && decorOptions.length) {
+      const d = decorOptions.find(x => x.id === selectedDecorId);
+      if (d && d.price > 0) {
+        total += d.price;
+        lines.push({ label: `🌸 ${d.name}`, amount: d.price, type: 'add' });
+      }
     }
 
     // Rituals
     document.querySelectorAll('#priceBox [data-ritual]:checked').forEach(cb => {
-      total -= Number(cb.dataset.deduct || 0);
+      const deduct = Number(cb.dataset.deduct || 0);
+      total -= deduct;
+      const r = pkg.rituals?.find(x => x.id === cb.dataset.ritual);
+      if (r) lines.push({ label: `🪔 ตัด: ${r.name}`, amount: -deduct, type: 'deduct' });
     });
 
-    document.getElementById('basePriceShow').textContent = CW.fmtBaht(base);
+    // Render lines
+    document.getElementById('calcLines').innerHTML = lines.map(l => `
+      <div class="calc-line ${l.type === 'deduct' ? 'deduct' : ''}">
+        <div class="label">${CW.escape(l.label)}</div>
+        <div class="amount">${l.amount >= 0 ? (l.type === 'base' ? '' : '+ ') : '- '}${CW.fmtBaht(Math.abs(l.amount))}</div>
+      </div>
+    `).join('');
+
     document.getElementById('totalPrice').textContent = CW.fmtBaht(Math.max(0, total));
   }
   recalc();
