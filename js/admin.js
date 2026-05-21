@@ -40,10 +40,9 @@ function persist() {
 }
 
 // ============================================
-// Image position editor — reusable widget
+// Image position editor v2 — drag + grid + zoom
 // Aspect: '4/3' (cards) | '16/9' (hero/featured) | '1/1' (gallery)
 // path: a JS expression string that resolves to the object owning imagePosition
-//       e.g. "DATA.packages['wedding'][0]"
 // ============================================
 function imgPosEditor(imgUrl, pathExpr, aspect) {
   if (!imgUrl) return '';
@@ -52,47 +51,104 @@ function imgPosEditor(imgUrl, pathExpr, aspect) {
   const [xStr, yStr] = pos.split(' ');
   const x = parseInt(xStr) || 50;
   const y = parseInt(yStr) || 50;
+  const zoom = obj.imageZoom || 100; // percent (100 = no zoom)
   const uid = 'iposed_' + Math.random().toString(36).slice(2,9);
   const ratioMap = { '4/3':'aspect-ratio:4/3', '16/9':'aspect-ratio:16/9', '1/1':'aspect-ratio:1/1', '21/9':'aspect-ratio:21/9' };
   const ar = ratioMap[aspect] || ratioMap['4/3'];
   return `
-    <div class="img-pos-editor" id="${uid}">
+    <div class="img-pos-editor" id="${uid}" data-path="${pathExpr.replace(/"/g,'&quot;')}">
       <div class="img-pos-editor__head">
-        <span>ปรับตำแหน่งรูปที่จะแสดง (อัตราส่วน ${aspect})</span>
-        <button type="button" class="btn btn--ghost btn--sm" onclick="resetImgPos('${uid}','${pathExpr}')">↺ Center</button>
+        <div>
+          <span>ปรับตำแหน่งรูป</span>
+          <span class="img-pos-editor__hint">· อัตราส่วน ${aspect} · ลากเมาส์เพื่อเลื่อน + ใช้ slider ปรับ Zoom</span>
+        </div>
+        <button type="button" class="btn btn--ghost btn--sm" onclick="resetImgPos('${uid}')">↺ Center</button>
       </div>
-      <div class="img-pos-preview" style="${ar}">
-        <img id="${uid}_img" src="${imgUrl.replace(/"/g,'&quot;')}" alt="" style="object-position:${x}% ${y}%;">
+      <div class="img-pos-preview" id="${uid}_box" style="${ar}" onmousedown="startImgDrag(event,'${uid}')" ontouchstart="startImgDrag(event,'${uid}')">
+        <img id="${uid}_img" src="${imgUrl.replace(/"/g,'&quot;')}" alt="" draggable="false" style="object-position:${x}% ${y}%; transform:scale(${zoom/100});">
       </div>
       <div class="img-pos-controls">
-        <label>X (ซ้าย-ขวา)</label>
-        <input type="range" min="0" max="100" value="${x}" oninput="updateImgPos('${uid}','${pathExpr}','x',this.value)">
-        <span class="val" id="${uid}_xv">${x}%</span>
-        <label>Y (บน-ล่าง)</label>
-        <input type="range" min="0" max="100" value="${y}" oninput="updateImgPos('${uid}','${pathExpr}','y',this.value)">
-        <span class="val" id="${uid}_yv">${y}%</span>
+        <label>🔍 Zoom</label>
+        <input type="range" min="100" max="300" step="5" value="${zoom}" oninput="updateImgZoom('${uid}',this.value)">
+        <span class="val" id="${uid}_zv">${zoom}%</span>
       </div>
+      <div class="img-pos-coord">ตำแหน่ง: X <span id="${uid}_xv">${x}</span>% · Y <span id="${uid}_yv">${y}</span>%</div>
     </div>
   `;
 }
 
-function updateImgPos(uid, pathExpr, axis, val) {
-  const xVal = (axis === 'x') ? val : (document.querySelector('#' + uid + ' input[type=range]').value);
-  const allRanges = document.querySelectorAll('#' + uid + ' input[type=range]');
-  const xv = allRanges[0].value;
-  const yv = allRanges[1].value;
-  const pos = xv + '% ' + yv + '%';
-  // Save to data
-  try {
-    const obj = eval(pathExpr);
-    obj.imagePosition = pos;
-    persist();
-  } catch(e) { console.error(e); }
-  // Update preview
+let _imgDrag = null;
+function startImgDrag(e, uid) {
+  e.preventDefault();
+  const box = document.getElementById(uid + '_box');
+  if (!box) return;
   const img = document.getElementById(uid + '_img');
-  if (img) img.style.objectPosition = pos;
-  document.getElementById(uid + '_xv').textContent = xv + '%';
-  document.getElementById(uid + '_yv').textContent = yv + '%';
+  const rect = box.getBoundingClientRect();
+  const cur = (img.style.objectPosition || '50% 50%').split(' ').map(s => parseFloat(s));
+  const pt = e.touches ? e.touches[0] : e;
+  _imgDrag = {
+    uid,
+    box, img, rect,
+    startX: pt.clientX, startY: pt.clientY,
+    startPosX: cur[0] || 50, startPosY: cur[1] || 50
+  };
+  box.classList.add('dragging');
+  document.addEventListener('mousemove', doImgDrag);
+  document.addEventListener('mouseup', endImgDrag);
+  document.addEventListener('touchmove', doImgDrag, { passive: false });
+  document.addEventListener('touchend', endImgDrag);
+}
+function doImgDrag(e) {
+  if (!_imgDrag) return;
+  e.preventDefault?.();
+  const pt = e.touches ? e.touches[0] : e;
+  const dx = pt.clientX - _imgDrag.startX;
+  const dy = pt.clientY - _imgDrag.startY;
+  // Convert pixel delta to percentage; invert because dragging right should reveal right portion (object-position decreases)
+  const deltaXPct = (dx / _imgDrag.rect.width) * 100;
+  const deltaYPct = (dy / _imgDrag.rect.height) * 100;
+  let nx = _imgDrag.startPosX - deltaXPct;
+  let ny = _imgDrag.startPosY - deltaYPct;
+  nx = Math.max(0, Math.min(100, nx));
+  ny = Math.max(0, Math.min(100, ny));
+  _imgDrag.img.style.objectPosition = nx.toFixed(1) + '% ' + ny.toFixed(1) + '%';
+  document.getElementById(_imgDrag.uid + '_xv').textContent = nx.toFixed(0);
+  document.getElementById(_imgDrag.uid + '_yv').textContent = ny.toFixed(0);
+}
+function endImgDrag() {
+  if (!_imgDrag) return;
+  const uid = _imgDrag.uid;
+  const editor = document.getElementById(uid);
+  const path = editor?.dataset.path;
+  const img = _imgDrag.img;
+  _imgDrag.box.classList.remove('dragging');
+  if (path && img) {
+    try {
+      const obj = eval(path);
+      obj.imagePosition = img.style.objectPosition;
+      persist();
+    } catch(e) { console.error(e); }
+  }
+  document.removeEventListener('mousemove', doImgDrag);
+  document.removeEventListener('mouseup', endImgDrag);
+  document.removeEventListener('touchmove', doImgDrag);
+  document.removeEventListener('touchend', endImgDrag);
+  _imgDrag = null;
+}
+function updateImgZoom(uid, val) {
+  const img = document.getElementById(uid + '_img');
+  const zv = document.getElementById(uid + '_zv');
+  if (img) img.style.transform = 'scale(' + (val/100) + ')';
+  if (zv) zv.textContent = val + '%';
+  const editor = document.getElementById(uid);
+  const path = editor?.dataset.path;
+  if (path) {
+    try {
+      const obj = eval(path);
+      obj.imageZoom = parseInt(val);
+      persist();
+    } catch(e) {}
+  }
 }
 
 function refreshImgEditor(slotId, imgUrl, pathExpr, aspect) {
@@ -100,19 +156,30 @@ function refreshImgEditor(slotId, imgUrl, pathExpr, aspect) {
   if (slot) slot.innerHTML = imgPosEditor(imgUrl, pathExpr, aspect);
 }
 
-function resetImgPos(uid, pathExpr) {
-  try {
-    const obj = eval(pathExpr);
-    obj.imagePosition = '50% 50%';
-    persist();
-  } catch(e) {}
-  const ranges = document.querySelectorAll('#' + uid + ' input[type=range]');
-  ranges[0].value = 50;
-  ranges[1].value = 50;
-  document.getElementById(uid + '_xv').textContent = '50%';
-  document.getElementById(uid + '_yv').textContent = '50%';
+function resetImgPos(uid) {
+  const editor = document.getElementById(uid);
+  const path = editor?.dataset.path;
+  if (path) {
+    try {
+      const obj = eval(path);
+      obj.imagePosition = '50% 50%';
+      obj.imageZoom = 100;
+      persist();
+    } catch(e) {}
+  }
   const img = document.getElementById(uid + '_img');
-  if (img) img.style.objectPosition = '50% 50%';
+  if (img) {
+    img.style.objectPosition = '50% 50%';
+    img.style.transform = 'scale(1)';
+  }
+  const xv = document.getElementById(uid + '_xv');
+  const yv = document.getElementById(uid + '_yv');
+  const zv = document.getElementById(uid + '_zv');
+  if (xv) xv.textContent = '50';
+  if (yv) yv.textContent = '50';
+  if (zv) zv.textContent = '100%';
+  const range = document.querySelector('#' + uid + ' input[type=range]');
+  if (range) range.value = 100;
 }
 
 // Logout
@@ -166,6 +233,9 @@ function render() {
     case 'ceremonies':   renderCeremonies(main); break;
     case 'zones':        renderZones(main); break;
     case 'photos':       renderPhotos(main); break;
+    case 'auspicious':   renderAuspicious(main); break;
+    case 'bookings':     renderBookings(main); break;
+    case 'publish':      renderPublish(main); break;
     case 'raw':          renderRaw(main); break;
   }
 }
@@ -727,6 +797,261 @@ function renderPhotos(root) {
       </div>
     </div>
   `).join('') || '<div class="empty-state">ยังไม่มีรูป</div>';
+}
+
+// ============================================
+// Auspicious wedding dates editor
+// ============================================
+function renderAuspicious(root) {
+  DATA.auspiciousDates = DATA.auspiciousDates || {};
+  const years = Object.keys(DATA.auspiciousDates).sort();
+  const TH_MONTHS = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+  let activeYear = window._auspActiveYear || years[0] || '2569';
+  if (!DATA.auspiciousDates[activeYear]) DATA.auspiciousDates[activeYear] = {};
+
+  root.innerHTML = `
+    <h2 style="margin-top:0;">💍 ฤกษ์งานแต่ง (ดิถีเรียงหมอน)</h2>
+    <p style="color:var(--color-text-muted);">คลิกวันที่เพื่อ toggle ว่าเป็นฤกษ์ดีหรือไม่ · ใช้แสดงในหน้า "ตารางวันว่าง" (ปี พ.ศ.)</p>
+
+    <div style="display:flex;gap:8px;align-items:center;margin:16px 0;flex-wrap:wrap;">
+      <strong>เลือกปี:</strong>
+      ${years.map(y => `<button class="btn btn--${y === activeYear ? 'primary' : 'ghost'} btn--sm" onclick="window._auspActiveYear='${y}'; render();">${y}</button>`).join('')}
+      <input id="newYear" type="number" min="2568" max="2599" placeholder="เพิ่มปี (พ.ศ.)" style="width:140px;">
+      <button class="btn btn--ghost btn--sm" onclick="addAuspYear()">+ เพิ่มปี</button>
+      ${years.length > 1 ? `<button class="btn btn--ghost btn--sm" style="margin-left:auto;color:#B23A2E;" onclick="if(confirm('ลบปี ${activeYear}?')){delete DATA.auspiciousDates['${activeYear}'];window._auspActiveYear=null;persist();render();}">ลบปี ${activeYear}</button>` : ''}
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr;gap:14px;" id="monthEditors">
+      ${[1,2,3,4,5,6,7,8,9,10,11,12].map(mo => renderMonthEditor(activeYear, mo, TH_MONTHS)).join('')}
+    </div>
+  `;
+}
+
+function renderMonthEditor(year, month, monthNames) {
+  const mKey = String(month).padStart(2,'0');
+  const days = (DATA.auspiciousDates[year]?.[mKey] || []).sort((a,b) => a-b);
+  const adYear = parseInt(year) - 543;
+  const lastDay = new Date(adYear, month, 0).getDate();
+  const firstDow = (new Date(adYear, month - 1, 1).getDay() + 6) % 7;
+
+  let cells = '';
+  for (let i = 0; i < firstDow; i++) cells += `<div></div>`;
+  for (let d = 1; d <= lastDay; d++) {
+    const sel = days.includes(d);
+    cells += `<button type="button" onclick="toggleAuspDay('${year}','${mKey}',${d})" style="aspect-ratio:1;border:1px solid ${sel?'var(--color-gold)':'var(--color-line)'};background:${sel?'linear-gradient(135deg,#FFEEF2,#FFE0E8)':'var(--color-ivory)'};color:${sel?'#A8505F':'var(--color-text)'};font-weight:${sel?'600':'400'};border-radius:6px;cursor:pointer;font-size:0.85rem;font-variant-numeric:tabular-nums;">${d}${sel?' 💍':''}</button>`;
+  }
+  return `
+    <div style="background:var(--color-ivory);border:1px solid var(--color-line);border-radius:8px;padding:12px 14px;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+        <strong>${monthNames[month-1]}</strong>
+        <span style="color:var(--color-gold-dark);font-size:0.85rem;">${days.length} วันฤกษ์ดี</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;font-size:0.72rem;color:var(--color-text-muted);text-align:center;margin-bottom:4px;">
+        <div>จ</div><div>อ</div><div>พ</div><div>พฤ</div><div>ศ</div><div>ส</div><div>อา</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;">${cells}</div>
+    </div>
+  `;
+}
+
+function toggleAuspDay(year, mKey, d) {
+  DATA.auspiciousDates[year] = DATA.auspiciousDates[year] || {};
+  DATA.auspiciousDates[year][mKey] = DATA.auspiciousDates[year][mKey] || [];
+  const arr = DATA.auspiciousDates[year][mKey];
+  const i = arr.indexOf(d);
+  if (i >= 0) arr.splice(i, 1);
+  else { arr.push(d); arr.sort((a,b)=>a-b); }
+  persist();
+  render();
+}
+
+function addAuspYear() {
+  const y = document.getElementById('newYear').value;
+  if (!y) return;
+  if (!DATA.auspiciousDates[y]) DATA.auspiciousDates[y] = {};
+  window._auspActiveYear = y;
+  persist();
+  render();
+}
+
+// ============================================
+// Bookings Google Sheet config
+// ============================================
+function renderBookings(root) {
+  DATA.bookingsSheet = DATA.bookingsSheet || {};
+  const b = DATA.bookingsSheet;
+  root.innerHTML = `
+    <h2 style="margin-top:0;">📅 ตั้งค่า Google Sheet สำหรับตารางจอง</h2>
+    <p style="color:var(--color-text-muted);font-size:0.95rem;">หน้า "ตารางวันว่าง" จะดึงข้อมูลจาก Google Sheet ที่นี่ — ลูกค้าจะเห็นวันที่ถูกจองแล้ว</p>
+
+    <div class="alert" style="background:#FBF6EF;border-left-color:var(--color-gold-dark);">
+      <strong>วิธีตั้งค่า:</strong><br>
+      1. เปิด Google Sheet ของคุณ<br>
+      2. <strong>File → Share → Publish to web</strong><br>
+      3. เลือก tab "งาน" (หรือชื่อ tab ที่มีตารางจอง)<br>
+      4. เลือก format = <strong>CSV (comma-separated values)</strong><br>
+      5. กด <strong>Publish</strong> → คัดลอก URL ที่ได้มาวางใน "CSV URL" ด้านล่าง<br>
+      <small style="color:var(--color-text-muted);">URL ที่ถูกต้องจะมีคำว่า <code>/pub?</code> และ <code>output=csv</code></small>
+    </div>
+
+    <div class="field"><label>CSV URL</label>
+      <input id="b_url" value="${esc(b.csvUrl)}" placeholder="https://docs.google.com/.../pub?gid=...&single=true&output=csv" style="font-family:monospace;font-size:0.85rem;">
+    </div>
+
+    <h3 style="margin-top:24px;">ชื่อคอลัมน์ในชีท</h3>
+    <p style="color:var(--color-text-muted);font-size:0.88rem;">ระบบจะมองหาคอลัมน์เหล่านี้ในแถวหัวตาราง · ใส่คำที่อยู่ในชื่อคอลัมน์ (พอบางส่วน)</p>
+    <div class="row">
+      <div class="field"><label>คอลัมน์ "วันจัดงาน"</label><input id="b_date" value="${esc(b.dateColumn || 'วันจัดงาน')}"></div>
+      <div class="field"><label>คอลัมน์ "ชื่อลูกค้า"</label><input id="b_cust" value="${esc(b.customerColumn || 'ชื่อลูกค้า')}"></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>คอลัมน์ "แพ็คเกจ"</label><input id="b_pkg" value="${esc(b.packageColumn || 'แพ็คเกจ')}"></div>
+      <div class="field"><label>คอลัมน์ "ช่วงเวลา"</label><input id="b_slot" value="${esc(b.timeSlotColumn || 'ช่วงเวลา')}"></div>
+    </div>
+
+    <div class="admin-actions"><button class="btn btn--primary" onclick="saveBookings()">บันทึก</button>
+      <button class="btn btn--ghost" onclick="testBookings()">🔍 ทดสอบดึงข้อมูล</button>
+    </div>
+    <div id="bookingsTest" style="margin-top:14px;"></div>
+  `;
+}
+
+function saveBookings() {
+  DATA.bookingsSheet = DATA.bookingsSheet || {};
+  DATA.bookingsSheet.csvUrl = val('b_url').trim();
+  DATA.bookingsSheet.dateColumn = val('b_date').trim() || 'วันจัดงาน';
+  DATA.bookingsSheet.customerColumn = val('b_cust').trim() || 'ชื่อลูกค้า';
+  DATA.bookingsSheet.packageColumn = val('b_pkg').trim() || 'แพ็คเกจ';
+  DATA.bookingsSheet.timeSlotColumn = val('b_slot').trim() || 'ช่วงเวลา';
+  persist();
+  toast('บันทึกแล้ว');
+}
+
+async function testBookings() {
+  const out = document.getElementById('bookingsTest');
+  out.innerHTML = '<div style="color:var(--color-text-muted);">กำลังดึงข้อมูล...</div>';
+  const url = val('b_url').trim();
+  if (!url) { out.innerHTML = '<div style="color:#B23A2E;">กรุณาใส่ CSV URL ก่อน</div>'; return; }
+  try {
+    const r = await fetch(url + '&_=' + Date.now());
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const text = await r.text();
+    const lines = text.split('\n').filter(x => x.trim()).length;
+    out.innerHTML = `<div style="color:var(--color-success);">✓ ดึงสำเร็จ · พบ ${lines} บรรทัด · ไปดูที่หน้า <a href="./calendar/" target="_blank">ตารางวันว่าง</a></div>`;
+  } catch(e) {
+    out.innerHTML = `<div style="color:#B23A2E;">✗ ดึงไม่สำเร็จ: ${e.message}<br><small>ตรวจสอบว่า URL เป็น Publish to web → CSV และมี output=csv</small></div>`;
+  }
+}
+
+// ============================================
+// GitHub publish (live editing)
+// ============================================
+function renderPublish(root) {
+  DATA.github = DATA.github || {};
+  const g = DATA.github;
+  const hasToken = !!localStorage.getItem('chaan_gh_token');
+
+  root.innerHTML = `
+    <h2 style="margin-top:0;">🚀 เผยแพร่ขึ้น GitHub (Live Edit)</h2>
+    <p style="color:var(--color-text-muted);">เมื่อบันทึก token แล้ว ปุ่ม <strong>"💾 บันทึก & เผยแพร่"</strong> จะอัปโหลด data.json ขึ้น GitHub โดยตรง — ลูกค้าเห็นภายใน 1-2 นาที</p>
+
+    <div class="alert" style="background:#FBF6EF;border-left-color:var(--color-gold-dark);">
+      <strong>วิธีสร้าง GitHub Personal Access Token:</strong><br>
+      1. เปิด <a href="https://github.com/settings/tokens/new?description=Chaan%20Wedding%20Admin&scopes=repo" target="_blank">GitHub Token settings</a> (ลิงก์ตั้งไว้แล้ว)<br>
+      2. ตั้งชื่อ token (เช่น "Chaan Wedding Admin")<br>
+      3. Expiration เลือก <strong>No expiration</strong> หรือ 1 ปี<br>
+      4. ✅ ติ๊ก <strong>repo</strong> scope (สำคัญ)<br>
+      5. กด <strong>Generate token</strong> → คัดลอก token ที่ขึ้นต้นด้วย <code>ghp_</code> หรือ <code>github_pat_</code><br>
+      6. วาง token ในช่องด้านล่าง<br>
+      <small style="color:#B23A2E;">⚠ Token จะเก็บไว้ใน browser นี้เท่านั้น · ไม่บันทึกลง data.json</small>
+    </div>
+
+    <h3 style="margin-top:24px;">การตั้งค่า Repo</h3>
+    <div class="row">
+      <div class="field"><label>Owner (username)</label><input id="gh_owner" value="${esc(g.owner || 'ajarnbae')}"></div>
+      <div class="field"><label>Repo name</label><input id="gh_repo" value="${esc(g.repo || 'chaan-wedding-info')}"></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>Branch</label><input id="gh_branch" value="${esc(g.branch || 'main')}"></div>
+      <div class="field"><label>Data path</label><input id="gh_path" value="${esc(g.dataPath || 'data/data.json')}"></div>
+    </div>
+
+    <h3 style="margin-top:24px;">GitHub Token ${hasToken ? '<span style="color:var(--color-success);font-size:0.85rem;">· ✓ มี token แล้ว</span>' : '<span style="color:#B23A2E;font-size:0.85rem;">· ยังไม่มี token</span>'}</h3>
+    <div class="field"><label>Token (ขึ้นต้นด้วย ghp_ หรือ github_pat_)</label>
+      <input id="gh_token" type="password" placeholder="${hasToken ? '●●●●●●●●●●●● (มี token แล้ว — เว้นว่างถ้าไม่เปลี่ยน)' : 'ghp_xxxxxxxxxxxxxxxxxxxxx'}" style="font-family:monospace;font-size:0.85rem;">
+    </div>
+
+    <div class="admin-actions">
+      <button class="btn btn--primary" onclick="saveGithubConfig()">บันทึกการตั้งค่า</button>
+      <button class="btn btn--primary" onclick="publishToGitHub()" style="background:linear-gradient(135deg,#28a745,#1e7e34);">💾 บันทึก &amp; เผยแพร่ data.json ขึ้น GitHub</button>
+      ${hasToken ? '<button class="btn btn--ghost" onclick="if(confirm(\'ลบ token?\')){localStorage.removeItem(\'chaan_gh_token\');render();}" style="color:#B23A2E;">🗑 ลบ token</button>' : ''}
+    </div>
+
+    <div id="ghStatus" style="margin-top:16px;"></div>
+  `;
+}
+
+function saveGithubConfig() {
+  DATA.github = DATA.github || {};
+  DATA.github.owner = val('gh_owner').trim();
+  DATA.github.repo = val('gh_repo').trim();
+  DATA.github.branch = val('gh_branch').trim() || 'main';
+  DATA.github.dataPath = val('gh_path').trim() || 'data/data.json';
+  const newToken = val('gh_token');
+  if (newToken) {
+    localStorage.setItem('chaan_gh_token', newToken);
+    document.getElementById('gh_token').value = '';
+  }
+  persist();
+  toast('บันทึกแล้ว');
+  render();
+}
+
+async function publishToGitHub() {
+  const status = document.getElementById('ghStatus');
+  const token = localStorage.getItem('chaan_gh_token');
+  if (!token) { status.innerHTML = '<div style="color:#B23A2E;">✗ ยังไม่มี GitHub token — กรอก token แล้วบันทึกก่อน</div>'; return; }
+  const g = DATA.github || {};
+  if (!g.owner || !g.repo) { status.innerHTML = '<div style="color:#B23A2E;">✗ กรุณากรอก Owner และ Repo</div>'; return; }
+  if (!confirm('ยืนยันเผยแพร่ data.json ขึ้น GitHub?\nลูกค้าจะเห็นการเปลี่ยนแปลงภายใน 1-2 นาที')) return;
+
+  status.innerHTML = '<div style="color:var(--color-text-muted);">กำลังเผยแพร่...</div>';
+  const apiBase = `https://api.github.com/repos/${g.owner}/${g.repo}/contents/${g.dataPath}`;
+  try {
+    let sha = null;
+    const getRes = await fetch(apiBase + '?ref=' + (g.branch || 'main'), {
+      headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' }
+    });
+    if (getRes.ok) {
+      const cur = await getRes.json();
+      sha = cur.sha;
+    } else if (getRes.status !== 404) {
+      throw new Error('GET ' + getRes.status + ': ' + (await getRes.text()).slice(0,200));
+    }
+    const json = JSON.stringify(DATA, null, 2);
+    const bytes = new TextEncoder().encode(json);
+    let bin = '';
+    for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    const b64 = btoa(bin);
+    const putRes = await fetch(apiBase, {
+      method: 'PUT',
+      headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' },
+      body: JSON.stringify({
+        message: 'Update data.json from admin · ' + new Date().toISOString(),
+        content: b64,
+        sha: sha,
+        branch: g.branch || 'main'
+      })
+    });
+    if (!putRes.ok) throw new Error('PUT ' + putRes.status + ': ' + (await putRes.text()).slice(0,300));
+    const result = await putRes.json();
+    status.innerHTML = `<div style="background:#E8F5E9;color:#1B5E20;padding:14px 16px;border-radius:8px;border:1px solid #4CAF50;">
+      ✓ เผยแพร่สำเร็จ · commit <code>${result.commit?.sha?.slice(0,7) || ''}</code><br>
+      <small>GitHub Pages จะ rebuild ภายใน 1-2 นาที — ลูกค้าเห็นเมื่อโหลดหน้าใหม่</small>
+    </div>`;
+  } catch(e) {
+    status.innerHTML = `<div style="color:#B23A2E;background:#FDECEA;padding:14px 16px;border-radius:8px;">✗ ผิดพลาด: ${esc(e.message)}<br><small>ตรวจสอบ token (ต้องมี repo scope) และ owner/repo/branch</small></div>`;
+  }
 }
 
 // ---------- Raw JSON ----------

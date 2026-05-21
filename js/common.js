@@ -33,6 +33,13 @@ CW.escape = (s) => String(s == null ? '' : s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
+// Build inline style for an image with imagePosition + imageZoom
+CW.imgStyle = (obj) => {
+  const pos = obj?.imagePosition || '50% 50%';
+  const zoom = obj?.imageZoom || 100;
+  return `object-position:${pos};${zoom !== 100 ? `transform:scale(${zoom/100});` : ''}`;
+};
+
 CW.isLowSeason = (month, seasonInfo) => {
   if (!seasonInfo || !seasonInfo.lowSeasonMonths) return false;
   return seasonInfo.lowSeasonMonths.includes(month);
@@ -82,7 +89,8 @@ CW.renderNav = function (activePage = '') {
     { href: base + 'packages/',        label: 'แพ็คเกจ',     key: 'packages' },
     { href: base + 'venue-fees.html',  label: 'ค่าเช่า/บริการ', key: 'venue' },
     { href: base + 'menu/',            label: 'เมนูอาหาร',   key: 'menu' },
-    { href: base + 'gallery/',         label: 'รูปภาพ',      key: 'gallery' }
+    { href: base + 'gallery/',         label: 'รูปภาพ',      key: 'gallery' },
+    { href: base + 'calendar/',        label: 'ตารางวันว่าง', key: 'calendar' }
   ];
   const linkHTML = links.map(l =>
     `<a href="${l.href}" class="${activePage === l.key ? 'active' : ''}">${l.label}</a>`

@@ -120,7 +120,7 @@
     }
     grid.innerHTML = filtered.map(p => `
       <div class="photo" data-url="${CW.escape(p.url)}">
-        <img src="${CW.escape(p.url)}" alt="${CW.escape(p.caption || '')}" loading="lazy" style="object-position:${CW.escape(p.imagePosition || '50% 50%')};">
+        <img src="${CW.escape(p.url)}" alt="${CW.escape(p.caption || '')}" loading="lazy" style="${CW.imgStyle(p)}">
         <div class="photo__cap">${CW.escape(p.caption || '')}${p.ceremony ? ' · ' + CW.escape(ceremonyName(p.ceremony)) : ''}</div>
       </div>
     `).join('');

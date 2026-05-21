@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="th" data-base="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ตารางวันว่าง — Chaan Wedding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+  .cal-controls {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .cal-legend {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+  }
+  .cal-legend__item { display: flex; align-items: center; gap: 6px; }
+  .cal-legend__dot {
+    width: 18px; height: 18px;
+    border-radius: 5px;
+    display: inline-block;
+  }
+
+  .year-block { margin-bottom: 48px; }
+  .year-block h2 {
+    text-align: center;
+    margin-bottom: 16px;
+    font-family: var(--font-serif);
+    color: var(--color-brown-dark);
+  }
+  .year-block h2 small {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    letter-spacing: 4px;
+    margin-top: 4px;
+  }
+
+  .months-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 720px) { .months-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1080px) { .months-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .month-card {
+    background: var(--color-ivory);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+  }
+  .month-card__head {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    color: var(--color-brown-dark);
+    text-align: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .month-card__head small {
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    display: block;
+    margin-top: 2px;
+    letter-spacing: 1.5px;
+  }
+  .month-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    font-size: 0.78rem;
+  }
+  .month-grid .dow {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.7rem;
+    padding: 4px 0;
+    font-weight: 600;
+  }
+  .day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    position: relative;
+    cursor: default;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-text);
+  }
+  .day.empty { visibility: hidden; }
+  .day.weekend { color: var(--color-rose); }
+  .day.today {
+    outline: 2px solid var(--color-gold);
+    outline-offset: -2px;
+    font-weight: 700;
+  }
+  .day.past { color: var(--color-text-muted); opacity: 0.45; }
+  .day.auspicious {
+    background: linear-gradient(135deg, #FFEEF2 0%, #FFE0E8 100%);
+    color: #A8505F;
+    font-weight: 600;
+  }
+  .day.booked {
+    background: var(--color-brown-dark);
+    color: var(--color-cream);
+    font-weight: 600;
+  }
+  .day.auspicious.booked {
+    background: linear-gradient(135deg, #A8505F 0%, var(--color-brown-dark) 100%);
+    color: #fff;
+  }
+  .day .icon {
+    position: absolute;
+    top: -2px;
+    right: 0;
+    font-size: 0.65rem;
+    pointer-events: none;
+  }
+  .day:hover:not(.empty) {
+    outline: 2px solid var(--color-gold-light);
+    cursor: pointer;
+  }
+
+  /* Tooltip / detail dialog */
+  .day-detail {
+    background: var(--color-ivory);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    display: none;
+  }
+  .day-detail.show { display: block; }
+  .day-detail__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .day-detail__head h4 { margin: 0; }
+  .day-detail__close {
+    background: none; border: none;
+    color: var(--color-text-muted);
+    font-size: 1.3rem;
+    cursor: pointer;
+  }
+  .day-detail__row {
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--color-line);
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .day-detail__row:last-child { border-bottom: none; }
+  .day-detail__row strong { color: var(--color-brown-dark); }
+  .cal-status {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+</style>
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<section class="section">
+  <div class="container">
+    <div class="breadcrumb"><a href="../index.html">หน้าแรก</a> <span>/</span> ตารางวันว่าง</div>
+    <div class="section-title">
+      <span class="eyebrow">Availability Calendar</span>
+      <h2>ตารางวันว่าง · ฤกษ์งานแต่ง</h2>
+      <p class="text-center" style="color:var(--color-text-muted); max-width: 720px; margin: 16px auto 0;">
+        ดูวันที่ว่างและฤกษ์แต่งงานล่วงหน้า 3 ปี · ติดต่อจองก่อนจะดีที่สุดเพราะคิวยาว
+      </p>
+    </div>
+
+    <div class="cal-legend">
+      <div class="cal-legend__item"><span class="cal-legend__dot" style="background:linear-gradient(135deg,#FFEEF2,#FFE0E8);"></span> ฤกษ์ดี (ดิถีเรียงหมอน)</div>
+      <div class="cal-legend__item"><span class="cal-legend__dot" style="background:var(--color-brown-dark);"></span> มีงานจองแล้ว</div>
+      <div class="cal-legend__item"><span class="cal-legend__dot" style="background:linear-gradient(135deg,#A8505F,#2E2218);"></span> ฤกษ์ดี + จองแล้ว</div>
+      <div class="cal-legend__item"><span class="cal-legend__dot" style="outline:2px solid var(--color-gold);outline-offset:-2px;background:var(--color-ivory);"></span> วันนี้</div>
+    </div>
+
+    <div id="dayDetail" class="day-detail"></div>
+    <div id="calStatus" class="cal-status">กำลังโหลดข้อมูล...</div>
+    <div id="yearsMount"></div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+
+<script src="../js/common.js"></script>
+<script>
+const TH_MONTHS = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+const TH_MONTHS_SHORT = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const DOWS = ['จ','อ','พ','พฤ','ศ','ส','อา'];
+
+// Parse various date formats from sheet
+function parseSheetDate(str) {
+  if (!str) return null;
+  str = String(str).trim();
+  // Try DD/MM/YYYY or DD/M/YY or D/M/YYYY (Thai-style)
+  let m = str.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{2,4})$/);
+  if (m) {
+    let d = parseInt(m[1]), mo = parseInt(m[2]), y = parseInt(m[3]);
+    // Convert BE → AD if year is large
+    if (y < 100) y += 2500; // assume Buddhist
+    if (y > 2400) y -= 543;
+    if (y < 1900) y += 2000;
+    return { y, m: mo, d };
+  }
+  // ISO YYYY-MM-DD
+  m = str.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+  if (m) {
+    let y = parseInt(m[1]);
+    if (y > 2400) y -= 543;
+    return { y, m: parseInt(m[2]), d: parseInt(m[3]) };
+  }
+  return null;
+}
+
+// Parse CSV - simple, handles quoted strings with commas
+function parseCSV(text) {
+  const rows = [];
+  let row = [], cur = '', inQuote = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (inQuote) {
+      if (ch === '"' && text[i+1] === '"') { cur += '"'; i++; }
+      else if (ch === '"') { inQuote = false; }
+      else { cur += ch; }
+    } else {
+      if (ch === '"') { inQuote = true; }
+      else if (ch === ',') { row.push(cur); cur = ''; }
+      else if (ch === '\n' || ch === '\r') {
+        if (ch === '\r' && text[i+1] === '\n') i++;
+        row.push(cur); cur = '';
+        if (row.some(x => x.trim())) rows.push(row);
+        row = [];
+      } else { cur += ch; }
+    }
+  }
+  if (cur || row.length) { row.push(cur); rows.push(row); }
+  return rows;
+}
+
+(async function() {
+  const data = await CW.mountChrome('calendar');
+  if (!data) return;
+
+  const auspicious = data.auspiciousDates || {};
+  const sheetCfg = data.bookingsSheet || {};
+  const now = new Date();
+  const todayY = now.getFullYear();
+  const todayM = now.getMonth() + 1;
+  const todayD = now.getDate();
+
+  // Fetch bookings from Google Sheet
+  let bookings = {};
+  if (sheetCfg.csvUrl) {
+    try {
+      const r = await fetch(sheetCfg.csvUrl + '&cb=' + Date.now());
+      if (r.ok) {
+        const text = await r.text();
+        const rows = parseCSV(text);
+        if (rows.length > 1) {
+          // Find header row — search for one that contains date column name
+          let headerIdx = -1;
+          for (let i = 0; i < Math.min(rows.length, 5); i++) {
+            if (rows[i].some(c => c && c.includes(sheetCfg.dateColumn))) { headerIdx = i; break; }
+          }
+          if (headerIdx >= 0) {
+            const headers = rows[headerIdx].map(h => h.trim());
+            const dateIdx = headers.findIndex(h => h.includes(sheetCfg.dateColumn));
+            const custIdx = headers.findIndex(h => h.includes(sheetCfg.customerColumn || 'ลูกค้า'));
+            const pkgIdx = headers.findIndex(h => h.includes(sheetCfg.packageColumn || 'แพ็ค'));
+            const slotIdx = headers.findIndex(h => h.includes(sheetCfg.timeSlotColumn || 'ช่วงเวลา'));
+            for (let i = headerIdx + 1; i < rows.length; i++) {
+              const row = rows[i];
+              if (!row[dateIdx]) continue;
+              const dt = parseSheetDate(row[dateIdx]);
+              if (!dt) continue;
+              const key = `${dt.y}-${String(dt.m).padStart(2,'0')}-${String(dt.d).padStart(2,'0')}`;
+              if (!bookings[key]) bookings[key] = [];
+              bookings[key].push({
+                customer: custIdx >= 0 ? (row[custIdx] || '').trim() : '',
+                package: pkgIdx >= 0 ? (row[pkgIdx] || '').trim() : '',
+                timeSlot: slotIdx >= 0 ? (row[slotIdx] || '').trim() : ''
+              });
+            }
+          }
+        }
+        document.getElementById('calStatus').textContent = `อัปเดตล่าสุด: ${new Date().toLocaleString('th-TH')} · มี ${Object.keys(bookings).length} วันที่ถูกจอง`;
+      } else {
+        document.getElementById('calStatus').textContent = 'โหลดข้อมูลการจองไม่ได้';
+      }
+    } catch(e) {
+      document.getElementById('calStatus').textContent = 'โหลดข้อมูลการจองไม่ได้: ' + e.message;
+    }
+  } else {
+    document.getElementById('calStatus').textContent = 'ยังไม่ได้ตั้งค่า Google Sheet URL';
+  }
+
+  // Render 3 years: current, next, year after
+  const years = [todayY, todayY + 1, todayY + 2];
+  const mount = document.getElementById('yearsMount');
+  mount.innerHTML = years.map(y => `
+    <div class="year-block">
+      <h2>${y} <small>BE ${y + 543}</small></h2>
+      <div class="months-grid">
+        ${[1,2,3,4,5,6,7,8,9,10,11,12].map(mo => renderMonth(y, mo)).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  function renderMonth(year, month) {
+    const beYear = year + 543;
+    const auspDays = auspicious[String(beYear)]?.[String(month).padStart(2,'0')] || [];
+    const firstDay = new Date(year, month - 1, 1);
+    const lastDay = new Date(year, month, 0).getDate();
+    let dow = firstDay.getDay(); // 0 = Sunday
+    dow = (dow === 0) ? 6 : dow - 1; // shift so Mon=0, Sun=6
+
+    let cells = '';
+    for (let i = 0; i < dow; i++) cells += `<div class="day empty"></div>`;
+    for (let d = 1; d <= lastDay; d++) {
+      const wd = new Date(year, month - 1, d).getDay(); // 0=Sun, 6=Sat
+      const isWeekend = (wd === 0 || wd === 6);
+      const isPast = (year < todayY) || (year === todayY && (month < todayM || (month === todayM && d < todayD)));
+      const isToday = (year === todayY && month === todayM && d === todayD);
+      const key = `${year}-${String(month).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const isBooked = !!bookings[key];
+      const isAusp = auspDays.includes(d);
+      const cls = [
+        'day',
+        isWeekend ? 'weekend' : '',
+        isPast ? 'past' : '',
+        isToday ? 'today' : '',
+        isAusp ? 'auspicious' : '',
+        isBooked ? 'booked' : ''
+      ].filter(Boolean).join(' ');
+      const icon = isAusp ? '<span class="icon">💍</span>' : '';
+      cells += `<div class="${cls}" data-date="${key}" data-aus="${isAusp?1:0}" data-book="${isBooked?1:0}">${d}${icon}</div>`;
+    }
+    return `
+      <div class="month-card">
+        <div class="month-card__head">${TH_MONTHS[month-1]}<small>${month}/${year}</small></div>
+        <div class="month-grid">
+          ${DOWS.map(d => `<div class="dow">${d}</div>`).join('')}
+          ${cells}
+        </div>
+      </div>
+    `;
+  }
+
+  // Day click handlers
+  mount.addEventListener('click', e => {
+    const cell = e.target.closest('.day');
+    if (!cell || cell.classList.contains('empty')) return;
+    const key = cell.dataset.date;
+    const isAusp = cell.dataset.aus === '1';
+    const isBooked = cell.dataset.book === '1';
+    const bks = bookings[key] || [];
+    const detail = document.getElementById('dayDetail');
+    const [y,m,d] = key.split('-').map(Number);
+    let html = `
+      <div class="day-detail__head">
+        <h4>${d} ${TH_MONTHS[m-1]} ${y} <small style="color:var(--color-text-muted);font-weight:normal;">(พ.ศ. ${y+543})</small></h4>
+        <button class="day-detail__close" onclick="document.getElementById('dayDetail').classList.remove('show');">×</button>
+      </div>
+    `;
+    if (isAusp) html += `<div class="day-detail__row"><strong>💍 วันฤกษ์ดี</strong><span style="color:#A8505F;">ดิถีเรียงหมอน</span></div>`;
+    if (bks.length) {
+      html += `<div class="day-detail__row"><strong>มีงานจองแล้ว</strong><span>${bks.length} งาน</span></div>`;
+      bks.forEach(b => {
+        const detailLine = [b.timeSlot, b.package].filter(Boolean).join(' · ');
+        html += `<div class="day-detail__row"><span>${CW.escape(b.customer || '(ไม่ระบุชื่อ)')}</span><span style="color:var(--color-text-muted);font-size:0.85rem;">${CW.escape(detailLine)}</span></div>`;
+      });
+    } else {
+      html += `<div class="day-detail__row"><strong>สถานะ</strong><span style="color:var(--color-success);">ว่าง · ติดต่อจองได้</span></div>`;
+    }
+    detail.innerHTML = html;
+    detail.classList.add('show');
+    detail.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+})();
+</script>
+
+</body>
+</html>

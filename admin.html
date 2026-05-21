@@ -55,12 +55,12 @@
   .login-card .btn { width: 100%; margin-top: 8px; }
   body.is-authed .login-overlay { display: none; }
 
-  /* Image position editor */
+  /* Image position editor v2 — drag + grid + zoom */
   .img-pos-editor {
     background: var(--color-cream-warm);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-md);
-    padding: 12px;
+    padding: 14px;
     margin-top: 8px;
   }
   .img-pos-editor__head {
@@ -71,24 +71,56 @@
     font-size: 0.85rem;
     color: var(--color-brown-dark);
     font-weight: 500;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .img-pos-editor__hint {
+    color: var(--color-text-muted);
+    font-size: 0.78rem;
+    font-weight: normal;
   }
   .img-pos-preview {
     aspect-ratio: 4/3;
     width: 100%;
-    max-width: 280px;
+    max-width: 380px;
     background: var(--color-line);
     border-radius: var(--radius-md);
     overflow: hidden;
-    margin: 0 auto 10px;
+    margin: 0 auto 12px;
+    position: relative;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
   }
+  .img-pos-preview.dragging { cursor: grabbing; }
   .img-pos-preview img {
     width: 100%; height: 100%;
     object-fit: cover;
     display: block;
+    pointer-events: none;
+    transition: transform 0.05s linear;
+  }
+  /* Grid overlay (rule of thirds) */
+  .img-pos-preview::before,
+  .img-pos-preview::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    inset: 0;
+    background:
+      linear-gradient(to right, transparent 33.33%, rgba(255,255,255,0.45) 33.33%, rgba(255,255,255,0.45) calc(33.33% + 1px), transparent calc(33.33% + 1px),
+                                transparent 66.66%, rgba(255,255,255,0.45) 66.66%, rgba(255,255,255,0.45) calc(66.66% + 1px), transparent calc(66.66% + 1px)),
+      linear-gradient(to bottom, transparent 33.33%, rgba(255,255,255,0.45) 33.33%, rgba(255,255,255,0.45) calc(33.33% + 1px), transparent calc(33.33% + 1px),
+                                  transparent 66.66%, rgba(255,255,255,0.45) 66.66%, rgba(255,255,255,0.45) calc(66.66% + 1px), transparent calc(66.66% + 1px));
+  }
+  .img-pos-preview::after {
+    border: 2px dashed rgba(216,180,115,0.6);
+    background: transparent;
+    border-radius: var(--radius-md);
   }
   .img-pos-controls {
     display: grid;
-    grid-template-columns: 60px 1fr 50px;
+    grid-template-columns: 80px 1fr 60px;
     gap: 10px;
     align-items: center;
     font-size: 0.85rem;
@@ -101,24 +133,14 @@
     text-align: right;
     font-variant-numeric: tabular-nums;
     color: var(--color-gold-dark);
+    font-weight: 500;
   }
-  .img-pos-aspects {
-    display: flex; gap: 6px; flex-wrap: wrap;
-    margin: 10px 0;
+  .img-pos-coord {
+    text-align: center;
     font-size: 0.78rem;
-  }
-  .img-pos-aspects button {
-    background: var(--color-ivory);
-    border: 1px solid var(--color-line);
-    border-radius: 999px;
-    padding: 4px 10px;
-    cursor: pointer;
-    color: var(--color-text);
-  }
-  .img-pos-aspects button.active {
-    background: var(--color-gold);
-    color: #fff;
-    border-color: var(--color-gold);
+    color: var(--color-text-muted);
+    margin-top: 8px;
+    font-variant-numeric: tabular-nums;
   }
 </style>
 </head>
@@ -183,6 +205,9 @@
         <button data-section="ceremonies">🪷 ประเภทพิธี</button>
         <button data-section="zones">📍 โซนสถานที่</button>
         <button data-section="photos">🖼 รูปภาพ</button>
+        <button data-section="auspicious">💍 ฤกษ์งานแต่ง</button>
+        <button data-section="bookings">📅 ตั้งค่า Google Sheet จอง</button>
+        <button data-section="publish">🚀 เผยแพร่ (GitHub)</button>
         <button data-section="raw">{ } JSON ทั้งหมด</button>
       </aside>
 

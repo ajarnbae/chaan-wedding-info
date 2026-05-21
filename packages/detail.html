@@ -239,7 +239,7 @@
 
   mount.innerHTML = `
     <div class="detail-hero">
-      <img src="${CW.escape(pkg.image)}" alt="${CW.escape(pkg.name)}" style="object-position:${CW.escape(pkg.imagePosition || '50% 50%')};">
+      <img src="${CW.escape(pkg.image)}" alt="${CW.escape(pkg.name)}" style="${CW.imgStyle(pkg)}">
       <div class="detail-hero__overlay">
         <div>
           <div class="eyebrow">${isWedding ? 'Wedding Package' : 'Seminar Package'}${pkg.isPromo ? ' · 🔥 PROMO' : ''}</div>
@@ -339,20 +339,23 @@
               </div>
             </div>` : ''}
 
-            <!-- Rituals: cuttable rituals list (after customer-provides, before add-ons) -->
+            <!-- Rituals: cuttable rituals list with inline checkboxes (after customer-provides, before add-ons) -->
             ${pkg.rituals && pkg.rituals.length ? `
             <div class="panel">
               <h3>${num()} 🪔 งานพิธีที่ต้องการตัดออก</h3>
-              <p style="color:var(--color-text-muted);font-size:0.92rem;margin-bottom:6px;">รายการพิธีที่ตัดได้มีตามนี้ — ติ๊กในกล่องคำนวณราคาด้านขวาเพื่อลดราคา</p>
+              <p style="color:var(--color-text-muted);font-size:0.95rem;margin-bottom:6px;">ติ๊กเลือกพิธีที่ต้องการตัดออก — ราคาจะถูกลดในกล่องคำนวณทันที</p>
               <p style="color:var(--color-text-muted);font-size:0.85rem;font-style:italic;margin-bottom:14px;">${CW.escape(data.ritualNote || 'บางรายการพิธีที่ถูกตัดออกจะไม่ได้ลดราคา เนื่องจากเป็นส่วนที่ทางสถานที่ไม่มีค่าใช้จ่ายเพิ่ม')}</p>
               <div style="display:grid;grid-template-columns:1fr;gap:6px;">
                 ${pkg.rituals.map(r => `
-                  <div style="background:var(--color-cream);padding:10px 14px;border-radius:var(--radius-md);border:1px solid var(--color-line);display:flex;justify-content:space-between;gap:12px;align-items:center;">
-                    <span>${CW.escape(r.name)}</span>
+                  <label class="ritual-row" data-ritual-id="${CW.escape(r.id)}" style="background:var(--color-cream);padding:12px 14px;border-radius:var(--radius-md);border:1px solid var(--color-line);display:flex;justify-content:space-between;gap:12px;align-items:center;cursor:${r.deductIfRemoved > 0 ? 'pointer' : 'default'};transition:all 0.15s ease;">
+                    <span style="display:flex;align-items:center;gap:10px;flex:1;">
+                      <input type="checkbox" data-ritual-section="${CW.escape(r.id)}" data-deduct="${r.deductIfRemoved}" style="width:18px;height:18px;accent-color:var(--color-gold);flex-shrink:0;">
+                      <span>${CW.escape(r.name)}</span>
+                    </span>
                     <span style="color:${r.deductIfRemoved > 0 ? 'var(--color-success)' : 'var(--color-text-muted)'};font-weight:500;white-space:nowrap;">
                       ${r.deductIfRemoved > 0 ? '− ' + CW.fmtBaht(r.deductIfRemoved) : 'ไม่ลด'}
                     </span>
-                  </div>
+                  </label>
                 `).join('')}
               </div>
             </div>` : ''}
@@ -361,7 +364,7 @@
             ${pkgAddons.length ? `
             <div class="panel">
               <h3>${num()} ✨ บริการเสริม (เลือกเพิ่มได้)</h3>
-              <p style="color:var(--color-text-muted);font-size:0.95rem;">ติ๊กเลือก add-on ที่ต้องการ — ราคาจะรวมในกล่องคำนวณด้านขวาทันที</p>
+              <p style="color:var(--color-text-muted);font-size:0.95rem;">ติ๊กเลือก add-on ที่ต้องการ — ราคาจะรวมในกล่องคำนวณ</p>
               <div>
                 ${pkgAddons.map(a => `
                   <label class="addon-card" data-addon-id="${CW.escape(a.id)}">
@@ -480,6 +483,29 @@
     cb.addEventListener('change', e => {
       e.target.closest('.addon-card').classList.toggle('is-checked', e.target.checked);
       recalc();
+    });
+  });
+
+  // Section-side ritual checkboxes — sync with calculator-side
+  document.querySelectorAll('[data-ritual-section]').forEach(cb => {
+    cb.addEventListener('change', e => {
+      const rid = e.target.dataset.ritualSection;
+      const partner = document.querySelector(`#priceBox [data-ritual="${rid}"]`);
+      if (partner) {
+        partner.checked = e.target.checked;
+      }
+      e.target.closest('.ritual-row')?.style.setProperty('background', e.target.checked ? 'rgba(216,180,115,0.18)' : 'var(--color-cream)');
+      recalc();
+    });
+  });
+  // Reverse-sync: when calculator-side ritual is toggled, also update section-side
+  document.querySelectorAll('#priceBox [data-ritual]').forEach(cb => {
+    cb.addEventListener('change', e => {
+      const partner = document.querySelector(`[data-ritual-section="${e.target.dataset.ritual}"]`);
+      if (partner) {
+        partner.checked = e.target.checked;
+        partner.closest('.ritual-row')?.style.setProperty('background', e.target.checked ? 'rgba(216,180,115,0.18)' : 'var(--color-cream)');
+      }
     });
   });
 

@@ -199,7 +199,7 @@
     const mount = document.getElementById('menuMount');
     mount.innerHTML = `
       <div class="featured" style="margin-bottom:32px;">
-        <div class="featured__img"><img src="${CW.escape(m.image)}" alt="${CW.escape(m.name)}" style="object-position:${CW.escape(m.imagePosition || '50% 50%')};"></div>
+        <div class="featured__img"><img src="${CW.escape(m.image)}" alt="${CW.escape(m.name)}" style="${CW.imgStyle(m)}"></div>
         <div class="featured__body">
           <span class="featured__eyebrow">${CW.escape(m.shortDescription || '')}</span>
           <h2 style="margin-top:8px;">${m.icon || ''} ${CW.escape(m.name)}</h2>
