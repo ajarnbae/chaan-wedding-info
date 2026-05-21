@@ -95,6 +95,7 @@
   .day {
     aspect-ratio: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     border-radius: 6px;
@@ -102,6 +103,7 @@
     cursor: default;
     font-variant-numeric: tabular-nums;
     color: var(--color-text);
+    padding: 2px;
   }
   .day.empty { visibility: hidden; }
   .day.weekend { color: var(--color-rose); }
@@ -111,27 +113,30 @@
     font-weight: 700;
   }
   .day.past { color: var(--color-text-muted); opacity: 0.45; }
-  .day.auspicious {
-    background: linear-gradient(135deg, #FFEEF2 0%, #FFE0E8 100%);
+  /* Auspicious (no booking): no background, just text/icon */
+  .day.auspicious .ausp-label {
+    font-size: 0.55rem;
     color: #A8505F;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    margin-bottom: 1px;
     font-weight: 600;
+    white-space: nowrap;
   }
+  .day.auspicious .ausp-label .ring { font-size: 0.7rem; }
+  .day.auspicious .day-num { color: #A8505F; font-weight: 600; line-height: 1; }
+  /* Booked */
   .day.booked {
     background: var(--color-brown-dark);
     color: var(--color-cream);
     font-weight: 600;
   }
-  .day.auspicious.booked {
-    background: linear-gradient(135deg, #A8505F 0%, var(--color-brown-dark) 100%);
-    color: #fff;
-  }
-  .day .icon {
-    position: absolute;
-    top: -2px;
-    right: 0;
-    font-size: 0.65rem;
-    pointer-events: none;
-  }
+  /* Booked + auspicious: use booked color, but show ring + ฤกษ์ดี label in cream */
+  .day.auspicious.booked .ausp-label { color: var(--color-gold-light); }
+  .day.auspicious.booked .day-num { color: var(--color-cream); }
+  .day .day-num { font-size: 0.85rem; line-height: 1; }
   .day:hover:not(.empty) {
     outline: 2px solid var(--color-gold-light);
     cursor: pointer;
@@ -188,14 +193,14 @@
       <span class="eyebrow">Availability Calendar</span>
       <h2>ตารางวันว่าง · ฤกษ์งานแต่ง</h2>
       <p class="text-center" style="color:var(--color-text-muted); max-width: 720px; margin: 16px auto 0;">
-        ดูวันที่ว่างและฤกษ์แต่งงานล่วงหน้า 3 ปี · ติดต่อจองก่อนจะดีที่สุดเพราะคิวยาว
+        ดูวันที่ว่างและฤกษ์แต่งงานล่วงหน้า 3 ปี
       </p>
     </div>
 
     <div class="cal-legend">
-      <div class="cal-legend__item"><span class="cal-legend__dot" style="background:linear-gradient(135deg,#FFEEF2,#FFE0E8);"></span> ฤกษ์ดี (ดิถีเรียงหมอน)</div>
+      <div class="cal-legend__item"><span class="cal-legend__dot" style="background:var(--color-ivory);border:1px solid var(--color-line);display:inline-flex;align-items:center;justify-content:center;font-size:11px;color:#A8505F;font-weight:600;">💍</span> ฤกษ์ดี (ดิถีเรียงหมอน)</div>
       <div class="cal-legend__item"><span class="cal-legend__dot" style="background:var(--color-brown-dark);"></span> มีงานจองแล้ว</div>
-      <div class="cal-legend__item"><span class="cal-legend__dot" style="background:linear-gradient(135deg,#A8505F,#2E2218);"></span> ฤกษ์ดี + จองแล้ว</div>
+      <div class="cal-legend__item"><span class="cal-legend__dot" style="background:var(--color-brown-dark);display:inline-flex;align-items:center;justify-content:center;font-size:11px;">💍</span> ฤกษ์ดี + จองแล้ว</div>
       <div class="cal-legend__item"><span class="cal-legend__dot" style="outline:2px solid var(--color-gold);outline-offset:-2px;background:var(--color-ivory);"></span> วันนี้</div>
     </div>
 
@@ -357,8 +362,8 @@ function parseCSV(text) {
         isAusp ? 'auspicious' : '',
         isBooked ? 'booked' : ''
       ].filter(Boolean).join(' ');
-      const icon = isAusp ? '<span class="icon">💍</span>' : '';
-      cells += `<div class="${cls}" data-date="${key}" data-aus="${isAusp?1:0}" data-book="${isBooked?1:0}">${d}${icon}</div>`;
+      const auspLabel = isAusp ? '<span class="ausp-label">ฤกษ์ดี<span class="ring">💍</span></span>' : '';
+      cells += `<div class="${cls}" data-date="${key}" data-aus="${isAusp?1:0}" data-book="${isBooked?1:0}">${auspLabel}<span class="day-num">${d}</span></div>`;
     }
     return `
       <div class="month-card">
@@ -391,8 +396,7 @@ function parseCSV(text) {
     if (bks.length) {
       html += `<div class="day-detail__row"><strong>มีงานจองแล้ว</strong><span>${bks.length} งาน</span></div>`;
       bks.forEach(b => {
-        const detailLine = [b.timeSlot, b.package].filter(Boolean).join(' · ');
-        html += `<div class="day-detail__row"><span>${CW.escape(b.customer || '(ไม่ระบุชื่อ)')}</span><span style="color:var(--color-text-muted);font-size:0.85rem;">${CW.escape(detailLine)}</span></div>`;
+        html += `<div class="day-detail__row"><span>${CW.escape(b.customer || '(ไม่ระบุชื่อ)')}</span><span style="color:var(--color-text-muted);font-size:0.85rem;">${CW.escape(b.timeSlot || '')}</span></div>`;
       });
     } else {
       html += `<div class="day-detail__row"><strong>สถานะ</strong><span style="color:var(--color-success);">ว่าง · ติดต่อจองได้</span></div>`;
