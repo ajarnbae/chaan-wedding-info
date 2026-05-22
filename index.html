@@ -95,20 +95,34 @@
     z-index: 2;
     display: flex;
     justify-content: center;
-    gap: 6px;
+    align-items: center;
+    gap: 5px;
     padding-bottom: 22px;
     margin-top: -8px;
+    pointer-events: none; /* clicks pass through to section swipe handler */
   }
   .hero-dot {
-    width: 6px; height: 6px;
+    display: block;
     border-radius: 50%;
-    background: rgba(255,255,255,0.35);
-    transition: background 0.3s ease, transform 0.3s ease;
+    background: rgba(255,255,255,0.4);
     cursor: pointer;
+    pointer-events: auto;
+    border: none;
+    padding: 0;
+    transition: width 0.35s ease, height 0.35s ease,
+                background 0.35s ease, opacity 0.35s ease;
+    /* default = distance-2 (smallest) */
+    width: 5px; height: 5px;
+    opacity: 0.45;
   }
-  .hero-dot.active {
+  .hero-dot[data-dist="1"] {
+    width: 6px; height: 6px;
+    opacity: 0.65;
+  }
+  .hero-dot[data-dist="0"] {
+    width: 8px; height: 8px;
     background: var(--color-gold-light);
-    transform: scale(1.3);
+    opacity: 1;
   }
 
   /* ─── Gallery Preview Section ─── */
@@ -443,21 +457,25 @@
       </div>
     `).join('');
 
-    // Build dots (max 5)
+    // Build exactly 5 dot elements (or fewer if < 5 photos)
     const dotCount = Math.min(MAX_DOTS, heroPhotos.length);
     dotsEl.innerHTML = Array.from({ length: dotCount }, (_, i) =>
-      `<button class="hero-dot${i === 0 ? ' active' : ''}" data-i="${i}" aria-label="ภาพที่ ${i+1}"></button>`
+      `<span class="hero-dot" data-dist="2" data-i="${i}" role="button" aria-label="ภาพที่ ${i+1}"></span>`
     ).join('');
 
     function updateDots(idx) {
       const total = heroPhotos.length;
       const dc = Math.min(MAX_DOTS, total);
-      // Which dot window to show: center the active dot
-      let winStart = Math.max(0, Math.min(idx - Math.floor(dc/2), total - dc));
+      // Sliding window: keep active dot as centered as possible
+      const half = Math.floor(dc / 2);
+      let winStart = idx - half;
+      winStart = Math.max(0, Math.min(winStart, total - dc));
+
       dotsEl.querySelectorAll('.hero-dot').forEach((d, di) => {
         const mappedIdx = winStart + di;
+        const dist = Math.abs(mappedIdx - idx);
         d.dataset.i = mappedIdx;
-        d.classList.toggle('active', mappedIdx === idx);
+        d.dataset.dist = Math.min(dist, 2); // 0=active, 1=adjacent, 2=far
       });
     }
 
@@ -479,17 +497,51 @@
     heroTimer = setInterval(() => goTo(heroIdx + 1), 4500);
     goTo(0);
 
-    // Touch/swipe support
+    // ── Swipe / drag support (attached to heroSection so content overlay doesn't block) ──
+    const heroSection = document.getElementById('heroSection');
     let touchStartX = 0;
-    slidesEl.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
-    slidesEl.addEventListener('touchend', (e) => {
+    let touchStartY = 0;
+    let isDragging = false;
+
+    heroSection.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      isDragging = false;
+    }, { passive: true });
+
+    heroSection.addEventListener('touchmove', (e) => {
+      if (!isDragging) {
+        const dx = Math.abs(e.touches[0].clientX - touchStartX);
+        const dy = Math.abs(e.touches[0].clientY - touchStartY);
+        if (dx > dy && dx > 8) isDragging = true;
+      }
+    }, { passive: true });
+
+    heroSection.addEventListener('touchend', (e) => {
       const dx = e.changedTouches[0].clientX - touchStartX;
+      if (isDragging && Math.abs(dx) > 40) {
+        clearInterval(heroTimer);
+        goTo(heroIdx + (dx < 0 ? 1 : -1));
+        heroTimer = setInterval(() => goTo(heroIdx + 1), 4500);
+      }
+      isDragging = false;
+    }, { passive: true });
+
+    // Mouse drag support (desktop)
+    let mouseStartX = 0;
+    let mouseDown = false;
+    heroSection.addEventListener('mousedown', (e) => { mouseStartX = e.clientX; mouseDown = true; });
+    heroSection.addEventListener('mouseup', (e) => {
+      if (!mouseDown) return;
+      mouseDown = false;
+      const dx = e.clientX - mouseStartX;
       if (Math.abs(dx) > 40) {
         clearInterval(heroTimer);
         goTo(heroIdx + (dx < 0 ? 1 : -1));
         heroTimer = setInterval(() => goTo(heroIdx + 1), 4500);
       }
-    }, { passive: true });
+    });
+    heroSection.addEventListener('mouseleave', () => { mouseDown = false; });
   } else {
     // Fallback: plain gradient background (hide carousel)
     document.getElementById('heroCarousel').style.display = 'none';
@@ -563,14 +615,3 @@
   const ctas = [];
   if (c.phone) ctas.push(`<a href="tel:${CW.escape(c.phone.replace(/[^\d+]/g, ''))}" class="btn btn--primary">☎ ${CW.escape(c.phone)}</a>`);
   if (c.line) {
-    const url = c.line.startsWith('http') ? c.line : `https://line.me/R/ti/p/${encodeURIComponent(c.line)}`;
-    ctas.push(`<a href="${CW.escape(url)}" class="btn btn--ghost" target="_blank">💬 LINE</a>`);
-  }
-  if (c.facebook) ctas.push(`<a href="${CW.escape(c.facebook)}" class="btn btn--ghost" target="_blank">f Facebook</a>`);
-  if (c.mapLink) ctas.push(`<a href="${CW.escape(c.mapLink)}" class="btn btn--ghost" target="_blank">📍 แผนที่</a>`);
-  document.getElementById('finalCtas').innerHTML = ctas.join('');
-})();
-</script>
-
-</body>
-</html>
