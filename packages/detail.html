@@ -287,6 +287,7 @@
                   <div class="section-card">
                     <h4>${CW.escape(sec.title)}</h4>
                     <ul>${(sec.items || []).map(i => `<li>${CW.escape(i)}</li>`).join('')}</ul>
+                    ${sec.note ? `<p style="font-size:0.85rem;color:var(--color-text-muted);font-style:italic;margin:6px 0 0;border-top:1px dashed var(--color-line);padding-top:6px;">${CW.escape(sec.note)}</p>` : ''}
                   </div>
                 `).join('')}
               </div>
@@ -344,7 +345,8 @@
             <div class="panel">
               <h3>${num()} 🪔 งานพิธีที่ต้องการตัดออก</h3>
               <p style="color:var(--color-text-muted);font-size:0.95rem;margin-bottom:6px;">ติ๊กเลือกพิธีที่ต้องการตัดออก — ราคาจะถูกลดในกล่องคำนวณทันที</p>
-              <p style="color:var(--color-text-muted);font-size:0.85rem;font-style:italic;margin-bottom:14px;">${CW.escape(data.ritualNote || 'บางรายการพิธีที่ถูกตัดออกจะไม่ได้ลดราคา เนื่องจากเป็นส่วนที่ทางสถานที่ไม่มีค่าใช้จ่ายเพิ่ม')}</p>
+              <p style="color:var(--color-text-muted);font-size:0.85rem;font-style:italic;margin-bottom:6px;">${CW.escape(data.ritualNote || 'บางรายการพิธีที่ถูกตัดออกจะไม่ได้ลดราคา เนื่องจากเป็นส่วนที่ทางสถานที่ไม่มีค่าใช้จ่ายเพิ่ม')}</p>
+              ${pkg.ritualNote ? `<p style="color:var(--color-brown-dark);font-size:0.88rem;font-weight:500;margin-bottom:14px;background:var(--color-cream-warm);padding:8px 12px;border-radius:var(--radius-sm);border-left:3px solid var(--color-gold);">${CW.escape(pkg.ritualNote)}</p>` : '<div style="margin-bottom:14px;"></div>'}
               <div style="display:grid;grid-template-columns:1fr;gap:6px;">
                 ${pkg.rituals.map(r => `
                   <label class="ritual-row" data-ritual-id="${CW.escape(r.id)}" style="background:var(--color-cream);padding:12px 14px;border-radius:var(--radius-md);border:1px solid var(--color-line);display:flex;justify-content:space-between;gap:12px;align-items:center;cursor:${r.deductIfRemoved > 0 ? 'pointer' : 'default'};transition:all 0.15s ease;">
@@ -590,40 +592,4 @@
       const addon = addonMap[addonId];
       if (addon) {
         total += addon.price;
-        lines.push({ label: `✨ ${addon.name}`, amount: addon.price, type: 'add' });
-      }
-    });
-
-    // Decor change
-    if (selectedDecorId && decorOptions.length) {
-      const d = decorOptions.find(x => x.id === selectedDecorId);
-      if (d && d.price > 0) {
-        total += d.price;
-        lines.push({ label: `🌸 ${d.name}`, amount: d.price, type: 'add' });
-      }
-    }
-
-    // Rituals
-    document.querySelectorAll('#priceBox [data-ritual]:checked').forEach(cb => {
-      const deduct = Number(cb.dataset.deduct || 0);
-      total -= deduct;
-      const r = pkg.rituals?.find(x => x.id === cb.dataset.ritual);
-      if (r) lines.push({ label: `🪔 ตัด: ${r.name}`, amount: -deduct, type: 'deduct' });
-    });
-
-    // Render lines
-    document.getElementById('calcLines').innerHTML = lines.map(l => `
-      <div class="calc-line ${l.type === 'deduct' ? 'deduct' : ''}">
-        <div class="label">${CW.escape(l.label)}</div>
-        <div class="amount">${l.amount >= 0 ? (l.type === 'base' ? '' : '+ ') : '- '}${CW.fmtBaht(Math.abs(l.amount))}</div>
-      </div>
-    `).join('');
-
-    document.getElementById('totalPrice').textContent = CW.fmtBaht(Math.max(0, total));
-  }
-  recalc();
-})();
-</script>
-
-</body>
-</html>
+        l
