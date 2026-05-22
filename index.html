@@ -615,3 +615,14 @@
   const ctas = [];
   if (c.phone) ctas.push(`<a href="tel:${CW.escape(c.phone.replace(/[^\d+]/g, ''))}" class="btn btn--primary">☎ ${CW.escape(c.phone)}</a>`);
   if (c.line) {
+    const url = c.line.startsWith('http') ? c.line : `https://line.me/R/ti/p/${encodeURIComponent(c.line)}`;
+    ctas.push(`<a href="${CW.escape(url)}" class="btn btn--ghost" target="_blank">💬 LINE</a>`);
+  }
+  if (c.facebook) ctas.push(`<a href="${CW.escape(c.facebook)}" class="btn btn--ghost" target="_blank">f Facebook</a>`);
+  if (c.mapLink) ctas.push(`<a href="${CW.escape(c.mapLink)}" class="btn btn--ghost" target="_blank">📍 แผนที่</a>`);
+  document.getElementById('finalCtas').innerHTML = ctas.join('');
+})();
+</script>
+
+</body>
+</html>
