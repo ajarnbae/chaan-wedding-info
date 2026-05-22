@@ -101,6 +101,49 @@
     top: 4px;
   }
   .item-list li:last-child { border-bottom: none; }
+
+  /* ─── Menu mini-gallery strip ─── */
+  .menu-gallery-strip {
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .menu-gallery-strip__track {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 6px;
+  }
+  .menu-gallery-strip__track::-webkit-scrollbar { display: none; }
+  .menu-gallery-strip__item {
+    flex: 0 0 220px;
+    height: 150px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    scroll-snap-align: start;
+    cursor: pointer;
+    position: relative;
+  }
+  @media (min-width: 640px) {
+    .menu-gallery-strip__item { flex: 0 0 280px; height: 190px; }
+  }
+  .menu-gallery-strip__item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  .menu-gallery-strip__item:hover img { transform: scale(1.04); }
+  .menu-gallery-strip__caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(0deg, rgba(62,45,32,0.72) 0%, transparent 100%);
+    color: #fff; font-size: 0.78rem;
+    padding: 8px 10px 7px;
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .menu-gallery-strip__item:hover .menu-gallery-strip__caption { opacity: 1; }
 </style>
 </head>
 <body>
@@ -123,6 +166,11 @@
     <div id="menuMount"></div>
   </div>
 </section>
+
+<div class="lightbox" id="menuLightbox">
+  <button class="lightbox__close" onclick="document.getElementById('menuLightbox').classList.remove('open')">×</button>
+  <img id="menuLightboxImg" alt="">
+</div>
 
 <div id="footer-mount"></div>
 
@@ -193,12 +241,27 @@
     `;
   }
 
+  function buildGalleryStrip(m) {
+    // Collect images: menu-level gallery[] first, then each set's image
+    const imgs = [];
+    (m.gallery || []).forEach(g => { if (g.url) imgs.push({ url: g.url, caption: g.caption || '' }); });
+    (m.sets || []).forEach(s => { if (s.image) imgs.push({ url: s.image, caption: s.name || '' }); });
+    if (!imgs.length) return '';
+    const items = imgs.map(img => `
+      <div class="menu-gallery-strip__item" data-url="${CW.escape(img.url)}">
+        <img src="${CW.escape(img.url)}" alt="${CW.escape(img.caption)}" loading="lazy" style="${img.pos ? 'object-position:'+img.pos : ''}">
+        <div class="menu-gallery-strip__caption">${CW.escape(img.caption)}</div>
+      </div>
+    `).join('');
+    return `<div class="menu-gallery-strip"><div class="menu-gallery-strip__track">${items}</div></div>`;
+  }
+
   function render() {
     const m = menus[active];
     if (!m) return;
     const mount = document.getElementById('menuMount');
     mount.innerHTML = `
-      <div class="featured" style="margin-bottom:32px;">
+      <div class="featured" style="margin-bottom:28px;">
         <div class="featured__img"><img src="${CW.escape(m.image)}" alt="${CW.escape(m.name)}" style="${CW.imgStyle(m)}"></div>
         <div class="featured__body">
           <span class="featured__eyebrow">${CW.escape(m.shortDescription || '')}</span>
@@ -207,10 +270,23 @@
         </div>
       </div>
 
+      ${buildGalleryStrip(m)}
+
       ${(m.sets || []).map(renderSet).join('')}
     `;
+    // Lightbox for gallery strip
+    mount.querySelectorAll('.menu-gallery-strip__item').forEach(el => {
+      el.addEventListener('click', () => {
+        const lb = document.getElementById('menuLightbox');
+        document.getElementById('menuLightboxImg').src = el.dataset.url;
+        lb.classList.add('open');
+      });
+    });
   }
   render();
+  document.getElementById('menuLightbox').addEventListener('click', (e) => {
+    if (e.target.id === 'menuLightbox') e.currentTarget.classList.remove('open');
+  });
 })();
 </script>
 

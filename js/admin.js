@@ -661,6 +661,11 @@ function renderMenu(root, type) {
     <h3 style="margin-top:32px;">Sets</h3>
     <button class="btn btn--primary btn--sm" id="addSet">+ เพิ่ม Set</button>
     <div id="setList" style="margin-top:16px;"></div>
+
+    <h3 style="margin-top:32px;">🖼️ Gallery ภาพอาหาร</h3>
+    <p style="color:var(--color-text-muted);font-size:0.88rem;margin-bottom:12px;">ภาพเหล่านี้จะแสดงเป็น mini gallery แบบ scroll ได้ ด้านบนของหมวดอาหารนี้ (ภาพของแต่ละ Set จะแสดงอัตโนมัติ)</p>
+    <button class="btn btn--primary btn--sm" id="addMenuPhoto">+ เพิ่มรูป</button>
+    <div id="menuPhotoList" style="margin-top:16px;"></div>
   `;
   document.getElementById('saveMenuMeta').addEventListener('click', () => {
     menu.name = val('m_name'); menu.shortDescription = val('m_short');
@@ -705,6 +710,31 @@ function renderMenu(root, type) {
       </details>
     </div>
   `).join('') || '<div class="empty-state">ยังไม่มี Set</div>';
+
+  // Gallery for this menu type
+  menu.gallery = menu.gallery || [];
+  const refreshMenuGallery = () => {
+    document.getElementById('menuPhotoList').innerHTML = menu.gallery.map((g, gi) => `
+      <div class="admin-item" style="margin-bottom:10px;">
+        <div class="admin-item__head">
+          <strong>ภาพที่ ${gi+1}${g.caption ? ' — '+esc(g.caption) : ''}</strong>
+          <button class="btn btn--ghost btn--sm" onclick="DATA.menus['${type}'].gallery.splice(${gi},1); persist(); render();">ลบ</button>
+        </div>
+        <div class="field"><label>URL รูป</label>
+          <input value="${esc(g.url)}" oninput="DATA.menus['${type}'].gallery[${gi}].url = this.value; persist(); refreshImgEditor('imgEdMG_${type}_${gi}', this.value, \"DATA.menus['${type}'].gallery[${gi}]\", '4/3')">
+          <div id="imgEdMG_${type}_${gi}">${imgPosEditor(g.url, `DATA.menus['${type}'].gallery[${gi}]`, '4/3')}</div>
+        </div>
+        <div class="field"><label>Caption (ตัวเลือก)</label>
+          <input value="${esc(g.caption||'')}" oninput="DATA.menus['${type}'].gallery[${gi}].caption = this.value; persist()">
+        </div>
+      </div>
+    `).join('') || '<div class="empty-state" style="margin-bottom:12px;">ยังไม่มีรูป gallery เพิ่มเติม (ภาพของแต่ละ Set จะแสดงอัตโนมัติ)</div>';
+  };
+  refreshMenuGallery();
+  document.getElementById('addMenuPhoto').addEventListener('click', () => {
+    menu.gallery.push({ url: '', caption: '' });
+    persist(); render();
+  });
 }
 
 // ---------- Ceremonies ----------

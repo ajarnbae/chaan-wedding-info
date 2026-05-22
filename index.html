@@ -10,25 +10,146 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./css/style.css">
 <style>
+  /* ─── Hero carousel ─── */
   .hero-mini {
-    background: linear-gradient(180deg, #FFFCF7 0%, #FBF6EF 60%, #F4EBDC 100%);
-    padding: 64px 16px 48px;
+    padding: 0;
     text-align: center;
     position: relative;
+    overflow: hidden;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
-  .hero-mini::before {
+  /* Carousel track (full bleed behind content) */
+  .hero-carousel {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero-carousel__slides {
+    display: flex;
+    height: 100%;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+  .hero-carousel__slide {
+    flex: 0 0 100%;
+    height: 100%;
+    position: relative;
+  }
+  .hero-carousel__slide img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+  }
+  /* Dark overlay so text stays readable */
+  .hero-carousel::after {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(circle at 20% 20%, rgba(216, 180, 115, 0.10) 0%, transparent 50%),
-                      radial-gradient(circle at 80% 80%, rgba(216, 180, 115, 0.10) 0%, transparent 50%);
+    background: linear-gradient(180deg,
+      rgba(30,18,8,0.38) 0%,
+      rgba(30,18,8,0.22) 50%,
+      rgba(30,18,8,0.48) 100%);
     pointer-events: none;
+    z-index: 1;
   }
-  .hero-mini__content { position: relative; max-width: 720px; margin: 0 auto; z-index: 1; }
-  .hero-mini__script { font-family: var(--font-script); font-size: clamp(2.4rem, 6.5vw, 3.4rem); color: var(--color-gold); line-height: 1; margin-bottom: -8px; }
-  .hero-mini h1 { font-size: clamp(2rem, 5vw, 3rem); letter-spacing: 3px; margin-bottom: 8px; }
-  .hero-mini__sub { color: var(--color-text-muted); font-size: 1rem; max-width: 560px; margin: 0 auto 24px; }
+  /* Content layer */
+  .hero-mini__content {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 72px 16px 80px;
+  }
+  .hero-mini__script {
+    font-family: var(--font-script);
+    font-size: clamp(2.4rem, 6.5vw, 3.4rem);
+    color: var(--color-gold-light);
+    line-height: 1;
+    margin-bottom: -8px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .hero-mini h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+    color: #fff;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.35);
+  }
+  .hero-mini__sub {
+    color: rgba(255,255,255,0.85);
+    font-size: 1rem;
+    max-width: 560px;
+    margin: 0 auto 24px;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+  }
   .hero-mini__ctas { display:flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  /* Dot indicators */
+  .hero-dots {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding-bottom: 22px;
+    margin-top: -8px;
+  }
+  .hero-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+    transition: background 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+  }
+  .hero-dot.active {
+    background: var(--color-gold-light);
+    transform: scale(1.3);
+  }
+
+  /* ─── Gallery Preview Section ─── */
+  .gallery-preview {
+    background: var(--color-cream-warm);
+    padding: 64px 16px;
+  }
+  .gallery-preview__grid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 200px 200px;
+    max-width: 900px;
+    margin: 32px auto 28px;
+  }
+  @media (min-width: 640px) {
+    .gallery-preview__grid {
+      grid-template-columns: 1.6fr 1fr 1fr;
+      grid-template-rows: 220px 220px;
+    }
+  }
+  .gallery-preview__item {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  .gallery-preview__item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .gallery-preview__item:hover img { transform: scale(1.05); }
+  /* First item spans 2 rows on desktop */
+  @media (min-width: 640px) {
+    .gallery-preview__item:first-child { grid-row: span 2; }
+  }
+  .gallery-preview__cta {
+    text-align: center;
+  }
 
   /* HOT PROMO SPOTLIGHT */
   .hot-promo {
@@ -187,7 +308,11 @@
 <div id="nav-mount"></div>
 
 <!-- HERO -->
-<section class="hero-mini">
+<section class="hero-mini" id="heroSection">
+  <!-- Carousel (injected by JS) -->
+  <div class="hero-carousel" id="heroCarousel" aria-hidden="true">
+    <div class="hero-carousel__slides" id="heroSlides"></div>
+  </div>
   <div class="hero-mini__content">
     <div class="hero-mini__script">Chaan</div>
     <h1>WEDDING VENUE</h1>
@@ -197,6 +322,8 @@
       <a href="./packages/" class="btn btn--ghost">แพ็คเกจทั้งหมด</a>
     </div>
   </div>
+  <!-- Dots -->
+  <div class="hero-dots" id="heroDots"></div>
 </section>
 
 <!-- HOT PROMO SPOTLIGHT -->
@@ -234,6 +361,22 @@
         <div class="cat-card__title">รูปภาพ</div>
         <p class="cat-card__hint">3 โซน · 7 พิธี</p>
       </a>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY PREVIEW -->
+<section class="gallery-preview">
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow">Gallery</span>
+      <h2>บรรยากาศสถานที่</h2>
+    </div>
+    <div class="gallery-preview__grid" id="galleryPreviewGrid">
+      <!-- Injected by JS -->
+    </div>
+    <div class="gallery-preview__cta">
+      <a href="./gallery/" class="btn btn--ghost">คลิกเพื่อดูภาพทั้งหมด →</a>
     </div>
   </div>
 </section>
@@ -280,6 +423,95 @@
   if (!data) return;
 
   if (data.site?.description) document.getElementById('heroSub').textContent = data.site.description;
+
+  // ── Hero carousel ──
+  const allPhotos = data.gallery?.photos || [];
+  // Shuffle
+  const shuffled = [...allPhotos].sort(() => Math.random() - 0.5);
+  const heroPhotos = shuffled.length ? shuffled : [];
+  const slidesEl = document.getElementById('heroSlides');
+  const dotsEl = document.getElementById('heroDots');
+  const MAX_DOTS = 5;
+  let heroIdx = 0;
+  let heroTimer = null;
+
+  if (heroPhotos.length > 0) {
+    // Build slides
+    slidesEl.innerHTML = heroPhotos.map(p => `
+      <div class="hero-carousel__slide">
+        <img src="${CW.escape(p.url)}" alt="${CW.escape(p.caption || '')}" loading="lazy" style="${CW.imgStyle(p)}">
+      </div>
+    `).join('');
+
+    // Build dots (max 5)
+    const dotCount = Math.min(MAX_DOTS, heroPhotos.length);
+    dotsEl.innerHTML = Array.from({ length: dotCount }, (_, i) =>
+      `<button class="hero-dot${i === 0 ? ' active' : ''}" data-i="${i}" aria-label="ภาพที่ ${i+1}"></button>`
+    ).join('');
+
+    function updateDots(idx) {
+      const total = heroPhotos.length;
+      const dc = Math.min(MAX_DOTS, total);
+      // Which dot window to show: center the active dot
+      let winStart = Math.max(0, Math.min(idx - Math.floor(dc/2), total - dc));
+      dotsEl.querySelectorAll('.hero-dot').forEach((d, di) => {
+        const mappedIdx = winStart + di;
+        d.dataset.i = mappedIdx;
+        d.classList.toggle('active', mappedIdx === idx);
+      });
+    }
+
+    function goTo(idx) {
+      heroIdx = (idx + heroPhotos.length) % heroPhotos.length;
+      slidesEl.style.transform = `translateX(-${heroIdx * 100}%)`;
+      updateDots(heroIdx);
+    }
+
+    dotsEl.addEventListener('click', (e) => {
+      const d = e.target.closest('.hero-dot');
+      if (!d) return;
+      clearInterval(heroTimer);
+      goTo(Number(d.dataset.i));
+      heroTimer = setInterval(() => goTo(heroIdx + 1), 4500);
+    });
+
+    // Auto-advance
+    heroTimer = setInterval(() => goTo(heroIdx + 1), 4500);
+    goTo(0);
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    slidesEl.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    slidesEl.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) {
+        clearInterval(heroTimer);
+        goTo(heroIdx + (dx < 0 ? 1 : -1));
+        heroTimer = setInterval(() => goTo(heroIdx + 1), 4500);
+      }
+    }, { passive: true });
+  } else {
+    // Fallback: plain gradient background (hide carousel)
+    document.getElementById('heroCarousel').style.display = 'none';
+    document.getElementById('heroSection').style.background = 'linear-gradient(180deg, #FFFCF7 0%, #FBF6EF 60%, #F4EBDC 100%)';
+    document.querySelector('.hero-mini__script').style.color = 'var(--color-gold)';
+    document.querySelector('.hero-mini h1').style.color = 'var(--color-brown-dark)';
+    document.querySelector('.hero-mini__sub').style.color = 'var(--color-text-muted)';
+  }
+
+  // ── Gallery Preview Section ──
+  const previewGrid = document.getElementById('galleryPreviewGrid');
+  if (previewGrid && allPhotos.length > 0) {
+    // Pick up to 5 photos for the preview (in original order, no shuffle)
+    const previewPhotos = allPhotos.slice(0, 5);
+    previewGrid.innerHTML = previewPhotos.map(p => `
+      <a href="./gallery/" class="gallery-preview__item">
+        <img src="${CW.escape(p.url)}" alt="${CW.escape(p.caption || 'บรรยากาศสถานที่')}" loading="lazy" style="${CW.imgStyle(p)}">
+      </a>
+    `).join('');
+  } else if (previewGrid) {
+    previewGrid.closest('section').style.display = 'none';
+  }
 
   // Featured = the 99,999 promo by default
   const featuredId = data.featuredPackageId;
