@@ -118,6 +118,16 @@
     padding-bottom: 6px;
   }
   .menu-gallery-strip__track::-webkit-scrollbar { display: none; }
+  .gallery-strip-hint {
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    margin: 0 0 6px;
+    display: none; /* hidden on mobile */
+  }
+  @media (hover: hover) and (pointer: fine) {
+    /* desktop/mouse only */
+    .gallery-strip-hint { display: block; }
+  }
   .menu-gallery-strip__item {
     flex: 0 0 220px;
     height: 150px;
@@ -254,7 +264,10 @@
         <div class="menu-gallery-strip__caption">${CW.escape(img.caption)}</div>
       </div>
     `).join('');
-    return `<div class="menu-gallery-strip"><div class="menu-gallery-strip__track">${items}</div></div>`;
+    return `<div class="menu-gallery-strip">
+      <p class="gallery-strip-hint">🖱 หากดูบนคอมพิวเตอร์ / PC โปรดใช้ลูกกลิ้งเมาส์เพื่อเลื่อนดูภาพ</p>
+      <div class="menu-gallery-strip__track">${items}</div>
+    </div>`;
   }
 
   function render() {
