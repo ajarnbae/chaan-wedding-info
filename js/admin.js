@@ -1114,4 +1114,5 @@ function toast(msg) {
   t.textContent = msg;
   t.style.display = 'block';
   clearTimeout(t._h);
-  t._h = setTimeout(() => t.style.display = 'none', 220
+  t._h = setTimeout(() => t.style.display = 'none', 2200);
+}
