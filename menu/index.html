@@ -112,11 +112,10 @@
     gap: 10px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     padding-bottom: 6px;
-    cursor: grab;
-    user-select: none;
   }
   .menu-gallery-strip__track::-webkit-scrollbar { display: none; }
   .menu-gallery-strip__item {
@@ -276,57 +275,17 @@
 
       ${(m.sets || []).map(renderSet).join('')}
     `;
-    // Mouse drag scroll with momentum (desktop)
+    // Wheel → horizontal scroll on desktop (mobile uses native touch swipe)
     mount.querySelectorAll('.menu-gallery-strip__track').forEach(track => {
-      let isDown = false, startX = 0, scrollLeft = 0, dragged = false;
-      let lastX = 0, lastT = 0, velocity = 0, rafId = null;
-
-      const applyMomentum = () => {
-        if (Math.abs(velocity) < 0.5) {
-          track.style.scrollSnapType = '';
-          return;
-        }
-        track.scrollLeft += velocity;
-        velocity *= 0.88;
-        rafId = requestAnimationFrame(applyMomentum);
-      };
-
-      const stopDrag = () => {
-        if (!isDown) return;
-        isDown = false;
-        track.style.cursor = '';
-        rafId = requestAnimationFrame(applyMomentum);
-      };
-
-      track.addEventListener('mousedown', e => {
-        if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-        isDown = true; dragged = false; velocity = 0;
-        startX = e.pageX;
-        scrollLeft = track.scrollLeft;
-        lastX = e.pageX; lastT = Date.now();
-        track.style.cursor = 'grabbing';
-        track.style.scrollSnapType = 'none';
-      });
-
-      track.addEventListener('mouseleave', stopDrag);
-      track.addEventListener('mouseup', stopDrag);
-
-      track.addEventListener('mousemove', e => {
-        if (!isDown) return;
+      track.addEventListener('wheel', e => {
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return; // already horizontal
         e.preventDefault();
-        const now = Date.now();
-        const dt = now - lastT || 1;
-        velocity = (lastX - e.pageX) / dt * 16;
-        lastX = e.pageX; lastT = now;
-        if (Math.abs(e.pageX - startX) > 3) dragged = true;
-        track.scrollLeft = scrollLeft - (e.pageX - startX);
-      });
+        track.scrollBy({ left: e.deltaY * 2, behavior: 'smooth' });
+      }, { passive: false });
     });
     // Lightbox for gallery strip (skip if dragged)
     mount.querySelectorAll('.menu-gallery-strip__item').forEach(el => {
-      el.addEventListener('click', e => {
-        const track = el.closest('.menu-gallery-strip__track');
-        if (track && track.style.cursor === 'grabbing') return;
+      el.addEventListener('click', () => {
         const lb = document.getElementById('menuLightbox');
         document.getElementById('menuLightboxImg').src = el.dataset.url;
         lb.classList.add('open');
