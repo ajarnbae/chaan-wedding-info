@@ -115,6 +115,8 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     padding-bottom: 6px;
+    cursor: grab;
+    user-select: none;
   }
   .menu-gallery-strip__track::-webkit-scrollbar { display: none; }
   .menu-gallery-strip__item {
@@ -274,9 +276,31 @@
 
       ${(m.sets || []).map(renderSet).join('')}
     `;
-    // Lightbox for gallery strip
+    // Mouse drag scroll for gallery strip (desktop)
+    mount.querySelectorAll('.menu-gallery-strip__track').forEach(track => {
+      let isDown = false, startX = 0, scrollLeft = 0, dragged = false;
+      track.addEventListener('mousedown', e => {
+        isDown = true; dragged = false;
+        startX = e.pageX - track.offsetLeft;
+        scrollLeft = track.scrollLeft;
+        track.style.cursor = 'grabbing';
+      });
+      track.addEventListener('mouseleave', () => { isDown = false; track.style.cursor = ''; });
+      track.addEventListener('mouseup', () => { isDown = false; track.style.cursor = ''; });
+      track.addEventListener('mousemove', e => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - track.offsetLeft;
+        const walk = (x - startX) * 1.2;
+        if (Math.abs(walk) > 4) dragged = true;
+        track.scrollLeft = scrollLeft - walk;
+      });
+    });
+    // Lightbox for gallery strip (skip if dragged)
     mount.querySelectorAll('.menu-gallery-strip__item').forEach(el => {
-      el.addEventListener('click', () => {
+      el.addEventListener('click', e => {
+        const track = el.closest('.menu-gallery-strip__track');
+        if (track && track.style.cursor === 'grabbing') return;
         const lb = document.getElementById('menuLightbox');
         document.getElementById('menuLightboxImg').src = el.dataset.url;
         lb.classList.add('open');
