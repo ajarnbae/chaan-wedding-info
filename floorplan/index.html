@@ -61,7 +61,7 @@
 
     /* SVG wrapper */
     .fp-map-wrap {
-      background: #f5f0e8;
+      background: #f0ece4;
       border: 1px solid var(--color-line);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-md);
@@ -93,23 +93,6 @@
       border: 1px solid rgba(0,0,0,.12);
     }
 
-    /* Room detail cards for indoor tab */
-    .fp-room-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: var(--space-md);
-      margin-top: var(--space-lg);
-    }
-    .fp-room-card {
-      background: var(--color-ivory);
-      border: 1px solid var(--color-line);
-      border-left: 4px solid var(--color-gold);
-      border-radius: var(--radius-md);
-      padding: var(--space-md) var(--space-lg);
-    }
-    .fp-room-card h4 { font-size: .95rem; color: var(--color-brown-dark); margin: 0 0 4px; }
-    .fp-room-card p { font-size: .82rem; color: var(--color-text-muted); margin: 0; line-height: 1.5; }
-
     .fp-note {
       background: var(--color-cream-warm);
       border: 1px solid var(--color-line);
@@ -127,7 +110,7 @@
   </style>
 </head>
 <body>
-  <div id="navMount"></div>
+  <div id="nav-mount"></div>
 
   <section class="fp-hero">
     <span class="script">Floor Plan</span>
@@ -142,10 +125,10 @@
 
   <!-- ===================================================
        TAB 1 — SITE OVERVIEW
-       Layout (ตามแปลนจริง):
-         [ที่จอดรถบน (top-right)]
-         [English Garden][ที่จอดรถ][ถนน][ที่จอดรถ][Main Building]
-         [ที่จอดรถ]              [ถนน]              [Waterfall][Cafe]
+       Layout ตามแปลนจริง:
+         Row 1 (top): [ที่จอดรถ ยาวเต็ม top]
+         Row 2: [Eng.Garden][Park][Road][Park][Main Building]
+         Row 3: [Park]      [Park][Road][Park][Waterfall][Cafe]
   =================================================== -->
   <div class="fp-panel active" id="tab-overview">
     <div class="fp-section-title">
@@ -155,139 +138,107 @@
     </div>
 
     <div class="fp-map-wrap">
-      <!--
-        SVG viewBox 860 x 600
-        Zones:
-          Parking top       : x=372,y=8,   w=480,h=120  #2D2D2D
-          English Garden    : x=8,  y=136, w=230,h=166  #00ACC1
-          Parking left-mid  : x=246,y=136, w=74, h=166  #2D2D2D
-          Road (vertical)   : x=320,y=136, w=54, h=456  #666
-          Parking right-road: x=374,y=136, w=46, h=148  #2D2D2D
-          Main Building     : x=420,y=136, w=432,h=316  #F5A623
-          Parking bot-left-A: x=8,  y=310, w=170,h=136  #2D2D2D
-          Parking bot-left-B: x=246,y=310, w=74, h=136  #2D2D2D
-          Parking bot-road  : x=374,y=292, w=46, h=136  #2D2D2D
-          Front plaza       : x=420,y=452, w=432,h=50   #E8D5A0
-          Waterfall Garden  : x=420,y=502, w=340,h=90   #43A047
-          Cafe              : x=768,y=502, w=84, h=90   #E53935
-          Road bottom       : x=320,y=592  (label area)
-      -->
-      <svg viewBox="0 0 860 600" xmlns="http://www.w3.org/2000/svg"
-           font-family="Sarabun,sans-serif">
+      <svg viewBox="0 0 860 580" xmlns="http://www.w3.org/2000/svg" font-family="Sarabun,sans-serif">
+        <rect width="860" height="580" fill="#DEDAD3"/>
 
-        <!-- ── Background ── -->
-        <rect width="860" height="600" fill="#EBEBEB"/>
+        <!-- ══ ROW 1: ที่จอดรถบนยาวเต็ม ══ -->
+        <rect x="8" y="8" width="844" height="108" rx="6" fill="#2D2D2D"/>
+        <text x="430" y="66" text-anchor="middle" font-size="26" fill="#fff" font-weight="600">ที่จอดรถ</text>
 
-        <!-- ── Top parking ── -->
-        <rect x="372" y="8" width="480" height="120" rx="6" fill="#2D2D2D"/>
-        <text x="612" y="72" text-anchor="middle" font-size="22" fill="#fff" font-weight="600">ที่จอดรถ</text>
-        <text x="612" y="96" text-anchor="middle" font-size="13" fill="#aaa">(ฝั่งเหนือ)</text>
+        <!-- ══ ROW 2 LEFT: English Garden ══ -->
+        <rect x="8" y="124" width="234" height="168" rx="6" fill="#00ACC1"/>
+        <text x="125" y="202" text-anchor="middle" font-size="15" fill="#fff" font-weight="600">โซนสวนหิน</text>
+        <text x="125" y="222" text-anchor="middle" font-size="15" fill="#fff" font-weight="600">สไตล์อังกฤษ</text>
 
-        <!-- ── English Garden ── -->
-        <rect x="8" y="136" width="230" height="166" rx="6" fill="#00ACC1"/>
-        <text x="123" y="212" text-anchor="middle" font-size="14" fill="#fff" font-weight="600">โซนสวนหิน</text>
-        <text x="123" y="232" text-anchor="middle" font-size="14" fill="#fff" font-weight="600">สไตล์อังกฤษ</text>
+        <!-- ══ ROW 2 LEFT: Parking beside English ══ -->
+        <rect x="250" y="124" width="66" height="168" rx="4" fill="#2D2D2D"/>
+        <text x="283" y="208" text-anchor="middle" font-size="13" fill="#aaa"
+              transform="rotate(-90,283,208)">ที่จอดรถ</text>
 
-        <!-- ── Parking left-mid ── -->
-        <rect x="246" y="136" width="66" height="166" rx="4" fill="#2D2D2D"/>
-        <text x="279" y="226" text-anchor="middle" font-size="12" fill="#aaa"
-              transform="rotate(-90,279,226)">ที่จอดรถ</text>
+        <!-- ══ Road vertical strip ══ -->
+        <rect x="324" y="124" width="54" height="448" fill="#666"/>
+        <text x="351" y="390" text-anchor="middle" font-size="15" fill="#fff" font-weight="700"
+              transform="rotate(-90,351,390)">ถนน</text>
 
-        <!-- ── Road (vertical strip) ── -->
-        <rect x="320" y="136" width="54" height="456" rx="0" fill="#666"/>
-        <text x="347" y="400" text-anchor="middle" font-size="15" fill="#fff" font-weight="700"
-              transform="rotate(-90,347,400)">ถนน</text>
+        <!-- ══ Parking right-of-road upper ══ -->
+        <rect x="386" y="124" width="46" height="168" rx="4" fill="#2D2D2D"/>
+        <text x="409" y="208" text-anchor="middle" font-size="12" fill="#aaa"
+              transform="rotate(-90,409,208)">ที่จอดรถ</text>
 
-        <!-- ── Parking right of road (upper) ── -->
-        <rect x="374" y="136" width="46" height="148" rx="4" fill="#2D2D2D"/>
-        <text x="397" y="212" text-anchor="middle" font-size="11" fill="#aaa"
-              transform="rotate(-90,397,212)">ที่จอดรถ</text>
+        <!-- ══ MAIN BUILDING ══ -->
+        <rect x="440" y="124" width="412" height="312" rx="8" fill="#F5A623"/>
+        <rect x="440" y="124" width="412" height="312" rx="8" fill="none" stroke="#C07800" stroke-width="2.5"/>
+        <text x="646" y="272" text-anchor="middle" font-size="20" fill="#3E2000" font-weight="700">อาคารแต่งงาน</text>
+        <text x="646" y="298" text-anchor="middle" font-size="20" fill="#3E2000" font-weight="700">จันทร์ เวดดิ้ง</text>
+        <text x="646" y="322" text-anchor="middle" font-size="13" fill="#5A3800">(จุได้สูงสุด 500 ท่าน)</text>
 
-        <!-- ── MAIN BUILDING ── -->
-        <rect x="420" y="136" width="432" height="316" rx="8" fill="#F5A623"/>
-        <!-- Building label -->
-        <text x="636" y="282" text-anchor="middle" font-size="18" fill="#3E2000" font-weight="700">อาคารแต่งงาน</text>
-        <text x="636" y="306" text-anchor="middle" font-size="18" fill="#3E2000" font-weight="700">จันทร์ เวดดิ้ง</text>
-        <text x="636" y="332" text-anchor="middle" font-size="13" fill="#5A3800">(จุได้สูงสุด 500 ท่าน)</text>
-        <!-- Building border accent -->
-        <rect x="420" y="136" width="432" height="316" rx="8" fill="none" stroke="#C07800" stroke-width="2.5"/>
+        <!-- ══ ROW 3 LEFT: Parking below English ══ -->
+        <rect x="8" y="300" width="234" height="130" rx="6" fill="#2D2D2D"/>
+        <text x="125" y="372" text-anchor="middle" font-size="20" fill="#fff" font-weight="600">ที่จอดรถ</text>
 
-        <!-- ── Parking bottom-left ── -->
-        <rect x="8" y="310" width="230" height="140" rx="6" fill="#2D2D2D"/>
-        <text x="123" y="385" text-anchor="middle" font-size="18" fill="#fff" font-weight="600">ที่จอดรถ</text>
+        <!-- ══ ROW 3 LEFT: Parking beside road (lower) ══ -->
+        <rect x="250" y="300" width="66" height="130" rx="4" fill="#2D2D2D"/>
+        <text x="283" y="365" text-anchor="middle" font-size="13" fill="#aaa"
+              transform="rotate(-90,283,365)">ที่จอดรถ</text>
 
-        <!-- ── Parking left-mid bottom ── -->
-        <rect x="246" y="310" width="66" height="140" rx="4" fill="#2D2D2D"/>
-        <text x="279" y="382" text-anchor="middle" font-size="12" fill="#aaa"
-              transform="rotate(-90,279,382)">ที่จอดรถ</text>
+        <!-- ══ Parking right-of-road lower ══ -->
+        <rect x="386" y="300" width="46" height="272" rx="4" fill="#2D2D2D"/>
+        <text x="409" y="438" text-anchor="middle" font-size="12" fill="#aaa"
+              transform="rotate(-90,409,438)">ที่จอดรถ</text>
 
-        <!-- ── Parking right-of-road (lower) ── -->
-        <rect x="374" y="292" width="46" height="158" rx="4" fill="#2D2D2D"/>
-        <text x="397" y="370" text-anchor="middle" font-size="11" fill="#aaa"
-              transform="rotate(-90,397,370)">ที่จอดรถ</text>
+        <!-- ══ Bottom parking below road (left side) ══ -->
+        <rect x="8" y="438" width="308" height="134" rx="6" fill="#2D2D2D"/>
+        <text x="162" y="510" text-anchor="middle" font-size="20" fill="#fff" font-weight="600">ที่จอดรถ</text>
 
-        <!-- ── Front plaza / พื้นที่หน้าอาคาร ── -->
-        <rect x="420" y="452" width="432" height="50" rx="0" fill="#D4B483" opacity=".7"/>
-        <text x="636" y="481" text-anchor="middle" font-size="13" fill="#5A3800" font-weight="500">พื้นที่หน้าอาคาร</text>
+        <!-- ══ Road bottom continuation ══ -->
+        <rect x="324" y="438" width="54" height="134" fill="#555"/>
 
-        <!-- ── Waterfall Garden ── -->
-        <rect x="420" y="502" width="340" height="90" rx="6" fill="#43A047"/>
-        <text x="590" y="553" text-anchor="middle" font-size="17" fill="#fff" font-weight="600">โซนสวนน้ำตก</text>
+        <!-- ══ Front plaza ══ -->
+        <rect x="440" y="436" width="412" height="48" rx="0" fill="#D4B483" opacity=".7"/>
+        <text x="646" y="465" text-anchor="middle" font-size="13" fill="#5A3800" font-weight="500">พื้นที่หน้าอาคาร</text>
 
-        <!-- ── Cafe ── -->
-        <rect x="768" y="502" width="84" height="90" rx="6" fill="#E53935"/>
-        <text x="810" y="541" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">ร้านอาหาร</text>
-        <text x="810" y="557" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">จันทร์ เดอ</text>
-        <text x="810" y="573" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">คาเฟ่</text>
+        <!-- ══ Waterfall Garden ══ -->
+        <rect x="440" y="484" width="328" height="88" rx="6" fill="#43A047"/>
+        <text x="604" y="534" text-anchor="middle" font-size="18" fill="#fff" font-weight="600">โซนสวนน้ำตก</text>
 
-        <!-- ── Parking bottom (under road area) ── -->
-        <rect x="320" y="592" width="54" height="8" fill="#666"/>
+        <!-- ══ Cafe ══ -->
+        <rect x="776" y="484" width="76" height="88" rx="6" fill="#E53935"/>
+        <text x="814" y="519" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">ร้านอาหาร</text>
+        <text x="814" y="535" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">จันทร์ เดอ</text>
+        <text x="814" y="551" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">คาเฟ่</text>
 
-        <!-- ── Scale / note ── -->
-        <text x="16" y="592" font-size="10" fill="#888">* ไม่ใช่สเกลจริง</text>
+        <text x="16" y="572" font-size="10" fill="#999">* ไม่ใช่สเกลจริง</text>
       </svg>
     </div>
 
-    <!-- Legend -->
     <div class="fp-legend">
-      <div class="fp-legend-item">
-        <span class="fp-legend-swatch" style="background:#F5A623;"></span>อาคารหลัก (500 ท่าน)
-      </div>
-      <div class="fp-legend-item">
-        <span class="fp-legend-swatch" style="background:#00ACC1;"></span>โซนสวนหินสไตล์อังกฤษ
-      </div>
-      <div class="fp-legend-item">
-        <span class="fp-legend-swatch" style="background:#43A047;"></span>โซนสวนน้ำตก
-      </div>
-      <div class="fp-legend-item">
-        <span class="fp-legend-swatch" style="background:#E53935;"></span>ร้านอาหาร จันทร์ เดอ คาเฟ่
-      </div>
-      <div class="fp-legend-item">
-        <span class="fp-legend-swatch" style="background:#2D2D2D;"></span>ที่จอดรถ
-      </div>
-      <div class="fp-legend-item">
-        <span class="fp-legend-swatch" style="background:#666;"></span>ถนน
-      </div>
+      <div class="fp-legend-item"><span class="fp-legend-swatch" style="background:#F5A623;"></span>อาคารหลัก (500 ท่าน)</div>
+      <div class="fp-legend-item"><span class="fp-legend-swatch" style="background:#00ACC1;"></span>โซนสวนหินสไตล์อังกฤษ</div>
+      <div class="fp-legend-item"><span class="fp-legend-swatch" style="background:#43A047;"></span>โซนสวนน้ำตก</div>
+      <div class="fp-legend-item"><span class="fp-legend-swatch" style="background:#E53935;"></span>ร้านอาหาร จันทร์ เดอ คาเฟ่</div>
+      <div class="fp-legend-item"><span class="fp-legend-swatch" style="background:#2D2D2D;"></span>ที่จอดรถ</div>
+      <div class="fp-legend-item"><span class="fp-legend-swatch" style="background:#666;"></span>ถนน</div>
     </div>
     <div class="fp-note">⚠️ แผนผังนี้เป็นภาพประกอบเพื่อความเข้าใจภาพรวม — ไม่ใช่สเกลจริง</div>
   </div>
 
   <!-- ===================================================
        TAB 2 — INDOOR FLOOR PLAN
-       อาคารหลัก layout (จากแปลนจริง):
-         ┌───────────────────────────────┬──────────────┐
-         │  ห้องโถงใหญ่ 1.5 ชั้น         │ ห้องน้ำ ช/ญ  │
-         │  [เวทีฉลองมงคลสมรส]           │ (ฝั่งละ 5 ห้อง)│
-         │                               │ โซนพักรอ     │
-         │                               │ บาร์น้ำ      │
-         │                               │ โซนเตรียม    │
-         │                               │ อาหาร        │
-         ├──────────┬────────────┬────────┤              │
-         │แบ็คดร็อป │โต๊ะลงทะเบียน│พิธีสงฆ์│              │
-         │รดน้ำสังข์│            │สวมแหวน │              │
-         ├──────────┴────────────┴────────┴──────────────┤
-         │              พื้นที่หน้าอาคาร                   │
-         └─────────────────────────────────────────────────┘
+       Layout:
+         ┌──────────────────────────────────┬────────────┐
+         │  ห้องโถงใหญ่ 1.5 ชั้น            │ ห้องน้ำหญิง│  ← หญิงบน
+         │     [เวทีฉลองมงคลสมรส]           │ (5 ห้อง)   │
+         │                                  │ ห้องน้ำชาย │  ← ชายล่าง
+         │                                  │ (5 ห้อง)   │
+         │                                  │ โซนพักรอ   │
+         │                                  │ บาร์น้ำ    │
+         │                                  │ เตรียมอาหาร│
+         ├─────────────────┬────────────────┤            │
+         │แบ็คดร็อป/รดน้ำสังข์│ พิธีสงฆ์    │            │
+         │(โต๊ะลงทะเบียน 1.5ม.)│สวมแหวน/หมั้น│            │
+         ├──────────────────────────────────┴────────────┤
+         │              พื้นที่หน้าอาคาร                  │
+         └────────────────────────────────────────────────┘
   =================================================== -->
   <div class="fp-panel" id="tab-indoor">
     <div class="fp-section-title">
@@ -299,68 +250,61 @@
     <div class="fp-map-wrap">
       <!--
         SVG 780 x 520
-        Outer shell: x=20,y=20,w=740,h=480
-        Main hall  : x=20,y=20,w=560,h=290  fill=#FFF9C4 (light yellow)
-        Stage      : x=140,y=36,w=280,h=80  fill=#F5A623
-        Right col  : x=580,y=20,w=180,h=380
-          WC-male  : x=580,y=20,w=180,h=80  fill=#BBDEFB
-          WC-female: x=580,y=100,w=180,h=80  fill=#F8BBD0
-          Wait zone: x=580,y=180,w=180,h=52  fill=#E3F2FD
-          Bar       : x=580,y=232,w=180,h=52  fill=#E8F5E9
-          Food prep : x=580,y=284,w=180,h=116 fill=#DCEDC8
-        Bottom rooms:
-          Backdrop  : x=20,y=310,w=186,h=90  fill=#FFE0B2
-          Reg.desk  : x=206,y=310,w=188,h=90 fill=#EDE7F6
-          Ceremony  : x=394,y=310,w=186,h=90 fill=#FCE4EC
-        Front plaza : x=20,y=400,w=560,h=100 fill=#E0D5C0
-        Right col extend: x=580,y=400,w=180,h=100 fill=#F5EFE3
+        Building shell : x=20, y=16, w=740, h=484
+        Main hall      : x=20, y=16, w=556, h=292  #FFF9C4
+        Stage          : x=136,y=34, w=284, h=88   #F5A623
+        Right col      : x=576,y=16, w=184, h=384
+          WC Female    : x=576,y=16,  w=184,h=88   #F8BBD0  ← หญิงบน
+          WC Male      : x=576,y=104, w=184,h=88   #BBDEFB  ← ชายล่าง
+          Wait zone    : x=576,y=192, w=184,h=54   #E3F2FD
+          Bar          : x=576,y=246, w=184,h=54   #E8F5E9
+          Food prep    : x=576,y=300, w=184,h=100  #DCEDC8
+        Bottom rooms (equal width, split-able):
+          Backdrop     : x=20, y=308, w=278,h=98   #FFE0B2  (โต๊ะลงทะเบียน อยู่ใน)
+          Ceremony     : x=298,y=308, w=278,h=98   #FCE4EC
+        Right col lower: x=576,y=400,w=184,h=100  #F5EFE3
+        Front plaza    : x=20, y=406, w=556,h=90   #D4B483
       -->
-      <svg viewBox="0 0 780 520" xmlns="http://www.w3.org/2000/svg"
-           font-family="Sarabun,sans-serif">
-
+      <svg viewBox="0 0 780 520" xmlns="http://www.w3.org/2000/svg" font-family="Sarabun,sans-serif">
         <rect width="780" height="520" fill="#DEDAD3"/>
 
-        <!-- ── Outer building shell ── -->
-        <rect x="20" y="16" width="740" height="484" rx="10"
-              fill="#FFF8F0" stroke="#C07800" stroke-width="2.5"/>
+        <!-- Outer building shell -->
+        <rect x="20" y="16" width="740" height="484" rx="10" fill="#FFF8F0" stroke="#C07800" stroke-width="2.5"/>
 
         <!-- ══ MAIN HALL ══ -->
-        <rect x="20" y="16" width="556" height="290" rx="10" fill="#FFF9C4"/>
-        <rect x="20" y="16" width="556" height="290" rx="10" fill="none" stroke="#F5A623" stroke-width="2"/>
-
-        <!-- Hall label -->
-        <text x="298" y="190" text-anchor="middle" font-size="15" fill="#5A3800" font-weight="600">ห้องโถงใหญ่ 1 ชั้นครึ่ง</text>
-        <text x="298" y="212" text-anchor="middle" font-size="12" fill="#8B6000">(พื้นที่งานเลี้ยงและพิธีหลัก)</text>
+        <rect x="20" y="16" width="556" height="292" rx="10" fill="#FFF9C4"/>
+        <rect x="20" y="16" width="556" height="292" rx="10" fill="none" stroke="#F5A623" stroke-width="2"/>
+        <text x="298" y="210" text-anchor="middle" font-size="15" fill="#5A3800" font-weight="600">ห้องโถงใหญ่ 1 ชั้นครึ่ง</text>
+        <text x="298" y="232" text-anchor="middle" font-size="12" fill="#8B6000">(พื้นที่งานเลี้ยงและพิธีหลัก)</text>
 
         <!-- Stage -->
-        <rect x="136" y="36" width="288" height="88" rx="8" fill="#F5A623" opacity=".85"/>
-        <text x="280" y="75" text-anchor="middle" font-size="14" fill="#fff" font-weight="700">เวทีฉลองมงคลสมรส</text>
-        <text x="280" y="96" text-anchor="middle" font-size="11" fill="#fff4cc">Wedding Stage</text>
-        <!-- Stage steps -->
-        <rect x="152" y="124" width="256" height="9" rx="4" fill="#C07800" opacity=".35"/>
-        <rect x="168" y="133" width="224" height="7" rx="3" fill="#C07800" opacity=".22"/>
+        <rect x="136" y="34" width="284" height="88" rx="8" fill="#F5A623" opacity=".88"/>
+        <text x="278" y="73" text-anchor="middle" font-size="14" fill="#fff" font-weight="700">เวทีฉลองมงคลสมรส</text>
+        <text x="278" y="94" text-anchor="middle" font-size="11" fill="#fff4cc">Wedding Stage</text>
+        <rect x="152" y="122" width="252" height="8" rx="4" fill="#C07800" opacity=".3"/>
+        <rect x="168" y="130" width="220" height="6" rx="3" fill="#C07800" opacity=".18"/>
 
         <!-- ══ RIGHT COLUMN ══ -->
 
-        <!-- WC Male -->
-        <rect x="576" y="16" width="184" height="88" rx="8" fill="#BBDEFB"/>
-        <rect x="576" y="16" width="184" height="88" rx="8" fill="none" stroke="#5B9BD5" stroke-width="1.5"/>
-        <text x="668" y="56" text-anchor="middle" font-size="13" fill="#1565C0" font-weight="600">ห้องน้ำชาย</text>
-        <text x="668" y="74" text-anchor="middle" font-size="11" fill="#1976D2">(5 ห้อง)</text>
-        <text x="668" y="92" text-anchor="middle" font-size="10" fill="#5B9BD5">Men's Restroom</text>
+        <!-- WC Female (top) ← หญิงบน -->
+        <rect x="576" y="16" width="184" height="88" rx="8" fill="#F8BBD0"/>
+        <rect x="576" y="16" width="184" height="88" rx="8" fill="none" stroke="#D56B9A" stroke-width="1.5"/>
+        <text x="668" y="54" text-anchor="middle" font-size="13" fill="#AD1457" font-weight="600">ห้องน้ำหญิง</text>
+        <text x="668" y="72" text-anchor="middle" font-size="11" fill="#C2185B">(5 ห้อง)</text>
+        <text x="668" y="90" text-anchor="middle" font-size="10" fill="#D56B9A">Women's Restroom</text>
 
-        <!-- WC Female -->
-        <rect x="576" y="104" width="184" height="88" rx="8" fill="#F8BBD0"/>
-        <rect x="576" y="104" width="184" height="88" rx="8" fill="none" stroke="#D56B9A" stroke-width="1.5"/>
-        <text x="668" y="144" text-anchor="middle" font-size="13" fill="#AD1457" font-weight="600">ห้องน้ำหญิง</text>
-        <text x="668" y="162" text-anchor="middle" font-size="11" fill="#C2185B">(5 ห้อง)</text>
-        <text x="668" y="180" text-anchor="middle" font-size="10" fill="#D56B9A">Women's Restroom</text>
+        <!-- WC Male (below female) ← ชายล่าง -->
+        <rect x="576" y="104" width="184" height="88" rx="8" fill="#BBDEFB"/>
+        <rect x="576" y="104" width="184" height="88" rx="8" fill="none" stroke="#5B9BD5" stroke-width="1.5"/>
+        <text x="668" y="142" text-anchor="middle" font-size="13" fill="#1565C0" font-weight="600">ห้องน้ำชาย</text>
+        <text x="668" y="160" text-anchor="middle" font-size="11" fill="#1976D2">(5 ห้อง)</text>
+        <text x="668" y="178" text-anchor="middle" font-size="10" fill="#5B9BD5">Men's Restroom</text>
 
         <!-- Wait zone -->
         <rect x="576" y="192" width="184" height="54" rx="6" fill="#E3F2FD"/>
         <rect x="576" y="192" width="184" height="54" rx="6" fill="none" stroke="#90CAF9" stroke-width="1.5"/>
         <text x="668" y="218" text-anchor="middle" font-size="12" fill="#1565C0" font-weight="500">โซนพักรอเข้าห้องน้ำ</text>
-        <text x="668" y="236" text-anchor="middle" font-size="10" fill="#4A90D9">Waiting Area</text>
+        <text x="668" y="235" text-anchor="middle" font-size="10" fill="#4A90D9">Waiting Area</text>
 
         <!-- Bar -->
         <rect x="576" y="246" width="184" height="54" rx="6" fill="#E8F5E9"/>
@@ -369,88 +313,68 @@
         <text x="668" y="291" text-anchor="middle" font-size="10" fill="#4CAF50">Beverage Bar</text>
 
         <!-- Food prep -->
-        <rect x="576" y="300" width="184" height="106" rx="6" fill="#DCEDC8"/>
-        <rect x="576" y="300" width="184" height="106" rx="6" fill="none" stroke="#AED581" stroke-width="1.5"/>
-        <text x="668" y="346" text-anchor="middle" font-size="13" fill="#33691E" font-weight="600">โซนจัดเตรียมอาหาร</text>
-        <text x="668" y="366" text-anchor="middle" font-size="10" fill="#7CB342">Catering &amp; Food Setup</text>
+        <rect x="576" y="300" width="184" height="100" rx="6" fill="#DCEDC8"/>
+        <rect x="576" y="300" width="184" height="100" rx="6" fill="none" stroke="#AED581" stroke-width="1.5"/>
+        <text x="668" y="344" text-anchor="middle" font-size="13" fill="#33691E" font-weight="600">โซนจัดเตรียมอาหาร</text>
+        <text x="668" y="363" text-anchor="middle" font-size="10" fill="#7CB342">Catering &amp; Food Setup</text>
 
-        <!-- Divider line between hall and bottom rooms -->
-        <line x1="20" y1="306" x2="576" y2="306" stroke="#C07800" stroke-width="2" stroke-dasharray="8,4"/>
+        <!-- Divider (dashed) between hall and bottom rooms -->
+        <line x1="20" y1="308" x2="576" y2="308" stroke="#C07800" stroke-width="2" stroke-dasharray="8,5"/>
 
-        <!-- ══ BOTTOM ROOMS ══ -->
+        <!-- ══ BOTTOM ROOMS — equal width, split-able ══ -->
 
-        <!-- Room 1: แบ็คดร็อปและรดน้ำสังข์ -->
-        <rect x="20" y="306" width="186" height="100" rx="6" fill="#FFE0B2"/>
-        <rect x="20" y="306" width="186" height="100" rx="6" fill="none" stroke="#FFA726" stroke-width="1.5"/>
-        <text x="113" y="348" text-anchor="middle" font-size="12" fill="#E65100" font-weight="600">แบ็คดร็อป</text>
-        <text x="113" y="366" text-anchor="middle" font-size="12" fill="#E65100" font-weight="600">&amp; รดน้ำสังข์</text>
-        <text x="113" y="384" text-anchor="middle" font-size="10" fill="#F57C00">Backdrop / Sand Ceremony</text>
+        <!-- Room A: แบ็คดร็อป & รดน้ำสังข์ (left half) -->
+        <!-- โต๊ะลงทะเบียนอยู่ใน room นี้ -->
+        <rect x="20" y="308" width="278" height="98" rx="6" fill="#FFE0B2"/>
+        <rect x="20" y="308" width="278" height="98" rx="6" fill="none" stroke="#FFA726" stroke-width="1.5"/>
+        <text x="159" y="343" text-anchor="middle" font-size="13" fill="#E65100" font-weight="600">แบ็คดร็อป &amp; รดน้ำสังข์</text>
+        <!-- โต๊ะลงทะเบียน label (small, inside) -->
+        <rect x="44" y="355" width="154" height="26" rx="4" fill="#FFB74D" opacity=".5"/>
+        <text x="121" y="372" text-anchor="middle" font-size="10" fill="#BF360C">📋 โต๊ะลงทะเบียน (1.5 ม.)</text>
+        <text x="159" y="396" text-anchor="middle" font-size="10" fill="#F57C00">Backdrop / Sand Ceremony</text>
 
-        <!-- Room 2: โต๊ะลงทะเบียน -->
-        <rect x="206" y="306" width="188" height="100" rx="6" fill="#EDE7F6"/>
-        <rect x="206" y="306" width="188" height="100" rx="6" fill="none" stroke="#B39DDB" stroke-width="1.5"/>
-        <text x="300" y="351" text-anchor="middle" font-size="13" fill="#4527A0" font-weight="600">โต๊ะลงทะเบียน</text>
-        <text x="300" y="372" text-anchor="middle" font-size="10" fill="#7E57C2">Registration Desk</text>
+        <!-- Split indicator (center divider) -->
+        <line x1="298" y1="308" x2="298" y2="406" stroke="#C07800" stroke-width="2" stroke-dasharray="6,4"/>
 
-        <!-- Room 3: พิธีสงฆ์ สวมแหวน หมั้น -->
-        <rect x="394" y="306" width="182" height="100" rx="6" fill="#FCE4EC"/>
-        <rect x="394" y="306" width="182" height="100" rx="6" fill="none" stroke="#F48FB1" stroke-width="1.5"/>
-        <text x="485" y="342" text-anchor="middle" font-size="12" fill="#880E4F" font-weight="600">พิธีสงฆ์</text>
-        <text x="485" y="360" text-anchor="middle" font-size="12" fill="#880E4F" font-weight="600">สวมแหวน / หมั้น</text>
-        <text x="485" y="380" text-anchor="middle" font-size="10" fill="#C2185B">Ceremony / Ring Exchange</text>
+        <!-- Room B: พิธีสงฆ์ สวมแหวน หมั้น (right half) — same width -->
+        <rect x="298" y="308" width="278" height="98" rx="6" fill="#FCE4EC"/>
+        <rect x="298" y="308" width="278" height="98" rx="6" fill="none" stroke="#F48FB1" stroke-width="1.5"/>
+        <text x="437" y="343" text-anchor="middle" font-size="13" fill="#880E4F" font-weight="600">พิธีสงฆ์ / สวมแหวน / หมั้น</text>
+        <text x="437" y="365" text-anchor="middle" font-size="11" fill="#C2185B">Buddhist Ceremony</text>
+        <text x="437" y="384" text-anchor="middle" font-size="11" fill="#C2185B">Ring Exchange / Engagement</text>
+        <text x="437" y="396" text-anchor="middle" font-size="10" fill="#F48FB1">Ceremony / Ring Exchange</text>
 
-        <!-- Note: 2 ห้องหน้าเปิด-ปิดได้ -->
-        <text x="300" y="420" text-anchor="middle" font-size="11" fill="#888"
-              font-style="italic">* สองห้องหน้าสามารถเปิดหรือปิดเพื่อแบ่งพื้นที่ได้</text>
+        <!-- Split note -->
+        <text x="298" y="422" text-anchor="middle" font-size="10" fill="#888" font-style="italic">⟵ สองห้องนี้เปิด-ปิดเพื่อรวมหรือแบ่งพื้นที่ได้ ⟶</text>
+
+        <!-- ══ RIGHT COL LOWER (align with bottom rooms) ══ -->
+        <rect x="576" y="400" width="184" height="100" rx="6" fill="#F5EFE3"/>
+        <rect x="576" y="400" width="184" height="100" rx="6" fill="none" stroke="#C8BAA0" stroke-width="1.5"/>
+        <text x="668" y="444" text-anchor="middle" font-size="11" fill="#5C4534">ทางออก /</text>
+        <text x="668" y="462" text-anchor="middle" font-size="11" fill="#5C4534">เชื่อมต่อโซนสวน</text>
 
         <!-- ══ FRONT PLAZA ══ -->
         <rect x="20" y="406" width="556" height="90" rx="6" fill="#D4B483" opacity=".45"/>
         <rect x="20" y="406" width="556" height="90" rx="6" fill="none" stroke="#B8924B" stroke-width="1.5" stroke-dasharray="6,4"/>
-        <text x="298" y="457" text-anchor="middle" font-size="14" fill="#5A3800" font-weight="500">พื้นที่หน้าอาคาร</text>
-        <text x="298" y="478" text-anchor="middle" font-size="11" fill="#7A5820">ทางเดินและจุดต้อนรับแขก</text>
-
-        <!-- Right col lower extension (matching height) -->
-        <rect x="576" y="406" width="184" height="90" rx="6" fill="#F5EFE3"/>
-        <rect x="576" y="406" width="184" height="90" rx="6" fill="none" stroke="#C8BAA0" stroke-width="1.5"/>
-        <text x="668" y="447" text-anchor="middle" font-size="11" fill="#5C4534">ทางออก /</text>
-        <text x="668" y="464" text-anchor="middle" font-size="11" fill="#5C4534">เชื่อมต่อโซนสวน</text>
+        <text x="298" y="455" text-anchor="middle" font-size="14" fill="#5A3800" font-weight="500">พื้นที่หน้าอาคาร</text>
+        <text x="298" y="476" text-anchor="middle" font-size="11" fill="#7A5820">ทางเดินและจุดต้อนรับแขก</text>
       </svg>
     </div>
 
-    <!-- Room legend -->
     <div class="fp-legend">
-      <div class="fp-legend-item">
-        <span class="fp-legend-swatch" style="background:#FFF9C4; border-color:#F5A623;"></span>ห้องโถงหลัก
-      </div>
-      <div class="fp-legend-item">
-        <span class="fp-legend-swatch" style="background:#F5A623;"></span>เวทีพิธี
-      </div>
-      <div class="fp-legend-item">
-        <span class="fp-legend-swatch" style="background:#BBDEFB;"></span>ห้องน้ำชาย
-      </div>
-      <div class="fp-legend-item">
-        <span class="fp-legend-swatch" style="background:#F8BBD0;"></span>ห้องน้ำหญิง
-      </div>
-      <div class="fp-legend-item">
-        <span class="fp-legend-swatch" style="background:#E8F5E9;"></span>บาร์น้ำ
-      </div>
-      <div class="fp-legend-item">
-        <span class="fp-legend-swatch" style="background:#DCEDC8;"></span>โซนเตรียมอาหาร
-      </div>
-      <div class="fp-legend-item">
-        <span class="fp-legend-swatch" style="background:#FFE0B2;"></span>แบ็คดร็อป / รดน้ำสังข์
-      </div>
-      <div class="fp-legend-item">
-        <span class="fp-legend-swatch" style="background:#EDE7F6;"></span>โต๊ะลงทะเบียน
-      </div>
-      <div class="fp-legend-item">
-        <span class="fp-legend-swatch" style="background:#FCE4EC;"></span>พิธีสงฆ์ / สวมแหวน
-      </div>
+      <div class="fp-legend-item"><span class="fp-legend-swatch" style="background:#FFF9C4;border-color:#F5A623;"></span>ห้องโถงหลัก</div>
+      <div class="fp-legend-item"><span class="fp-legend-swatch" style="background:#F5A623;"></span>เวทีพิธี</div>
+      <div class="fp-legend-item"><span class="fp-legend-swatch" style="background:#F8BBD0;"></span>ห้องน้ำหญิง</div>
+      <div class="fp-legend-item"><span class="fp-legend-swatch" style="background:#BBDEFB;"></span>ห้องน้ำชาย</div>
+      <div class="fp-legend-item"><span class="fp-legend-swatch" style="background:#E8F5E9;"></span>บาร์น้ำ</div>
+      <div class="fp-legend-item"><span class="fp-legend-swatch" style="background:#DCEDC8;"></span>โซนเตรียมอาหาร</div>
+      <div class="fp-legend-item"><span class="fp-legend-swatch" style="background:#FFE0B2;"></span>แบ็คดร็อป / รดน้ำสังข์</div>
+      <div class="fp-legend-item"><span class="fp-legend-swatch" style="background:#FCE4EC;"></span>พิธีสงฆ์ / สวมแหวน</div>
     </div>
-    <div class="fp-note">⚠️ ผังนี้เป็นภาพประกอบ — ไม่ใช่สเกลจริง ตำแหน่งห้องอิงจากแปลนจริงของสถานที่</div>
+    <div class="fp-note">⚠️ ผังนี้เป็นภาพประกอบ — ไม่ใช่สเกลจริง · สองห้องด้านหน้าเปิด-ปิดเพื่อรวมหรือแบ่งพื้นที่ได้</div>
   </div>
 
-  <div id="footerMount"></div>
+  <div id="footer-mount"></div>
 
   <script src="../js/common.js"></script>
   <script>
