@@ -2887,6 +2887,79 @@
         "caption": "",
         "zone": "waterfall-garden",
         "ceremony": "ring_elder"
+      },
+      {
+        "id": "p_1779544727559",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczPNDeVpxqkPFoMSvIpcLSzI8JkjfWP_2R9Jn_9UBijJiFaj81wyGaNt3UHcKhPSn9O3Ptw-7F8_fjuoPlLwVq1bytf-Lf9sIrV1KMpIi5dGzKaW6mM1QciWhZfIcXSM12NtinmiWzPkH0M-2-tePETW=w1379-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "waterfall-garden",
+        "ceremony": "ring_elder"
+      },
+      {
+        "id": "p_1779544727856",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczNkuzg6Os4bW240NU905GX0RVxSWlrl1QJNpFlTiXC8ffRsjP0Jkwwb5pcVdH3nWZcfPLxRax4VtSTR15A5D8ccNj9iQZh9SjbXb56mu0wkdDQE66WpTwQ7zOPmIRBsAC0zcBJPwa9JI5yxsSsxHI_n=w1379-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "waterfall-garden",
+        "ceremony": "ring_elder"
+      },
+      {
+        "id": "p_1779544728114",
+        "url": "",
+        "caption": "",
+        "zone": "indoor",
+        "ceremony": "sangha"
+      },
+      {
+        "id": "p_1779544728385",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczN21D_smfGZnqFiG6tgGbpG2tarUwlO4UB4r4QyyDnphGcC02z8TXYVWxCOrYTM9lHfbJsadoNIK-eUJaUpc-g1hw3hErqKI4zlXegoLOQh0ZkOXt-icqwwPOyWeRJBPUvqKK7QyHVIHHywhohxdpUy=w1379-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "indoor",
+        "ceremony": "sangha"
+      },
+      {
+        "id": "p_1779544728643",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczNMe4d-QuYT1HDhyCTbaDY4FXeiGmzaG1tMiTdxkFldGEAagYmPecVa6VnChQZXg5OV2ITriZT-9oH8ql4ldgfGSncRIBr325puOZdw2USV9cv4MCQ2sGVuKbrnYProF8Inb-WsD2QaIP0e0wonSsMg=w1379-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "waterfall-garden",
+        "ceremony": "bride_pickup"
+      },
+      {
+        "id": "p_1779544728908",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczPfRBulTd2Xr6RT6yFsGUbafVL89OsTe82uulUadsM3WOZUNnbz37EaahiCh6vjXDvi6wyicgdDFi8Cr8_bqDL-kQ0VCIwtrh-7grpqfm7pRCpA98fL8RVK3sMNISpJaqc9BMalu7MEhRQ3-KSVVNvW=w1379-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "english-garden",
+        "ceremony": "bride_pickup"
+      },
+      {
+        "id": "p_1779544729139",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczNaq_Av__EzONrUyTZPulX-DBrTqiodw4mvqyG_75qQpISU89TmmkBMV_u0i6sHbC6_sGQzMu071UYcTCCh7M5_GpiNvmJpCPgcNr37377Rs2-4dmjOoI0mk1kU3VwgxgOoI3umpDUlB5t6dw6LfJYw=w613-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "waterfall-garden",
+        "ceremony": "reception",
+        "imagePosition": "54.5% 80.5%"
+      },
+      {
+        "id": "p_1779544729369",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczPj_6vVrqvKLZRlYeZjmXYZmDhdSztWjVtdb0TErInDhmZBT36Fq97tdkOOpuKOq4yzwMVRhOA0afJcdEUYaZIgeh1_N0nzv2oe82iN3PORk52rFUhdtDiVxrPG1Hsz3E-9svyr2BpaIZ59YfIBkg7R=w613-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "indoor",
+        "ceremony": "reception"
+      },
+      {
+        "id": "p_1779544729585",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczNEio61nHlHT7faC7g4lSF3yxD7dxJuqH95EW0m5KtR-nAGd289aZi_bWf7lwULa0Dmst6P42MQreQIkoIbicL7UH2rOW8hn7n1e6rfSntl0KnlGPdTK6TpEj_3YXKyTyMj2vmrAbwso4sV2wkE_aCR=w1379-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "waterfall-garden",
+        "ceremony": "blessing",
+        "imagePosition": "27.9% 54.7%"
+      },
+      {
+        "id": "p_1779544729877",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczPPBQG0lhGjsSsoEr5iqVLs3tHJLCKtT4kuiVnvyRRz8ePdXth0BnaxrNJ4Ka821uJeGYIZz-z-olky-YF6jnnhw_2Go7t1dk-ka4xJ_VgANCbgP5CB1t1lVqNOh3ARrdCWQsEp9ClBAYYv3RupyVLQ=w1379-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "indoor",
+        "ceremony": "bride_pickup",
+        "imagePosition": "92.4% 54.7%"
       }
     ]
   },
