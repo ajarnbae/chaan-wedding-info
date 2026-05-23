@@ -143,23 +143,6 @@
         },
         "includedSections": [
           {
-            "title": "จุดตกแต่งหลัก",
-            "items": [
-              "1. ฉากแบ็คดร็อปและฉากรดน้ำสังข์ (ใช้ฉากเดียวกัน)",
-              "2. ฉากพิธีสงฆ์ และ สวมแหวน รับไหว้ผู้ใหญ่",
-              "3. ฉากบนเวทีพิธีฉลองมงคลสมรส"
-            ],
-            "note": "หมายเหตุ: หากตัดพิธีฉลองมงคลสมรสออก แต่ยังมีทานข้าวหลังงานพิธีอื่นต่อ ทางเราจะยังคงตกแต่งบนเวทีไว้เหมือนเดิม เพื่อความสวยงามของงาน"
-          },
-          {
-            "title": "ทีมงาน",
-            "items": [
-              "พิธีกร และนายพิธี (1 คน)",
-              "ทีมงานรันคิวดูแลเจ้าสาวและเจ้าบ่าว",
-              "เด็กเสิร์ฟ และ เด็กชงเครื่องดื่มที่บาร์น้ำ"
-            ]
-          },
-          {
             "title": "1. พิธีสงฆ์",
             "items": [
               "ชุดโต๊ะหมู่บูชาพร้อมสายสิญจน์ ธูป เทียน แจกันดอกไม้",
@@ -222,6 +205,7 @@
               "ฉากดอกไม้สำหรับพิธีการไทย",
               "พรมขนมิ้งรองนั่ง ขนาด 2 x 6 เมตร",
               "ป้ายชื่อบ่าว-สาว แบบป้ายโฟมฉลุลาย",
+              "พิธีกร 1 คน เจ้าหน้าที่รันคิว 2 คน",
               "ไฟส่องฉากดอกไม้"
             ]
           },
@@ -249,6 +233,7 @@
               "เทียนมงคลพร้อมขาตั้งตกแต่งสวยงาม",
               "พิธีตัดเค้ก (โมเดลเค้กและคัพเค้ก 12 ชิ้น)",
               "ระบบเสียงสำหรับเปิดเพลงและไมโครโฟน 2 ตัว",
+              "เจ้าหน้าที่รันคิวและพิธีกร 1 คน",
               "ไฟส่องฉากถ่ายภาพ",
               "พรมปูพื้น ขนาด 3 x 6 เมตร",
               "โลโก้ชื่อบ่าว-สาว แบบป้ายโฟมฉลุลาย 1 ป้าย"
@@ -322,8 +307,7 @@
         "notes": "ใช้ได้เฉพาะเดือนพฤษภาคม, มิถุนายน, กรกฎาคม · เปลี่ยนสีดอกไม้ไม่ได้ (หากเปลี่ยน มีค่าใช้จ่ายเพิ่ม) · ไม่มีอาหารเช้า",
         "decorChangeCategory": "promo",
         "imagePosition": "50% 50%",
-        "imageZoom": 100,
-        "ritualNote": "หมายเหตุ: การตัดพิธีออกคือไม่มีการดำเนินการพิธีในส่วนนั้น"
+        "imageZoom": 100
       },
       {
         "id": "wedding_summerpromo_full",
@@ -348,23 +332,6 @@
         },
         "includedSections": [
           {
-            "title": "จุดตกแต่งหลัก",
-            "items": [
-              "1. ฉากแบ็คดร็อปและฉากรดน้ำสังข์ (ใช้ฉากเดียวกัน)",
-              "2. ฉากพิธีสงฆ์ และ สวมแหวน รับไหว้ผู้ใหญ่",
-              "3. ฉากบนเวทีพิธีฉลองมงคลสมรส"
-            ],
-            "note": "หมายเหตุ: หากตัดพิธีฉลองมงคลสมรสออก แต่ยังมีทานข้าวหลังงานพิธีอื่นต่อ ทางเราจะยังคงตกแต่งบนเวทีไว้เหมือนเดิม เพื่อความสวยงามของงาน"
-          },
-          {
-            "title": "ทีมงาน",
-            "items": [
-              "พิธีกร และนายพิธี (1 คน)",
-              "ทีมงานรันคิวดูแลเจ้าสาวและเจ้าบ่าว",
-              "เด็กเสิร์ฟ และ เด็กชงเครื่องดื่มที่บาร์น้ำ"
-            ]
-          },
-          {
             "title": "1. พิธีสงฆ์",
             "items": [
               "ชุดโต๊ะหมู่บูชาพร้อมสายสิญจน์ ธูป เทียน แจกันดอกไม้",
@@ -427,6 +394,7 @@
               "ฉากดอกไม้สำหรับพิธีการไทย",
               "พรมขนมิ้งรองนั่ง ขนาด 2 x 6 เมตร",
               "ป้ายชื่อบ่าว-สาว แบบป้ายโฟมฉลุลาย",
+              "พิธีกร 1 คน เจ้าหน้าที่รันคิว 2 คน",
               "ไฟส่องฉากดอกไม้"
             ]
           },
@@ -454,6 +422,7 @@
               "เทียนมงคลพร้อมขาตั้งตกแต่งสวยงาม",
               "พิธีตัดเค้ก (โมเดลเค้กและคัพเค้ก 12 ชิ้น)",
               "ระบบเสียงสำหรับเปิดเพลงและไมโครโฟน 2 ตัว",
+              "เจ้าหน้าที่รันคิวและพิธีกร 1 คน",
               "ไฟส่องฉากถ่ายภาพ",
               "พรมปูพื้น ขนาด 3 x 6 เมตร",
               "โลโก้ชื่อบ่าว-สาว แบบป้ายโฟมฉลุลาย 1 ป้าย"
@@ -526,8 +495,7 @@
         ],
         "notes": "ใช้ได้เฉพาะเดือนพฤษภาคม, มิถุนายน, กรกฎาคม · เปลี่ยนสีดอกไม้ไม่ได้ (หากเปลี่ยน มีค่าใช้จ่ายเพิ่ม) · ไม่มีอาหารเช้า",
         "decorChangeCategory": "promo",
-        "imagePosition": "50% 50%",
-        "ritualNote": "หมายเหตุ: การตัดพิธีออกคือไม่มีการดำเนินการพิธีในส่วนนั้น"
+        "imagePosition": "50% 50%"
       },
       {
         "id": "wedding_summerpromo_evening",
@@ -552,22 +520,6 @@
         },
         "includedSections": [
           {
-            "title": "จุดตกแต่งหลัก",
-            "items": [
-              "1. ฉากแบ็คดร็อป",
-              "2. ฉากบนเวที"
-            ],
-            "note": "หมายเหตุ: หากตัดพิธีฉลองมงคลสมรสออก แต่ยังมีทานข้าวหลังงานพิธีอื่นต่อ ทางเราจะยังคงตกแต่งบนเวทีไว้เหมือนเดิม เพื่อความสวยงามของงาน"
-          },
-          {
-            "title": "ทีมงาน",
-            "items": [
-              "พิธีกร และนายพิธี (1 คน)",
-              "ทีมงานรันคิวดูแลเจ้าสาวและเจ้าบ่าว",
-              "เด็กเสิร์ฟ และ เด็กชงเครื่องดื่มที่บาร์น้ำ"
-            ]
-          },
-          {
             "title": "การตกแต่งสถานที่ (พิธีฉลองมงคลสมรส)",
             "items": [
               "ฉากถ่ายภาพ 1 จุด",
@@ -591,6 +543,7 @@
               "เทียนมงคลพร้อมขาตั้งตกแต่งสวยงาม และ Bubble",
               "พิธีตัดเค้ก (โมเดลเค้กและคัพเค้ก 12 ชิ้น)",
               "ระบบเสียงสำหรับเปิดเพลงและไมโครโฟน 2 ตัว",
+              "เจ้าหน้าที่รันคิวและพิธีกร 1 คน",
               "ไฟส่องฉากถ่ายภาพ",
               "พรมปูพื้น ขนาด 3 x 6 เมตร",
               "โลโก้ชื่อบ่าว-สาว แบบป้ายโฟมฉลุลาย 1 ป้าย",
@@ -654,14 +607,6 @@
         },
         "includedSections": [
           {
-            "title": "ทีมงาน",
-            "items": [
-              "พิธีกร และนายพิธี (1 คน)",
-              "ทีมงานรันคิวดูแลเจ้าสาวและเจ้าบ่าว",
-              "เด็กเสิร์ฟ และ เด็กชงเครื่องดื่มที่บาร์น้ำ"
-            ]
-          },
-          {
             "title": "1. พิธีสงฆ์",
             "items": [
               "ชุดโต๊ะหมู่บูชาพร้อมสายสิญจน์ ธูป เทียน แจกันดอกไม้",
@@ -724,6 +669,7 @@
               "ฉากดอกไม้สำหรับพิธีการไทย",
               "พรมขนมิ้งรองนั่ง ขนาด 2 x 6 เมตร",
               "ป้ายชื่อบ่าว-สาว แบบป้ายโฟมฉลุลาย",
+              "พิธีกร 1 คน เจ้าหน้าที่รันคิว 2 คน",
               "ไฟส่องฉากดอกไม้"
             ]
           },
@@ -816,23 +762,6 @@
         "crossYearDiscount": 20000,
         "includedSections": [
           {
-            "title": "จุดตกแต่งหลัก",
-            "items": [
-              "1. ฉากแบ็คดร็อปและฉากรดน้ำสังข์ (ใช้ฉากเดียวกัน)",
-              "2. ฉากพิธีสงฆ์ และ สวมแหวน รับไหว้ผู้ใหญ่",
-              "3. ฉากบนเวทีพิธีฉลองมงคลสมรส"
-            ],
-            "note": "หมายเหตุ: หากตัดพิธีฉลองมงคลสมรสออก แต่ยังมีทานข้าวหลังงานพิธีอื่นต่อ ทางเราจะยังคงตกแต่งบนเวทีไว้เหมือนเดิม เพื่อความสวยงามของงาน"
-          },
-          {
-            "title": "ทีมงาน",
-            "items": [
-              "พิธีกร และนายพิธี (1 คน)",
-              "ทีมงานรันคิวดูแลเจ้าสาวและเจ้าบ่าว",
-              "เด็กเสิร์ฟ และ เด็กชงเครื่องดื่มที่บาร์น้ำ"
-            ]
-          },
-          {
             "title": "1. พิธีสงฆ์",
             "items": [
               "ชุดโต๊ะหมู่บูชาพร้อมสายสิญจน์ ธูป เทียน แจกันดอกไม้",
@@ -895,6 +824,7 @@
               "ฉากดอกไม้สำหรับพิธีการไทย",
               "พรมขนมิ้งรองนั่ง ขนาด 2 x 6 เมตร",
               "ป้ายชื่อบ่าว-สาว แบบป้ายโฟมฉลุลาย",
+              "พิธีกร 1 คน เจ้าหน้าที่รันคิว 2 คน",
               "ไฟส่องฉากดอกไม้"
             ]
           },
@@ -922,6 +852,7 @@
               "เทียนมงคลพร้อมขาตั้งตกแต่งสวยงาม และ Bubble",
               "พิธีตัดเค้ก (โมเดลเค้กและคัพเค้ก 12 ชิ้น)",
               "ระบบเสียงสำหรับเปิดเพลงและไมโครโฟน 2 ตัว",
+              "เจ้าหน้าที่รันคิวและพิธีกร 1 คน",
               "ไฟส่องฉากถ่ายภาพ",
               "พรมปูพื้น ขนาด 3 x 6 เมตร",
               "โลโก้ชื่อบ่าว-สาว แบบป้ายโฟมฉลุลาย 1 ป้าย",
@@ -1025,8 +956,7 @@
         ],
         "notes": "ราคาด้านบนเป็นราคามาตรฐาน · ลูกค้าจองข้ามปีรับส่วนลด 20,000 บาท",
         "decorChangeCategory": "full",
-        "imagePosition": "50% 50%",
-        "ritualNote": "หมายเหตุ: การตัดพิธีออกคือไม่มีการดำเนินการพิธีในส่วนนั้น"
+        "imagePosition": "50% 50%"
       },
       {
         "id": "wedding_standard_full",
@@ -1051,23 +981,6 @@
         "crossYearDiscount": 20000,
         "includedSections": [
           {
-            "title": "จุดตกแต่งหลัก",
-            "items": [
-              "1. ฉากแบ็คดร็อปและฉากรดน้ำสังข์ (ใช้ฉากเดียวกัน)",
-              "2. ฉากพิธีสงฆ์ และ สวมแหวน รับไหว้ผู้ใหญ่",
-              "3. ฉากบนเวทีพิธีฉลองมงคลสมรส"
-            ],
-            "note": "หมายเหตุ: หากตัดพิธีฉลองมงคลสมรสออก แต่ยังมีทานข้าวหลังงานพิธีอื่นต่อ ทางเราจะยังคงตกแต่งบนเวทีไว้เหมือนเดิม เพื่อความสวยงามของงาน"
-          },
-          {
-            "title": "ทีมงาน",
-            "items": [
-              "พิธีกร และนายพิธี (1 คน)",
-              "ทีมงานรันคิวดูแลเจ้าสาวและเจ้าบ่าว",
-              "เด็กเสิร์ฟ และ เด็กชงเครื่องดื่มที่บาร์น้ำ"
-            ]
-          },
-          {
             "title": "1. พิธีสงฆ์",
             "items": [
               "ชุดโต๊ะหมู่บูชาพร้อมสายสิญจน์ ธูป เทียน แจกันดอกไม้",
@@ -1130,6 +1043,7 @@
               "ฉากดอกไม้สำหรับพิธีการไทย",
               "พรมขนมิ้งรองนั่ง ขนาด 2 x 6 เมตร",
               "ป้ายชื่อบ่าว-สาว แบบป้ายโฟมฉลุลาย",
+              "พิธีกร 1 คน เจ้าหน้าที่รันคิว 2 คน",
               "ไฟส่องฉากดอกไม้"
             ]
           },
@@ -1157,6 +1071,7 @@
               "เทียนมงคลพร้อมขาตั้งตกแต่งสวยงาม และ Bubble",
               "พิธีตัดเค้ก (โมเดลเค้กและคัพเค้ก 12 ชิ้น)",
               "ระบบเสียงสำหรับเปิดเพลงและไมโครโฟน 2 ตัว",
+              "เจ้าหน้าที่รันคิวและพิธีกร 1 คน",
               "ไฟส่องฉากถ่ายภาพ",
               "พรมปูพื้น ขนาด 3 x 6 เมตร",
               "โลโก้ชื่อบ่าว-สาว แบบป้ายโฟมฉลุลาย 1 ป้าย",
@@ -1260,8 +1175,7 @@
         ],
         "notes": "ราคาด้านบนเป็นราคามาตรฐาน · ลูกค้าจองข้ามปีรับส่วนลด 20,000 บาท",
         "decorChangeCategory": "full",
-        "imagePosition": "50% 50%",
-        "ritualNote": "หมายเหตุ: การตัดพิธีออกคือไม่มีการดำเนินการพิธีในส่วนนั้น"
+        "imagePosition": "50% 50%"
       },
       {
         "id": "wedding_standard_evening",
@@ -1286,22 +1200,6 @@
         "crossYearDiscount": 20000,
         "includedSections": [
           {
-            "title": "จุดตกแต่งหลัก",
-            "items": [
-              "1. ฉากแบ็คดร็อป",
-              "2. ฉากบนเวที"
-            ],
-            "note": "หมายเหตุ: หากตัดพิธีฉลองมงคลสมรสออก แต่ยังมีทานข้าวหลังงานพิธีอื่นต่อ ทางเราจะยังคงตกแต่งบนเวทีไว้เหมือนเดิม เพื่อความสวยงามของงาน"
-          },
-          {
-            "title": "ทีมงาน",
-            "items": [
-              "พิธีกร และนายพิธี (1 คน)",
-              "ทีมงานรันคิวดูแลเจ้าสาวและเจ้าบ่าว",
-              "เด็กเสิร์ฟ และ เด็กชงเครื่องดื่มที่บาร์น้ำ"
-            ]
-          },
-          {
             "title": "การตกแต่งสถานที่ (พิธีฉลองมงคลสมรส)",
             "items": [
               "ฉากถ่ายภาพ 1 จุด",
@@ -1325,6 +1223,7 @@
               "เทียนมงคลพร้อมขาตั้งตกแต่งสวยงาม และ Bubble",
               "พิธีตัดเค้ก (โมเดลเค้กและคัพเค้ก 12 ชิ้น)",
               "ระบบเสียงสำหรับเปิดเพลงและไมโครโฟน 2 ตัว",
+              "เจ้าหน้าที่รันคิวและพิธีกร 1 คน",
               "ไฟส่องฉากถ่ายภาพ",
               "พรมปูพื้น ขนาด 3 x 6 เมตร",
               "โลโก้ชื่อบ่าว-สาว แบบป้ายโฟมฉลุลาย 1 ป้าย",
@@ -1407,23 +1306,6 @@
           }
         },
         "includedSections": [
-          {
-            "title": "จุดตกแต่งหลัก",
-            "items": [
-              "1. ฉากแบ็คดร็อปและฉากรดน้ำสังข์ (ใช้ฉากเดียวกัน)",
-              "2. ฉากพิธีสงฆ์ และ สวมแหวน รับไหว้ผู้ใหญ่",
-              "3. ฉากบนเวทีพิธีฉลองมงคลสมรส"
-            ],
-            "note": "หมายเหตุ: หากตัดพิธีฉลองมงคลสมรสออก แต่ยังมีทานข้าวหลังงานพิธีอื่นต่อ ทางเราจะยังคงตกแต่งบนเวทีไว้เหมือนเดิม เพื่อความสวยงามของงาน"
-          },
-          {
-            "title": "ทีมงาน",
-            "items": [
-              "พิธีกร และนายพิธี (1 คน)",
-              "ทีมงานรันคิวดูแลเจ้าสาวและเจ้าบ่าว",
-              "เด็กเสิร์ฟ และ เด็กชงเครื่องดื่มที่บาร์น้ำ"
-            ]
-          },
           {
             "title": "1. รายการอุปกรณ์",
             "items": [
@@ -1630,7 +1512,7 @@
           "name": "บุฟเฟต์ เซต A",
           "pricePerPerson": 390,
           "description": "เลือกอาหารทานเล่น 1 อย่าง, อาหารหลัก 4 อย่าง, ขนมหวาน 2 อย่าง",
-          "image": "https://lh3.googleusercontent.com/pw/AP1GczOAvhk9stCKr1-dGFiFF_4vsGDbFS8SpaR8L5ycZ7Ly6BLI44FaE08u_TcWoHwmuwzF1myrw1wwQyn_HwPSKcGG70ed05x9ooQyHIh3MKgmT227yuqZkTNdlN5HR1L-W9UMgokXEB5E0udzWo-zgQ5O=w613-h919-s-no-gm?authuser=0",
+          "image": "https://lh3.googleusercontent.com/pw/AP1GczO6991dbXK2a0Q3La91bZvxmL6DweRbIXA79RdwdaNGjUKvpyhflnD3TQYVWrBTIn93WYvD5QVnqyZ4P4PpsvfEFDXCYo3qUkcrtbyF_CkcMroqy7n43HpAJRqp2xPR2fr7n8yLuWxVJZP5F_pH6xan=w613-h919-s-no-gm?authuser=0",
           "selections": [
             {
               "category": "อาหารทานเล่น",
@@ -1730,7 +1612,7 @@
               ]
             }
           ],
-          "imagePosition": "48.4% 59.1%"
+          "imagePosition": "47.7% 95.5%"
         },
         {
           "id": "buffet_b",
@@ -1850,7 +1732,34 @@
         }
       ],
       "imagePosition": "30.1% 57.7%",
-      "gallery": []
+      "gallery": [
+        {
+          "url": "https://lh3.googleusercontent.com/pw/AP1GczM4QRshmRjDBFqdWkG4t_9NdyB45DqKtri7cvRBdYv9cCbuj2RmvUVa4vaIqrWMRwP4IOLKIi8ZmkbaaXVg3MxcxJnW7medKDTsDZ5xlqFEZSNVBdWTtI1LT0i3Q25p3e1N_i2oQLkiWu_JzPAS6gKZ=w1226-h919-s-no-gm?authuser=0",
+          "caption": "",
+          "imagePosition": "46.6% 100%"
+        },
+        {
+          "url": "https://lh3.googleusercontent.com/pw/AP1GczP8gFO38gS0hyeflVjF_OU1LQ7K7nauRmb66EYjsH4xmbltjRg58i8-cEymeSUAmdSNVBSnX-LLmxmRUei8wK8XvxoFl8YfnjEQPHUrioLF6rsC0kdD-Yb1HrmkQkFhFpV9rF49XbJ-Xe20cIqnxpi_=w613-h919-s-no-gm?authuser=0",
+          "caption": "",
+          "imagePosition": "46.6% 100%",
+          "imageZoom": 100
+        },
+        {
+          "url": "https://lh3.googleusercontent.com/pw/AP1GczM28M-t0TWiexqU-9P_eec3WaTW7ZG8nEKb_-vydV75NKzRbJA1vbbRzVmTLroYtTv83lTbXoIxBLe5HxpvW2YKSnfsrFek4zUIHvCjXBVpH4RSWWTWWWeXct3YDV1nzwI_1lpnqOo8jhGFkTW_4BnO=w613-h919-s-no-gm?authuser=0",
+          "caption": "",
+          "imagePosition": "48.2% 69.3%"
+        },
+        {
+          "url": "https://lh3.googleusercontent.com/pw/AP1GczNyt9--QcijVcVXHF3GQOh3Igh_O7QRbi7Bn4x6NaNzH7JPBkOYTYfmZe9C7E_5NfWuIk8YJMWuz2PN9vEvQXsrqtlUJIcGNPF4tTB2lVF_vMi4ucf9SYvBhc0kEQhi45wsqwqVFqhz_CP-Lm0a99eY=w1226-h919-s-no-gm?authuser=0",
+          "caption": "",
+          "imagePosition": "51.1% 79.5%"
+        },
+        {
+          "url": "https://lh3.googleusercontent.com/pw/AP1GczOA_JhyqxQDD6UXRJOwJYs7q5eX_ESQUPA5lUPpR50ndZ2tZG2Ux12_aA8tVSHdC0DTNCY_i8ai1LvANQzsIFUJ_TeYarY48PHvV_I7NhaPr2dQNFUP0zaFzBv2xf5umM_V8P-ZpDsH60cYluuX2Qwj=w613-h919-s-no-gm?authuser=0",
+          "caption": "",
+          "imagePosition": "49.2% 89.3%"
+        }
+      ]
     },
     "chinese": {
       "name": "โต๊ะจีน",
@@ -1865,7 +1774,7 @@
           "pricePerTable": 3900,
           "tableSize": 9,
           "description": "เลือกได้ฟรีในช่วง All Year Long (ไม่มีในช่วง Hot Season)",
-          "image": "https://lh3.googleusercontent.com/pw/AP1GczO2_YXNgbckJ1n7OswQDFWZR3L1WKGquI2PuhjZvIu-u53J6KQ6SIR7RwJRONSwE0DzCTJ_5kN6CpwGKhJhjFXoiRQ9CEGHTxOuuoNERqtRHklEF7xDY2lG8eI4CXJTxxyDXGv7KwT5z2LIFZE0ZVFz=w613-h919-s-no-gm?authuser=0",
+          "image": "https://lh3.googleusercontent.com/pw/AP1GczNr6az8JnSsMYsd4XLfAMqAQSSJrhRoWOnc66uk0I4-D_4x-APGoT8QlLDRE0t4Rjfv0gNufqfZf7o1lRHX0zAXQlVDJkgt2PGbzJVhirMekrQMh2057RVV7ejaF7rtNRzQK3Enn9JwVmXHSnE18Zu2=w613-h919-s-no-gm?authuser=0",
           "selections": [
             {
               "category": "ออเดิร์ฟร้อน 5 อย่าง",
@@ -1952,7 +1861,7 @@
               ]
             }
           ],
-          "imagePosition": "27.8% 58.1%"
+          "imagePosition": "23.1% 67.8%"
         },
         {
           "id": "chinese_b",
@@ -1960,7 +1869,7 @@
           "pricePerTable": 4500,
           "tableSize": 9,
           "description": "อัปเกรดเพิ่มโต๊ะละ 600 บาท · เลือกอัปเกรดได้ในช่วง All Year Long (ไม่มีในช่วง Hot Season)",
-          "image": "https://lh3.googleusercontent.com/pw/AP1GczObh9jbf0PlI0G1rtLzC0QuLtcjTqfvJTwBq4rl-3CUgKdQ-zyY_568SWsO5K-LqM1kKL__9GSujoIgyIbGKTtRRmrlZzdFRG6kapHMGXAEwz9nW01voAXt2wsp7_jj6UgdEvMbaYRwuknFZya_pKDv=w613-h919-s-no-gm?authuser=0",
+          "image": "https://lh3.googleusercontent.com/pw/AP1GczMfgS9m4yVaml_iTkPgeMZS5omX_lZzqZ0aeH9Z1Si_6Y8KDFNWVEyh5QsA2DQTn8VVg066nx4W-ld3bxDgpIqjwHwzzx5nLgmbUZKjsGtr7o-Gd_J3bzqcqwffsLSk_0tirJZuxTpPJWBussvB_y63=w694-h919-s-no-gm?authuser=0",
           "selections": [
             {
               "category": "ข้อ 1 — ข้าวเกรียบทอด",
@@ -2058,7 +1967,7 @@
               ]
             }
           ],
-          "imagePosition": "51.3% 70.4%"
+          "imagePosition": "44.7% 54.9%"
         },
         {
           "id": "chinese_c",
@@ -2066,7 +1975,7 @@
           "pricePerTable": 4900,
           "tableSize": 9,
           "description": "อัปเกรดเพิ่มโต๊ะละ 1,000 บาท · เลือกอัปเกรดได้ในช่วง All Year Long (ไม่มีในช่วง Hot Season)",
-          "image": "https://lh3.googleusercontent.com/pw/AP1GczNAZPxdTplVCfKp094Ul7HkRG4GFIEhGSD6CVo485JZGh3hwTNBrSP8XO62hcX_mQPd_iKPKkmEz98XQduajxuyWbYIdu5l6nGkghzj7C0r1uwOFBeEBxFLH9ruu8m-HACFWn24MwjQe91-S-aKGniX=w613-h919-s-no-gm?authuser=0",
+          "image": "https://lh3.googleusercontent.com/pw/AP1GczMG1vVkerHY7JVZY9JKi-J9YCF4mXp7KODksPcPi--wplW7Ox5tmv81ab9iPXm6TVcczFSc02AP76bi7zDmWWJyfPUeED7g_dwbLjShkqwOhqr38NIKP31UHoAbxhWyLH0AXmOD1kOIcp1zMTd7n32D=w613-h919-s-no-gm?authuser=0",
           "selections": [
             {
               "category": "ข้อ 1 — ข้าวเกรียบทอด",
@@ -2165,12 +2074,18 @@
               ]
             }
           ],
-          "imagePosition": "47.1% 80%"
+          "imagePosition": "43.1% 75.1%"
         }
       ],
       "imagePosition": "6.4% 60.2%",
       "imageZoom": 100,
-      "gallery": []
+      "gallery": [
+        {
+          "url": "https://lh3.googleusercontent.com/pw/AP1GczOdr602n6iRxRAJ0RA1D4ko-EgvflfnVy-2_gW9uuMHZNA0MgzJUKWG0LFwKz_3vmUINnZuGASTYYFOndPSSFMadvo614Jci3Ofx1s1EtBhfQGn7dPLUONUUREoBufkUhZnruIISTP4QY9Ght1NCEu0=w613-h919-s-no-gm?authuser=0",
+          "caption": "",
+          "imagePosition": "47.9% 69.3%"
+        }
+      ]
     },
     "thai": {
       "name": "โต๊ะจันทร์ (อาหารไทย)",
@@ -2257,7 +2172,7 @@
               ]
             }
           ],
-          "imagePosition": "44.2% 64.7%"
+          "imagePosition": "43.7% 73.1%"
         },
         {
           "id": "thai_a",
@@ -2357,7 +2272,7 @@
               ]
             }
           ],
-          "imagePosition": "46.8% 63.7%"
+          "imagePosition": "42.8% 75.3%"
         },
         {
           "id": "thai_b",
@@ -2458,12 +2373,51 @@
               ]
             }
           ],
-          "imagePosition": "51.3% 66.1%"
+          "imagePosition": "48.1% 84.2%"
         }
       ],
-      "imagePosition": "4.3% 68.2%",
+      "imagePosition": "0% 78.1%",
       "imageZoom": 100,
-      "gallery": []
+      "gallery": [
+        {
+          "url": "https://lh3.googleusercontent.com/pw/AP1GczONwt1teAqqDi30cW8WTYilEjxeHaSN2VSvSmejWAt64CMMdWQrjnmH3mSgOyT5b93cOJBe262FJzDB22GYFFRfFHmip9lRHCdm-RZVggMkxCFVIunaxBfl79fgzvYQsRZOgtwLg8K64gO9udWO9Emx=w613-h919-s-no-gm?authuser=0",
+          "caption": "",
+          "imagePosition": "48.2% 65.1%"
+        },
+        {
+          "url": "https://lh3.googleusercontent.com/pw/AP1GczN16NNB-QNgdLRLye5VzTCkmvvFHTYNaml6g4rj05eoHcv6MDklYuHKyjk-W6h7x96dPL2lGhBagO-E8p_0iNV5VCt1gpjNw9bOtVA1RE1GcNhnht2ZtoLXCG9SWrb2qRKSSosk27bVDabLvpd_PXD1=w1379-h919-s-no-gm?authuser=0",
+          "caption": "",
+          "imagePosition": "60.5% 50.7%"
+        },
+        {
+          "url": "https://lh3.googleusercontent.com/pw/AP1GczOjp0WgXF9Dre-zMUtDp0b6Yo_6mQOUnqMu3wcKiK1JweWZHy-tZxYamBJhPK4_8QEKrR_FKM5ohrA1ab1-h2cBiZg2xD1LZyGNYABNn-oPjilIxfb5sbfFM0t7LQHiGZUvvPGGcuuKBOjpy3Oz6ota=w1379-h919-s-no-gm?authuser=0",
+          "caption": "",
+          "imagePosition": "57.6% 41.6%"
+        },
+        {
+          "url": "https://lh3.googleusercontent.com/pw/AP1GczNdaHvqy43N1HiTDOAtF9Zlwi_1__NEOjrqc6TOpgL7QNm0KgeFAFKCvTgL7ncdtMBcfhYv8BKlKLCYBL_ldYLCUDJsEQo8ysvjI9JLiHPJIxfP69kPACy6Z6-QKhFaQiPx8RfLU3k2bQ-zazX02Jrn=w1379-h919-s-no-gm?authuser=0",
+          "caption": "",
+          "imagePosition": "47.9% 42.3%"
+        },
+        {
+          "url": "https://lh3.googleusercontent.com/pw/AP1GczOq37bN-8LlJj5BMqat3vPbx35aWBpQZWlMeA-H2gK_0hpSX72g4SjhTdghb6NCQubv4VNUP9pObCykMtunSYpD8_q4RPWJYUOGc0P_mK1V3iGrE4-p1nqVw5AzRHOW0WSXwPxnUm6c-LpotAGz1jwJ=w1379-h919-s-no-gm?authuser=0",
+          "caption": "",
+          "imageZoom": 135,
+          "imagePosition": "34.7% 39.5%"
+        },
+        {
+          "url": "https://lh3.googleusercontent.com/pw/AP1GczNJXPjWhfcBZTFX_94YF9GIHxJ0PkxXyVhMWkNPv_zarexkNeUZsJjO7x3dWngUspod1VC7M3xIlgpqi8vnSQJVa9dEQZIG-TfBIj8vAfv99JpwX7E7hqjNVW5pImetk2Xs6bMvXNK3TqWCKNVLICWQ=w1379-h919-s-no-gm?authuser=0",
+          "caption": "",
+          "imagePosition": "81.3% 33.9%",
+          "imageZoom": 105
+        },
+        {
+          "url": "https://lh3.googleusercontent.com/pw/AP1GczMQN2x8DRv8shliDhMJFGPhApvETy-FOoQ_r6rEAdzByFHJ4G1r97dP0bohZN7BBQ0sYVZx7v-d-gROJ-2BafSnWqtn9FYD2j3MKqZlP8OfsSrGE7QeyXpss-p5hs4MG-d2eUwXKaX7N7eaTq0MzBSI=w1379-h919-s-no-gm?authuser=0",
+          "caption": "",
+          "imageZoom": 145,
+          "imagePosition": "100% 57.7%"
+        }
+      ]
     }
   },
   "gallery": {
@@ -2764,6 +2718,175 @@
         "zone": "indoor",
         "ceremony": "reception",
         "imagePosition": "38.4% 34.5%"
+      },
+      {
+        "id": "p_1779543699148",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczM4FpxEPwzjrDYzxqPeDhiESwHO2S7uMw4OrPBbMWWj0BaFCBzH_LKQYI-OXpRWfnDICa24kXlAgV5bbcTYC08Mw0wmAOs-wBtbpK9JaAVM_12XrK5j9-6PAY5gtH14Q3Hc2xoLBlhvtPymqd_NBH9_=w613-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "indoor",
+        "ceremony": "reception",
+        "imagePosition": "51.6% 16.8%"
+      },
+      {
+        "id": "p_1779543699334",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczM23GGNdapU7778m4cjrP5vjan4EzNE2VbcKoTRRs7ej44wv9_u9pL9TCg_ps03hnZd98VhOZzjUQrmZr1LXeuZgds6LpCREBZhNxSSmKc03JAMlkAppwR3t2zH2owqDq78-eC6YQSHThXGRuoHnFMN=w1378-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "indoor",
+        "ceremony": "sangha"
+      },
+      {
+        "id": "p_1779543699501",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczP9KDIeCwkIKfL6J1-kZk1oGdXds-r6bpKhnzYsxKMEf5eXRgSntHq7A71bV1bgEHzId_IDEr6Ho__DzcyuvULplYyvXC8qbf-835fXnhmRsDOHt_EWpcXjrqf_ZglkUX8bzFG_z4eFgImnIJqYOhL0=w1378-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "indoor",
+        "ceremony": "sangha"
+      },
+      {
+        "id": "p_1779543699677",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczOHrWu-2G6SVwBpxR3_mqiifOrtQ1ltPrcdHNGm8NnKdjqSk2K3IJ23vtbGwNaCqBqqLI3fdFVVmnv2bdaUggQk3SVUO5j6_cX_2x79OWPYAMn8HQZY2fi6zLC1b5pXaua5tjLju3NfGO-XRh2d-C85=w613-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "indoor",
+        "ceremony": "sangha",
+        "imagePosition": "50.3% 100%"
+      },
+      {
+        "id": "p_1779543699869",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczOBcyMP8oG3UMcXsrBYVAMpR9vQKYtswWbgwBw3VdqzJo4TmacvoZN-IJI3jR9DVGheNN5UQJJKTf7JOiz5Jly1WXz5rHplQe0UvjQW8gwWlBfhJpoK0up0chC9aI7v7x27h5uFWamtKLN0B3zyFrBH=w1456-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "english-garden",
+        "ceremony": "sangha",
+        "imagePosition": "34.5% 44.5%"
+      },
+      {
+        "id": "p_1779543700018",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczOUZBUFltcD8QMvyVq3BV1o0YLQAVsZF30AkN_MQdq0qH3rUmqTtRPxQpEevYDWT_hce0J_eBsBBZ5IwL6mU3VgU8nW7vmCdU_r1zOmpUUL3HnZBvFyc0S3SMKLY8RlvC9pHo8alUB4Cp3ZX07hnhaG=w613-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "english-garden",
+        "ceremony": "bride_pickup"
+      },
+      {
+        "id": "p_1779543700180",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczPv-SM062F6iAglgijo2zeAjYqFaIV34gYTeWfuAGB4wY_IAb2Jz3k_EqEnCxPH6NI7i8bIKkMiiYxdy9-nIPp3PcPoORkPT9ROFrx4pngnVL3F2NHItOgBTWnbLJXfbU5DZZ77WhKUqwMQIf0EJEIQ=w613-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "english-garden",
+        "ceremony": "bride_pickup"
+      },
+      {
+        "id": "p_1779543700331",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczMiUWhMbcu-uyyNcxkTamUB7RKAEo8jx7i2p-IXHoTXvPQlLUojlalfXmzQcFge8NmFMbvJ54s7zCX7NZkAgAfJXzXwh7SW5RYH5G_o9pKLYgXxrPtr1e7HeCVLYxc0e4KZztHncEfdeH6n_Oirowld=w1379-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "english-garden",
+        "ceremony": "bride_pickup"
+      },
+      {
+        "id": "p_1779543700489",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczPK-4SkZD3eV7Rpwq2DUBrs1U2_bxsfwLlAh_0C7fW3AFl7uooD4PJZXYAfbvq9p_gx8RWq093SzurtrO3aweQbhMxAklJ8ST8iSKBZdp813PAwvy9FMxK_P2gPPjNDlnQYuVEgoXXINyPYfJ4y-J2R=w613-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "indoor",
+        "ceremony": "bride_pickup",
+        "imagePosition": "50.3% 78.2%"
+      },
+      {
+        "id": "p_1779543700650",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczP_onB2waCvhECiVBTJ5HQh-R89izoN5UHxmjU0dcIStNrT9VuI09CxULTeifHJP1OIrOs-E4vVtdlDWA1_HCbj-CPTkA_a9tfoKTLq-XYKay3YE3ehoJgYswSVeXUl8fpHuG9SjPdhz_DZh3wiNmuN=w1379-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "indoor",
+        "ceremony": "reception",
+        "imagePosition": "50% 63.9%"
+      },
+      {
+        "id": "p_1779543700806",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczNvSQ_Yod7m78MNaGH-cmm1egM7fSMfMYneIIc04e2GebfYG7kWzQT3DrrG34GOc8Ub7XNS7LRTffVzzEdjPFzKc1GGPLJvwV4RfnpbCV9v0e0M0nT2vH23kEVBO09frj--IVwnjE5teepzJzCaSlL7=w1379-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "indoor",
+        "ceremony": "reception"
+      },
+      {
+        "id": "p_1779543700967",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczNcCMqs4T3MAaFHE4xLgAM6EAHmSXtZ3LbtqSojOtBUZRJ9jTy2AObFrwV9V_xYzv95YE18uupKy6oPDqpX1VOyTBy620ngY4dVcdHfK4JjoFPyiDB57F0td4qTnlGORTE96C6YjvgGYKYHDR-mkIsH=w1379-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "indoor",
+        "ceremony": "sending"
+      },
+      {
+        "id": "p_1779543701122",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczMwnRfEbEwGUcKTdDV8KFUyFTDEUJbWpkah2FsLMjbbbSRsci1pRyPPTv9sKrAuCH7exBwl1m2hUBB4Dh1dT7eP4mCvhstgV3OIeNDXdy4ebSt3hzPqrsjSOEbCs2KuojUH5GeiBMmDkPuiIiJdpwKT=w1379-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "indoor",
+        "ceremony": "sangha",
+        "imagePosition": "57.1% 52.6%"
+      },
+      {
+        "id": "p_1779543701277",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczO-Z3Hk6oAuP9gRdFfgGCZ0G1097yKC89l_TD9E1NjLmep9NB3Fyyuu4BE_HD72twHT2gcI49oVBHDQitWe81YnIxrVX6WN3ZSYjoIzISD-1g7Qh8KV_YZ2egKxAbNQt3cqDJyrYNdy70d2bIAMDXUj=w1379-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "indoor",
+        "ceremony": "sangha"
+      },
+      {
+        "id": "p_1779543701446",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczPCayRxfTEDq3TdAkJxyNiLxLtQsmEMdNYuunaIqT43Phqv4vmGv6pDRKkE2Uj7iE8PhPt-o3yV1CuA6xrW91Ofdm3CopN3aQIGIHw0sM037GDF5NoFwK-8Wm0QJ4Tmr917quZHy7ZvUbUBIzkbUAto=w1225-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "english-garden",
+        "ceremony": "reception"
+      },
+      {
+        "id": "p_1779543701602",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczPF6JAjhMO4nCmyY6kdrZHJzDXfp1Lp8zDCSLXjCzrq3bmxdMbtrY2mrr74AhNU6YXu5mG7QcGoSOiQR6DMsr_s6brdH_qo_6bOhjfTxLuuzPpNnyiYfZvyhdgvBUhr3cH6UkEkcU-ZAzJP1hA_Hn_R=w1379-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "english-garden",
+        "ceremony": "reception"
+      },
+      {
+        "id": "p_1779543701751",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczPevr_Ps9KBknmqSrMz9QcUO3lLC-LEWr71OD2hrI5AEk6qzyGrVEJl5GOqYM4AXCKhnhVDJOwg3xiv9kjnoO0M1iRqvg_WGc8RAdMXl4RCM9YRcz6xUteGt48HU6RlmuV9zzGnR9nYT9wZJu7o7F2L=w1379-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "english-garden",
+        "ceremony": "blessing"
+      },
+      {
+        "id": "p_1779543701912",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczPXUrX4XZ4f42bB8p-1xDNfTMl4kteDcusIWhcB-aJEhn9qYrzEXgKUDi9CokstoaoiVGDuszhH18kDgP1DWLsMdejZ7Bl8ylGRruFhSBs4s0iwgJAp0h6lMeOf6Jgb7P0kVU6C9SIC06wago9doAdy=w613-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "english-garden",
+        "ceremony": "blessing"
+      },
+      {
+        "id": "p_1779543702076",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczPuJ9hGKW-c--5z5-OxsOFoeDR_nQR791zR1IhCaQ9hqSFjqfTgjlDiHo9z4IIFNgJw-jHHAyCqJooVkWwcufVThsNl3lvU3hNTKwpLNZEXUpxyolc3lVre_XdvC7lcd_TUmUWBxQ3asNRelOR_VuWF=w1634-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "english-garden",
+        "ceremony": "bride_pickup",
+        "imagePosition": "0% 44.7%"
+      },
+      {
+        "id": "p_1779543702241",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczNd1ICM_6tRvGXMrF-Qlmiohm1wy3VgFn5HHLYXC7k-ocPvgqPgm1cNefiAjdKe_8yKxZ4s1YfkN4MH7OM6Zkh-I8MwWsr6Il-1jiWcauc9NKd-92-Ko2bgqdh5a0wOt1nb9deViBSbdxZq5MgxXVdg=w1379-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "english-garden",
+        "ceremony": "bride_pickup"
+      },
+      {
+        "id": "p_1779543702409",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczNhGvS1YIumtbpfQhnwMjknt52pqc5rv4Ojf3a7TDolJuI9suYcjOX0RVA6B0BtFJDQFgH2fr_Oynb2u9MI9JAjzQPxaoRm0ufcqZl9R8XkdNEFm15PL75DVDQXRtJMfzPj3us-I_k4v5eNSIMas_Hg=w613-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "indoor",
+        "ceremony": "ring_elder"
+      },
+      {
+        "id": "p_1779543702690",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczORmaBH8wjWIV_3yrOv98oZwrXKO7EMNN6QsJGqPGx4P5EZ0cy4X2ZWBEdLZ26IMcLzXSJdNXgl8Ii7dsnd18PHKgM1Q0gp3zskwWu7sRSwbPa0arfzphGh6pcriO28EuxqvfXcv7885kxQ5wuzZeaD=w1351-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "indoor",
+        "ceremony": "reception",
+        "imagePosition": "73.2% 47.9%"
+      },
+      {
+        "id": "p_1779543702886",
+        "url": "https://lh3.googleusercontent.com/pw/AP1GczOc8dMdJrw0aemdI34e7zXzjxNbFvXtdLxPtC3A3p0GxTX1kjAKh4dLAfaAFW8jiRqEVgU8kBpE-z65AxrZXpxo8IaGm-doigW8WjET6uhlEMWgPFKRRscv__pmEFh9jCBx3-FCeS8IaHbIAKR5V8-t=w1379-h919-s-no-gm?authuser=0",
+        "caption": "",
+        "zone": "waterfall-garden",
+        "ceremony": "ring_elder"
       }
     ]
   },
