@@ -90,7 +90,8 @@ CW.renderNav = function (activePage = '') {
     { href: base + 'venue-fees.html',  label: 'ค่าเช่า/บริการ', key: 'venue' },
     { href: base + 'menu/',            label: 'เมนูอาหาร',   key: 'menu' },
     { href: base + 'gallery/',         label: 'รูปภาพ',      key: 'gallery' },
-    { href: base + 'calendar/',        label: 'ตารางวันว่าง', key: 'calendar' }
+    { href: base + 'calendar/',        label: 'ตารางวันว่าง', key: 'calendar' },
+    { href: base + 'floorplan/',       label: 'แปลนสถานที่',  key: 'floorplan' }
   ];
   const linkHTML = links.map(l =>
     `<a href="${l.href}" class="${activePage === l.key ? 'active' : ''}">${l.label}</a>`
