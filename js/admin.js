@@ -721,7 +721,7 @@ function renderMenu(root, type) {
           <button class="btn btn--ghost btn--sm" onclick="DATA.menus['${type}'].gallery.splice(${gi},1); persist(); render();">ลบ</button>
         </div>
         <div class="field"><label>URL รูป</label>
-          <input value="${esc(g.url)}" oninput="DATA.menus['${type}'].gallery[${gi}].url = this.value; persist(); refreshImgEditor('imgEdMG_${type}_${gi}', this.value, \"DATA.menus['${type}'].gallery[${gi}]\", '4/3')">
+          <input value="${esc(g.url)}" oninput="DATA.menus['${type}'].gallery[${gi}].url = this.value; persist(); refreshImgEditor('imgEdMG_${type}_${gi}', this.value, &quot;DATA.menus['${type}'].gallery[${gi}]&quot;, '4/3')">
           <div id="imgEdMG_${type}_${gi}">${imgPosEditor(g.url, `DATA.menus['${type}'].gallery[${gi}]`, '4/3')}</div>
         </div>
         <div class="field"><label>Caption (ตัวเลือก)</label>
@@ -1114,5 +1114,4 @@ function toast(msg) {
   t.textContent = msg;
   t.style.display = 'block';
   clearTimeout(t._h);
-  t._h = setTimeout(() => t.style.display = 'none', 2200);
-}
+  t._h = setTimeout(() => t.style.display = 'none', 220
