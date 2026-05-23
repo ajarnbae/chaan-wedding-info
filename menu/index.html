@@ -279,20 +279,28 @@
     // Mouse drag scroll for gallery strip (desktop)
     mount.querySelectorAll('.menu-gallery-strip__track').forEach(track => {
       let isDown = false, startX = 0, scrollLeft = 0, dragged = false;
+      const stopDrag = () => {
+        if (!isDown) return;
+        isDown = false;
+        track.style.cursor = '';
+        // re-enable snap after short delay so browser doesn't snap mid-momentum
+        setTimeout(() => { track.style.scrollSnapType = ''; }, 50);
+      };
       track.addEventListener('mousedown', e => {
         isDown = true; dragged = false;
         startX = e.pageX - track.offsetLeft;
         scrollLeft = track.scrollLeft;
         track.style.cursor = 'grabbing';
+        track.style.scrollSnapType = 'none'; // disable snap while dragging
       });
-      track.addEventListener('mouseleave', () => { isDown = false; track.style.cursor = ''; });
-      track.addEventListener('mouseup', () => { isDown = false; track.style.cursor = ''; });
+      track.addEventListener('mouseleave', stopDrag);
+      track.addEventListener('mouseup', stopDrag);
       track.addEventListener('mousemove', e => {
         if (!isDown) return;
         e.preventDefault();
         const x = e.pageX - track.offsetLeft;
-        const walk = (x - startX) * 1.2;
-        if (Math.abs(walk) > 4) dragged = true;
+        const walk = (x - startX) * 1.5;
+        if (Math.abs(walk) > 3) dragged = true;
         track.scrollLeft = scrollLeft - walk;
       });
     });
