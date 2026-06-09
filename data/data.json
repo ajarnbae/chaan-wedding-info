@@ -120,7 +120,7 @@
         "name": "โปรร้อนนี้! งานเช้าเที่ยง / งานบ่ายเย็น",
         "subtitle": "โปร ร้อนนี้มาแต่งงานกันเถอะ · Hot Season",
         "shortDescription": "99,999 บาท · เริ่ม 100 ท่าน · เม.ย. - ก.ค. เท่านั้น",
-        "longDescription": "แพ็คเกจโปรร้อนนี้ คุ้มสุด ๆ! งานเช้าเที่ยง (06:00-15:00) หรือ งานบ่ายเย็น (14:00-22:00) ราคาเดียวกัน อาหารโต๊ะจันทร์เซต SP สำหรับ 100 ท่าน",
+        "longDescription": "แพ็คเกจโปรร้อนนี้ คุ้มสุด ๆ! งานเช้าเที่ยง (06:00-15:00) หรือ งานบ่ายเย็น (14:00-22:00) ใช้ได้เฉพาะเดือนพฤษภาคม, มิถุนายน, กรกฎาคม หรือ วันธรรมดาจันทร์ - ศุกร์ของทุกเดือน",
         "image": "https://lh3.googleusercontent.com/pw/AP1GczPO7qoMqgmQuAGjt5QplCvU6ihjBr4kml36v3Wl4SZhePKYJxiUEUErqgNdppn5YVdsqU4AnKIba16NGpgkbMHzoSY2oHh7RWBHMET2K33RhY3WvUIsg2OybEvNBYKfIdzT9VUU83NEGs65WmXA6qqO=w1378-h919-s-no-gm?authuser=0",
         "isFeatured": true,
         "isPromo": true,
@@ -305,7 +305,7 @@
             "deductIfRemoved": 3000
           }
         ],
-        "notes": "ใช้ได้เฉพาะเดือนพฤษภาคม, มิถุนายน, กรกฎาคม · เปลี่ยนสีดอกไม้ไม่ได้ (หากเปลี่ยน มีค่าใช้จ่ายเพิ่ม) · ไม่มีอาหารเช้า",
+        "notes": "ใช้ได้เฉพาะเดือนพฤษภาคม, มิถุนายน, กรกฎาคม หรือ วันธรรมดาจันทร์ - ศุกร์ของทุกเดือน · เปลี่ยนสีดอกไม้ไม่ได้ (หากเปลี่ยน มีค่าใช้จ่ายเพิ่ม) · ไม่มีอาหารเช้า",
         "decorChangeCategory": "promo",
         "imagePosition": "50% 50%",
         "imageZoom": 100
@@ -315,7 +315,7 @@
         "name": "โปรร้อนนี้! งานเช้าเย็น (เต็มวัน)",
         "subtitle": "โปร ร้อนนี้มาแต่งงานกันเถอะ · เต็มวัน 06:00-22:00",
         "shortDescription": "139,999 บาท · เริ่ม 100 ท่าน · เม.ย. - ก.ค. เท่านั้น",
-        "longDescription": "แพ็คเกจโปรร้อนนี้ จัดเต็มวัน 06:00-22:00 ทั้งพิธีเช้าและงานเลี้ยงเย็น อาหารโต๊ะจันทร์เซต SP",
+        "longDescription": "ใช้ได้เฉพาะเดือนพฤษภาคม, มิถุนายน, กรกฎาคม หรือ วันธรรมดาจันทร์ - ศุกร์ของทุกเดือน · เปลี่ยนสีดอกไม้ไม่ได้ (หากเปลี่ยน มีค่าใช้จ่ายเพิ่ม) · ไม่มีอาหารเช้า",
         "image": "https://lh3.googleusercontent.com/pw/AP1GczPTzCA3YATiS3c-WDsH5kOoOXDqgyJhH4js3Pcsv4c0GdRc_VACL97We-DAuHp3cfo-JG0CvyzBh9mjqI-YlQJuFmNkY6lH7_Qn4OouSMgEbyeMg5fFe6trcn5ZA0AS9LIDjU4bmJXiShs3XX_NmNGl=w1379-h919-s-no-gm?authuser=0",
         "isFeatured": true,
         "isPromo": true,
@@ -495,7 +495,7 @@
             "deductIfRemoved": 3000
           }
         ],
-        "notes": "ใช้ได้เฉพาะเดือนพฤษภาคม, มิถุนายน, กรกฎาคม · เปลี่ยนสีดอกไม้ไม่ได้ (หากเปลี่ยน มีค่าใช้จ่ายเพิ่ม) · ไม่มีอาหารเช้า",
+        "notes": "ใช้ได้เฉพาะเดือนพฤษภาคม, มิถุนายน, กรกฎาคม หรือ วันธรรมดาจันทร์ - ศุกร์ของทุกเดือน · เปลี่ยนสีดอกไม้ไม่ได้ (หากเปลี่ยน มีค่าใช้จ่ายเพิ่ม) · ไม่มีอาหารเช้า",
         "decorChangeCategory": "promo",
         "imagePosition": "50% 50%"
       },
@@ -504,7 +504,7 @@
         "name": "โปรพิเศษ! งานเลี้ยงเย็น (Hot Season)",
         "subtitle": "ราคาดี แต่งได้ทุกวัน · 18:00-22:00",
         "shortDescription": "89,999 บาท · เริ่ม 100 ท่าน",
-        "longDescription": "แพ็คเกจงานเลี้ยงเย็น 18:00-22:00 อาหารโต๊ะจันทร์เซต SP สำหรับ 100 ท่าน · ใช้ได้วันธรรมดาทุกเดือน และวันเสาร์-อาทิตย์เฉพาะเดือน พ.ค.-ก.ค.",
+        "longDescription": "แพ็คเกจงานเลี้ยงเย็น 18:00-22:00 อาหารโต๊ะจันทร์เซต SP สำหรับ 100 ท่าน · ช้ได้เฉพาะเดือนพฤษภาคม, มิถุนายน, กรกฎาคม หรือ วันธรรมดาจันทร์ - ศุกร์ของทุกเดือน",
         "image": "https://lh3.googleusercontent.com/pw/AP1GczPWzGPK48wE9H-O-cwIChDTil_SSG-VbRVSrPqoxKUkw55CVQLBsTHJLAiG-7QwfYbFwDKWApFqirpl-mV0nFa1lV-INsMmCxyMnjKX7Vlg8dkvvpBpUbXtFeHg3WMHbgRqKjVo1z404lRm-58p0NxP=w1378-h919-s-no-gm?authuser=0",
         "isFeatured": false,
         "isPromo": true,
