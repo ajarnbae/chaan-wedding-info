@@ -36,6 +36,7 @@ var activeSection = 'site';
 })();
 
 function persist() {
+  DATA._version = Math.floor(Date.now() / 1000);
   localStorage.setItem('chaan_data_override', JSON.stringify(DATA));
 }
 

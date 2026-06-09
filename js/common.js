@@ -7,15 +7,24 @@ window.CW = window.CW || {};
 CW.dataPath = (() => document.documentElement.dataset.base || './')();
 
 CW.loadData = async function () {
-  const local = localStorage.getItem('chaan_data_override');
-  if (local) {
-    try { return JSON.parse(local); } catch (e) { /* fall through */ }
-  }
   try {
     const res = await fetch(CW.dataPath + 'data/data.json', { cache: 'no-store' });
     if (!res.ok) throw new Error('Failed to load data.json');
-    return await res.json();
+    const remote = await res.json();
+    const local = localStorage.getItem('chaan_data_override');
+    if (local) {
+      try {
+        const localData = JSON.parse(local);
+        const remoteVer = remote._version || 0;
+        const localVer  = localData._version || 0;
+        if (localVer >= remoteVer) return localData;
+        localStorage.removeItem('chaan_data_override');
+      } catch (e) { localStorage.removeItem('chaan_data_override'); }
+    }
+    return remote;
   } catch (e) {
+    const local = localStorage.getItem('chaan_data_override');
+    if (local) { try { return JSON.parse(local); } catch (_) {} }
     console.error(e);
     document.body.insertAdjacentHTML('afterbegin',
       `<div class="alert" style="margin:16px;">ไม่สามารถโหลดข้อมูลได้ — กรุณาเปิดผ่านเว็บเซิร์ฟเวอร์ หรือเข้าผ่าน URL จริง</div>`);
