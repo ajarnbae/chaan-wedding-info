@@ -17,7 +17,7 @@
     "heroImage": "https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80",
     "admin": {
       "username": "chaan",
-      "passwordHash": "6acd139d583cbca2a2ca6d103c3b05f5b373da64c53d7aad2627d33e7d831fa8"
+      "passwordHash": "098d725231771f73a62edeec4db43fa7c3c0d5d945f752803dad724eb9d94dff"
     },
     "heroImagePosition": "50% 50%"
   },
@@ -270,7 +270,8 @@
         ],
         "availableAddons": [
           "addon_dryice",
-          "addon_bubble"
+          "addon_bubble",
+          "addon_extrahour"
         ],
         "rituals": [
           {
@@ -459,7 +460,8 @@
         ],
         "availableAddons": [
           "addon_dryice",
-          "addon_bubble"
+          "addon_bubble",
+          "addon_extrahour"
         ],
         "rituals": [
           {
@@ -578,7 +580,8 @@
         ],
         "availableAddons": [
           "addon_dryice",
-          "addon_bubble"
+          "addon_bubble",
+          "addon_extrahour"
         ],
         "rituals": [],
         "notes": "ใช้ได้วันธรรมดาทุกเดือน และวันเสาร์-อาทิตย์เฉพาะเดือนพฤษภาคม-กรกฎาคม · สีของดอกไม้และการตกแต่งไม่สามารถเปลี่ยนแปลงได้",
@@ -697,7 +700,9 @@
         },
         "availableMenus": [],
         "allowedMenuSetIds": [],
-        "availableAddons": [],
+        "availableAddons": [
+          "addon_extrahour"
+        ],
         "rituals": [
           {
             "id": "ritual_khanmaak",
@@ -921,7 +926,9 @@
           "chinese_a",
           "thai_a"
         ],
-        "availableAddons": [],
+        "availableAddons": [
+          "addon_extrahour"
+        ],
         "rituals": [
           {
             "id": "ritual_khanmaak",
@@ -1140,7 +1147,9 @@
           "chinese_a",
           "thai_a"
         ],
-        "availableAddons": [],
+        "availableAddons": [
+          "addon_extrahour"
+        ],
         "rituals": [
           {
             "id": "ritual_khanmaak",
@@ -1277,7 +1286,9 @@
           "chinese_a",
           "thai_a"
         ],
-        "availableAddons": [],
+        "availableAddons": [
+          "addon_extrahour"
+        ],
         "rituals": [],
         "notes": "ราคาด้านบนเป็นราคามาตรฐาน · จองข้ามปีลด 20,000 บาท",
         "decorChangeCategory": "full",
@@ -1440,6 +1451,13 @@
         "unit": "ครั้ง",
         "price": 8000,
         "description": "ช่างแต่งหน้าทำผมเจ้าสาวและเจ้าบ่าว"
+      },
+      {
+        "id": "addon_extrahour",
+        "name": "ต่อเวลาจัดงาน",
+        "unit": "ชั่วโมง",
+        "price": 5000,
+        "description": "ต่อได้สูงสุดไม่เกินเที่ยงคืน"
       }
     ],
     "decorChanges": {
