@@ -58,8 +58,8 @@
     <!-- Weekday sub-toggle (shown only when high season) -->
     <div class="text-center" style="margin-bottom: var(--space-xl);" id="weekdayWrap" hidden>
       <div class="toggle" id="weekdayToggle">
-        <button data-weekday="all" class="active">ทุกวัน</button>
-        <button data-weekday="weekday">จันทร์ – ศุกร์</button>
+        <button data-weekday="all">ทุกวัน</button>
+        <button data-weekday="weekday" class="active">จันทร์ – ศุกร์</button>
       </div>
     </div>
 
@@ -79,7 +79,7 @@
   let season = CW.currentSeason(data.seasonInfo);
   let category = 'wedding';
 
-  let weekday = 'all';
+  let weekday = 'weekday';
 
   document.querySelectorAll('#seasonToggle button').forEach(b => {
     b.classList.toggle('active', b.dataset.season === season);
@@ -91,8 +91,8 @@
         wd.removeAttribute('hidden');
       } else {
         wd.setAttribute('hidden', '');
-        weekday = 'all';
-        document.querySelectorAll('#weekdayToggle button').forEach(x => x.classList.toggle('active', x.dataset.weekday === 'all'));
+        weekday = 'weekday';
+        document.querySelectorAll('#weekdayToggle button').forEach(x => x.classList.toggle('active', x.dataset.weekday === 'weekday'));
       }
       render();
     });
