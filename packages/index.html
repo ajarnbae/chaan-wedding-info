@@ -49,10 +49,17 @@
     </div>
 
     <!-- Season toggle (hidden for seminar) -->
-    <div class="text-center" style="margin-bottom: var(--space-xl);" id="seasonWrap">
+    <div class="text-center" style="margin-bottom: var(--space-md);" id="seasonWrap">
       <div class="toggle" id="seasonToggle">
-        <button data-season="low">โปรร้อนนี้ (พ.ค. - ก.ค.)</button>
-        <button data-season="high" class="active">All Year Long (ส.ค. - มี.ค.)</button>
+        <button data-season="low">เมษายน – กรกฎาคม</button>
+        <button data-season="high" class="active">สิงหาคม – มีนาคม</button>
+      </div>
+    </div>
+    <!-- Weekday sub-toggle (shown only when high season) -->
+    <div class="text-center" style="margin-bottom: var(--space-xl);" id="weekdayWrap" hidden>
+      <div class="toggle" id="weekdayToggle">
+        <button data-weekday="all" class="active">ทุกวัน</button>
+        <button data-weekday="weekday">จันทร์ – ศุกร์</button>
       </div>
     </div>
 
@@ -72,11 +79,29 @@
   let season = CW.currentSeason(data.seasonInfo);
   let category = 'wedding';
 
+  let weekday = 'all';
+
   document.querySelectorAll('#seasonToggle button').forEach(b => {
     b.classList.toggle('active', b.dataset.season === season);
     b.addEventListener('click', () => {
       season = b.dataset.season;
       document.querySelectorAll('#seasonToggle button').forEach(x => x.classList.toggle('active', x === b));
+      const wd = document.getElementById('weekdayWrap');
+      if (season === 'high') {
+        wd.removeAttribute('hidden');
+      } else {
+        wd.setAttribute('hidden', '');
+        weekday = 'all';
+        document.querySelectorAll('#weekdayToggle button').forEach(x => x.classList.toggle('active', x.dataset.weekday === 'all'));
+      }
+      render();
+    });
+  });
+
+  document.querySelectorAll('#weekdayToggle button').forEach(b => {
+    b.addEventListener('click', () => {
+      weekday = b.dataset.weekday;
+      document.querySelectorAll('#weekdayToggle button').forEach(x => x.classList.toggle('active', x === b));
       render();
     });
   });
@@ -86,16 +111,19 @@
       category = b.dataset.cat;
       document.querySelectorAll('#catToggle button').forEach(x => x.classList.toggle('active', x === b));
       document.getElementById('seasonWrap').style.display = (category === 'seminar') ? 'none' : '';
+      document.getElementById('weekdayWrap').setAttribute('hidden', '');
       render();
     });
   });
 
   function render() {
     const seasonForList = (category === 'seminar') ? 'high' : season;
-    // For wedding: include packages with season=="all" or matching season
-    const list = (data.packages?.[category] || []).filter(p =>
-      !p.season || p.season === 'all' || p.season === seasonForList
-    );
+    const list = (data.packages?.[category] || []).filter(p => {
+      const seasonOk = !p.season || p.season === 'all' || p.season === seasonForList;
+      if (!seasonOk) return false;
+      if (seasonForList === 'high' && weekday === 'all' && p.highSeasonWeekdayOnly) return false;
+      return true;
+    });
     const slots = data.timeSlots?.[category] || [];
     const grid = document.getElementById('packagesGrid');
     if (!list.length) {
@@ -108,7 +136,7 @@
       const price = p.basePricing?.[primarySlot]?.[seasonForList] ?? 0;
       const promoCls = p.isPromo ? ' promo-card' : '';
       const featBadge = p.isFeatured ? '<span class="badge badge--gold">⭐ Featured</span>' : '';
-      const seasonAllBadge = p.season === 'all' ? '<span class="badge badge--green">ใช้ได้ทั้งปี</span>' : '';
+      const seasonAllBadge = '';
       const crossYear = p.crossYearDiscount ? `<span style="font-size:0.75rem;color:var(--color-success);">จองข้ามปี ${CW.fmtBaht(price - p.crossYearDiscount)}</span>` : '';
       return `
         <a href="./detail.html?id=${encodeURIComponent(p.id)}" class="card${promoCls}" style="text-decoration:none;color:inherit;">
@@ -123,14 +151,4 @@
               <small>เริ่ม ${guestBase} ท่าน · ${(p.availableTimeSlots || []).length} ช่วงเวลา</small>
               ${crossYear ? '<small>' + crossYear + '</small>' : ''}
             </div>
-            <div class="card__actions"><span class="btn btn--ghost btn--sm">ดูรายละเอียด →</span></div>
-          </div>
-        </a>`;
-    }).join('');
-  }
-  render();
-})();
-</script>
-
-</body>
-</html>
+            <div class="card__actions"><span class="btn btn--ghost btn--sm">ดูรายละเอ
