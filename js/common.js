@@ -166,9 +166,7 @@ CW.renderFooter = function (data) {
     ? `<a class="fab-contact" href="${CW.escape(lineLink)}" target="_blank">💬 สอบถาม / จอง</a>`
     : (c.phone ? `<a class="fab-contact" href="tel:${CW.escape(c.phone.replace(/[^\d+]/g, ''))}">☎ ${CW.escape(c.phone)}</a>` : '')}
   <nav class="cta-bar" aria-label="ติดต่อด่วน">
-    ${c.phone ? `<a class="cta-bar__primary" href="tel:${CW.escape(c.phone.replace(/[^\d+]/g, ''))}"><span class="ico">☎</span>โทร</a>` : ''}
-    <a href="${base}packages/"><span class="ico">💐</span>ดูแพ็คเกจ</a>
-    ${c.facebook ? `<a href="${CW.escape(c.facebook)}" target="_blank"><span class="ico">f</span>Facebook</a>` : ''}
+    ${c.phone ? `<a class="cta-bar__primary" href="tel:${CW.escape(c.phone.replace(/[^\d+]/g, ''))}"><span class="ico">☎</span>โทร ${CW.escape(c.phone)}</a>` : ''}
     ${lineLink ? `<a href="${CW.escape(lineLink)}" target="_blank"><span class="ico">💬</span>LINE</a>` : ''}
   </nav>`;
 };

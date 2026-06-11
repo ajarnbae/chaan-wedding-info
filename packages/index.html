@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css?v=20260612a">
+<link rel="stylesheet" href="../css/style.css?v=20260612b">
 <style>
   /* ================================================
      Packages — editorial theme (เข้าชุดหน้าแรก รอบ 4)
@@ -72,8 +72,10 @@
 
   /* ── Tier toggle (Essential / Signature) — segmented hairline ── */
   .tier-toggle {
-    display: inline-flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    max-width: 680px;
     border: 1px solid var(--color-line);
     background: transparent;
   }
@@ -81,8 +83,8 @@
     background: transparent;
     border: none;
     border-left: 1px solid var(--color-line);
-    padding: 18px 26px;
-    min-width: 250px;
+    padding: clamp(12px, 2.5vw, 18px) clamp(12px, 3vw, 26px);
+    min-width: 0;
     cursor: pointer;
     text-align: left;
     font-family: inherit;
@@ -96,7 +98,7 @@
   .tier-toggle button .tier-name {
     display: block;
     font-family: var(--font-serif);
-    font-size: 1.15rem;
+    font-size: clamp(0.95rem, 2.4vw, 1.15rem);
     font-weight: 500;
     color: var(--color-text);
   }
@@ -104,44 +106,159 @@
   .tier-toggle button .tier-cond {
     display: block;
     margin-top: 4px;
-    font-size: 0.78rem;
+    font-size: clamp(0.6rem, 1.8vw, 0.78rem);
     color: var(--color-text-muted);
     line-height: 1.5;
   }
-  @media (max-width: 639px) {
-    .tier-toggle { display: flex; flex-direction: column; width: 100%; }
-    .tier-toggle button { border-left: none; border-top: 1px solid var(--color-line); min-width: 0; }
-    .tier-toggle button:first-child { border-top: none; }
-  }
 
-  /* ── cards → editorial (override global .card) ── */
-  .card {
-    border-radius: 0;
-    box-shadow: none;
-    border: 1px solid var(--color-line);
-    background: var(--color-ivory);
+  /* ── PAGE HERO — wordmark เกยภาพ (ทุกหน้าแบบ Hillbrook) ── */
+  .phero { position: relative; height: clamp(300px, 52vh, 560px); }
+  .phero__media { position: absolute; inset: 0; overflow: hidden; background: var(--color-line); }
+  .phero__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .phero__media::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(30,18,8,0.22) 0%, rgba(30,18,8,0.08) 55%, rgba(30,18,8,0.25) 100%);
   }
-  .card:hover { transform: none; box-shadow: var(--shadow-md); }
-  .card__img { aspect-ratio: 4 / 3; border-radius: 0; }
-  .card__img img { transition: transform 1.1s ease; }
-  .card:hover .card__img img { transform: scale(1.04); }
-  .card__tag {
-    background: transparent;
-    border: 1px solid var(--color-gold-light);
-    color: var(--color-gold-dark);
+  .phero__wordmark {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    transform: translateY(44%);
+    z-index: 2;
+    text-align: center;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(52px, 12.5vw, 200px);
+    line-height: 0.74;
+    letter-spacing: 0.05em;
+    color: var(--color-cream);
+    pointer-events: none;
+    user-select: none;
+  }
+  .pintro {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: clamp(84px, 11vw, 170px) clamp(20px, 5vw, 64px) clamp(36px, 5vw, 64px);
+  }
+  .pintro__body {
+    max-width: 540px;
+    margin: clamp(28px, 4vw, 44px) 0 0 auto;
+    color: var(--color-text-muted);
+    line-height: 1.95;
+    font-size: 0.95rem;
+  }
+  .pintro__body p { margin: 0; }
+
+  .lnk {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--color-text);
+    min-height: 44px;
+    transition: color 0.3s ease;
+  }
+  .circ {
+    width: 26px; height: 26px;
+    flex-shrink: 0;
+    border: 1px solid var(--color-gold);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gold);
+    font-size: 0.8rem;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  }
+  .pk:hover .circ, .lnk:hover .circ { background: var(--color-gold); color: #fff; transform: translateX(4px); }
+
+  /* ── package items — unboxed editorial (Hillbrook services) ── */
+  .pk {
+    display: flex;
+    flex-direction: column;
+    color: inherit;
+    text-decoration: none;
+  }
+  .pk:hover { color: inherit; }
+  .pk__img {
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: var(--color-line);
+    margin-bottom: 20px;
+  }
+  .pk__img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.001);
+    transition: transform 1.2s ease;
+  }
+  .pk:hover .pk__img img { transform: scale(1.04); }
+  .pk__kicker {
     font-size: 0.68rem;
     font-weight: 600;
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
+    color: var(--color-gold-dark);
+    margin-bottom: 8px;
   }
-  .card__title { font-weight: 500; }
-  .card__price { color: var(--color-gold-dark); font-size: 1.5rem; }
-  .card__actions .btn {
-    border-radius: 0;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-size: 0.76rem;
-    font-weight: 600;
+  .pk__title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 2.4vw, 1.75rem);
+    font-weight: 400;
+    color: var(--color-text);
+    line-height: 1.25;
+    margin: 0 0 4px;
+  }
+  .pk__sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.98rem;
+    color: var(--color-gold-dark);
+    margin: 0 0 10px;
+  }
+  .pk__desc {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin: 0 0 16px;
+    flex: 1;
+  }
+  .pk__price {
+    font-family: var(--font-serif);
+    font-size: 1.45rem;
+    color: var(--color-text);
+    border-top: 1px solid var(--color-line);
+    padding-top: 14px;
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .pk__price small {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: 5px;
+  }
+  .pk__price .cy {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--color-success);
+    margin-top: 3px;
+  }
+
+  /* controls row */
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: clamp(24px, 4vw, 48px);
+    margin-bottom: 26px;
   }
 
   /* ── Tier summary strip — hairline rows ── */
@@ -239,30 +356,35 @@
 
 <div id="nav-mount"></div>
 
-<section class="section">
-  <div class="container">
-    <div class="breadcrumb"><a href="../index.html">หน้าแรก</a> <span>/</span> แพ็คเกจ</div>
-    <div class="page-head">
-      <h2 class="dhead__en"><em>Our</em> Packages</h2>
-      <p class="dhead__th">แพ็คเกจทั้งหมด</p>
-      <p class="page-head__intro">
-        เลือกระดับแพ็คเกจด้านล่าง หรือกด <strong>เปรียบเทียบแพ็คเกจ</strong> เพื่อดูตารางเทียบทุกรายการ
-      </p>
-    </div>
+<!-- PAGE HERO -->
+<section class="phero">
+  <div class="phero__media"><img id="pheroImg" alt="แพ็คเกจ Chaan Wedding"></div>
+  <div class="phero__wordmark" aria-hidden="true">PACKAGES</div>
+</section>
 
-    <!-- Tabs (wedding / seminar) -->
-    <div class="toggle-row">
+<!-- INTRO -->
+<section class="pintro">
+  <div class="breadcrumb"><a href="../index.html">หน้าแรก</a> <span>/</span> แพ็คเกจ</div>
+  <h2 class="dhead__en"><em>Our</em> Packages</h2>
+  <p class="dhead__th">แพ็คเกจทั้งหมด</p>
+  <div class="pintro__body">
+    <p>เลือกระดับแพ็คเกจด้านล่าง หรือกด <strong>เปรียบเทียบแพ็คเกจ</strong> เพื่อดูตารางเทียบทุกรายการ</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <!-- Tabs (wedding / seminar) + view toggle in one row -->
+    <div class="controls">
       <div class="toggle" id="catToggle">
         <button data-cat="wedding" class="active">งานแต่งงาน</button>
         <button data-cat="seminar">งานสัมมนา</button>
       </div>
-    </div>
-
-    <!-- View toggle: cards / compare (wedding only) -->
-    <div class="toggle-row" id="viewWrap">
-      <div class="toggle" id="viewToggle">
-        <button data-view="cards" class="active">แพ็คเกจทั้งหมด</button>
-        <button data-view="compare">เปรียบเทียบแพ็คเกจ</button>
+      <div id="viewWrap">
+        <div class="toggle" id="viewToggle">
+          <button data-view="cards" class="active">แพ็คเกจทั้งหมด</button>
+          <button data-view="compare">เปรียบเทียบแพ็คเกจ</button>
+        </div>
       </div>
     </div>
 
@@ -292,11 +414,17 @@
 
 <div id="footer-mount"></div>
 
-<script src="../js/common.js?v=20260612a"></script>
+<script src="../js/common.js?v=20260612b"></script>
 <script>
 (async function() {
   const data = await CW.mountChrome('packages');
   if (!data) return;
+
+  // page hero — รูปจากแพ็คเกจแนะนำ (หรือ gallery ภาพแรก)
+  const _feat = (data.packages?.wedding || []).find(p => p.id === data.featuredPackageId);
+  const _heroImg = document.getElementById('pheroImg');
+  const _heroSrc = _feat?.image || data.gallery?.photos?.[0]?.url || '';
+  if (_heroSrc) { _heroImg.src = _heroSrc; if (_feat) _heroImg.style.cssText = CW.imgStyle(_feat); }
 
   let category = 'wedding';
   let view = 'cards';
@@ -364,25 +492,24 @@
   function cardHTML(p) {
     const price = priceOf(p);
     const guestBase = p.guestBase || 100;
-    const featBadge = p.isFeatured ? '<span class="badge badge--gold">⭐ Featured</span>' : '';
+    const tierTag = category === 'wedding' ? (tierOf(p) === 'signature' ? 'Signature' : 'Essential') : 'สัมมนา';
+    const featBadge = p.isFeatured ? ' · ⭐ Featured' : '';
     const crossYear = p.crossYearDiscount
-      ? `<span style="font-size:0.75rem;color:var(--color-success);">จองข้ามปี ${CW.fmtBaht(price - p.crossYearDiscount)}</span>`
+      ? `<span class="cy">จองข้ามปี ${CW.fmtBaht(price - p.crossYearDiscount)}</span>`
       : '';
     return `
-      <a href="./detail.html?id=${encodeURIComponent(p.id)}" class="card" style="text-decoration:none;color:inherit;">
-        <div class="card__img"><img src="${CW.escape(p.image)}" alt="${CW.escape(p.name)}" loading="lazy" style="${CW.imgStyle(p)}"></div>
-        <div class="card__body">
-          <span class="card__tag">${category === 'wedding' ? (tierOf(p) === 'signature' ? 'Signature' : 'Essential') : 'สัมมนา'}</span>
-          <h3 class="card__title">${CW.escape(p.name)} ${featBadge}</h3>
-          <p class="card__subtitle">${CW.escape(p.subtitle || '')}</p>
-          <p class="card__desc">${CW.escape(p.shortDescription || '')}</p>
-          <div class="card__price">
-            ${CW.fmtBaht(price)}
-            <small>เริ่ม ${guestBase} ท่าน · ${(p.availableTimeSlots || []).length} ช่วงเวลา</small>
-            ${crossYear ? '<small>' + crossYear + '</small>' : ''}
-          </div>
-          <div class="card__actions"><span class="btn btn--ghost btn--sm">ดูรายละเอียด →</span></div>
+      <a href="./detail.html?id=${encodeURIComponent(p.id)}" class="pk">
+        <div class="pk__img"><img src="${CW.escape(p.image)}" alt="${CW.escape(p.name)}" loading="lazy" style="${CW.imgStyle(p)}"></div>
+        <span class="pk__kicker">${tierTag}${featBadge}</span>
+        <h3 class="pk__title">${CW.escape(p.name)}</h3>
+        <p class="pk__sub">${CW.escape(p.subtitle || '')}</p>
+        <p class="pk__desc">${CW.escape(p.shortDescription || '')}</p>
+        <div class="pk__price">
+          ${CW.fmtBaht(price)}
+          <small>เริ่ม ${guestBase} ท่าน · ${(p.availableTimeSlots || []).length} ช่วงเวลา</small>
+          ${crossYear}
         </div>
+        <span class="lnk">ดูรายละเอียด <span class="circ">→</span></span>
       </a>`;
   }
 
