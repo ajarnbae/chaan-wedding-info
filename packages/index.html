@@ -6,75 +6,175 @@
 <title>แพ็คเกจ — Chaan Wedding</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css?v=20260612a">
 <style>
-  /* ── Tier toggle (Essential / Signature) ── */
+  /* ================================================
+     Packages — editorial theme (เข้าชุดหน้าแรก รอบ 4)
+     ================================================ */
+
+  .dhead__en {
+    font-family: var(--font-serif);
+    font-size: clamp(2.3rem, 5.4vw, 3.9rem);
+    font-weight: 400;
+    line-height: 1.04;
+    letter-spacing: 0.5px;
+    color: var(--color-text);
+    margin: 0;
+  }
+  .dhead__en em { font-style: italic; }
+  .dhead__th {
+    font-family: var(--font-sans);
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    color: var(--color-text-muted);
+    margin: 12px 0 0;
+  }
+  .page-head { margin: clamp(14px, 3vw, 28px) 0 clamp(36px, 5vw, 56px); }
+  .page-head__intro {
+    color: var(--color-text-muted);
+    max-width: 640px;
+    margin: 18px 0 0;
+    line-height: 1.9;
+    font-size: 0.95rem;
+  }
+  .toggle-row { margin-bottom: 20px; }
+
+  /* ── toggles → text tabs (override global pill) ── */
+  .toggle {
+    border: none;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    display: inline-flex;
+    gap: clamp(18px, 3vw, 32px);
+    border-bottom: 1px solid var(--color-line);
+  }
+  .toggle button {
+    padding: 10px 2px 14px;
+    min-height: 48px;
+    border-radius: 0;
+    border-bottom: 1px solid transparent;
+    margin-bottom: -1px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--color-text-muted);
+    transition: color 0.25s ease, border-color 0.25s ease;
+  }
+  .toggle button:hover { color: var(--color-brown-dark); }
+  .toggle button.active {
+    background: transparent;
+    color: var(--color-brown-dark);
+    border-bottom-color: var(--color-gold);
+  }
+
+  /* ── Tier toggle (Essential / Signature) — segmented hairline ── */
   .tier-toggle {
     display: inline-flex;
-    gap: 12px;
     flex-wrap: wrap;
-    justify-content: center;
+    border: 1px solid var(--color-line);
+    background: transparent;
   }
   .tier-toggle button {
-    background: #fff;
-    border: 1.5px solid var(--color-border, #E5DDD3);
-    border-radius: var(--radius-lg);
-    padding: 14px 22px;
+    background: transparent;
+    border: none;
+    border-left: 1px solid var(--color-line);
+    padding: 18px 26px;
+    min-width: 250px;
     cursor: pointer;
-    text-align: center;
-    min-width: 220px;
-    transition: border-color .2s, box-shadow .2s, background .2s;
+    text-align: left;
     font-family: inherit;
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+  }
+  .tier-toggle button:first-child { border-left: none; }
+  .tier-toggle button.active {
+    background: var(--color-ivory);
+    box-shadow: inset 0 -2px 0 var(--color-gold);
   }
   .tier-toggle button .tier-name {
     display: block;
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--color-text, #3B3026);
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--color-text);
   }
+  .tier-toggle button.active .tier-name { color: var(--color-gold-dark); }
   .tier-toggle button .tier-cond {
     display: block;
     margin-top: 4px;
     font-size: 0.78rem;
-    color: var(--color-text-muted, #8A7C6C);
+    color: var(--color-text-muted);
     line-height: 1.5;
   }
-  .tier-toggle button.active {
-    border-color: var(--color-gold, #B8924B);
-    background: #FFFDF7;
-    box-shadow: 0 4px 14px rgba(184,146,75,.18);
+  @media (max-width: 639px) {
+    .tier-toggle { display: flex; flex-direction: column; width: 100%; }
+    .tier-toggle button { border-left: none; border-top: 1px solid var(--color-line); min-width: 0; }
+    .tier-toggle button:first-child { border-top: none; }
   }
-  .tier-toggle button.active .tier-name { color: var(--color-gold-dark, #8C6C2E); }
 
-  /* ── Tier summary strip (row-based) ── */
+  /* ── cards → editorial (override global .card) ── */
+  .card {
+    border-radius: 0;
+    box-shadow: none;
+    border: 1px solid var(--color-line);
+    background: var(--color-ivory);
+  }
+  .card:hover { transform: none; box-shadow: var(--shadow-md); }
+  .card__img { aspect-ratio: 4 / 3; border-radius: 0; }
+  .card__img img { transition: transform 1.1s ease; }
+  .card:hover .card__img img { transform: scale(1.04); }
+  .card__tag {
+    background: transparent;
+    border: 1px solid var(--color-gold-light);
+    color: var(--color-gold-dark);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .card__title { font-weight: 500; }
+  .card__price { color: var(--color-gold-dark); font-size: 1.5rem; }
+  .card__actions .btn {
+    border-radius: 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.76rem;
+    font-weight: 600;
+  }
+
+  /* ── Tier summary strip — hairline rows ── */
   .tier-strip {
-    margin-top: var(--space-lg, 32px);
-    background: var(--color-cream-warm, #F4EBDC);
-    border-radius: var(--radius-lg);
-    padding: 16px 24px 10px;
+    margin: var(--space-xl) auto 0;
+    max-width: 760px;
+    background: transparent;
+    border-top: 1px solid var(--color-brown);
+    padding: 18px 2px 4px;
   }
   .tier-strip h4 {
-    margin: 0 0 4px;
-    font-size: 0.95rem;
-    color: var(--color-text, #3B3026);
+    margin: 0 0 8px;
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--color-text);
   }
   .tier-strip .srow {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     gap: 16px;
-    padding: 11px 0;
-    border-bottom: 0.5px solid rgba(60,48,32,.14);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--color-line);
     font-size: 0.85rem;
   }
   .tier-strip .srow:last-child { border-bottom: none; }
-  .tier-strip .srow .lbl { color: var(--color-text, #3B3026); }
+  .tier-strip .srow .lbl { color: var(--color-text); }
   .tier-strip .srow .val { text-align: right; }
   .val--muted { color: #A99A85; }
-  .val--gold { color: var(--color-gold-dark, #8C6C2E); font-weight: 500; }
-  .val--green { color: var(--color-success, #6B8E5A); font-weight: 500; }
-  .val--plain { color: var(--color-text, #3B3026); }
+  .val--gold { color: var(--color-gold-dark); font-weight: 500; }
+  .val--green { color: var(--color-success); font-weight: 500; }
+  .val--plain { color: var(--color-text); }
 
   /* ── Compare table (apple.com/compare style) ── */
   .compare-wrap { max-width: 880px; margin: 0 auto; overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -87,52 +187,51 @@
   }
   .compare-table th, .compare-table td {
     padding: 13px 16px;
-    border-bottom: 0.5px solid rgba(60,48,32,.14);
+    border-bottom: 1px solid var(--color-line);
     vertical-align: top;
   }
   .compare-table col.c-label { width: 38%; }
   .compare-table col.c-tier { width: 31%; }
   .compare-table thead th {
     text-align: center;
-    border-bottom: 1px solid rgba(60,48,32,.25);
+    border-bottom: 1px solid var(--color-brown);
     padding-bottom: 16px;
   }
   .compare-table thead th .t-name {
     display: block;
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--color-text, #3B3026);
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--color-text);
   }
   .compare-table thead th .t-cond {
     display: block;
     margin-top: 4px;
     font-size: 0.74rem;
     font-weight: 400;
-    color: var(--color-text-muted, #8A7C6C);
+    color: var(--color-text-muted);
     line-height: 1.5;
   }
-  .compare-table td.row-label {
-    text-align: left;
-    color: var(--color-text, #3B3026);
-  }
+  .compare-table td.row-label { text-align: left; color: var(--color-text); }
   .compare-table td.cell { text-align: center; }
-  .compare-table .sig-col { background: var(--color-cream-warm, #F4EBDC); }
+  .compare-table .sig-col { background: var(--color-cream-warm); }
   .compare-table tr.section-row td {
     border-bottom: none;
     padding: 28px 16px 6px;
+    font-family: var(--font-serif);
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     text-align: left;
   }
   .compare-table tr.section-row:first-child td { padding-top: 6px; }
-  .compare-table .price-main { font-weight: 600; font-size: 0.95rem; }
+  .compare-table .price-main { font-family: var(--font-serif); font-weight: 600; font-size: 1.02rem; }
   .compare-table .price-cy {
     display: block;
     margin-top: 3px;
     font-size: 0.74rem;
-    color: var(--color-success, #6B8E5A);
+    color: var(--color-success);
   }
-  .compare-table .mark-yes { color: var(--color-success, #6B8E5A); font-weight: 700; }
+  .compare-table .mark-yes { color: var(--color-success); font-weight: 700; }
   .compare-table .mark-no { color: #C9BFB1; }
 </style>
 </head>
@@ -143,16 +242,16 @@
 <section class="section">
   <div class="container">
     <div class="breadcrumb"><a href="../index.html">หน้าแรก</a> <span>/</span> แพ็คเกจ</div>
-    <div class="section-title">
-      <span class="eyebrow">Our Packages</span>
-      <h2>แพ็คเกจทั้งหมด</h2>
-      <p class="text-center" style="color:var(--color-text-muted); max-width: 720px; margin: 16px auto 0;">
+    <div class="page-head">
+      <h2 class="dhead__en"><em>Our</em> Packages</h2>
+      <p class="dhead__th">แพ็คเกจทั้งหมด</p>
+      <p class="page-head__intro">
         เลือกระดับแพ็คเกจด้านล่าง หรือกด <strong>เปรียบเทียบแพ็คเกจ</strong> เพื่อดูตารางเทียบทุกรายการ
       </p>
     </div>
 
     <!-- Tabs (wedding / seminar) -->
-    <div class="text-center" style="margin-bottom: 16px;">
+    <div class="toggle-row">
       <div class="toggle" id="catToggle">
         <button data-cat="wedding" class="active">งานแต่งงาน</button>
         <button data-cat="seminar">งานสัมมนา</button>
@@ -160,7 +259,7 @@
     </div>
 
     <!-- View toggle: cards / compare (wedding only) -->
-    <div class="text-center" style="margin-bottom: 16px;" id="viewWrap">
+    <div class="toggle-row" id="viewWrap">
       <div class="toggle" id="viewToggle">
         <button data-view="cards" class="active">แพ็คเกจทั้งหมด</button>
         <button data-view="compare">เปรียบเทียบแพ็คเกจ</button>
@@ -168,7 +267,7 @@
     </div>
 
     <!-- Tier toggle: Essential / Signature (card view only) -->
-    <div class="text-center" style="margin-bottom: var(--space-xl);" id="tierWrap">
+    <div class="toggle-row" style="margin-bottom: var(--space-xl);" id="tierWrap">
       <div class="tier-toggle" id="tierToggle">
         <button data-tier="essential" class="active">
           <span class="tier-name">Essential จันทร์คุ้มครบ</span>

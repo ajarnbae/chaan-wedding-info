@@ -475,6 +475,79 @@
   }
   .gal__btn:hover { background: var(--color-brown); color: #fff; }
 
+  /* ─── TESTIMONIALS — quote slider ─── */
+  .tm { padding: clamp(80px, 10vw, 140px) 0 clamp(60px, 8vw, 100px); }
+  .tm__head {
+    max-width: 1500px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 0 clamp(20px, 5vw, 64px) clamp(36px, 5vw, 56px);
+  }
+  .tm__sub {
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    max-width: 340px;
+    margin: 0;
+  }
+  .tm__track {
+    display: flex;
+    align-items: stretch;
+    gap: clamp(14px, 2vw, 28px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 0 clamp(16px, 4vw, 48px);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .tm__track::-webkit-scrollbar { display: none; }
+  .tm__card {
+    flex: 0 0 min(82vw, 440px);
+    scroll-snap-align: center;
+    margin: 0;
+    border-top: 1px solid var(--color-line);
+    padding: clamp(24px, 3vw, 36px) 4px 8px;
+    display: flex;
+    flex-direction: column;
+  }
+  .tm__mark {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    line-height: 0.6;
+    color: var(--color-gold-light);
+    margin-bottom: 18px;
+  }
+  .tm__text {
+    font-family: var(--font-serif);
+    font-size: 1.08rem;
+    line-height: 1.9;
+    color: var(--color-brown);
+    margin: 0 0 22px;
+    flex: 1;
+  }
+  .tm__name {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-text);
+  }
+  .tm__stars { color: var(--color-gold); font-size: 0.8rem; letter-spacing: 4px; margin-top: 6px; }
+  .tm__closing {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: clamp(44px, 6vw, 72px) clamp(20px, 5vw, 64px) 0;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+
   /* ─── WHY — สถิติแบบ editorial บนพื้นเรียบ ─── */
   .why {
     max-width: 1500px;
@@ -744,6 +817,23 @@
     <button class="gal__btn" id="galPrev" aria-label="ภาพก่อนหน้า">←</button>
     <button class="gal__btn" id="galNext" aria-label="ภาพถัดไป">→</button>
   </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="tm" id="testimonialSection" style="display:none;">
+  <div class="tm__head reveal">
+    <div>
+      <h2 class="dhead__en"><em>Kind</em> Words</h2>
+      <p class="dhead__th" id="tmHeading">ความประทับใจจากลูกค้าเรา</p>
+    </div>
+    <p class="tm__sub" id="tmSub"></p>
+  </div>
+  <div class="tm__track" id="tmTrack"></div>
+  <div class="gal__nav">
+    <button class="gal__btn" id="tmPrev" aria-label="รีวิวก่อนหน้า">←</button>
+    <button class="gal__btn" id="tmNext" aria-label="รีวิวถัดไป">→</button>
+  </div>
+  <p class="tm__closing reveal" id="tmClosing"></p>
 </section>
 
 <!-- WHY US -->
@@ -1072,6 +1162,32 @@
     document.getElementById('galNext').addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
   } else if (track) {
     track.closest('section').style.display = 'none';
+  }
+
+  // ── Testimonials slider ──
+  const tmData = data.testimonials;
+  if (tmData?.items?.length) {
+    document.getElementById('testimonialSection').style.display = '';
+    if (tmData.heading) document.getElementById('tmHeading').textContent = tmData.heading;
+    if (tmData.subheading) document.getElementById('tmSub').textContent = tmData.subheading;
+    if (tmData.closing) document.getElementById('tmClosing').textContent = tmData.closing;
+    const tmTrack = document.getElementById('tmTrack');
+    tmTrack.innerHTML = tmData.items.map(t => `
+      <figure class="tm__card">
+        <span class="tm__mark" aria-hidden="true">“</span>
+        <blockquote class="tm__text">${CW.escape(t.text)}</blockquote>
+        <figcaption>
+          <div class="tm__name">${CW.escape(t.name)}</div>
+          <div class="tm__stars" aria-label="5 ดาว">★★★★★</div>
+        </figcaption>
+      </figure>
+    `).join('');
+    const tmStep = () => {
+      const card = tmTrack.querySelector('.tm__card');
+      return card ? card.getBoundingClientRect().width + 20 : 400;
+    };
+    document.getElementById('tmPrev').addEventListener('click', () => tmTrack.scrollBy({ left: -tmStep(), behavior: 'smooth' }));
+    document.getElementById('tmNext').addEventListener('click', () => tmTrack.scrollBy({ left: tmStep(), behavior: 'smooth' }));
   }
 
   // ── Contact — พื้นหลังภาพจริงจาก gallery + ลิงก์ติดต่อเดิมทั้งหมด ──
