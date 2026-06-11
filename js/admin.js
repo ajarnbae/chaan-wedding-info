@@ -1118,4 +1118,31 @@ async function publishToGitHub() {
 function renderRaw(root) {
   root.innerHTML = `
     <h2 style="margin-top:0;">JSON ดิบทั้งหมด</h2>
- 
+    <p style="color:var(--color-text-muted);">แก้ JSON ทั้งหมดได้โดยตรง (ระวังโครงสร้าง)</p>
+    <textarea id="rawText" style="min-height:480px;font-family:Consolas,Monaco,monospace;font-size:0.85rem;">${esc(JSON.stringify(DATA, null, 2))}</textarea>
+    <div class="admin-actions"><button class="btn btn--primary" id="rawSave">บันทึก JSON</button></div>
+  `;
+  document.getElementById('rawSave').addEventListener('click', () => {
+    try {
+      DATA = JSON.parse(document.getElementById('rawText').value);
+      persist(); toast('บันทึกแล้ว');
+    } catch (e) { alert('JSON ไม่ถูกต้อง: ' + e.message); }
+  });
+}
+
+// ---------- Helpers ----------
+function esc(s) { return CW.escape(s); }
+function val(id) { const el = document.getElementById(id); return el ? el.value : ''; }
+function toast(msg) {
+  let t = document.getElementById('toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'toast';
+    t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--color-brown-dark);color:#fff;padding:12px 20px;border-radius:8px;z-index:200;box-shadow:var(--shadow-lg);font-size:0.95rem;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.display = 'block';
+  clearTimeout(t._h);
+  t._h = setTimeout(() => t.style.display = 'none', 2200);
+}

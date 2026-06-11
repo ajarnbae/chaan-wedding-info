@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Chaan Wedding — สถานที่จัดงานแต่งงาน</title>
-<meta name="description" content="Chaan de Cafe &amp; Wedding · สถานที่จัดงานแต่งงาน 3 โซน · โปรร้อนนี้ 99,999 บาท">
+<meta name="description" content="Chaan de Cafe &amp; Wedding · สถานที่จัดงานแต่งงาน 3 โซน · Essential จันทร์คุ้มครบ 99,999 บาท">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
@@ -165,7 +165,7 @@
     text-align: center;
   }
 
-  /* HOT PROMO SPOTLIGHT */
+  /* FEATURED PACKAGE SPOTLIGHT */
   .hot-promo {
     background: linear-gradient(135deg, #5C4534 0%, #8C6C2E 100%);
     color: #fff;
@@ -470,7 +470,7 @@
     <h1>WEDDING VENUE</h1>
     <p class="hero-mini__sub" id="heroSub">Chaan de Cafe &amp; Wedding · สถานที่จัดงานแต่งงาน 3 โซน 3 บรรยากาศ</p>
     <div class="hero-mini__ctas">
-      <a href="#promo" class="btn btn--primary">ดูโปรร้อนนี้ 99,999 →</a>
+      <a href="#promo" class="btn btn--primary">ดู Essential จันทร์คุ้มครบ 99,999 →</a>
       <a href="./packages/" class="btn btn--ghost">แพ็คเกจทั้งหมด</a>
     </div>
   </div>
@@ -478,7 +478,7 @@
   <div class="hero-dots" id="heroDots"></div>
 </section>
 
-<!-- HOT PROMO SPOTLIGHT -->
+<!-- FEATURED PACKAGE SPOTLIGHT -->
 <section class="section" id="promo">
   <div class="container">
     <div id="featuredMount" class="loading">กำลังโหลดโปรโมชั่น...</div>
@@ -549,7 +549,7 @@
     <div>
       <div class="why-num">7</div>
       <div class="why-h">แพ็คเกจงานแต่ง</div>
-      <p class="why-p">โปรร้อนนี้ + แพ็คเกจมาตรฐาน + จองข้ามปี</p>
+      <p class="why-p">Essential + Signature + จองข้ามปี</p>
     </div>
   </div>
 </section>
@@ -803,14 +803,17 @@
     const guestBase = featured.guestBase || 100;
     const slots = (data.timeSlots?.[cat] || []).filter(s => (featured.availableTimeSlots || []).includes(s.id));
 
+    const isSignature = featured.tier === 'signature' || featured.id.startsWith('signature_');
+    const tierLabel = isSignature ? 'Signature \u0E08\u0E31\u0E19\u0E17\u0E23\u0E4C\u0E04\u0E23\u0E1A\u0E40\u0E04\u0E23\u0E37\u0E48\u0E2D\u0E07' : 'Essential \u0E08\u0E31\u0E19\u0E17\u0E23\u0E4C\u0E04\u0E38\u0E49\u0E21\u0E04\u0E23\u0E1A';
+
     featuredMount.classList.remove('loading');
     featuredMount.innerHTML = `
       <div class="hot-promo">
-        <span class="hot-promo__badge">\uD83D\uDD25 HOT PROMO</span>
+        <span class="hot-promo__badge">${isSignature ? 'Signature' : 'Essential'}</span>
         <div class="hot-promo__img"><img src="${CW.escape(featured.image)}" alt="${CW.escape(featured.name)}" style="${CW.imgStyle(featured)}"></div>
         <div class="hot-promo__body">
-          <span class="hot-promo__eyebrow">โปร ร้อนนี้มาแต่งงานกันเถอะ</span>
-          <h2 class="hot-promo__title">${CW.escape(featured.name)}</h2>
+          <span class="hot-promo__eyebrow">${CW.escape(featured.name)}</span>
+          <h2 class="hot-promo__title">${tierLabel}</h2>
           <p class="hot-promo__sub">${CW.escape(featured.longDescription || featured.shortDescription || '')}</p>
           <div class="hot-promo__price-row">
             <div class="hot-promo__price">${CW.fmtBaht(price)}</div>

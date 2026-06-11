@@ -242,7 +242,7 @@
       <img src="${CW.escape(pkg.image)}" alt="${CW.escape(pkg.name)}" style="${CW.imgStyle(pkg)}">
       <div class="detail-hero__overlay">
         <div>
-          <div class="eyebrow">${isWedding ? 'Wedding Package' : 'Seminar Package'}${pkg.isPromo ? ' · 🔥 PROMO' : ''}</div>
+          <div class="eyebrow">${isWedding ? 'Wedding Package' : 'Seminar Package'}${pkg.tier === 'signature' ? ' · Signature จันทร์ครบเครื่อง' : pkg.tier === 'essential' ? ' · Essential จันทร์คุ้มครบ' : ''}</div>
           <h1>${CW.escape(pkg.name)}</h1>
           <p style="margin-top:8px;opacity:0.95;">${CW.escape(pkg.subtitle || '')}</p>
         </div>
