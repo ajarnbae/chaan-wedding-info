@@ -6,38 +6,67 @@
 <title>รายละเอียดแพ็คเกจ — Chaan Wedding</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css?v=20260612b">
 <style>
-  .section-card { background: var(--color-ivory); border: 1px solid var(--color-line); border-radius: var(--radius-md); padding: 16px 20px; margin-bottom: 12px; }
-  .section-card h4 { margin: 0 0 10px; color: var(--color-brown-dark); display: flex; align-items: center; gap: 8px; font-size: 1.05rem; }
+  /* ── ธีม editorial (เข้าชุดหน้าแรก) — มุมคม, hairline, ไม่มี gradient ── */
+  .detail-hero { aspect-ratio: auto; min-height: clamp(380px, 62vh, 660px); }
+  .detail-hero__overlay {
+    background: linear-gradient(180deg, rgba(30,18,8,0.04) 30%, rgba(30,18,8,0.66) 100%);
+    padding: clamp(24px, 5vw, 56px);
+  }
+  .detail-hero__overlay h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 400; }
+  .detail-hero__overlay .eyebrow { letter-spacing: 2.5px; font-size: 0.74rem; font-weight: 600; }
+
+  .panel { border-radius: 0; padding: clamp(20px, 3vw, 32px); }
+  .panel h3 { font-weight: 500; }
+  .panel h3 .num {
+    background: transparent;
+    border: 1px solid var(--color-gold);
+    color: var(--color-gold-dark);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.95rem;
+  }
+
+  .price-box { background: var(--color-brown-dark); border-radius: 0; }
+  .price-box h4 {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.35rem;
+    color: var(--color-gold-light);
+  }
+  .price-box .btn { border-radius: 0; letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem; }
+
+  .section-card { background: transparent; border: none; border-top: 1px solid var(--color-line); border-radius: 0; padding: 14px 2px 10px; margin-bottom: 4px; }
+  .section-card h4 { margin: 0 0 8px; color: var(--color-brown-dark); display: flex; align-items: center; gap: 8px; font-size: 1.05rem; font-family: var(--font-serif); font-weight: 600; }
   .section-card ul { list-style: none; padding: 0; margin: 0; }
-  .section-card li { padding: 5px 0 5px 22px; position: relative; font-size: 0.95rem; color: var(--color-text); }
-  .section-card li::before { content: "•"; position: absolute; left: 6px; color: var(--color-gold); font-size: 1.2rem; line-height: 1; top: 8px; }
-  .freebonus { background: linear-gradient(135deg, #FBF6EF 0%, var(--color-gold-light) 100%); border: 1px solid var(--color-gold); border-radius: var(--radius-md); padding: 18px 20px; margin-bottom: 12px; }
-  .freebonus h4 { color: var(--color-brown-dark); margin: 0 0 10px; }
+  .section-card li { padding: 5px 0 5px 20px; position: relative; font-size: 0.95rem; color: var(--color-text); }
+  .section-card li::before { content: "·"; position: absolute; left: 4px; color: var(--color-gold); font-size: 1.4rem; line-height: 1; top: 4px; }
+  .freebonus { background: var(--color-cream-warm); border: none; border-left: 2px solid var(--color-gold); border-radius: 0; padding: 18px 20px; margin-bottom: 12px; }
+  .freebonus h4 { color: var(--color-brown-dark); margin: 0 0 10px; font-family: var(--font-serif); }
   .freebonus li::before { content: "🎁"; left: 0; top: 6px; font-size: 0.95rem; }
   .freebonus li { padding-left: 26px; }
-  .overflow-note { background: var(--color-cream-warm); border-left: 4px solid var(--color-gold); padding: 10px 14px; border-radius: 4px; font-size: 0.9rem; margin-top: 8px; color: var(--color-brown-dark); }
-  .customer-provides { background: var(--color-brown-dark); color: var(--color-cream); padding: 18px 20px; border-radius: var(--radius-md); margin-bottom: 12px; }
-  .customer-provides h4 { color: var(--color-gold-light); margin: 0 0 10px; }
+  .overflow-note { background: var(--color-cream-warm); border-left: 2px solid var(--color-gold); padding: 10px 14px; border-radius: 0; font-size: 0.9rem; margin-top: 8px; color: var(--color-brown-dark); }
+  .customer-provides { background: var(--color-brown-dark); color: var(--color-cream); padding: 18px 20px; border-radius: 0; margin-bottom: 12px; }
+  .customer-provides h4 { color: var(--color-gold-light); margin: 0 0 10px; font-family: var(--font-serif); }
   .customer-provides li { color: var(--color-cream); }
   .customer-provides li::before { color: var(--color-gold-light); content: "✓"; }
 
   /* Add-on checkbox cards */
   .addon-card {
-    background: var(--color-cream);
+    background: transparent;
     padding: 14px 16px;
-    border-radius: var(--radius-md);
+    border-radius: 0;
     border: 1px solid var(--color-line);
     display: flex;
     align-items: center;
     gap: 14px;
-    margin-bottom: 8px;
+    margin-bottom: -1px;
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: background 0.2s ease, border-color 0.2s ease;
   }
-  .addon-card:hover { border-color: var(--color-gold-light); }
+  .addon-card:hover { background: var(--color-ivory); }
   .addon-card input[type="checkbox"] {
     width: 20px; height: 20px;
     accent-color: var(--color-gold);
@@ -48,21 +77,22 @@
   .addon-card__name { font-weight: 500; color: var(--color-brown-dark); }
   .addon-card__desc { font-size: 0.85rem; color: var(--color-text-muted); margin-top: 2px; }
   .addon-card__price { text-align: right; min-width: 110px; }
-  .addon-card__price .num { color: var(--color-gold-dark); font-weight: 500; }
+  .addon-card__price .num { color: var(--color-gold-dark); font-weight: 500; font-family: var(--font-serif); }
   .addon-card__price .unit { font-size: 0.75rem; color: var(--color-text-muted); }
-  .addon-card.is-checked { background: linear-gradient(135deg, var(--color-cream-warm) 0%, var(--color-ivory) 100%); border-color: var(--color-gold); }
+  .addon-card.is-checked { background: var(--color-cream-warm); border-color: var(--color-gold); position: relative; z-index: 1; }
 
   /* Menu set expandable */
-  .menu-group { margin-bottom: 16px; }
+  .menu-group { margin-bottom: 20px; }
   .menu-group__title {
     font-family: var(--font-serif);
-    font-size: 1.1rem;
+    font-size: 1.15rem;
+    font-weight: 500;
     color: var(--color-brown-dark);
-    margin: 0 0 6px;
-    padding-bottom: 4px;
-    border-bottom: 2px solid var(--color-gold-light);
+    margin: 0 0 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--color-brown);
   }
-  .menu-set { background: var(--color-ivory); border: 1px solid var(--color-line); border-radius: var(--radius-md); margin-bottom: 8px; overflow: hidden; }
+  .menu-set { background: transparent; border: 1px solid var(--color-line); border-radius: 0; margin-bottom: -1px; overflow: hidden; }
   .menu-set summary {
     list-style: none;
     cursor: pointer;
@@ -77,17 +107,18 @@
   .menu-set summary::after {
     content: "▼";
     color: var(--color-gold);
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     transition: transform 0.2s;
   }
   .menu-set[open] summary::after { transform: rotate(180deg); }
-  .menu-set summary:hover { background: var(--color-cream); }
-  .menu-set__title { font-weight: 500; color: var(--color-brown-dark); flex: 1; min-width: 200px; }
-  .menu-set__price { color: var(--color-gold-dark); font-weight: 500; }
+  .menu-set summary:hover { background: var(--color-ivory); }
+  .menu-set__title { font-family: var(--font-serif); font-size: 1.02rem; font-weight: 500; color: var(--color-brown-dark); flex: 1; min-width: 200px; }
+  .menu-set__price { color: var(--color-gold-dark); font-weight: 500; font-size: 0.88rem; }
   .menu-set__body { padding: 14px 18px 18px; border-top: 1px solid var(--color-line); background: var(--color-cream); }
   .selection-block {
     background: var(--color-ivory);
-    border-radius: var(--radius-md);
+    border-radius: 0;
+    border-left: 2px solid var(--color-gold-light);
     padding: 12px 14px;
     margin-bottom: 8px;
   }
@@ -102,31 +133,33 @@
     gap: 8px;
   }
   .selection-block h5 small {
-    background: var(--color-gold);
-    color: #fff;
+    background: transparent;
+    border: 1px solid var(--color-gold);
+    color: var(--color-gold-dark);
     padding: 2px 10px;
     border-radius: 999px;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 1px;
     font-family: var(--font-sans);
   }
   .selection-block .opts { display: flex; flex-wrap: wrap; gap: 6px; }
-  .selection-block .opt { background: var(--color-cream-warm); border: 1px solid var(--color-line); border-radius: 999px; padding: 4px 12px; font-size: 0.83rem; color: var(--color-text); }
+  .selection-block .opt { background: transparent; border: 1px solid var(--color-line); border-radius: 999px; padding: 4px 12px; font-size: 0.83rem; color: var(--color-text); }
 
   /* Decor change radio */
   .decor-row {
-    background: var(--color-cream);
+    background: transparent;
     padding: 12px 16px;
-    border-radius: var(--radius-md);
+    border-radius: 0;
     border: 1px solid var(--color-line);
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 6px;
+    margin-bottom: -1px;
     cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
   }
-  .decor-row:hover { border-color: var(--color-gold-light); }
+  .decor-row:hover { background: var(--color-ivory); }
   .decor-row input[type="radio"] {
     width: 18px; height: 18px;
     accent-color: var(--color-gold);
@@ -135,7 +168,7 @@
   }
   .decor-row__name { flex: 1; }
   .decor-row__price { color: var(--color-gold-dark); font-weight: 500; }
-  .decor-row.is-selected { background: linear-gradient(135deg, var(--color-cream-warm) 0%, var(--color-ivory) 100%); border-color: var(--color-gold); }
+  .decor-row.is-selected { background: var(--color-cream-warm); border-color: var(--color-gold); position: relative; z-index: 1; }
 
   /* Calculator line items */
   .calc-line {
@@ -148,6 +181,35 @@
   .calc-line .label { flex: 1; }
   .calc-line .amount { color: var(--color-gold-light); font-weight: 500; }
   .calc-line.deduct .amount { color: #FFB39E; }
+
+  /* Gallery banner — hairline editorial */
+  .gal-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border: 1px solid var(--color-line);
+    border-left: 2px solid var(--color-gold);
+    background: var(--color-ivory);
+    padding: 18px 22px;
+    color: var(--color-brown-dark);
+    transition: background 0.3s ease;
+  }
+  .gal-banner:hover { background: var(--color-cream-warm); color: var(--color-brown-dark); }
+  .gal-banner:hover .circ { background: var(--color-gold); color: #fff; transform: translateX(4px); }
+  .gal-banner__txt { font-family: var(--font-serif); font-size: 1.12rem; }
+  .circ {
+    width: 28px; height: 28px;
+    flex-shrink: 0;
+    border: 1px solid var(--color-gold);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gold);
+    font-size: 0.85rem;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  }
 </style>
 </head>
 <body>
@@ -270,7 +332,7 @@
               <h3>${num()} ช่วงเวลาที่จัดได้</h3>
               <div style="display:grid;grid-template-columns:1fr;gap:8px;">
                 ${slots.map(s => `
-                  <div style="background: var(--color-cream); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--color-line); display:flex; justify-content:space-between; gap: 12px; flex-wrap:wrap;">
+                  <div style="background: transparent; padding: 12px 16px; border-radius: 0; border: 1px solid var(--color-line); display:flex; justify-content:space-between; gap: 12px; flex-wrap:wrap;">
                     <strong>${CW.escape(s.name)}</strong>
                     <span style="color: var(--color-text-muted);">${CW.escape(s.hours)}</span>
                   </div>
@@ -346,10 +408,10 @@
               <h3>${num()} 🪔 งานพิธีที่ต้องการตัดออก</h3>
               <p style="color:var(--color-text-muted);font-size:0.95rem;margin-bottom:6px;">ติ๊กเลือกพิธีที่ต้องการตัดออก — ราคาจะถูกลดในกล่องคำนวณทันที</p>
               <p style="color:var(--color-text-muted);font-size:0.85rem;font-style:italic;margin-bottom:14px;">${CW.escape(data.ritualNote || 'บางรายการพิธีที่ถูกตัดออกจะไม่ได้ลดราคา เนื่องจากเป็นส่วนที่ทางสถานที่ไม่มีค่าใช้จ่ายเพิ่ม')}</p>
-              ${pkg.ritualNote ? `<p style="color:var(--color-brown-dark);font-size:0.88rem;font-weight:500;margin-bottom:14px;background:var(--color-cream-warm);padding:8px 12px;border-radius:var(--radius-sm);border-left:3px solid var(--color-gold);">${CW.escape(pkg.ritualNote)}</p>` : '<div style="margin-bottom:14px;"></div>'}
+              ${pkg.ritualNote ? `<p style="color:var(--color-brown-dark);font-size:0.88rem;font-weight:500;margin-bottom:14px;background:var(--color-cream-warm);padding:8px 12px;border-radius:0;border-left:2px solid var(--color-gold);">${CW.escape(pkg.ritualNote)}</p>` : '<div style="margin-bottom:14px;"></div>'}
               <div style="display:grid;grid-template-columns:1fr;gap:6px;">
                 ${pkg.rituals.map(r => `
-                  <label class="ritual-row" data-ritual-id="${CW.escape(r.id)}" style="background:var(--color-cream);padding:12px 14px;border-radius:var(--radius-md);border:1px solid var(--color-line);display:flex;justify-content:space-between;gap:12px;align-items:center;cursor:${r.deductIfRemoved > 0 ? 'pointer' : 'default'};transition:all 0.15s ease;">
+                  <label class="ritual-row" data-ritual-id="${CW.escape(r.id)}" style="background:transparent;padding:12px 14px;border-radius:0;border:1px solid var(--color-line);display:flex;justify-content:space-between;gap:12px;align-items:center;cursor:${r.deductIfRemoved > 0 ? 'pointer' : 'default'};transition:all 0.15s ease;">
                     <span style="display:flex;align-items:center;gap:10px;flex:1;">
                       <input type="checkbox" data-ritual-section="${CW.escape(r.id)}" data-deduct="${r.deductIfRemoved}" style="width:18px;height:18px;accent-color:var(--color-gold);flex-shrink:0;">
                       <span>${CW.escape(r.name)}</span>
@@ -401,20 +463,9 @@
             </div>` : ''}
 
             <!-- Gallery banner (inside LEFT column, sticky like price-box) -->
-            <a href="../gallery/index.html"
-               style="display:flex; align-items:center; gap:12px;
-                      background: linear-gradient(135deg, var(--color-gold-dark) 0%, var(--color-gold) 50%, var(--color-gold-light) 100%);
-                      color: var(--color-cream);
-                      border-radius: 12px;
-                      padding: 16px 20px;
-                      text-decoration: none;
-                      box-shadow: 0 4px 16px rgba(184,146,75,0.35);
-                      transition: transform 0.2s, box-shadow 0.2s;"
-               onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(184,146,75,0.5)'"
-               onmouseout="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(184,146,75,0.35)'">
-              <span style="font-size:2rem; line-height:1; flex-shrink:0;">🖼️</span>
-              <div style="font-weight:700; font-size:1rem; letter-spacing:0.03em;">คลิกเพื่อดูรูปภาพสถานที่</div>
-              <span style="margin-left:auto; font-size:1.2rem; opacity:0.8;">›</span>
+            <a href="../gallery/index.html" class="gal-banner">
+              <span class="gal-banner__txt">🖼️ คลิกเพื่อดูรูปภาพสถานที่</span>
+              <span class="circ">→</span>
             </a>
           </div>
 
@@ -513,7 +564,7 @@
       if (partner) {
         partner.checked = e.target.checked;
       }
-      e.target.closest('.ritual-row')?.style.setProperty('background', e.target.checked ? 'rgba(216,180,115,0.18)' : 'var(--color-cream)');
+      e.target.closest('.ritual-row')?.style.setProperty('background', e.target.checked ? 'rgba(216,180,115,0.18)' : 'transparent');
       recalc();
     });
   });
@@ -523,7 +574,7 @@
       const partner = document.querySelector(`[data-ritual-section="${e.target.dataset.ritual}"]`);
       if (partner) {
         partner.checked = e.target.checked;
-        partner.closest('.ritual-row')?.style.setProperty('background', e.target.checked ? 'rgba(216,180,115,0.18)' : 'var(--color-cream)');
+        partner.closest('.ritual-row')?.style.setProperty('background', e.target.checked ? 'rgba(216,180,115,0.18)' : 'transparent');
       }
     });
   });

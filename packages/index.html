@@ -141,8 +141,8 @@
     padding: clamp(84px, 11vw, 170px) clamp(20px, 5vw, 64px) clamp(36px, 5vw, 64px);
   }
   .pintro__body {
-    max-width: 540px;
-    margin: clamp(28px, 4vw, 44px) 0 0 auto;
+    max-width: 600px;
+    margin: clamp(22px, 3vw, 34px) 0 0;
     color: var(--color-text-muted);
     line-height: 1.95;
     font-size: 0.95rem;
@@ -258,8 +258,19 @@
     flex-wrap: wrap;
     align-items: flex-end;
     gap: clamp(24px, 4vw, 48px);
-    margin-bottom: 26px;
+    margin-bottom: clamp(30px, 4vw, 44px);
   }
+
+  /* ── unified page grid: ทุกชั้นกว้างเท่ากัน (symmetry แบบ Hillbrook) ── */
+  .section .container {
+    max-width: 1240px;
+    padding: 0 clamp(20px, 5vw, 64px);
+  }
+  #packagesGrid {
+    gap: clamp(44px, 6vw, 68px) clamp(20px, 3vw, 44px);
+  }
+  @media (min-width: 640px) { #packagesGrid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 980px) { #packagesGrid { grid-template-columns: repeat(3, 1fr); } }
 
   /* ── Tier summary strip — hairline rows ── */
   .tier-strip {
@@ -374,17 +385,12 @@
 
 <section class="section" style="padding-top: 0;">
   <div class="container">
-    <!-- Tabs (wedding / seminar) + view toggle in one row -->
+    <!-- Mode tabs: แถวเดียว 3 โหมด -->
     <div class="controls">
-      <div class="toggle" id="catToggle">
-        <button data-cat="wedding" class="active">งานแต่งงาน</button>
-        <button data-cat="seminar">งานสัมมนา</button>
-      </div>
-      <div id="viewWrap">
-        <div class="toggle" id="viewToggle">
-          <button data-view="cards" class="active">แพ็คเกจทั้งหมด</button>
-          <button data-view="compare">เปรียบเทียบแพ็คเกจ</button>
-        </div>
+      <div class="toggle" id="modeToggle">
+        <button data-mode="wedding" class="active">งานแต่งงาน</button>
+        <button data-mode="compare">เปรียบเทียบแพ็คเกจ</button>
+        <button data-mode="seminar">งานสัมมนา</button>
       </div>
     </div>
 
@@ -426,8 +432,8 @@
   const _heroSrc = _feat?.image || data.gallery?.photos?.[0]?.url || '';
   if (_heroSrc) { _heroImg.src = _heroSrc; if (_feat) _heroImg.style.cssText = CW.imgStyle(_feat); }
 
+  let mode = 'wedding';
   let category = 'wedding';
-  let view = 'cards';
   let tier = 'essential';
 
   const $ = id => document.getElementById(id);
@@ -466,17 +472,10 @@
   ];
 
   // ── toggle wiring ──
-  document.querySelectorAll('#catToggle button').forEach(b => {
+  document.querySelectorAll('#modeToggle button').forEach(b => {
     b.addEventListener('click', () => {
-      category = b.dataset.cat;
-      document.querySelectorAll('#catToggle button').forEach(x => x.classList.toggle('active', x === b));
-      render();
-    });
-  });
-  document.querySelectorAll('#viewToggle button').forEach(b => {
-    b.addEventListener('click', () => {
-      view = b.dataset.view;
-      document.querySelectorAll('#viewToggle button').forEach(x => x.classList.toggle('active', x === b));
+      mode = b.dataset.mode;
+      document.querySelectorAll('#modeToggle button').forEach(x => x.classList.toggle('active', x === b));
       render();
     });
   });
@@ -619,25 +618,23 @@
       </div>`;
   }
 
-  // ── main render ──
+  // ── main render: 3 โหมด (งานแต่ง / เปรียบเทียบ / สัมมนา) ──
   function render() {
-    const isWedding = category === 'wedding';
+    category = mode === 'seminar' ? 'seminar' : 'wedding';
     const all = data.packages?.[category] || [];
 
-    $('viewWrap').style.display = isWedding ? '' : 'none';
-    const effView = isWedding ? view : 'cards';
-    $('tierWrap').style.display = (isWedding && effView === 'cards') ? '' : 'none';
+    $('tierWrap').style.display = mode === 'wedding' ? '' : 'none';
 
-    if (effView === 'compare') {
+    if (mode === 'compare') {
       $('packagesGrid').style.display = 'none';
       $('tierStrip').innerHTML = '';
       $('compareMount').removeAttribute('hidden');
-      renderCompare(all);
+      renderCompare(data.packages?.wedding || []);
     } else {
       $('compareMount').setAttribute('hidden', '');
       $('compareMount').innerHTML = '';
       $('packagesGrid').style.display = '';
-      const list = isWedding ? all.filter(p => tierOf(p) === tier) : all;
+      const list = mode === 'wedding' ? all.filter(p => tierOf(p) === tier) : all;
       renderCards(list);
     }
   }
