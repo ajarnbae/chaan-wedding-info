@@ -7,38 +7,66 @@
 <meta name="description" content="Chaan de Cafe &amp; Wedding · สถานที่จัดงานแต่งงาน 3 โซน · Essential จันทร์คุ้มครบ 99,999 บาท">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./css/style.css?v=20260612a">
 <style>
-  /* ============================================================
-     Homepage — cinematic editorial redesign (มิ.ย. 2026 รอบ 3.5)
-     โครงใหม่ทั้งหน้า · เนื้อหา/ข้อมูลเดิมทุกตัวอักษร (bind จาก data.json)
-     ============================================================ */
+  /* ================================================================
+     Homepage — Hillbrook-style editorial redesign (มิ.ย. 2026 รอบ 4)
+     ข้อมูล/ราคา/ลิงก์เดิม 100% · เพิ่มเฉพาะ mood text ตามที่อนุมัติ
+     ================================================================ */
 
-  /* ─── Scroll reveal (นุ่ม, ครั้งเดียว) ─── */
+  /* ─── Editorial primitives ─── */
+  .kicker {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-text);
+    opacity: 0.72;
+  }
+  .lnk {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-sans);
+    font-size: 0.84rem;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--color-text);
+    min-height: 44px;
+    transition: color 0.3s ease;
+  }
+  .lnk .circ {
+    width: 28px; height: 28px;
+    flex-shrink: 0;
+    border: 1px solid var(--color-gold);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gold);
+    font-size: 0.85rem;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  }
+  .lnk:hover { color: var(--color-brown-dark); }
+  .lnk:hover .circ { background: var(--color-gold); color: #fff; transform: translateX(4px); }
   .reveal {
     opacity: 0;
-    transform: translateY(26px);
+    transform: translateY(28px);
     transition: opacity 1s ease, transform 1s ease;
   }
   .reveal.in-view { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1; transform: none; }
-  }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
 
-  /* ─── HERO — เต็มจอ + crossfade + slow zoom ─── */
-  .hero-cine {
+  /* ─── HERO — wordmark ยักษ์เกยภาพ (Hillbrook) ─── */
+  .hero {
     position: relative;
-    min-height: clamp(620px, 92svh, 920px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    overflow: hidden;
-    padding: 0;
+    height: clamp(540px, 86vh, 900px);
   }
-  .hero-carousel { position: absolute; inset: 0; z-index: 0; }
+  .hero__media { position: absolute; inset: 0; overflow: hidden; }
   .hero-carousel__slides { position: relative; height: 100%; }
   .hero-carousel__slide {
     position: absolute;
@@ -53,83 +81,68 @@
     display: block;
     pointer-events: none;
     user-select: none;
-    transform: scale(1.001);
   }
-  .hero-carousel__slide.active img {
-    transform: scale(1.07);
-    transition: transform 9s ease-out;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .hero-carousel__slide.active img { transform: none; }
-  }
-  .hero-carousel::after {
+  .hero__media::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg,
-      rgba(30,18,8,0.34) 0%,
-      rgba(30,18,8,0.10) 40%,
-      rgba(30,18,8,0.62) 100%);
+    background: linear-gradient(180deg, rgba(30,18,8,0.26) 0%, rgba(30,18,8,0.08) 50%, rgba(30,18,8,0.30) 100%);
     pointer-events: none;
-    z-index: 1;
   }
-  .hero-cine__content {
-    position: relative;
-    z-index: 2;
-    max-width: 880px;
-    margin: 0 auto;
-    padding: clamp(90px, 14vh, 130px) 20px clamp(40px, 6vh, 60px);
-  }
-  /* brand lockup — script เด่นแบบ Hillbrook */
-  .hero-cine__script {
-    font-family: var(--font-script);
-    font-size: clamp(4.2rem, 13vw, 8rem);
-    color: #FDF9F2;
-    line-height: 0.95;
-    text-shadow: 0 4px 28px rgba(0,0,0,0.35);
-  }
-  .hero-cine h1 {
-    font-family: var(--font-serif);
-    font-size: clamp(1.15rem, 3vw, 1.7rem);
-    font-weight: 400;
-    letter-spacing: 0.55em;
-    text-indent: 0.55em; /* balance tracking */
-    color: var(--color-gold-light);
-    margin: 18px 0 0;
-    text-shadow: 0 2px 14px rgba(0,0,0,0.4);
-  }
-  .hero-cine__sub {
-    color: rgba(255,255,255,0.9);
-    font-size: clamp(0.98rem, 2vw, 1.1rem);
-    font-weight: 300;
-    letter-spacing: 0.5px;
-    max-width: 620px;
-    margin: 22px auto 0;
+  .hero__topline {
+    position: absolute;
+    top: clamp(18px, 3vw, 34px);
+    right: clamp(16px, 4vw, 52px);
+    z-index: 3;
+    max-width: min(340px, 62vw);
+    text-align: right;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    line-height: 2;
     text-shadow: 0 1px 8px rgba(0,0,0,0.35);
   }
-  .hero-cine__ctas {
-    display: flex;
-    gap: 14px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 38px;
+  .hero h1 {
+    position: absolute;
+    top: 44%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    margin: 0;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-size: clamp(0.95rem, 2vw, 1.35rem);
+    font-weight: 400;
+    letter-spacing: 0.62em;
+    text-indent: 0.62em;
+    white-space: nowrap;
+    text-shadow: 0 2px 14px rgba(0,0,0,0.45);
   }
-  /* เส้น scroll cue บาง ๆ */
-  .hero-cine__cue {
-    position: relative;
-    z-index: 2;
-    width: 1px;
-    height: clamp(40px, 7vh, 64px);
-    margin: 0 auto;
-    background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0));
+  /* ตัวอักษรยักษ์ครีม เกยขอบล่างของภาพ — ครึ่งบนทับรูป ครึ่งล่างกลืนพื้นครีม */
+  .hero__wordmark {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    transform: translateY(46%);
+    z-index: 4;
+    text-align: center;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(74px, 18.5vw, 305px);
+    line-height: 0.74;
+    letter-spacing: 0.04em;
+    color: var(--color-cream);
+    pointer-events: none;
+    user-select: none;
   }
   .hero-dots {
     position: absolute;
-    bottom: 24px;
-    left: 0; right: 0;
-    z-index: 2;
+    bottom: 18px;
+    left: clamp(16px, 4vw, 52px);
+    z-index: 5;
     display: flex;
-    justify-content: center;
     align-items: center;
     gap: 6px;
     pointer-events: none;
@@ -137,397 +150,414 @@
   .hero-dot {
     display: block;
     border-radius: 50%;
-    background: rgba(255,255,255,0.45);
+    background: rgba(255,255,255,0.5);
     cursor: pointer;
     pointer-events: auto;
     border: none;
     padding: 0;
-    transition: width 0.35s ease, height 0.35s ease,
-                background 0.35s ease, opacity 0.35s ease;
     width: 4px; height: 4px;
-    opacity: 0.4;
+    opacity: 0.45;
+    transition: all 0.35s ease;
   }
-  .hero-dot[data-dist="1"] { width: 5px; height: 5px; opacity: 0.6; }
-  .hero-dot[data-dist="0"] {
-    width: 7px; height: 7px;
-    background: var(--color-gold-light);
-    opacity: 1;
-  }
+  .hero-dot[data-dist="1"] { width: 5px; height: 5px; opacity: 0.65; }
+  .hero-dot[data-dist="0"] { width: 7px; height: 7px; background: var(--color-gold-light); opacity: 1; }
 
-  /* ─── INTRO — editorial statement ─── */
-  .intro-state {
+  /* ─── INTRO — staggered statement + ย่อหน้าเยื้องขวา (Hillbrook) ─── */
+  .intro {
     background: var(--color-cream);
-    padding: clamp(96px, 14vw, 170px) 24px;
-    text-align: center;
+    padding: clamp(120px, 16vw, 250px) clamp(20px, 5vw, 64px) clamp(90px, 12vw, 170px);
+    overflow: hidden;
   }
-  .intro-state__eyebrow {
-    display: block;
-    font-family: var(--font-sans);
-    font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: 3px;
-    color: var(--color-gold-dark);
-    margin-bottom: 28px;
-  }
-  .intro-state__text {
+  .intro__inner { max-width: 1240px; margin: 0 auto; }
+  .intro__statement {
     font-family: var(--font-serif);
-    font-size: clamp(1.65rem, 4.2vw, 2.9rem);
+    font-size: clamp(1.9rem, 5vw, 3.9rem);
     font-weight: 400;
-    line-height: 1.55;
-    color: var(--color-brown-dark);
-    max-width: 980px;
-    margin: 0 auto;
+    line-height: 1.32;
+    color: var(--color-text);
+    margin: 0;
   }
-  .intro-state__rule {
-    width: 1px;
-    height: clamp(48px, 7vw, 72px);
-    margin: clamp(36px, 5vw, 56px) auto 0;
-    background: linear-gradient(180deg, var(--color-gold), rgba(184,146,75,0));
+  .intro__statement em { font-style: italic; }
+  .intro__statement .l2 { display: block; padding-left: clamp(36px, 11vw, 210px); }
+  .intro__statement .l3 { display: block; padding-left: clamp(72px, 21vw, 400px); }
+  .intro__body {
+    max-width: 580px;
+    margin: clamp(52px, 8vw, 96px) clamp(0px, 4vw, 56px) 0 auto;
   }
+  .intro__body .kicker { margin-bottom: 18px; }
+  .intro__desc {
+    font-size: 0.98rem;
+    line-height: 2;
+    color: var(--color-text-muted);
+    margin: 0 0 30px;
+  }
+  .intro__links { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
 
-  /* ─── VENUE ZONES — แถวสลับแบบ editorial ─── */
-  .zones-cine { padding: var(--space-section) 0 calc(var(--space-section) * 1.15); }
-  .zone-rows {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(72px, 10vw, 128px);
-    max-width: 1160px;
+  /* ─── ZONES — full-screen scrolling sections (Hillbrook "The farm") ─── */
+  .zones-head {
+    max-width: 1500px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 clamp(20px, 5vw, 64px) clamp(44px, 6vw, 80px);
   }
-  .zone-row {
+  .zones-head h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 400;
+    margin: 10px 0 0;
+    letter-spacing: 0.5px;
+  }
+  .zone {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 26px;
-    align-items: center;
+    background: var(--color-cream);
   }
-  @media (min-width: 900px) {
-    .zone-row { grid-template-columns: 7fr 5fr; gap: clamp(44px, 6vw, 92px); }
-    .zone-row--flip .zone-row__media { order: 2; }
-  }
-  .zone-row__media {
+  .zone__media {
     display: block;
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
-    border-radius: 6px;
-    background: var(--color-line);
-    box-shadow: var(--shadow-md);
+    position: relative;
+    height: 58vh;
+    min-height: 320px;
   }
-  .zone-row__media img {
+  .zone__media img {
+    position: absolute;
+    inset: 0;
     width: 100%; height: 100%;
     object-fit: cover;
     display: block;
-    transform: scale(1.001);
-    transition: transform 1.4s ease;
   }
-  .zone-row__media:hover img { transform: scale(1.05); }
-  .zone-row__num {
-    display: block;
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1rem;
-    letter-spacing: 4px;
-    color: var(--color-gold);
-    margin-bottom: 14px;
-  }
-  .zone-row__name {
-    font-family: var(--font-serif);
-    font-size: clamp(1.9rem, 3.6vw, 2.7rem);
-    font-weight: 400;
-    color: var(--color-brown-dark);
-    line-height: 1.2;
-    margin: 0 0 16px;
-  }
-  .zone-row__desc {
-    color: var(--color-text-muted);
-    font-size: 1.02rem;
-    line-height: 1.95;
-    max-width: 44ch;
-    margin: 0 0 26px;
-  }
-  .zone-row__link {
-    display: inline-block;
-    font-size: 0.8rem;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--color-gold-dark);
-    border-bottom: 1px solid var(--color-gold-light);
-    padding-bottom: 5px;
-    transition: color 0.25s ease, border-color 0.25s ease;
-  }
-  .zone-row__link:hover { color: var(--color-brown-dark); border-color: var(--color-brown); }
-
-  /* ─── FEATURED PACKAGE — premium band ─── */
-  .feat-band {
-    background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-cream-warm) 100%);
-    padding: var(--space-section) 20px;
-  }
-  .feat {
-    display: grid;
-    grid-template-columns: 1fr;
-    max-width: 1160px;
-    margin: 0 auto;
-    background: var(--color-ivory);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: var(--shadow-lg);
-    position: relative;
-  }
-  @media (min-width: 880px) {
-    .feat { grid-template-columns: 1.15fr 1fr; }
-    .feat__img { min-height: 560px; aspect-ratio: auto; }
-  }
-  .feat__img { position: relative; aspect-ratio: 16 / 11; }
-  .feat__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .feat__img::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(46,34,24,0) 65%, rgba(46,34,24,0.25) 100%);
-  }
-  .feat__badge {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 2;
-    background: rgba(255, 252, 247, 0.95);
-    color: var(--color-gold-dark);
-    border: 1px solid var(--color-gold-light);
-    padding: 7px 18px;
-    border-radius: 999px;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-  }
-  .feat__body {
-    padding: clamp(36px, 5.5vw, 68px) clamp(26px, 4.5vw, 56px);
+  .zone__text {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: flex-start;
+    padding: clamp(48px, 8vw, 110px) clamp(24px, 5vw, 80px);
   }
-  .feat__eyebrow {
-    font-family: var(--font-script);
-    color: var(--color-gold);
-    font-size: clamp(1.7rem, 3vw, 2.1rem);
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-  .feat__title {
+  .zone__kicker { margin-bottom: 20px; }
+  .zone__name {
     font-family: var(--font-serif);
-    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    font-size: clamp(2.2rem, 4.2vw, 3.5rem);
     font-weight: 400;
-    margin: 0 0 12px;
-    color: var(--color-brown-dark);
-    line-height: 1.18;
-  }
-  .feat__sub {
-    color: var(--color-text-muted);
+    line-height: 1.12;
     margin: 0 0 22px;
+  }
+  .zone__name em { font-style: italic; }
+  .zone__desc {
+    max-width: 46ch;
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    line-height: 1.95;
+    margin: 0 0 36px;
+  }
+  @media (min-width: 900px) {
+    .zone { grid-template-columns: 42fr 58fr; min-height: 94vh; }
+    .zone__media { height: auto; min-height: 100%; }
+    .zone--flip .zone__media { order: -1; }
+  }
+
+  /* ─── FEATURED PACKAGE — split เต็มจอ โทนเดียวกับ zones ─── */
+  .feat {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: var(--color-cream-warm);
+  }
+  .feat__media {
+    position: relative;
+    height: 58vh;
+    min-height: 320px;
+  }
+  .feat__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .feat__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: clamp(56px, 8vw, 110px) clamp(24px, 5vw, 80px);
+  }
+  .feat__kicker { margin-bottom: 20px; color: var(--color-gold-dark); opacity: 1; }
+  .feat__name {
+    font-family: var(--font-serif);
+    font-size: clamp(2.1rem, 4vw, 3.3rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin: 0 0 10px;
+  }
+  .feat__pkgname {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+    color: var(--color-gold-dark);
+    margin: 0 0 22px;
+  }
+  .feat__desc {
+    max-width: 52ch;
+    color: var(--color-text-muted);
     font-size: 0.98rem;
-    line-height: 1.85;
+    line-height: 1.95;
+    margin: 0 0 30px;
   }
   .feat__price-row {
     display: flex;
     align-items: baseline;
     gap: 18px;
     flex-wrap: wrap;
-    padding-top: 20px;
-    margin-bottom: 22px;
+    padding-top: 24px;
+    margin-bottom: 26px;
     border-top: 1px solid var(--color-line);
+    align-self: stretch;
   }
   .feat__price {
     font-family: var(--font-serif);
-    font-size: clamp(2.5rem, 5.5vw, 3.6rem);
-    color: var(--color-gold-dark);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--color-text);
     line-height: 1;
   }
-  .feat__price-meta { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.6; }
-  .feat__pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
-  .feat__pill {
-    background: transparent;
-    border: 1px solid var(--color-line);
-    padding: 6px 16px;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    letter-spacing: 0.4px;
+  .feat__price-meta { font-size: 0.88rem; color: var(--color-text-muted); line-height: 1.7; }
+  .feat__slots { align-self: stretch; margin: 0 0 36px; }
+  .feat__slot {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 11px 2px;
+    border-bottom: 1px solid var(--color-line);
+    font-size: 0.88rem;
     color: var(--color-brown);
   }
-  .feat__ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .feat__slot .hrs { color: var(--color-text-muted); white-space: nowrap; }
+  .feat__links { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+  @media (min-width: 900px) {
+    .feat { grid-template-columns: 42fr 58fr; min-height: 92vh; }
+    .feat__media { height: auto; min-height: 100%; order: 2; }
+  }
 
-  /* ─── EXPLORE — minimal editorial list ─── */
-  .explore-cine { padding: var(--space-section) 20px; background: var(--color-cream); }
-  .explore-list {
-    max-width: 1160px;
+  /* ─── EXPLORE — editorial index rows ─── */
+  .explore {
+    max-width: 1500px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border-top: 1px solid var(--color-line);
-    border-left: 1px solid var(--color-line);
+    padding: clamp(80px, 10vw, 140px) clamp(20px, 5vw, 64px);
   }
-  @media (min-width: 880px) { .explore-list { grid-template-columns: repeat(4, 1fr); } }
-  .explore-item {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding: clamp(26px, 4vw, 40px) clamp(18px, 3vw, 30px);
-    border-right: 1px solid var(--color-line);
-    border-bottom: 1px solid var(--color-line);
-    background: transparent;
-    color: inherit;
-    text-decoration: none;
-    transition: background 0.3s ease;
-    position: relative;
-  }
-  .explore-item:hover { background: var(--color-ivory); color: inherit; }
-  .explore-item__icon { font-size: 1.15rem; filter: saturate(0.7); opacity: 0.9; }
-  .explore-item__title {
+  .explore h2 {
     font-family: var(--font-serif);
-    font-size: clamp(1.15rem, 2vw, 1.4rem);
-    font-weight: 500;
-    color: var(--color-brown-dark);
-    margin: 2px 0 0;
+    font-size: clamp(2rem, 4.4vw, 3.2rem);
+    font-weight: 400;
+    margin: 10px 0 clamp(36px, 5vw, 56px);
   }
-  .explore-item__hint { font-size: 0.82rem; color: var(--color-text-muted); margin: 0; }
-  .explore-item__arrow {
-    margin-top: 14px;
-    font-size: 0.95rem;
-    color: var(--color-gold);
-    transition: transform 0.3s ease;
-  }
-  .explore-item:hover .explore-item__arrow { transform: translateX(6px); }
-
-  /* ─── GALLERY — full-bleed mosaic ─── */
-  .gal-cine {
-    background: var(--color-cream-warm);
-    padding: var(--space-section) 0;
-  }
-  .gal-grid {
+  .idx { border-top: 1px solid var(--color-line); }
+  .idx a {
     display: grid;
-    gap: 10px;
-    padding: 0 12px;
-    max-width: 1480px;
+    grid-template-columns: auto 1fr auto;
+    gap: clamp(16px, 4vw, 48px);
+    align-items: center;
+    padding: clamp(22px, 3.5vw, 34px) 4px;
+    border-bottom: 1px solid var(--color-line);
+    color: inherit;
+    transition: background 0.3s ease, padding 0.3s ease;
+  }
+  .idx a:hover { background: var(--color-ivory); padding-left: 14px; color: inherit; }
+  .idx__num {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--color-gold);
+    font-size: 1rem;
+    letter-spacing: 2px;
+  }
+  .idx__title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+    font-weight: 400;
+    color: var(--color-brown-dark);
+    line-height: 1.3;
+  }
+  .idx__ico { font-size: 0.85em; margin-right: 10px; filter: saturate(0.7); opacity: 0.9; }
+  .idx__hint {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: 4px;
+  }
+
+  /* ─── GALLERY — horizontal slider (Hillbrook) ─── */
+  .gal { background: var(--color-cream-warm); padding: clamp(80px, 10vw, 140px) 0; }
+  .gal__head {
+    max-width: 1500px;
     margin: 0 auto;
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 165px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 0 clamp(20px, 5vw, 64px) clamp(36px, 5vw, 56px);
   }
-  @media (min-width: 760px) {
-    .gal-grid {
-      grid-template-columns: repeat(4, 1fr);
-      grid-auto-rows: clamp(220px, 24vw, 300px);
-      gap: 12px;
-    }
+  .gal__head h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.4vw, 3.2rem);
+    font-weight: 400;
+    margin: 10px 0 0;
   }
-  .gal-item {
+  .gal__track {
+    display: flex;
+    gap: clamp(12px, 1.8vw, 24px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 0 clamp(16px, 4vw, 48px);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .gal__track::-webkit-scrollbar { display: none; }
+  .gal__slide {
     position: relative;
+    flex: 0 0 min(84vw, 880px);
+    aspect-ratio: 16 / 10;
+    scroll-snap-align: center;
     overflow: hidden;
-    border-radius: 6px;
-    background: var(--color-line);
     display: block;
   }
-  .gal-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
-  .gal-item img {
+  .gal__slide img {
     width: 100%; height: 100%;
     object-fit: cover;
     display: block;
-    transform: scale(1.001);
-    transition: transform 1.3s ease;
   }
-  .gal-item:hover img { transform: scale(1.05); }
-  .gal-cta { text-align: center; margin-top: clamp(32px, 5vw, 48px); }
-
-  /* ─── WHY — cinematic stat band ─── */
-  .why-cine {
-    background: var(--color-brown-dark);
-    color: var(--color-cream);
-    padding: clamp(80px, 11vw, 130px) 20px;
+  .gal__cap {
+    position: absolute;
+    left: 18px; bottom: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.45);
   }
-  .why-grid {
-    max-width: 1000px;
+  .gal__cap::before {
+    content: "";
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--color-gold-light);
+    flex-shrink: 0;
+  }
+  .gal__nav {
+    max-width: 1500px;
     margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 26px clamp(20px, 5vw, 64px) 0;
+  }
+  .gal__btn {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--color-brown);
+    background: transparent;
+    color: var(--color-brown);
+    font-size: 1.05rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .gal__btn:hover { background: var(--color-brown); color: #fff; }
+
+  /* ─── WHY — สถิติแบบ editorial บนพื้นเรียบ ─── */
+  .why {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: clamp(80px, 10vw, 140px) clamp(20px, 5vw, 64px);
+  }
+  .why__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 44px;
-    text-align: center;
   }
-  @media (min-width: 640px) { .why-grid { grid-template-columns: repeat(3, 1fr); gap: 36px; } }
+  @media (min-width: 640px) { .why__grid { grid-template-columns: repeat(3, 1fr); } }
+  .why__cell {
+    padding: clamp(28px, 4vw, 44px) clamp(20px, 3vw, 36px);
+    border-top: 1px solid var(--color-line);
+  }
   .why-num {
-    font-family: var(--font-script);
-    color: var(--color-gold-light);
-    font-size: clamp(3.2rem, 6vw, 4.2rem);
+    font-family: var(--font-serif);
+    font-size: clamp(3.4rem, 6vw, 4.8rem);
+    font-weight: 400;
+    color: var(--color-gold-dark);
     line-height: 1;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
   .why-h {
     font-family: var(--font-serif);
-    font-size: clamp(1.2rem, 2.2vw, 1.45rem);
-    font-weight: 400;
-    color: #fff;
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+    font-weight: 500;
+    color: var(--color-brown-dark);
     margin-bottom: 8px;
   }
-  .why-p { color: rgba(251, 246, 239, 0.72); font-size: 0.95rem; margin: 0; line-height: 1.7; }
+  .why-p { color: var(--color-text-muted); font-size: 0.94rem; margin: 0; line-height: 1.8; }
 
-  /* ─── BOOKING STEPS ─── */
-  .booking-steps-section { background: var(--color-cream); padding: var(--space-section) 0; }
+  /* ─── BOOKING — โทนเรียบ + timeline เดิม ─── */
+  .booking { background: var(--color-cream-warm); padding: clamp(80px, 10vw, 140px) 20px; }
+  .booking__inner { max-width: 960px; margin: 0 auto; }
+  .booking__inner h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.4vw, 3.2rem);
+    font-weight: 400;
+    margin: 10px 0 clamp(36px, 5vw, 52px);
+  }
   .booking-tabs {
     display: flex;
-    justify-content: center;
-    gap: 12px;
+    gap: clamp(20px, 4vw, 40px);
     margin-bottom: 44px;
     flex-wrap: wrap;
+    border-bottom: 1px solid var(--color-line);
   }
   .booking-tab {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 11px 26px;
-    min-height: 44px;
-    border-radius: 999px;
-    border: 1px solid var(--color-gold-light);
+    padding: 12px 2px 16px;
+    min-height: 48px;
     background: transparent;
-    color: var(--color-brown);
+    border: none;
+    border-bottom: 1px solid transparent;
+    margin-bottom: -1px;
+    color: var(--color-text-muted);
     font-family: var(--font-sans);
-    font-size: 0.95rem;
-    font-weight: 500;
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: color 0.25s ease, border-color 0.25s ease;
   }
-  .booking-tab:hover { border-color: var(--color-gold); color: var(--color-gold-dark); }
-  .booking-tab.active { background: var(--color-gold); border-color: var(--color-gold); color: #fff; }
+  .booking-tab:hover { color: var(--color-brown-dark); }
+  .booking-tab.active { color: var(--color-brown-dark); border-bottom-color: var(--color-gold); }
   .tab-badge {
     display: inline-block;
-    background: rgba(255,255,255,0.25);
+    border: 1px solid var(--color-gold);
+    color: var(--color-gold-dark);
     border-radius: 999px;
     padding: 2px 10px;
-    font-size: 0.78rem;
+    font-size: 0.74rem;
     font-weight: 600;
   }
-  .booking-tab:not(.active) .tab-badge { background: var(--color-gold-light); color: var(--color-brown-dark); }
-
   .booking-note {
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    background: rgba(184,146,75,0.08);
-    border: 1px solid var(--color-gold-light);
-    border-radius: 10px;
+    border-left: 2px solid var(--color-gold);
+    background: var(--color-cream);
     padding: 16px 22px;
     margin-bottom: 44px;
     color: var(--color-brown-dark);
     font-size: 0.92rem;
     line-height: 1.7;
     max-width: 640px;
-    margin-left: auto;
-    margin-right: auto;
   }
-  .booking-note-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+  .booking-note-icon { font-size: 1.15rem; flex-shrink: 0; margin-top: 1px; }
 
-  .timeline-steps {
-    display: flex;
-    align-items: flex-start;
-    position: relative;
-    gap: 0;
-  }
+  .timeline-steps { display: flex; align-items: flex-start; position: relative; gap: 0; }
   .timeline-steps::before {
     content: "";
     position: absolute;
@@ -535,7 +565,7 @@
     left: calc(100% / 6);
     right: calc(100% / 6);
     height: 1px;
-    background: linear-gradient(90deg, var(--color-gold-light), var(--color-gold), var(--color-gold-light));
+    background: var(--color-gold-light);
     z-index: 0;
   }
   .timeline-step {
@@ -549,10 +579,9 @@
     padding: 0 8px;
   }
   .step-dot {
-    width: 44px;
-    height: 44px;
+    width: 44px; height: 44px;
     border-radius: 50%;
-    background: var(--color-cream);
+    background: var(--color-cream-warm);
     border: 1px solid var(--color-gold);
     display: flex;
     align-items: center;
@@ -577,99 +606,86 @@
     margin-bottom: 6px;
     line-height: 1.3;
   }
-  .step-desc { font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.6; }
+  .step-desc { font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.65; }
   .step-tag {
     display: inline-block;
-    margin-top: 8px;
-    padding: 3px 12px;
-    background: transparent;
-    border: 1px solid var(--color-gold);
-    color: var(--color-gold-dark);
-    border-radius: 999px;
-    font-size: 0.76rem;
+    margin-top: 10px;
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
     font-weight: 600;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    color: var(--color-gold-dark);
+    border-bottom: 1px solid var(--color-gold-light);
+    padding-bottom: 2px;
   }
-
   @media (max-width: 639px) {
     .timeline-steps { flex-direction: column; align-items: stretch; }
-    .timeline-steps::before {
-      top: 0; bottom: 0; left: 22px; right: auto;
-      width: 1px; height: auto;
-    }
-    .timeline-step {
-      flex-direction: row;
-      text-align: left;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 0 0 30px 0;
-    }
+    .timeline-steps::before { top: 0; bottom: 0; left: 22px; right: auto; width: 1px; height: auto; }
+    .timeline-step { flex-direction: row; text-align: left; align-items: flex-start; gap: 16px; padding: 0 0 30px 0; }
     .step-dot { margin-bottom: 0; flex-shrink: 0; }
     .step-content { padding-top: 8px; }
   }
 
-  /* ─── FINAL CTA ─── */
-  .contact-cine {
-    background: linear-gradient(180deg, var(--color-cream-warm) 0%, var(--color-cream) 100%);
-    padding: clamp(88px, 12vw, 140px) 20px;
-    text-align: center;
-  }
-  .contact-cine__lead {
-    color: var(--color-text-muted);
-    margin: 0 auto 36px;
-    max-width: 480px;
-    line-height: 1.85;
-  }
-  .final-ctas__primary {
+  /* ─── CONTACT — full-bleed image + ลิงก์ขีดเส้นใต้ (redesign) ─── */
+  .contact {
+    position: relative;
+    min-height: clamp(520px, 82vh, 820px);
     display: flex;
-    gap: 12px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .final-ctas__map { margin-top: 22px; text-align: center; }
-  .final-ctas__map a {
-    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    min-height: 44px;
-    padding: 10px 24px;
-    border: 1px solid var(--color-line);
-    border-radius: 999px;
-    color: var(--color-brown);
-    font-size: 0.88rem;
-    letter-spacing: 0.5px;
-    transition: border-color 0.25s ease, color 0.25s ease;
+    text-align: center;
+    padding: clamp(90px, 12vw, 150px) 20px;
+    overflow: hidden;
   }
-  .final-ctas__map a:hover { border-color: var(--color-gold); color: var(--color-gold-dark); }
-  @media (max-width: 639px) {
-    .final-ctas__primary { flex-direction: column; align-items: stretch; max-width: 360px; margin: 0 auto; }
-    .final-ctas__primary .btn { width: 100%; }
-  }
-
-  /* section heading รุ่นใหม่ (โปร่ง บางเบา) */
-  .sec-head { text-align: center; margin-bottom: clamp(44px, 7vw, 72px); }
-  .sec-head .eyebrow {
-    display: block;
-    font-family: var(--font-script);
-    font-size: clamp(1.5rem, 2.6vw, 1.9rem);
-    color: var(--color-gold);
-    margin-bottom: 2px;
-  }
-  .sec-head h2 {
+  .contact__bg { position: absolute; inset: 0; background-size: cover; background-position: center; background-color: var(--color-brown-dark); }
+  .contact__bg::after { content: ""; position: absolute; inset: 0; background: rgba(30, 18, 8, 0.6); }
+  .contact__inner { position: relative; z-index: 2; max-width: 820px; color: #fff; }
+  .contact__inner .kicker { color: var(--color-gold-light); opacity: 1; margin-bottom: 18px; }
+  .contact__inner h2 {
     font-family: var(--font-serif);
-    font-size: clamp(1.9rem, 4.6vw, 3rem);
+    font-size: clamp(2.2rem, 5.4vw, 3.8rem);
     font-weight: 400;
-    letter-spacing: 0.5px;
-    margin: 0;
+    color: #fff;
+    margin: 0 0 14px;
   }
-  .sec-head h2::after {
-    content: "";
-    display: block;
-    width: 40px;
-    height: 1px;
-    background: var(--color-gold-light);
-    margin: 18px auto 0;
+  .contact__quote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+    color: rgba(255,255,255,0.85);
+    margin: 0 0 10px;
+  }
+  .contact__lead {
+    color: rgba(255,255,255,0.78);
+    font-size: 0.95rem;
+    line-height: 1.9;
+    margin: 0 auto;
+    max-width: 460px;
+  }
+  .contact__links {
+    margin-top: clamp(36px, 5vw, 52px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(18px, 4vw, 48px);
+  }
+  .clink {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 6px 2px;
+    color: #fff;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255,255,255,0.35);
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+  .clink:hover { color: var(--color-gold-light); border-color: var(--color-gold-light); }
+  @media (max-width: 639px) {
+    .contact__links { flex-direction: column; align-items: center; gap: 6px; }
   }
 </style>
 </head>
@@ -677,107 +693,110 @@
 
 <div id="nav-mount"></div>
 
-<!-- HERO -->
-<section class="hero-cine" id="heroSection">
-  <div class="hero-carousel" id="heroCarousel" aria-hidden="true">
+<!-- HERO — ภาพเต็มจอ + wordmark ยักษ์เกยขอบล่าง -->
+<section class="hero" id="heroSection">
+  <div class="hero__media" id="heroCarousel" aria-hidden="true">
     <div class="hero-carousel__slides" id="heroSlides"></div>
   </div>
-  <div class="hero-cine__content">
-    <div class="hero-cine__script">Chaan</div>
-    <h1>WEDDING VENUE</h1>
-    <p class="hero-cine__sub" id="heroSub">Chaan de Cafe &amp; Wedding · สถานที่จัดงานแต่งงาน 3 โซน 3 บรรยากาศ</p>
-    <div class="hero-cine__ctas">
-      <a href="#promo" class="btn btn--primary">ดู Essential จันทร์คุ้มครบ 99,999 →</a>
-      <a href="./packages/" class="btn btn--light">แพ็คเกจทั้งหมด</a>
-    </div>
-  </div>
-  <div class="hero-cine__cue" aria-hidden="true"></div>
+  <p class="hero__topline" id="heroSub">Chaan de Cafe &amp; Wedding · สถานที่จัดงานแต่งงาน 3 โซน 3 บรรยากาศ</p>
+  <h1>WEDDING VENUE</h1>
+  <div class="hero__wordmark" aria-hidden="true">CHAAN</div>
   <div class="hero-dots" id="heroDots"></div>
 </section>
 
-<!-- INTRO STATEMENT -->
-<section class="intro-state" id="introSection">
-  <div class="reveal">
-    <span class="intro-state__eyebrow" id="introEyebrow"></span>
-    <p class="intro-state__text" id="introStatement"></p>
-    <div class="intro-state__rule" aria-hidden="true"></div>
+<!-- INTRO — statement เยื้องบรรทัด + ย่อหน้าเยื้องขวา -->
+<section class="intro" id="introSection">
+  <div class="intro__inner">
+    <p class="intro__statement reveal">
+      บางสถานที่ มีไว้เพียง<em>แวะมาเยือน</em>
+      <span class="l2">แต่บางสถานที่ มีไว้เป็น<em>จุดเริ่มต้น</em></span>
+      <span class="l3">ของเรื่องราวทั้งชีวิต</span>
+    </p>
+    <div class="intro__body reveal">
+      <span class="kicker" id="introEyebrow"></span>
+      <p class="intro__desc" id="introStatement"></p>
+      <div class="intro__links">
+        <a href="#promo" class="lnk">ดู Essential จันทร์คุ้มครบ 99,999 <span class="circ">→</span></a>
+        <a href="./packages/" class="lnk">แพ็คเกจทั้งหมด <span class="circ">→</span></a>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- VENUE ZONES -->
-<section class="zones-cine" id="venueSpacesSection" style="display:none;">
-  <div class="sec-head reveal">
-    <span class="eyebrow">Our Spaces</span>
+<!-- VENUE ZONES — full-screen scrolling sections -->
+<section id="venueSpacesSection" style="display:none;">
+  <div class="zones-head reveal">
+    <span class="kicker">Our Spaces</span>
     <h2>โซนสถานที่</h2>
   </div>
-  <div class="zone-rows" id="venueSpacesGrid"></div>
+  <div id="venueSpacesGrid"></div>
 </section>
 
 <!-- FEATURED PACKAGE -->
-<section class="feat-band" id="promo">
+<section id="promo">
   <div id="featuredMount" class="loading">กำลังโหลดโปรโมชั่น...</div>
 </section>
 
-<!-- EXPLORE -->
-<section class="explore-cine">
-  <div class="sec-head reveal">
-    <span class="eyebrow">Explore</span>
+<!-- EXPLORE — editorial index -->
+<section class="explore">
+  <div class="reveal">
+    <span class="kicker">Explore</span>
     <h2>เลือกข้อมูลที่คุณสนใจ</h2>
   </div>
-  <div class="explore-list reveal">
-    <a href="./packages/" class="explore-item">
-      <span class="explore-item__icon">💐</span>
-      <div class="explore-item__title">แพ็คเกจ</div>
-      <p class="explore-item__hint">7 แพ็คเกจงานแต่ง + สัมมนา</p>
-      <span class="explore-item__arrow">→</span>
+  <div class="idx reveal">
+    <a href="./packages/">
+      <span class="idx__num">01</span>
+      <span><span class="idx__title"><span class="idx__ico">💐</span>แพ็คเกจ</span><span class="idx__hint">7 แพ็คเกจงานแต่ง + สัมมนา</span></span>
+      <span class="circ">→</span>
     </a>
-    <a href="./venue-fees.html" class="explore-item">
-      <span class="explore-item__icon">🏛️</span>
-      <div class="explore-item__title">ค่าเช่า / บริการเสริม</div>
-      <p class="explore-item__hint">เช่าสถานที่ + add-on</p>
-      <span class="explore-item__arrow">→</span>
+    <a href="./venue-fees.html">
+      <span class="idx__num">02</span>
+      <span><span class="idx__title"><span class="idx__ico">🏛️</span>ค่าเช่า / บริการเสริม</span><span class="idx__hint">เช่าสถานที่ + add-on</span></span>
+      <span class="circ">→</span>
     </a>
-    <a href="./menu/" class="explore-item">
-      <span class="explore-item__icon">🍽️</span>
-      <div class="explore-item__title">เมนูอาหาร</div>
-      <p class="explore-item__hint">บุฟเฟต์ · จีน · จันทร์</p>
-      <span class="explore-item__arrow">→</span>
+    <a href="./menu/">
+      <span class="idx__num">03</span>
+      <span><span class="idx__title"><span class="idx__ico">🍽️</span>เมนูอาหาร</span><span class="idx__hint">บุฟเฟต์ · จีน · จันทร์</span></span>
+      <span class="circ">→</span>
     </a>
-    <a href="./gallery/" class="explore-item">
-      <span class="explore-item__icon">📸</span>
-      <div class="explore-item__title">รูปภาพ</div>
-      <p class="explore-item__hint">3 โซน · 7 พิธี</p>
-      <span class="explore-item__arrow">→</span>
+    <a href="./gallery/">
+      <span class="idx__num">04</span>
+      <span><span class="idx__title"><span class="idx__ico">📸</span>รูปภาพ</span><span class="idx__hint">3 โซน · 7 พิธี</span></span>
+      <span class="circ">→</span>
     </a>
   </div>
 </section>
 
-<!-- GALLERY -->
-<section class="gal-cine">
-  <div class="sec-head reveal">
-    <span class="eyebrow">Gallery</span>
-    <h2>บรรยากาศสถานที่</h2>
+<!-- GALLERY — horizontal slider -->
+<section class="gal">
+  <div class="gal__head reveal">
+    <div>
+      <span class="kicker">Gallery</span>
+      <h2>บรรยากาศสถานที่</h2>
+    </div>
+    <a href="./gallery/" class="lnk">คลิกเพื่อดูภาพทั้งหมด <span class="circ">→</span></a>
   </div>
-  <div class="gal-grid reveal" id="galleryPreviewGrid"></div>
-  <div class="gal-cta">
-    <a href="./gallery/" class="btn btn--ghost">คลิกเพื่อดูภาพทั้งหมด →</a>
+  <div class="gal__track" id="galleryPreviewGrid"></div>
+  <div class="gal__nav">
+    <button class="gal__btn" id="galPrev" aria-label="ภาพก่อนหน้า">←</button>
+    <button class="gal__btn" id="galNext" aria-label="ภาพถัดไป">→</button>
   </div>
 </section>
 
 <!-- WHY US -->
-<section class="why-cine">
-  <div class="why-grid reveal">
-    <div>
+<section class="why">
+  <div class="why__grid reveal">
+    <div class="why__cell">
       <div class="why-num">3</div>
       <div class="why-h">โซนสถานที่</div>
       <p class="why-p">ในอาคาร · สวนหินสไตล์อังกฤษ · สวนน้ำตก</p>
     </div>
-    <div>
+    <div class="why__cell">
       <div class="why-num">5</div>
       <div class="why-h">ช่วงเวลาให้เลือก</div>
       <p class="why-p">งานเช้า · เช้าเที่ยง · บ่ายเย็น · เช้าเย็น · เลี้ยงเย็น</p>
     </div>
-    <div>
+    <div class="why__cell">
       <div class="why-num">7</div>
       <div class="why-h">แพ็คเกจงานแต่ง</div>
       <p class="why-p">Essential + Signature + จองข้ามปี</p>
@@ -786,10 +805,10 @@
 </section>
 
 <!-- BOOKING STEPS -->
-<section class="booking-steps-section">
-  <div class="container" style="max-width: 960px;">
-    <div class="sec-head reveal">
-      <span class="eyebrow">How to Book</span>
+<section class="booking">
+  <div class="booking__inner">
+    <div class="reveal">
+      <span class="kicker">How to Book</span>
       <h2>ขั้นตอนการจองและชำระเงิน</h2>
     </div>
 
@@ -872,15 +891,15 @@
   </div>
 </section>
 
-<!-- FINAL CTA -->
-<section class="contact-cine">
-  <div class="reveal">
-    <div class="sec-head" style="margin-bottom: 28px;">
-      <span class="eyebrow">Get in touch</span>
-      <h2>พร้อมให้ปรึกษา</h2>
-    </div>
-    <p class="contact-cine__lead">สนใจสอบถามหรือจองเข้าชมสถานที่ ติดต่อทางช่องทางด้านล่าง</p>
-    <div id="finalCtas"></div>
+<!-- CONTACT — redesign: full-bleed image -->
+<section class="contact">
+  <div class="contact__bg" id="contactBg" aria-hidden="true"></div>
+  <div class="contact__inner reveal">
+    <span class="kicker">Get in touch</span>
+    <h2>พร้อมให้ปรึกษา</h2>
+    <p class="contact__quote">ทุกเรื่องราวความรักมีจุดเริ่มต้น — เริ่มต้นเรื่องราวของคุณที่ ชาน</p>
+    <p class="contact__lead">สนใจสอบถามหรือจองเข้าชมสถานที่ ติดต่อทางช่องทางด้านล่าง</p>
+    <div id="finalCtas" class="contact__links"></div>
   </div>
 </section>
 
@@ -892,16 +911,11 @@
   const data = await CW.mountChrome('home');
   if (!data) return;
 
-  // ── Intro statement (editorial) — ใช้ tagline + description เดิมจาก data ──
-  // (hero sub ใช้ข้อความ static เดิม — description ย้ายไปเป็น statement ใหญ่ด้านล่าง)
+  // ── Intro — tagline + description เดิมจาก data.json ──
   const introEyebrow = document.getElementById('introEyebrow');
   const introStatement = document.getElementById('introStatement');
   if (data.site?.tagline) introEyebrow.textContent = data.site.tagline;
-  if (data.site?.description) {
-    introStatement.textContent = data.site.description;
-  } else {
-    document.getElementById('introSection').style.display = 'none';
-  }
+  if (data.site?.description) introStatement.textContent = data.site.description;
 
   // ── Hero carousel (crossfade) ──
   const allPhotos = data.gallery?.photos || [];
@@ -958,18 +972,13 @@
     heroTimer = setInterval(() => goTo(heroIdx + 1), 6000);
     goTo(0);
 
-    // Swipe / drag
     const heroSection = document.getElementById('heroSection');
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let isDragging = false;
-
+    let touchStartX = 0, touchStartY = 0, isDragging = false;
     heroSection.addEventListener('touchstart', (e) => {
       touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
       isDragging = false;
     }, { passive: true });
-
     heroSection.addEventListener('touchmove', (e) => {
       if (!isDragging) {
         const dx = Math.abs(e.touches[0].clientX - touchStartX);
@@ -977,7 +986,6 @@
         if (dx > dy && dx > 8) isDragging = true;
       }
     }, { passive: true });
-
     heroSection.addEventListener('touchend', (e) => {
       const dx = e.changedTouches[0].clientX - touchStartX;
       if (isDragging && Math.abs(dx) > 40) {
@@ -987,9 +995,7 @@
       }
       isDragging = false;
     }, { passive: true });
-
-    let mouseStartX = 0;
-    let mouseDown = false;
+    let mouseStartX = 0, mouseDown = false;
     heroSection.addEventListener('mousedown', (e) => { mouseStartX = e.clientX; mouseDown = true; });
     heroSection.addEventListener('mouseup', (e) => {
       if (!mouseDown) return;
@@ -1005,25 +1011,12 @@
   } else {
     document.getElementById('heroCarousel').style.display = 'none';
     document.getElementById('heroSection').style.background = 'linear-gradient(180deg, #FFFCF7 0%, #FBF6EF 60%, #F4EBDC 100%)';
-    document.querySelector('.hero-cine__script').style.color = 'var(--color-gold)';
-    document.querySelector('.hero-cine h1').style.color = 'var(--color-gold-dark)';
-    document.querySelector('.hero-cine__sub').style.color = 'var(--color-text-muted)';
+    document.querySelector('.hero h1').style.color = 'var(--color-gold-dark)';
+    document.querySelector('.hero__topline').style.color = 'var(--color-text-muted)';
+    document.querySelector('.hero__wordmark').style.color = 'var(--color-cream-warm)';
   }
 
-  // ── Gallery mosaic (5 ภาพแรกเดิม) ──
-  const previewGrid = document.getElementById('galleryPreviewGrid');
-  if (previewGrid && allPhotos.length > 0) {
-    const previewPhotos = allPhotos.slice(0, 5);
-    previewGrid.innerHTML = previewPhotos.map(p => `
-      <a href="./gallery/" class="gal-item">
-        <img src="${CW.escape(p.url)}" alt="${CW.escape(p.caption || 'บรรยากาศสถานที่')}" loading="lazy" style="${CW.imgStyle(p)}">
-      </a>
-    `).join('');
-  } else if (previewGrid) {
-    previewGrid.closest('section').style.display = 'none';
-  }
-
-  // ── Venue zones — แถวสลับ editorial (ชื่อ/คำอธิบายเดิมจาก data) ──
+  // ── Venue zones — full-screen scrolling sections ──
   const zoneDefs = data.gallery?.zones || [];
   const zoneGrid = document.getElementById('venueSpacesGrid');
   if (zoneGrid && zoneDefs.length) {
@@ -1031,16 +1024,16 @@
       const photo = allPhotos.find(p => p.zone === z.id);
       if (!photo) return '';
       return `
-        <div class="zone-row${zi % 2 ? ' zone-row--flip' : ''} reveal">
-          <a href="./gallery/?zone=${encodeURIComponent(z.id)}" class="zone-row__media">
+        <div class="zone${zi % 2 ? ' zone--flip' : ''}">
+          <div class="zone__text reveal">
+            <span class="kicker zone__kicker">Zone ${String(zi + 1).padStart(2, '0')}</span>
+            <h3 class="zone__name">${CW.escape(z.name)}</h3>
+            <p class="zone__desc">${CW.escape(z.description || '')}</p>
+            <a class="lnk" href="./gallery/?zone=${encodeURIComponent(z.id)}">ดูรูปภาพ <span class="circ">→</span></a>
+          </div>
+          <a href="./gallery/?zone=${encodeURIComponent(z.id)}" class="zone__media">
             <img src="${CW.escape(photo.url)}" alt="${CW.escape(z.name)}" loading="lazy" style="${CW.imgStyle(photo)}">
           </a>
-          <div class="zone-row__body">
-            <span class="zone-row__num">${String(zi + 1).padStart(2, '0')}</span>
-            <h3 class="zone-row__name">${CW.escape(z.name)}</h3>
-            <p class="zone-row__desc">${CW.escape(z.description || '')}</p>
-            <a class="zone-row__link" href="./gallery/?zone=${encodeURIComponent(z.id)}">ดูรูปภาพ →</a>
-          </div>
         </div>`;
     }).join('');
     if (zoneCards.trim()) {
@@ -1049,7 +1042,7 @@
     }
   }
 
-  // ── Featured package (ข้อมูล/ราคา render เหมือนเดิมทุกอย่าง) ──
+  // ── Featured package (ข้อมูล/ราคา render เดิมทุกค่า) ──
   const featuredId = data.featuredPackageId;
   const all = [...(data.packages?.wedding || []), ...(data.packages?.seminar || [])];
   const featured = all.find(p => p.id === featuredId) || all[0];
@@ -1067,15 +1060,12 @@
 
     featuredMount.classList.remove('loading');
     featuredMount.innerHTML = `
-      <div class="feat reveal">
-        <div class="feat__img">
-          <span class="feat__badge">${isSignature ? 'Signature' : 'Essential'}</span>
-          <img src="${CW.escape(featured.image)}" alt="${CW.escape(featured.name)}" style="${CW.imgStyle(featured)}">
-        </div>
-        <div class="feat__body">
-          <span class="feat__eyebrow">${CW.escape(featured.name)}</span>
-          <h2 class="feat__title">${tierLabel}</h2>
-          <p class="feat__sub">${CW.escape(featured.longDescription || featured.shortDescription || '')}</p>
+      <div class="feat">
+        <div class="feat__body reveal">
+          <span class="kicker feat__kicker">Recommended · ${isSignature ? 'Signature' : 'Essential'}</span>
+          <h2 class="feat__name">${tierLabel}</h2>
+          <p class="feat__pkgname">${CW.escape(featured.name)}</p>
+          <p class="feat__desc">${CW.escape(featured.longDescription || featured.shortDescription || '')}</p>
           <div class="feat__price-row">
             <div class="feat__price">${CW.fmtBaht(price)}</div>
             <div class="feat__price-meta">
@@ -1083,13 +1073,16 @@
               <small>${CW.escape(featured.notes || '').split('·')[0]}</small>
             </div>
           </div>
-          <div class="feat__pills">
-            ${slots.map(s => `<span class="feat__pill">${CW.escape(s.name)} · ${CW.escape(s.hours)}</span>`).join('')}
+          <div class="feat__slots">
+            ${slots.map(s => `<div class="feat__slot"><span>${CW.escape(s.name)}</span><span class="hrs">${CW.escape(s.hours)}</span></div>`).join('')}
           </div>
-          <div class="feat__ctas">
-            <a href="./packages/detail.html?id=${encodeURIComponent(featured.id)}" class="btn btn--primary">ดูรายละเอียดเต็ม →</a>
-            <a href="./packages/" class="btn btn--ghost">แพ็คเกจอื่น ๆ</a>
+          <div class="feat__links">
+            <a href="./packages/detail.html?id=${encodeURIComponent(featured.id)}" class="lnk">ดูรายละเอียดเต็ม <span class="circ">→</span></a>
+            <a href="./packages/" class="lnk">แพ็คเกจอื่น ๆ <span class="circ">→</span></a>
           </div>
+        </div>
+        <div class="feat__media">
+          <img src="${CW.escape(featured.image)}" alt="${CW.escape(featured.name)}" loading="lazy" style="${CW.imgStyle(featured)}">
         </div>
       </div>
     `;
@@ -1097,18 +1090,41 @@
     featuredMount.innerHTML = '<div class="empty-state">ยังไม่มีโปรโมชั่น</div>';
   }
 
-  // ── Final CTAs — แถวหลัก (โทร/LINE/Facebook) + แผนที่เป็น secondary ──
+  // ── Gallery slider (Hillbrook-style) ──
+  const track = document.getElementById('galleryPreviewGrid');
+  if (track && allPhotos.length > 0) {
+    const previewPhotos = allPhotos.slice(0, 8);
+    track.innerHTML = previewPhotos.map(p => `
+      <a href="./gallery/" class="gal__slide">
+        <img src="${CW.escape(p.url)}" alt="${CW.escape(p.caption || 'บรรยากาศสถานที่')}" loading="lazy" style="${CW.imgStyle(p)}">
+        ${p.caption ? `<span class="gal__cap">${CW.escape(p.caption)}</span>` : ''}
+      </a>
+    `).join('');
+    const step = () => {
+      const slide = track.querySelector('.gal__slide');
+      return slide ? slide.getBoundingClientRect().width + 18 : 600;
+    };
+    document.getElementById('galPrev').addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+    document.getElementById('galNext').addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+  } else if (track) {
+    track.closest('section').style.display = 'none';
+  }
+
+  // ── Contact — พื้นหลังภาพจริงจาก gallery + ลิงก์ติดต่อเดิมทั้งหมด ──
+  if (allPhotos.length > 0) {
+    const bgPhoto = allPhotos[1] || allPhotos[0];
+    document.getElementById('contactBg').style.backgroundImage = `url("${bgPhoto.url}")`;
+  }
   const c = data.site?.contact || {};
   const ctas = [];
-  if (c.phone) ctas.push(`<a href="tel:${CW.escape(c.phone.replace(/[^\d+]/g, ''))}" class="btn btn--primary">☎ ${CW.escape(c.phone)}</a>`);
+  if (c.phone) ctas.push(`<a href="tel:${CW.escape(c.phone.replace(/[^\d+]/g, ''))}" class="clink">☎ ${CW.escape(c.phone)}</a>`);
   if (c.line) {
     const url = c.line.startsWith('http') ? c.line : `https://line.me/R/ti/p/${encodeURIComponent(c.line)}`;
-    ctas.push(`<a href="${CW.escape(url)}" class="btn btn--ghost" target="_blank">💬 LINE</a>`);
+    ctas.push(`<a href="${CW.escape(url)}" class="clink" target="_blank">💬 LINE</a>`);
   }
-  if (c.facebook) ctas.push(`<a href="${CW.escape(c.facebook)}" class="btn btn--ghost" target="_blank">f Facebook</a>`);
-  let finalHtml = `<div class="final-ctas__primary">${ctas.join('')}</div>`;
-  if (c.mapLink) finalHtml += `<div class="final-ctas__map"><a href="${CW.escape(c.mapLink)}" target="_blank">📍 แผนที่</a></div>`;
-  document.getElementById('finalCtas').innerHTML = finalHtml;
+  if (c.facebook) ctas.push(`<a href="${CW.escape(c.facebook)}" class="clink" target="_blank">f Facebook</a>`);
+  if (c.mapLink) ctas.push(`<a href="${CW.escape(c.mapLink)}" class="clink" target="_blank">📍 แผนที่</a>`);
+  document.getElementById('finalCtas').innerHTML = ctas.join('');
 
   // ── Booking tab switching ──
   document.querySelectorAll('.booking-tab').forEach(btn => {
@@ -1122,7 +1138,7 @@
     });
   });
 
-  // ── Scroll reveal (หลังจาก inject เนื้อหา dynamic แล้ว) ──
+  // ── Scroll reveal ──
   const revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
     const obs = new IntersectionObserver((entries) => {
