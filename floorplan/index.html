@@ -8,46 +8,65 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Sarabun:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/style.css?v=20260612b" />
   <style>
-    .fp-hero {
-      background: var(--color-brown-dark);
-      color: var(--color-cream);
-      text-align: center;
-      padding: 52px var(--space-lg) 40px;
+    .fp-head {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: clamp(40px, 6vw, 72px) clamp(20px, 5vw, 64px) clamp(28px, 4vw, 48px);
     }
-    .fp-hero .script {
-      font-family: var(--font-script);
-      font-size: clamp(2rem, 5vw, 3rem);
-      color: var(--color-gold-light);
-      display: block;
-      margin-bottom: 4px;
+    .dhead__en {
+      font-family: var(--font-serif);
+      font-size: clamp(2.1rem, 4.8vw, 3.6rem);
+      font-weight: 400;
+      line-height: 1.04;
+      letter-spacing: 0.5px;
+      color: var(--color-text);
+      margin: 0;
     }
-    .fp-hero h1 { color: var(--color-cream); font-size: clamp(1.4rem, 4vw, 2rem); margin: 0 0 8px; }
-    .fp-hero p { color: var(--color-cream-warm); opacity: .72; font-size: .9rem; margin: 0; }
+    .dhead__en em { font-style: italic; }
+    h1.dhead__th {
+      font-family: var(--font-sans);
+      font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      color: var(--color-text-muted);
+      margin: 12px 0 0;
+    }
+    .fp-head__desc {
+      max-width: 600px;
+      color: var(--color-text-muted);
+      line-height: 1.95;
+      font-size: 0.95rem;
+      margin: clamp(18px, 3vw, 28px) 0 0;
+    }
 
     .fp-tabs {
       display: flex;
       justify-content: center;
-      background: var(--color-cream-warm);
-      border-bottom: 2px solid var(--color-line);
+      gap: clamp(16px, 4vw, 40px);
+      background: rgba(251, 246, 239, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--color-line);
       position: sticky;
       top: 0;
       z-index: 50;
     }
     .fp-tab {
-      padding: 14px 36px;
+      padding: 14px 4px;
       font-family: var(--font-sans);
-      font-size: .95rem;
-      font-weight: 500;
+      font-size: .92rem;
+      font-weight: 600;
+      letter-spacing: 1px;
       color: var(--color-text-muted);
       cursor: pointer;
       border: none;
-      border-bottom: 3px solid transparent;
+      border-bottom: 1px solid transparent;
+      margin-bottom: -1px;
       background: none;
       transition: color .2s, border-color .2s;
       white-space: nowrap;
     }
     .fp-tab:hover { color: var(--color-gold); }
-    .fp-tab.active { color: var(--color-gold-dark); border-bottom-color: var(--color-gold); }
+    .fp-tab.active { color: var(--color-brown-dark); border-bottom-color: var(--color-gold); }
 
     .fp-panel { display: none; padding: var(--space-xl) var(--space-lg); max-width: 980px; margin: 0 auto; }
     .fp-panel.active { display: block; }
@@ -60,8 +79,7 @@
     .fp-map-wrap {
       background: #e8e4dc;
       border: 1px solid var(--color-line);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
+      border-radius: 0;
       overflow: hidden;
       margin-bottom: var(--space-lg);
     }
@@ -88,8 +106,10 @@
 
     .fp-note {
       background: var(--color-cream-warm);
-      border: 1px solid var(--color-line);
-      border-radius: var(--radius-md);
+      border: none;
+      border-left: 2px solid var(--color-gold);
+      border-radius: 0;
+      text-align: left;
       padding: var(--space-md) var(--space-lg);
       font-size: .82rem;
       color: var(--color-text-muted);
@@ -105,10 +125,10 @@
 <body>
   <div id="nav-mount"></div>
 
-  <section class="fp-hero">
-    <span class="script">Floor Plan</span>
-    <h1>แปลนสถานที่</h1>
-    <p>ภาพรวมพื้นที่จัดงานทั้งหมดของ CHAAN Wedding Venue</p>
+  <section class="fp-head">
+    <div class="dhead__en">Floor <em>Plan</em></div>
+    <h1 class="dhead__th">แปลนสถานที่</h1>
+    <p class="fp-head__desc">ภาพรวมพื้นที่จัดงานทั้งหมดของ CHAAN Wedding Venue</p>
   </section>
 
   <div class="fp-tabs" role="tablist">

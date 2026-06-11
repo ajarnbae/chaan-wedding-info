@@ -974,7 +974,7 @@
   // ── Hero carousel (crossfade) ──
   const allPhotos = data.gallery?.photos || [];
   const shuffled = [...allPhotos].sort(() => Math.random() - 0.5);
-  const heroPhotos = shuffled.length ? shuffled : [];
+  const heroPhotos = shuffled.slice(0, 8); // จำกัด 8 ภาพ — เร็วขึ้น ไม่โหลดทั้ง gallery
   const slidesEl = document.getElementById('heroSlides');
   const dotsEl = document.getElementById('heroDots');
   const MAX_DOTS = 5;

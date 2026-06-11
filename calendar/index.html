@@ -6,9 +6,66 @@
 <title>ตารางวันว่าง — Chaan Wedding</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css?v=20260612b">
 <style>
+  /* ── ธีม editorial ร่วม ── */
+  .phero { position: relative; height: clamp(260px, 46vh, 520px); }
+  .phero__media { position: absolute; inset: 0; overflow: hidden; background: var(--color-line); }
+  .phero__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .phero__media::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(30,18,8,0.2) 0%, rgba(30,18,8,0.06) 55%, rgba(30,18,8,0.22) 100%);
+  }
+  .phero__wordmark {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    transform: translateY(44%);
+    z-index: 2;
+    text-align: center;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(44px, 10.5vw, 170px);
+    line-height: 0.74;
+    letter-spacing: 0.05em;
+    color: var(--color-cream);
+    pointer-events: none;
+    user-select: none;
+  }
+  .dhead__en {
+    font-family: var(--font-serif);
+    font-size: clamp(2.1rem, 4.8vw, 3.6rem);
+    font-weight: 400;
+    line-height: 1.04;
+    letter-spacing: 0.5px;
+    color: var(--color-text);
+    margin: 0;
+  }
+  .dhead__en em { font-style: italic; }
+  .dhead__th {
+    font-family: var(--font-sans);
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    color: var(--color-text-muted);
+    margin: 12px 0 0;
+  }
+  .pintro {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: clamp(76px, 10vw, 150px) clamp(20px, 5vw, 64px) clamp(30px, 4vw, 52px);
+  }
+  .pintro__body {
+    max-width: 600px;
+    margin: clamp(20px, 3vw, 32px) 0 0;
+    color: var(--color-text-muted);
+    line-height: 1.95;
+    font-size: 0.95rem;
+  }
+  .pintro__body p { margin: 0; }
+  .section .container { max-width: 1240px; padding: 0 clamp(20px, 5vw, 64px); }
+
   .cal-controls {
     display: flex;
     justify-content: center;
@@ -59,7 +116,7 @@
   .month-card {
     background: var(--color-ivory);
     border: 1px solid var(--color-line);
-    border-radius: var(--radius-md);
+    border-radius: 0;
     padding: 14px 16px;
   }
   .month-card__head {
@@ -146,7 +203,8 @@
   .day-detail {
     background: var(--color-ivory);
     border: 1px solid var(--color-line);
-    border-radius: var(--radius-md);
+    border-radius: 0;
+    border-left: 2px solid var(--color-gold);
     padding: 16px 20px;
     margin-bottom: 16px;
     display: none;
@@ -186,16 +244,24 @@
 
 <div id="nav-mount"></div>
 
-<section class="section">
+<!-- PAGE HERO -->
+<section class="phero">
+  <div class="phero__media"><img id="pheroImg" alt="ตารางวันว่าง"></div>
+  <div class="phero__wordmark" aria-hidden="true">CALENDAR</div>
+</section>
+
+<!-- INTRO -->
+<section class="pintro">
+  <div class="breadcrumb"><a href="../index.html">หน้าแรก</a> <span>/</span> ตารางวันว่าง</div>
+  <h2 class="dhead__en"><em>Availability</em> Calendar</h2>
+  <p class="dhead__th">ตารางวันว่าง · ฤกษ์งานแต่ง</p>
+  <div class="pintro__body">
+    <p>ดูวันที่ว่างและฤกษ์แต่งงานล่วงหน้า 3 ปี</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 0;">
   <div class="container">
-    <div class="breadcrumb"><a href="../index.html">หน้าแรก</a> <span>/</span> ตารางวันว่าง</div>
-    <div class="section-title">
-      <span class="eyebrow">Availability Calendar</span>
-      <h2>ตารางวันว่าง · ฤกษ์งานแต่ง</h2>
-      <p class="text-center" style="color:var(--color-text-muted); max-width: 720px; margin: 16px auto 0;">
-        ดูวันที่ว่างและฤกษ์แต่งงานล่วงหน้า 3 ปี
-      </p>
-    </div>
 
     <div class="cal-legend">
       <div class="cal-legend__item"><span class="cal-legend__dot" style="background:var(--color-ivory);border:1px solid var(--color-line);display:inline-flex;align-items:center;justify-content:center;font-size:11px;color:#A8505F;font-weight:600;">💍</span> ฤกษ์ดี (ดิถีเรียงหมอน)</div>
@@ -270,6 +336,9 @@ function parseCSV(text) {
 (async function() {
   const data = await CW.mountChrome('calendar');
   if (!data) return;
+
+  const _ph = data.gallery?.photos || [];
+  if (_ph.length) document.getElementById('pheroImg').src = (_ph[3] || _ph[0]).url;
 
   const auspicious = data.auspiciousDates || {};
   const sheetCfg = data.bookingsSheet || {};
