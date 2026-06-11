@@ -97,7 +97,7 @@
       "name": "พิธีฉลองมงคลสมรส"
     }
   ],
-  "featuredPackageId": "wedding_summerpromo_lunch",
+  "featuredPackageId": "essential_lunch_afternoon",
   "guestCountTiers": [
     50,
     60,
@@ -116,15 +116,14 @@
   "packages": {
     "wedding": [
       {
-        "id": "wedding_summerpromo_lunch",
-        "name": "โปรร้อนนี้! งานเช้าเที่ยง / งานบ่ายเย็น",
-        "subtitle": "โปรร้อนนี้มาแต่งงานกันเถอะ · จ–ศ ทั้งปี / ทุกวัน เม.ย.–ก.ค.",
+        "id": "essential_lunch_afternoon",
+        "name": "งานเช้าเที่ยง / บ่ายเย็น",
+        "subtitle": "Essential · เม.ย.–ก.ค. ทุกวัน / เดือนอื่น จ–ศ",
         "shortDescription": "99,999 บาท · เริ่ม 100 ท่าน · เม.ย.–ก.ค. ทุกวัน / เดือนอื่น จ–ศ เท่านั้น",
         "longDescription": "แพ็คเกจโปรร้อนนี้ คุ้มสุด ๆ! งานเช้าเที่ยง (06:00-15:00) หรือ งานบ่ายเย็น (14:00-22:00) ราคาเดียวกัน อาหารโต๊ะจันทร์เซต SP สำหรับ 100 ท่าน",
         "image": "https://lh3.googleusercontent.com/pw/AP1GczPO7qoMqgmQuAGjt5QplCvU6ihjBr4kml36v3Wl4SZhePKYJxiUEUErqgNdppn5YVdsqU4AnKIba16NGpgkbMHzoSY2oHh7RWBHMET2K33RhY3WvUIsg2OybEvNBYKfIdzT9VUU83NEGs65WmXA6qqO=w1378-h919-s-no-gm?authuser=0",
         "isFeatured": true,
-        "isPromo": true,
-        "promoLabel": "🔥 Hot Promo",
+        "isPromo": false,
         "season": "all",
         "availableTimeSlots": [
           "morning_lunch",
@@ -325,18 +324,18 @@
         "imagePosition": "50% 50%",
         "imageZoom": 100,
         "highSeasonWeekdayOnly": true,
-        "ritualNote": "หมายเหตุ: การตัดพิธีออกคือไม่มีการดำเนินการพิธีในส่วนนั้น"
+        "ritualNote": "หมายเหตุ: การตัดพิธีออกคือไม่มีการดำเนินการพิธีในส่วนนั้น",
+        "tier": "essential"
       },
       {
-        "id": "wedding_summerpromo_full",
-        "name": "โปรร้อนนี้! งานเช้าเย็น (เต็มวัน)",
-        "subtitle": "โปรร้อนนี้มาแต่งงานกันเถอะ · เต็มวัน 06:00-22:00 · จ–ศ ทั้งปี / ทุกวัน เม.ย.–ก.ค.",
+        "id": "essential_full_day",
+        "name": "งานเช้า+เย็น เต็มวัน",
+        "subtitle": "Essential · เต็มวัน 06:00-22:00 · เม.ย.–ก.ค. ทุกวัน / เดือนอื่น จ–ศ",
         "shortDescription": "139,999 บาท · เริ่ม 100 ท่าน · เม.ย.–ก.ค. ทุกวัน / เดือนอื่น จ–ศ เท่านั้น",
         "longDescription": "แพ็คเกจโปรร้อนนี้ จัดเต็มวัน 06:00-22:00 ทั้งพิธีเช้าและงานเลี้ยงเย็น อาหารโต๊ะจันทร์เซต SP",
         "image": "https://lh3.googleusercontent.com/pw/AP1GczPTzCA3YATiS3c-WDsH5kOoOXDqgyJhH4js3Pcsv4c0GdRc_VACL97We-DAuHp3cfo-JG0CvyzBh9mjqI-YlQJuFmNkY6lH7_Qn4OouSMgEbyeMg5fFe6trcn5ZA0AS9LIDjU4bmJXiShs3XX_NmNGl=w1379-h919-s-no-gm?authuser=0",
         "isFeatured": true,
-        "isPromo": true,
-        "promoLabel": "🔥 Hot Promo",
+        "isPromo": false,
         "season": "all",
         "availableTimeSlots": [
           "morning_evening"
@@ -531,18 +530,18 @@
         "decorChangeCategory": "promo",
         "imagePosition": "50% 50%",
         "highSeasonWeekdayOnly": true,
-        "ritualNote": "หมายเหตุ: การตัดพิธีออกคือไม่มีการดำเนินการพิธีในส่วนนั้น"
+        "ritualNote": "หมายเหตุ: การตัดพิธีออกคือไม่มีการดำเนินการพิธีในส่วนนั้น",
+        "tier": "essential"
       },
       {
-        "id": "wedding_summerpromo_evening",
-        "name": "โปรพิเศษ! งานเลี้ยงเย็น (Hot Season)",
-        "subtitle": "ราคาดี แต่งได้ · จ–ศ ทั้งปี / ทุกวัน เม.ย.–ก.ค.",
+        "id": "essential_evening",
+        "name": "งานเย็นอย่างเดียว",
+        "subtitle": "Essential · 18:00-22:00 · เม.ย.–ก.ค. ทุกวัน / เดือนอื่น จ–ศ",
         "shortDescription": "89,999 บาท · เริ่ม 100 ท่าน · เม.ย.–ก.ค. ทุกวัน / เดือนอื่น จ–ศ เท่านั้น",
         "longDescription": "แพ็คเกจงานเลี้ยงเย็น 18:00-22:00 อาหารโต๊ะจันทร์เซต SP สำหรับ 100 ท่าน · ใช้ได้ทุกวันในช่วง เม.ย.–ก.ค. และวันจันทร์–ศุกร์ตลอดปี",
         "image": "https://lh3.googleusercontent.com/pw/AP1GczPWzGPK48wE9H-O-cwIChDTil_SSG-VbRVSrPqoxKUkw55CVQLBsTHJLAiG-7QwfYbFwDKWApFqirpl-mV0nFa1lV-INsMmCxyMnjKX7Vlg8dkvvpBpUbXtFeHg3WMHbgRqKjVo1z404lRm-58p0NxP=w1378-h919-s-no-gm?authuser=0",
         "isFeatured": false,
-        "isPromo": true,
-        "promoLabel": "Evening Promo",
+        "isPromo": false,
         "season": "all",
         "availableTimeSlots": [
           "evening"
@@ -550,8 +549,8 @@
         "guestBase": 100,
         "basePricing": {
           "evening": {
-            "high": 89999,
-            "low": 89999
+            "high": 79999,
+            "low": 79999
           }
         },
         "includedSections": [
@@ -636,171 +635,13 @@
         "notes": "ใช้ได้วันธรรมดาทุกเดือน และวันเสาร์-อาทิตย์เฉพาะเดือนพฤษภาคม-กรกฎาคม · สีของดอกไม้และการตกแต่งไม่สามารถเปลี่ยนแปลงได้",
         "decorChangeCategory": "promo",
         "imagePosition": "50% 50%",
-        "highSeasonWeekdayOnly": true
+        "highSeasonWeekdayOnly": true,
+        "tier": "essential"
       },
       {
-        "id": "wedding_morning_only",
-        "name": "งานเช้า (เฉพาะพิธีเช้า) 50 ท่าน",
-        "subtitle": "พิธีเช้าครบครัน 06:00-12:00 · ใช้ได้ทุกเดือน",
-        "shortDescription": "70,000 บาท · เริ่ม 50 ท่าน · ใช้ได้ทั้งปี",
-        "longDescription": "แพ็คเกจเฉพาะพิธีเช้า รวมพิธีสงฆ์ตักบาตร แห่ขันหมาก พิธีหลั่งน้ำสังข์ พิธีส่งตัว พร้อมอาหารเช้าบุฟเฟต์สำหรับ 50 ท่าน",
-        "image": "https://lh3.googleusercontent.com/pw/AP1GczMj9wQ8HrDjFtZc28mwbe9jO4i6QsFV-_zgcxn40ght0pqm3_Ai4dUzOfl8-UzQGWNy6cHjt2szeYGC5DFuFyIVA7WxUGUh0xw-mmfnn3-XH7OaPM703MpCwOBpmgpagwmz5WbKyV8Qzq7io9QziV7J=w1378-h919-s-no-gm?authuser=0",
-        "isFeatured": false,
-        "isPromo": false,
-        "season": "all",
-        "availableTimeSlots": [
-          "morning"
-        ],
-        "guestBase": 50,
-        "basePricing": {
-          "morning": {
-            "high": 70000,
-            "low": 70000
-          }
-        },
-        "includedSections": [
-          {
-            "title": "ทีมงาน",
-            "items": [
-              "พิธีกร และนายพิธี (1 คน)",
-              "ทีมงานรันคิวดูแลเจ้าสาวและเจ้าบ่าว",
-              "เด็กเสิร์ฟ และ เด็กชงเครื่องดื่มที่บาร์น้ำ"
-            ]
-          },
-          {
-            "title": "1. พิธีสงฆ์",
-            "items": [
-              "ชุดโต๊ะหมู่บูชาพร้อมสายสิญจน์ ธูป เทียน แจกันดอกไม้",
-              "ชุดอาสน์สงฆ์ 9 ชุด พร้อมที่กรวดน้ำ พานน้ำมนต์",
-              "ขันและทัพพีตักบาตรสำหรับบ่าวสาว พร้อมขนมเปี๊ยะไข่เค็มและข้าวสวย",
-              "ชุดอาหารถวายพระแบบนำไปฉันท์ที่วัด 9 ชุด",
-              "บริการผู้ดำเนินพิธีการสงฆ์",
-              "บริการนิมนต์พระ พร้อมรับ-ส่งพระสงฆ์",
-              "ช่อดอกไม้สดธูปเทียนถวายพระสงฆ์ 9 ชุด (ไม่รวมซองปัจจัย)"
-            ]
-          },
-          {
-            "title": "2. ชุดพานขันหมาก",
-            "items": [
-              "ต้นกล้วย, ต้นอ้อย 2 คู่",
-              "พานขันหมากเอก 1 พาน",
-              "พานสินสอด 1 พาน",
-              "พานแหวนหมั้น 1 พาน",
-              "พานไหว้ผู้ใหญ่ 1 พาน",
-              "พานขนมหวานมงคล 2 พาน",
-              "พานจันอับ ขนมเปี๊ยะ ขนมปลา 4 พาน",
-              "พานผลไม้มงคล 6 พาน",
-              "พานเชิญขันหมาก 1 พาน (ฝ่ายเจ้าสาวรับขบวนขันหมาก)",
-              "มาลัยสำหรับรับตัวเจ้าสาว 1 ช่อ",
-              "สายดอกไม้/ใบไม้ สำหรับกั้นประตู 6 เส้น"
-            ]
-          },
-          {
-            "title": "3. พิธีดูสินสอด, พิธีหมั้น สวมแหวน",
-            "items": [
-              "ข้าวตอกดอกไม้ สำหรับผู้ใหญ่โปรยอวยพร",
-              "ผ้าห่อเงิน-ทอง สำหรับช่วงพิธีการดูสินสอดทองหมั้น"
-            ]
-          },
-          {
-            "title": "4. พิธีไหว้ผู้ใหญ่ และ/หรือ ยกน้ำชา",
-            "items": [
-              "พานไหว้ผู้ใหญ่ และ/หรือ ชุดน้ำชา",
-              "หมอนสำหรับรอง พานเงินพานทอง"
-            ]
-          },
-          {
-            "title": "5. พิธีหลั่งน้ำพระพุทธมนต์ (หลั่งน้ำสังข์)",
-            "items": [
-              "ตกแต่งสถานที่หลั่งน้ำสังข์ พร้อมตั้งหลั่งน้ำ",
-              "คนโทน้ำ หอยสังข์ พานวางมาลัยบ่าวสาว ด้ายมงคลแฝด แป้งเจิม",
-              "มาลัยบ่าวสาว 1 คู่, พานรองน้ำดอกไม้ ตกแต่งสวยงาม"
-            ]
-          },
-          {
-            "title": "6. พิธีส่งตัว",
-            "items": [
-              "ห้องส่งตัว - ดอกกุหลาบโปรยเตียง",
-              "พานส่งตัว ได้แก่ แมว ไก่ ฟักเขียว ครก ถุงเงินถุงทอง ไม้เท้า"
-            ]
-          },
-          {
-            "title": "7. การตกแต่งสถานที่พิธีการไทย",
-            "items": [
-              "ฉากดอกไม้สำหรับพิธีการไทย",
-              "พรมขนมิ้งรองนั่ง ขนาด 2 x 6 เมตร",
-              "ป้ายชื่อบ่าว-สาว แบบป้ายโฟมฉลุลาย",
-              "ไฟส่องฉากดอกไม้"
-            ]
-          },
-          {
-            "title": "8. อาหารว่างตอนเช้า (สำหรับแขก 50 ท่าน)",
-            "items": [
-              "ข้าวต้มหมูและข้าวต้มทะเล",
-              "ขนม / เบเกอรี่ / ผลไม้รวม",
-              "เครื่องดื่มร้อน: ชา กาแฟ โอวัลติน",
-              "เครื่องดื่มเย็น: น้ำเปล่า น้ำสมุนไพร"
-            ]
-          }
-        ],
-        "customerProvides": [
-          "ซองปัจจัย 9 ซอง",
-          "สังฆทาน 9 ชุด (ถ้ามี)",
-          "ของชำร่วยและของรับไหว้ผู้ใหญ่",
-          "รูปถ่ายบ่าว-สาว จำนวน 4 ภาพ",
-          "ชุดแต่งงาน",
-          "โฟโต้บูธ และ วีดีโอบูธ (ถ้าต้องการ)"
-        ],
-        "overflowPricing": {
-          "label": "ในกรณีคนเกิน — คิดท่านละ 50 บาท",
-          "perPerson": 50
-        },
-        "availableMenus": [],
-        "allowedMenuSetIds": [],
-        "availableAddons": [
-          "addon_extrahour"
-        ],
-        "rituals": [
-          {
-            "id": "ritual_khanmaak",
-            "name": "ขันหมาก",
-            "deductIfRemoved": 5000
-          },
-          {
-            "id": "ritual_sangha",
-            "name": "พิธีสงฆ์",
-            "deductIfRemoved": 5000
-          },
-          {
-            "id": "ritual_rabwai",
-            "name": "รับไหว้",
-            "deductIfRemoved": 0
-          },
-          {
-            "id": "ritual_ring",
-            "name": "สวมแหวน",
-            "deductIfRemoved": 0
-          },
-          {
-            "id": "ritual_yoknaamcha",
-            "name": "ยกน้ำชา",
-            "deductIfRemoved": 0
-          },
-          {
-            "id": "ritual_chalongmongkol",
-            "name": "พิธีฉลองมงคล",
-            "deductIfRemoved": 3000
-          }
-        ],
-        "notes": "อาหารเช้าบุฟเฟต์รวมในแพ็คเกจ · ส่วนเกินจาก 50 ท่าน คิดท่านละ 50 บาท",
-        "decorChangeCategory": null,
-        "imagePosition": "50% 50%",
-        "ritualNote": "หมายเหตุ: การตัดพิธีออกคือไม่มีการดำเนินการพิธีในส่วนนั้น"
-      },
-      {
-        "id": "wedding_standard_lunch",
-        "name": "งานเช้าเที่ยง / งานบ่ายเย็น (All Year Long)",
-        "subtitle": "แพ็คเกจมาตรฐาน · ส.ค. - มี.ค.",
+        "id": "signature_lunch_afternoon",
+        "name": "งานเช้าเที่ยง / บ่ายเย็น",
+        "subtitle": "Signature · ทุกวัน ทั้งปี · ลด 20,000 เมื่อจองข้ามปี",
         "shortDescription": "160,000 บาท · จองข้ามปีลด 20,000 เหลือ 140,000",
         "longDescription": "แพ็คเกจมาตรฐาน 06:00-15:00 หรือ 14:00-22:00 อาหารเลือกได้ บุฟเฟต์ / โต๊ะจีน / โต๊ะจันทร์ เซต A พร้อมของแถมฟรีมูลค่ากว่า 200,000 บาท",
         "image": "https://lh3.googleusercontent.com/pw/AP1GczMiUWhMbcu-uyyNcxkTamUB7RKAEo8jx7i2p-IXHoTXvPQlLUojlalfXmzQcFge8NmFMbvJ54s7zCX7NZkAgAfJXzXwh7SW5RYH5G_o9pKLYgXxrPtr1e7HeCVLYxc0e4KZztHncEfdeH6n_Oirowld=w1379-h919-s-no-gm?authuser=0",
@@ -1037,12 +878,13 @@
         "notes": "ราคาด้านบนเป็นราคามาตรฐาน · ลูกค้าจองข้ามปีรับส่วนลด 20,000 บาท",
         "decorChangeCategory": "full",
         "imagePosition": "50% 50%",
-        "ritualNote": "หมายเหตุ: การตัดพิธีออกคือไม่มีการดำเนินการพิธีในส่วนนั้น"
+        "ritualNote": "หมายเหตุ: การตัดพิธีออกคือไม่มีการดำเนินการพิธีในส่วนนั้น",
+        "tier": "signature"
       },
       {
-        "id": "wedding_standard_full",
-        "name": "งานเช้าเย็น เต็มวัน (All Year Long)",
-        "subtitle": "แพ็คเกจมาตรฐานเต็มวัน · 06:00-22:00",
+        "id": "signature_full_day",
+        "name": "งานเช้า+เย็น เต็มวัน",
+        "subtitle": "Signature · เต็มวัน 06:00-22:00 · ทุกวัน ทั้งปี · ลด 20,000 เมื่อจองข้ามปี",
         "shortDescription": "190,000 บาท · จองข้ามปีลด 20,000 เหลือ 170,000",
         "longDescription": "แพ็คเกจมาตรฐานเต็มวัน 06:00-22:00 ทั้งพิธีเช้าและงานเลี้ยงเย็น พร้อมอาหารเช้า อาหารหลัก และของแถมฟรีมูลค่ากว่า 200,000 บาท",
         "image": "https://lh3.googleusercontent.com/pw/AP1GczNSSmDTfwd_BUv-CVZD0jK_cRhmRZlLqgOs0m0sdLtiNJl3qBwqoWquA0vaKAjIhuan2fN6DvcIy1UWgzhzsUlEE57mi6x1luSpQPpOI9tPm317Fa5T0Aaz70FZ4OP6gUzVC5QZMcm3vATJrXtvB2j3=w1379-h919-s-no-gm?authuser=0",
@@ -1274,12 +1116,13 @@
         "notes": "ราคาด้านบนเป็นราคามาตรฐาน · ลูกค้าจองข้ามปีรับส่วนลด 20,000 บาท",
         "decorChangeCategory": "full",
         "imagePosition": "50% 50%",
-        "ritualNote": "หมายเหตุ: การตัดพิธีออกคือไม่มีการดำเนินการพิธีในส่วนนั้น"
+        "ritualNote": "หมายเหตุ: การตัดพิธีออกคือไม่มีการดำเนินการพิธีในส่วนนั้น",
+        "tier": "signature"
       },
       {
-        "id": "wedding_standard_evening",
-        "name": "งานเลี้ยงเย็น (All Year Long)",
-        "subtitle": "โปรพิเศษ คุ้มค่าราคาดี · 18:00-22:00",
+        "id": "signature_evening",
+        "name": "งานเย็นอย่างเดียว",
+        "subtitle": "Signature · 18:00-22:00 · ทุกวัน ทั้งปี · ลด 20,000 เมื่อจองข้ามปี",
         "shortDescription": "110,000 บาท · จองข้ามปีลด 20,000 เหลือ 90,000",
         "longDescription": "งานเลี้ยงเย็น 18:00-22:00 อาหารบุฟเฟต์ / โต๊ะจีน / โต๊ะจันทร์ เซต A พร้อมของแถมฟรี 6 รายการรวมผ้าผูกเก้าอี้",
         "image": "https://lh3.googleusercontent.com/pw/AP1GczPWgwtuMJGm6vCRZwQws2-L8xW4KSF7q91rX9UvnIZuz8oK1QACDn9sAO_Ov04ZVBVRMrroYHdo7N6eV0C0bsdg4oD81MGJUA1a25gMSWeobujfuAdW4PZS_zXJY635yFYLl6ogNiMqqVXEHE8dvlVU=w1379-h919-s-no-gm?authuser=0",
@@ -1397,7 +1240,168 @@
         "rituals": [],
         "notes": "ราคาด้านบนเป็นราคามาตรฐาน · จองข้ามปีลด 20,000 บาท",
         "decorChangeCategory": "full",
-        "imagePosition": "50% 50%"
+        "imagePosition": "50% 50%",
+        "tier": "signature"
+      },
+      {
+        "id": "signature_morning_only",
+        "name": "งานเช้าพิธีไทย",
+        "subtitle": "Signature · พิธีเช้า 06:00-12:00 · ทุกวัน ทั้งปี · เริ่ม 50 ท่าน",
+        "shortDescription": "70,000 บาท · เริ่ม 50 ท่าน · ใช้ได้ทั้งปี",
+        "longDescription": "แพ็คเกจเฉพาะพิธีเช้า รวมพิธีสงฆ์ตักบาตร แห่ขันหมาก พิธีหลั่งน้ำสังข์ พิธีส่งตัว พร้อมอาหารเช้าบุฟเฟต์สำหรับ 50 ท่าน",
+        "image": "https://lh3.googleusercontent.com/pw/AP1GczMj9wQ8HrDjFtZc28mwbe9jO4i6QsFV-_zgcxn40ght0pqm3_Ai4dUzOfl8-UzQGWNy6cHjt2szeYGC5DFuFyIVA7WxUGUh0xw-mmfnn3-XH7OaPM703MpCwOBpmgpagwmz5WbKyV8Qzq7io9QziV7J=w1378-h919-s-no-gm?authuser=0",
+        "isFeatured": false,
+        "isPromo": false,
+        "season": "all",
+        "availableTimeSlots": [
+          "morning"
+        ],
+        "guestBase": 50,
+        "basePricing": {
+          "morning": {
+            "high": 70000,
+            "low": 70000
+          }
+        },
+        "includedSections": [
+          {
+            "title": "ทีมงาน",
+            "items": [
+              "พิธีกร และนายพิธี (1 คน)",
+              "ทีมงานรันคิวดูแลเจ้าสาวและเจ้าบ่าว",
+              "เด็กเสิร์ฟ และ เด็กชงเครื่องดื่มที่บาร์น้ำ"
+            ]
+          },
+          {
+            "title": "1. พิธีสงฆ์",
+            "items": [
+              "ชุดโต๊ะหมู่บูชาพร้อมสายสิญจน์ ธูป เทียน แจกันดอกไม้",
+              "ชุดอาสน์สงฆ์ 9 ชุด พร้อมที่กรวดน้ำ พานน้ำมนต์",
+              "ขันและทัพพีตักบาตรสำหรับบ่าวสาว พร้อมขนมเปี๊ยะไข่เค็มและข้าวสวย",
+              "ชุดอาหารถวายพระแบบนำไปฉันท์ที่วัด 9 ชุด",
+              "บริการผู้ดำเนินพิธีการสงฆ์",
+              "บริการนิมนต์พระ พร้อมรับ-ส่งพระสงฆ์",
+              "ช่อดอกไม้สดธูปเทียนถวายพระสงฆ์ 9 ชุด (ไม่รวมซองปัจจัย)"
+            ]
+          },
+          {
+            "title": "2. ชุดพานขันหมาก",
+            "items": [
+              "ต้นกล้วย, ต้นอ้อย 2 คู่",
+              "พานขันหมากเอก 1 พาน",
+              "พานสินสอด 1 พาน",
+              "พานแหวนหมั้น 1 พาน",
+              "พานไหว้ผู้ใหญ่ 1 พาน",
+              "พานขนมหวานมงคล 2 พาน",
+              "พานจันอับ ขนมเปี๊ยะ ขนมปลา 4 พาน",
+              "พานผลไม้มงคล 6 พาน",
+              "พานเชิญขันหมาก 1 พาน (ฝ่ายเจ้าสาวรับขบวนขันหมาก)",
+              "มาลัยสำหรับรับตัวเจ้าสาว 1 ช่อ",
+              "สายดอกไม้/ใบไม้ สำหรับกั้นประตู 6 เส้น"
+            ]
+          },
+          {
+            "title": "3. พิธีดูสินสอด, พิธีหมั้น สวมแหวน",
+            "items": [
+              "ข้าวตอกดอกไม้ สำหรับผู้ใหญ่โปรยอวยพร",
+              "ผ้าห่อเงิน-ทอง สำหรับช่วงพิธีการดูสินสอดทองหมั้น"
+            ]
+          },
+          {
+            "title": "4. พิธีไหว้ผู้ใหญ่ และ/หรือ ยกน้ำชา",
+            "items": [
+              "พานไหว้ผู้ใหญ่ และ/หรือ ชุดน้ำชา",
+              "หมอนสำหรับรอง พานเงินพานทอง"
+            ]
+          },
+          {
+            "title": "5. พิธีหลั่งน้ำพระพุทธมนต์ (หลั่งน้ำสังข์)",
+            "items": [
+              "ตกแต่งสถานที่หลั่งน้ำสังข์ พร้อมตั้งหลั่งน้ำ",
+              "คนโทน้ำ หอยสังข์ พานวางมาลัยบ่าวสาว ด้ายมงคลแฝด แป้งเจิม",
+              "มาลัยบ่าวสาว 1 คู่, พานรองน้ำดอกไม้ ตกแต่งสวยงาม"
+            ]
+          },
+          {
+            "title": "6. พิธีส่งตัว",
+            "items": [
+              "ห้องส่งตัว - ดอกกุหลาบโปรยเตียง",
+              "พานส่งตัว ได้แก่ แมว ไก่ ฟักเขียว ครก ถุงเงินถุงทอง ไม้เท้า"
+            ]
+          },
+          {
+            "title": "7. การตกแต่งสถานที่พิธีการไทย",
+            "items": [
+              "ฉากดอกไม้สำหรับพิธีการไทย",
+              "พรมขนมิ้งรองนั่ง ขนาด 2 x 6 เมตร",
+              "ป้ายชื่อบ่าว-สาว แบบป้ายโฟมฉลุลาย",
+              "ไฟส่องฉากดอกไม้"
+            ]
+          },
+          {
+            "title": "8. อาหารว่างตอนเช้า (สำหรับแขก 50 ท่าน)",
+            "items": [
+              "ข้าวต้มหมูและข้าวต้มทะเล",
+              "ขนม / เบเกอรี่ / ผลไม้รวม",
+              "เครื่องดื่มร้อน: ชา กาแฟ โอวัลติน",
+              "เครื่องดื่มเย็น: น้ำเปล่า น้ำสมุนไพร"
+            ]
+          }
+        ],
+        "customerProvides": [
+          "ซองปัจจัย 9 ซอง",
+          "สังฆทาน 9 ชุด (ถ้ามี)",
+          "ของชำร่วยและของรับไหว้ผู้ใหญ่",
+          "รูปถ่ายบ่าว-สาว จำนวน 4 ภาพ",
+          "ชุดแต่งงาน",
+          "โฟโต้บูธ และ วีดีโอบูธ (ถ้าต้องการ)"
+        ],
+        "overflowPricing": {
+          "label": "ในกรณีคนเกิน — คิดท่านละ 50 บาท",
+          "perPerson": 50
+        },
+        "availableMenus": [],
+        "allowedMenuSetIds": [],
+        "availableAddons": [
+          "addon_extrahour"
+        ],
+        "rituals": [
+          {
+            "id": "ritual_khanmaak",
+            "name": "ขันหมาก",
+            "deductIfRemoved": 5000
+          },
+          {
+            "id": "ritual_sangha",
+            "name": "พิธีสงฆ์",
+            "deductIfRemoved": 5000
+          },
+          {
+            "id": "ritual_rabwai",
+            "name": "รับไหว้",
+            "deductIfRemoved": 0
+          },
+          {
+            "id": "ritual_ring",
+            "name": "สวมแหวน",
+            "deductIfRemoved": 0
+          },
+          {
+            "id": "ritual_yoknaamcha",
+            "name": "ยกน้ำชา",
+            "deductIfRemoved": 0
+          },
+          {
+            "id": "ritual_chalongmongkol",
+            "name": "พิธีฉลองมงคล",
+            "deductIfRemoved": 3000
+          }
+        ],
+        "notes": "อาหารเช้าบุฟเฟต์รวมในแพ็คเกจ · ส่วนเกินจาก 50 ท่าน คิดท่านละ 50 บาท",
+        "decorChangeCategory": null,
+        "imagePosition": "50% 50%",
+        "ritualNote": "หมายเหตุ: การตัดพิธีออกคือไม่มีการดำเนินการพิธีในส่วนนั้น",
+        "tier": "signature"
       }
     ],
     "seminar": [

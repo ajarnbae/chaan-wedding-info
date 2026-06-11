@@ -9,19 +9,110 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
 <style>
-  .promo-card { position: relative; }
-  .promo-card::before {
-    content: "🔥 PROMO";
-    position: absolute;
-    top: 12px; left: 12px;
-    z-index: 2;
-    background: var(--color-rose);
-    color: #fff;
-    padding: 4px 10px;
+  /* ── Tier toggle (Essential / Signature) ── */
+  .tier-toggle {
+    display: inline-flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .tier-toggle button {
+    background: #fff;
+    border: 1.5px solid var(--color-border, #E5DDD3);
+    border-radius: 14px;
+    padding: 14px 22px;
+    cursor: pointer;
+    text-align: center;
+    min-width: 220px;
+    transition: border-color .2s, box-shadow .2s, background .2s;
+    font-family: inherit;
+  }
+  .tier-toggle button .tier-name {
+    display: block;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-text, #3B3026);
+  }
+  .tier-toggle button .tier-cond {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.78rem;
+    color: var(--color-text-muted, #8A7C6C);
+    line-height: 1.5;
+  }
+  .tier-toggle button.active {
+    border-color: var(--color-gold, #B89B5E);
+    background: #FFFDF7;
+    box-shadow: 0 4px 14px rgba(184,155,94,.18);
+  }
+  .tier-toggle button.active .tier-name { color: var(--color-gold-dark, #8A6F33); }
+
+  /* ── Inclusions strip below cards ── */
+  .tier-strip {
+    margin-top: var(--space-lg, 32px);
+    background: #FFFDF7;
+    border: 1px solid var(--color-border, #E5DDD3);
+    border-radius: 14px;
+    padding: 18px 22px;
+  }
+  .tier-strip h4 {
+    margin: 0 0 10px;
+    font-size: 0.95rem;
+    color: var(--color-text, #3B3026);
+  }
+  .tier-strip .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tier-strip .chip {
+    background: #fff;
+    border: 1px solid var(--color-border, #E5DDD3);
     border-radius: 999px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
+    padding: 4px 12px;
+    font-size: 0.78rem;
+    color: var(--color-text-muted, #6E6052);
+    white-space: nowrap;
+  }
+  .tier-strip .strip-note {
+    margin: 10px 0 0;
+    font-size: 0.75rem;
+    color: var(--color-text-muted, #8A7C6C);
+  }
+
+  /* ── Compare table ── */
+  .compare-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .compare-table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 880px;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0,0,0,.05);
+    font-size: 0.85rem;
+  }
+  .compare-table th, .compare-table td {
+    border: 1px solid var(--color-border, #EDE6DB);
+    padding: 10px 12px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .compare-table td.row-label {
+    text-align: left;
+    min-width: 220px;
+    color: var(--color-text, #3B3026);
+    background: #FBF8F2;
+  }
+  .compare-table thead .tier-head-essential { background: var(--color-cream, #F4EDE2); }
+  .compare-table thead .tier-head-signature { background: var(--color-gold, #B89B5E); color: #fff; }
+  .compare-table thead th .pkg-name { display:block; font-weight: 600; }
+  .compare-table thead th .pkg-price { display:block; font-size: 0.8rem; font-weight: 400; margin-top: 2px; }
+  .compare-table thead th a { color: inherit; text-decoration: underline; }
+  .compare-table .check { color: var(--color-success, #4C8C4A); font-weight: 700; }
+  .compare-table .dash { color: #C9BFB1; }
+  .compare-table tr.section-row td {
+    background: var(--color-cream, #F4EDE2);
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: .5px;
   }
 </style>
 </head>
@@ -36,7 +127,7 @@
       <span class="eyebrow">Our Packages</span>
       <h2>แพ็คเกจทั้งหมด</h2>
       <p class="text-center" style="color:var(--color-text-muted); max-width: 720px; margin: 16px auto 0;">
-        เลือกหมวดและฤดูกาลด้านล่าง · แต่ละแพ็คเกจสามารถปรับ <strong>ช่วงเวลา</strong>, <strong>จำนวนแขก</strong>, และคำนวณค่าใช้จ่ายต่าง ๆ ได้
+        เลือกระดับแพ็คเกจด้านล่าง หรือกด <strong>เปรียบเทียบแพ็คเกจ</strong> เพื่อดูตารางเทียบทุกรายการ
       </p>
     </div>
 
@@ -48,24 +139,35 @@
       </div>
     </div>
 
-    <!-- Season toggle (hidden for seminar) -->
-    <div class="text-center" style="margin-bottom: var(--space-md);" id="seasonWrap">
-      <div class="toggle" id="seasonToggle">
-        <button data-season="low">เมษายน – กรกฎาคม</button>
-        <button data-season="high" class="active">สิงหาคม – มีนาคม</button>
+    <!-- View toggle: cards / compare (wedding only) -->
+    <div class="text-center" style="margin-bottom: 16px;" id="viewWrap">
+      <div class="toggle" id="viewToggle">
+        <button data-view="cards" class="active">แพ็คเกจทั้งหมด</button>
+        <button data-view="compare">เปรียบเทียบแพ็คเกจ</button>
       </div>
     </div>
-    <!-- Weekday sub-toggle (shown only when high season) -->
-    <div class="text-center" style="margin-bottom: var(--space-xl);" id="weekdayWrap" hidden>
-      <div class="toggle" id="weekdayToggle">
-        <button data-weekday="all">ทุกวัน</button>
-        <button data-weekday="weekday" class="active">จันทร์ – ศุกร์</button>
+
+    <!-- Tier toggle: Essential / Signature (card view only) -->
+    <div class="text-center" style="margin-bottom: var(--space-xl);" id="tierWrap">
+      <div class="tier-toggle" id="tierToggle">
+        <button data-tier="essential" class="active">
+          <span class="tier-name">Essential จันทร์คุ้มครบ</span>
+          <span class="tier-cond">เม.ย.–ก.ค. ใช้ได้ทุกวัน · เดือนอื่น จันทร์–ศุกร์</span>
+        </button>
+        <button data-tier="signature">
+          <span class="tier-name">Signature จันทร์ครบเครื่อง</span>
+          <span class="tier-cond">ใช้ได้ทุกวัน ทั้งปี · ลด 20,000 เมื่อจองข้ามปี</span>
+        </button>
       </div>
     </div>
 
     <div id="packagesGrid" class="grid grid--auto">
       <div class="loading">กำลังโหลด...</div>
     </div>
+
+    <div id="tierStrip"></div>
+
+    <div id="compareMount" hidden></div>
   </div>
 </section>
 
@@ -76,85 +178,198 @@
 (async function() {
   const data = await CW.mountChrome('packages');
   if (!data) return;
-  let season = CW.currentSeason(data.seasonInfo);
+
   let category = 'wedding';
+  let view = 'cards';
+  let tier = 'essential';
 
-  let weekday = 'weekday';
+  const $ = id => document.getElementById(id);
+  const tierOf = p => p.tier || (p.id.startsWith('signature_') ? 'signature' : 'essential');
+  const priceOf = p => {
+    const slot = (p.availableTimeSlots && p.availableTimeSlots[0]) || (data.timeSlots?.[category] || [])[0]?.id;
+    return p.basePricing?.[slot]?.high ?? p.basePricing?.[slot]?.low ?? 0;
+  };
+  // normalize section title: strip leading "1. " numbering for compare matching
+  const normTitle = t => (t || '').replace(/^\d+\.\s*/, '').trim();
 
-  document.querySelectorAll('#seasonToggle button').forEach(b => {
-    b.classList.toggle('active', b.dataset.season === season);
-    b.addEventListener('click', () => {
-      season = b.dataset.season;
-      document.querySelectorAll('#seasonToggle button').forEach(x => x.classList.toggle('active', x === b));
-      const wd = document.getElementById('weekdayWrap');
-      if (season === 'high') {
-        wd.removeAttribute('hidden');
-      } else {
-        wd.setAttribute('hidden', '');
-        weekday = 'weekday';
-        document.querySelectorAll('#weekdayToggle button').forEach(x => x.classList.toggle('active', x.dataset.weekday === 'weekday'));
-      }
-      render();
-    });
-  });
+  const TIER_META = {
+    essential: { label: 'Essential จันทร์คุ้มครบ', cond: 'เม.ย.–ก.ค. ใช้ได้ทุกวัน · เดือนอื่น จันทร์–ศุกร์' },
+    signature: { label: 'Signature จันทร์ครบเครื่อง', cond: 'ใช้ได้ทุกวัน ทั้งปี · ลด 20,000 เมื่อจองข้ามปี' }
+  };
 
-  document.querySelectorAll('#weekdayToggle button').forEach(b => {
-    b.addEventListener('click', () => {
-      weekday = b.dataset.weekday;
-      document.querySelectorAll('#weekdayToggle button').forEach(x => x.classList.toggle('active', x === b));
-      render();
-    });
-  });
-
+  // ── toggle wiring ──
   document.querySelectorAll('#catToggle button').forEach(b => {
     b.addEventListener('click', () => {
       category = b.dataset.cat;
       document.querySelectorAll('#catToggle button').forEach(x => x.classList.toggle('active', x === b));
-      document.getElementById('seasonWrap').style.display = (category === 'seminar') ? 'none' : '';
-      document.getElementById('weekdayWrap').setAttribute('hidden', '');
+      render();
+    });
+  });
+  document.querySelectorAll('#viewToggle button').forEach(b => {
+    b.addEventListener('click', () => {
+      view = b.dataset.view;
+      document.querySelectorAll('#viewToggle button').forEach(x => x.classList.toggle('active', x === b));
+      render();
+    });
+  });
+  document.querySelectorAll('#tierToggle button').forEach(b => {
+    b.addEventListener('click', () => {
+      tier = b.dataset.tier;
+      document.querySelectorAll('#tierToggle button').forEach(x => x.classList.toggle('active', x === b));
       render();
     });
   });
 
-  function render() {
-    const seasonForList = (category === 'seminar') ? 'high' : season;
-    const list = (data.packages?.[category] || []).filter(p => {
-      const seasonOk = !p.season || p.season === 'all' || p.season === seasonForList;
-      if (!seasonOk) return false;
-      if (seasonForList === 'high' && weekday === 'all' && p.highSeasonWeekdayOnly) return false;
-      return true;
-    });
-    const slots = data.timeSlots?.[category] || [];
-    const grid = document.getElementById('packagesGrid');
+  // ── card view ──
+  function cardHTML(p) {
+    const price = priceOf(p);
+    const guestBase = p.guestBase || 100;
+    const featBadge = p.isFeatured ? '<span class="badge badge--gold">⭐ Featured</span>' : '';
+    const crossYear = p.crossYearDiscount
+      ? `<span style="font-size:0.75rem;color:var(--color-success);">จองข้ามปี ${CW.fmtBaht(price - p.crossYearDiscount)}</span>`
+      : '';
+    return `
+      <a href="./detail.html?id=${encodeURIComponent(p.id)}" class="card" style="text-decoration:none;color:inherit;">
+        <div class="card__img"><img src="${CW.escape(p.image)}" alt="${CW.escape(p.name)}" loading="lazy" style="${CW.imgStyle(p)}"></div>
+        <div class="card__body">
+          <span class="card__tag">${category === 'wedding' ? (tierOf(p) === 'signature' ? 'Signature' : 'Essential') : 'สัมมนา'}</span>
+          <h3 class="card__title">${CW.escape(p.name)} ${featBadge}</h3>
+          <p class="card__subtitle">${CW.escape(p.subtitle || '')}</p>
+          <p class="card__desc">${CW.escape(p.shortDescription || '')}</p>
+          <div class="card__price">
+            ${CW.fmtBaht(price)}
+            <small>เริ่ม ${guestBase} ท่าน · ${(p.availableTimeSlots || []).length} ช่วงเวลา</small>
+            ${crossYear ? '<small>' + crossYear + '</small>' : ''}
+          </div>
+          <div class="card__actions"><span class="btn btn--ghost btn--sm">ดูรายละเอียด →</span></div>
+        </div>
+      </a>`;
+  }
+
+  function renderCards(list) {
+    const grid = $('packagesGrid');
     if (!list.length) {
-      grid.innerHTML = `<div class="empty-state">ไม่มีแพ็คเกจในช่วงนี้</div>`;
+      grid.innerHTML = '<div class="empty-state">ไม่มีแพ็คเกจในหมวดนี้</div>';
+      $('tierStrip').innerHTML = '';
       return;
     }
-    grid.innerHTML = list.map(p => {
-      const primarySlot = (p.availableTimeSlots && p.availableTimeSlots[0]) || slots[0]?.id;
-      const guestBase = p.guestBase || 100;
-      const price = p.basePricing?.[primarySlot]?.[seasonForList] ?? 0;
-      const promoCls = p.isPromo ? ' promo-card' : '';
-      const featBadge = p.isFeatured ? '<span class="badge badge--gold">⭐ Featured</span>' : '';
-      const seasonAllBadge = '';
-      const crossYear = p.crossYearDiscount ? `<span style="font-size:0.75rem;color:var(--color-success);">จองข้ามปี ${CW.fmtBaht(price - p.crossYearDiscount)}</span>` : '';
-      return `
-        <a href="./detail.html?id=${encodeURIComponent(p.id)}" class="card${promoCls}" style="text-decoration:none;color:inherit;">
-          <div class="card__img"><img src="${CW.escape(p.image)}" alt="${CW.escape(p.name)}" loading="lazy" style="${CW.imgStyle(p)}"></div>
-          <div class="card__body">
-            <span class="card__tag">${category === 'wedding' ? 'งานแต่งงาน' : 'สัมมนา'}</span>
-            <h3 class="card__title">${CW.escape(p.name)} ${featBadge}${seasonAllBadge}</h3>
-            <p class="card__subtitle">${CW.escape(p.subtitle || '')}</p>
-            <p class="card__desc">${CW.escape(p.shortDescription || '')}</p>
-            <div class="card__price">
-              ${CW.fmtBaht(price)}
-              <small>เริ่ม ${guestBase} ท่าน · ${(p.availableTimeSlots || []).length} ช่วงเวลา</small>
-              ${crossYear ? '<small>' + crossYear + '</small>' : ''}
-            </div>
-            <div class="card__actions"><span class="btn btn--ghost btn--sm">ดูรายละเอียด →</span></div>
-          </div>
-        </a>`;
-    }).join('');
+    grid.innerHTML = list.map(cardHTML).join('');
+
+    // strip: union of included-section titles for this tier
+    if (category !== 'wedding') { $('tierStrip').innerHTML = ''; return; }
+    const seen = new Set();
+    const chips = [];
+    list.forEach(p => (p.includedSections || []).forEach(s => {
+      const t = normTitle(s.title);
+      if (t && !seen.has(t)) { seen.add(t); chips.push(t); }
+    }));
+    $('tierStrip').innerHTML = `
+      <div class="tier-strip">
+        <h4>รายการที่รวมในแพ็คเกจ ${TIER_META[tier].label}</h4>
+        <div class="chips">${chips.map(c => `<span class="chip">${CW.escape(c)}</span>`).join('')}</div>
+        <p class="strip-note">* บางรายการมีเฉพาะบางแพ็คเกจ — กด "เปรียบเทียบแพ็คเกจ" เพื่อดูตารางเทียบทุกรายการ หรือกดเข้าแพ็คเกจเพื่อดูรายละเอียดเต็ม</p>
+      </div>`;
+  }
+
+  // ── compare view ──
+  function renderCompare(list) {
+    const ess = list.filter(p => tierOf(p) === 'essential');
+    const sig = list.filter(p => tierOf(p) === 'signature');
+    const cols = [...ess, ...sig];
+
+    // union of normalized inclusion titles, in first-seen order
+    const rowKeys = [];
+    const seen = new Set();
+    cols.forEach(p => (p.includedSections || []).forEach(s => {
+      const t = normTitle(s.title);
+      if (t && !seen.has(t)) { seen.add(t); rowKeys.push(t); }
+    }));
+    const hasItem = (p, key) => (p.includedSections || []).some(s => normTitle(s.title) === key);
+
+    const headTier = `
+      <tr>
+        <th class="row-label" style="background:#FBF8F2;"></th>
+        <th colspan="${ess.length}" class="tier-head-essential">Essential จันทร์คุ้มครบ<br><small style="font-weight:400;">${CW.escape(TIER_META.essential.cond)}</small></th>
+        <th colspan="${sig.length}" class="tier-head-signature">Signature จันทร์ครบเครื่อง<br><small style="font-weight:400;">${CW.escape(TIER_META.signature.cond)}</small></th>
+      </tr>`;
+    const headPkg = `
+      <tr>
+        <th class="row-label" style="background:#FBF8F2;text-align:left;">แพ็คเกจ</th>
+        ${cols.map(p => `<th class="${tierOf(p) === 'signature' ? 'tier-head-signature' : 'tier-head-essential'}" style="font-size:0.8rem;">
+          <a href="./detail.html?id=${encodeURIComponent(p.id)}"><span class="pkg-name">${CW.escape(p.name)}</span></a>
+          <span class="pkg-price">${CW.fmtBaht(priceOf(p))}</span>
+        </th>`).join('')}
+      </tr>`;
+
+    const infoRows = `
+      <tr>
+        <td class="row-label">ราคาแพ็คเกจ</td>
+        ${cols.map(p => `<td><strong>${CW.fmtBaht(priceOf(p))}</strong></td>`).join('')}
+      </tr>
+      <tr>
+        <td class="row-label">ส่วนลดจองข้ามปี</td>
+        ${cols.map(p => p.crossYearDiscount
+          ? `<td class="check">-${CW.fmtBaht(p.crossYearDiscount)}<br><small style="color:var(--color-text-muted);">เหลือ ${CW.fmtBaht(priceOf(p) - p.crossYearDiscount)}</small></td>`
+          : '<td class="dash">—</td>').join('')}
+      </tr>
+      <tr>
+        <td class="row-label">วันที่ใช้ได้</td>
+        ${cols.map(p => `<td style="font-size:0.75rem;">${p.highSeasonWeekdayOnly ? 'เม.ย.–ก.ค. ทุกวัน<br>เดือนอื่น จ–ศ' : 'ทุกวัน ทั้งปี'}</td>`).join('')}
+      </tr>
+      <tr>
+        <td class="row-label">จำนวนแขกเริ่มต้น</td>
+        ${cols.map(p => `<td>${p.guestBase || 100} ท่าน</td>`).join('')}
+      </tr>
+      <tr>
+        <td class="row-label">ช่วงเวลา</td>
+        ${cols.map(p => `<td style="font-size:0.75rem;">${(p.availableTimeSlots || [])
+          .map(id => (data.timeSlots?.wedding || []).find(s => s.id === id))
+          .filter(Boolean).map(s => CW.escape(s.name)).join('<br>')}</td>`).join('')}
+      </tr>`;
+
+    const itemRows = rowKeys.map(key => `
+      <tr>
+        <td class="row-label">${CW.escape(key)}</td>
+        ${cols.map(p => hasItem(p, key) ? '<td class="check">✓</td>' : '<td class="dash">—</td>').join('')}
+      </tr>`).join('');
+
+    $('compareMount').innerHTML = `
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>${headTier}${headPkg}</thead>
+          <tbody>
+            ${infoRows}
+            <tr class="section-row"><td colspan="${cols.length + 1}">รายการที่รวมในแพ็คเกจ</td></tr>
+            ${itemRows}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-center" style="font-size:0.78rem;color:var(--color-text-muted);margin-top:12px;">
+        กดชื่อแพ็คเกจเพื่อดูรายละเอียดเต็มและคำนวณราคา
+      </p>`;
+  }
+
+  // ── main render ──
+  function render() {
+    const isWedding = category === 'wedding';
+    const all = data.packages?.[category] || [];
+
+    $('viewWrap').style.display = isWedding ? '' : 'none';
+    const effView = isWedding ? view : 'cards';
+    $('tierWrap').style.display = (isWedding && effView === 'cards') ? '' : 'none';
+
+    if (effView === 'compare') {
+      $('packagesGrid').setAttribute('hidden', '');
+      $('tierStrip').innerHTML = '';
+      $('compareMount').removeAttribute('hidden');
+      renderCompare(all);
+    } else {
+      $('compareMount').setAttribute('hidden', '');
+      $('compareMount').innerHTML = '';
+      $('packagesGrid').removeAttribute('hidden');
+      const list = isWedding ? all.filter(p => tierOf(p) === tier) : all;
+      renderCards(list);
+    }
   }
   render();
 })();

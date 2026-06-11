@@ -180,7 +180,7 @@
   const allSlots = data.timeSlots?.[cat] || [];
   const slots = allSlots.filter(s => (pkg.availableTimeSlots || []).includes(s.id));
   const guestBase = pkg.guestBase || 100;
-  const isMorning = pkg.id === 'wedding_morning_only';
+  const isMorning = pkg.id === 'signature_morning_only';
 
   let season = (cat === 'seminar' || pkg.season === 'low') ? (pkg.season === 'low' ? 'low' : 'high') : (CW.qs('season') || CW.currentSeason(data.seasonInfo));
   let timeSlot = slots[0]?.id;
