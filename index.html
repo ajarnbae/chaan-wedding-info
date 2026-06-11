@@ -7,36 +7,44 @@
 <meta name="description" content="Chaan de Cafe &amp; Wedding · สถานที่จัดงานแต่งงาน 3 โซน · Essential จันทร์คุ้มครบ 99,999 บาท">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./css/style.css?v=20260612a">
 <style>
-  /* ─── Hero carousel ─── */
-  .hero-mini {
-    padding: 0;
-    text-align: center;
+  /* ============================================================
+     Homepage — cinematic editorial redesign (มิ.ย. 2026 รอบ 3.5)
+     โครงใหม่ทั้งหน้า · เนื้อหา/ข้อมูลเดิมทุกตัวอักษร (bind จาก data.json)
+     ============================================================ */
+
+  /* ─── Scroll reveal (นุ่ม, ครั้งเดียว) ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  .reveal.in-view { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; }
+  }
+
+  /* ─── HERO — เต็มจอ + crossfade + slow zoom ─── */
+  .hero-cine {
     position: relative;
-    overflow: hidden;
-    min-height: clamp(560px, 86vh, 780px);
+    min-height: clamp(620px, 92svh, 920px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 0;
   }
-  /* Carousel track (full bleed behind content) */
-  .hero-carousel {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-  .hero-carousel__slides {
-    position: relative;
-    height: 100%;
-  }
+  .hero-carousel { position: absolute; inset: 0; z-index: 0; }
+  .hero-carousel__slides { position: relative; height: 100%; }
   .hero-carousel__slide {
     position: absolute;
     inset: 0;
     opacity: 0;
-    transition: opacity 1.4s ease;
+    transition: opacity 1.8s ease;
   }
   .hero-carousel__slide.active { opacity: 1; }
   .hero-carousel__slide img {
@@ -45,307 +53,444 @@
     display: block;
     pointer-events: none;
     user-select: none;
+    transform: scale(1.001);
   }
-  /* Dark overlay so text stays readable */
+  .hero-carousel__slide.active img {
+    transform: scale(1.07);
+    transition: transform 9s ease-out;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-carousel__slide.active img { transform: none; }
+  }
   .hero-carousel::after {
     content: "";
     position: absolute;
     inset: 0;
     background: linear-gradient(180deg,
-      rgba(30,18,8,0.30) 0%,
-      rgba(30,18,8,0.12) 45%,
-      rgba(30,18,8,0.58) 100%);
+      rgba(30,18,8,0.34) 0%,
+      rgba(30,18,8,0.10) 40%,
+      rgba(30,18,8,0.62) 100%);
     pointer-events: none;
     z-index: 1;
   }
-  /* Content layer */
-  .hero-mini__content {
+  .hero-cine__content {
     position: relative;
     z-index: 2;
-    max-width: 720px;
+    max-width: 880px;
     margin: 0 auto;
-    padding: clamp(80px, 12vh, 110px) 16px clamp(88px, 13vh, 120px);
+    padding: clamp(90px, 14vh, 130px) 20px clamp(40px, 6vh, 60px);
   }
-  .hero-mini__script {
+  /* brand lockup — script เด่นแบบ Hillbrook */
+  .hero-cine__script {
     font-family: var(--font-script);
-    font-size: clamp(2.6rem, 7vw, 4rem);
-    color: var(--color-gold-light);
-    line-height: 1;
-    margin-bottom: -8px;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    font-size: clamp(4.2rem, 13vw, 8rem);
+    color: #FDF9F2;
+    line-height: 0.95;
+    text-shadow: 0 4px 28px rgba(0,0,0,0.35);
   }
-  .hero-mini h1 {
-    font-size: clamp(2.2rem, 5.6vw, 3.6rem);
+  .hero-cine h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.15rem, 3vw, 1.7rem);
     font-weight: 400;
-    letter-spacing: 0.16em;
-    margin-bottom: 10px;
-    color: #fff;
-    text-shadow: 0 2px 16px rgba(0,0,0,0.35);
+    letter-spacing: 0.55em;
+    text-indent: 0.55em; /* balance tracking */
+    color: var(--color-gold-light);
+    margin: 18px 0 0;
+    text-shadow: 0 2px 14px rgba(0,0,0,0.4);
   }
-  .hero-mini__sub {
-    color: rgba(255,255,255,0.88);
-    font-size: 1.02rem;
-    max-width: 600px;
-    margin: 0 auto 28px;
-    text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+  .hero-cine__sub {
+    color: rgba(255,255,255,0.9);
+    font-size: clamp(0.98rem, 2vw, 1.1rem);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    max-width: 620px;
+    margin: 22px auto 0;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.35);
   }
-  .hero-mini__ctas { display:flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  /* Dot indicators */
-  .hero-dots {
+  .hero-cine__ctas {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 38px;
+  }
+  /* เส้น scroll cue บาง ๆ */
+  .hero-cine__cue {
     position: relative;
+    z-index: 2;
+    width: 1px;
+    height: clamp(40px, 7vh, 64px);
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0));
+  }
+  .hero-dots {
+    position: absolute;
+    bottom: 24px;
+    left: 0; right: 0;
     z-index: 2;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
-    padding-bottom: 22px;
-    margin-top: -8px;
-    pointer-events: none; /* clicks pass through to section swipe handler */
+    gap: 6px;
+    pointer-events: none;
   }
   .hero-dot {
     display: block;
     border-radius: 50%;
-    background: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.45);
     cursor: pointer;
     pointer-events: auto;
     border: none;
     padding: 0;
     transition: width 0.35s ease, height 0.35s ease,
                 background 0.35s ease, opacity 0.35s ease;
-    /* default = distance-2 (smallest) */
-    width: 5px; height: 5px;
-    opacity: 0.45;
+    width: 4px; height: 4px;
+    opacity: 0.4;
   }
-  .hero-dot[data-dist="1"] {
-    width: 6px; height: 6px;
-    opacity: 0.65;
-  }
+  .hero-dot[data-dist="1"] { width: 5px; height: 5px; opacity: 0.6; }
   .hero-dot[data-dist="0"] {
-    width: 8px; height: 8px;
+    width: 7px; height: 7px;
     background: var(--color-gold-light);
     opacity: 1;
   }
 
-  /* ─── Gallery Preview Section ─── */
-  .gallery-preview {
-    background: var(--color-cream-warm);
-    padding: var(--space-section) 16px;
+  /* ─── INTRO — editorial statement ─── */
+  .intro-state {
+    background: var(--color-cream);
+    padding: clamp(96px, 14vw, 170px) 24px;
+    text-align: center;
   }
-  .gallery-preview__grid {
+  .intro-state__eyebrow {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: var(--color-gold-dark);
+    margin-bottom: 28px;
+  }
+  .intro-state__text {
+    font-family: var(--font-serif);
+    font-size: clamp(1.65rem, 4.2vw, 2.9rem);
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--color-brown-dark);
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .intro-state__rule {
+    width: 1px;
+    height: clamp(48px, 7vw, 72px);
+    margin: clamp(36px, 5vw, 56px) auto 0;
+    background: linear-gradient(180deg, var(--color-gold), rgba(184,146,75,0));
+  }
+
+  /* ─── VENUE ZONES — แถวสลับแบบ editorial ─── */
+  .zones-cine { padding: var(--space-section) 0 calc(var(--space-section) * 1.15); }
+  .zone-rows {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(72px, 10vw, 128px);
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .zone-row {
     display: grid;
-    gap: 12px;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 200px 200px;
-    max-width: 1080px;
-    margin: 40px auto 32px;
+    grid-template-columns: 1fr;
+    gap: 26px;
+    align-items: center;
   }
-  @media (min-width: 640px) {
-    .gallery-preview__grid {
-      grid-template-columns: 1.6fr 1fr 1fr;
-      grid-template-rows: 300px 300px;
-      gap: 14px;
-    }
+  @media (min-width: 900px) {
+    .zone-row { grid-template-columns: 7fr 5fr; gap: clamp(44px, 6vw, 92px); }
+    .zone-row--flip .zone-row__media { order: 2; }
   }
-  .gallery-preview__item {
-    border-radius: var(--radius-md);
+  .zone-row__media {
+    display: block;
+    aspect-ratio: 4 / 3;
     overflow: hidden;
-    position: relative;
-    cursor: pointer;
+    border-radius: 6px;
+    background: var(--color-line);
+    box-shadow: var(--shadow-md);
   }
-  .gallery-preview__item img {
+  .zone-row__media img {
     width: 100%; height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.9s ease;
+    transform: scale(1.001);
+    transition: transform 1.4s ease;
   }
-  .gallery-preview__item:hover img { transform: scale(1.04); }
-  /* First item spans 2 rows on desktop */
-  @media (min-width: 640px) {
-    .gallery-preview__item:first-child { grid-row: span 2; }
+  .zone-row__media:hover img { transform: scale(1.05); }
+  .zone-row__num {
+    display: block;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1rem;
+    letter-spacing: 4px;
+    color: var(--color-gold);
+    margin-bottom: 14px;
   }
-  .gallery-preview__cta {
-    text-align: center;
+  .zone-row__name {
+    font-family: var(--font-serif);
+    font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+    font-weight: 400;
+    color: var(--color-brown-dark);
+    line-height: 1.2;
+    margin: 0 0 16px;
   }
+  .zone-row__desc {
+    color: var(--color-text-muted);
+    font-size: 1.02rem;
+    line-height: 1.95;
+    max-width: 44ch;
+    margin: 0 0 26px;
+  }
+  .zone-row__link {
+    display: inline-block;
+    font-size: 0.8rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--color-gold-dark);
+    border-bottom: 1px solid var(--color-gold-light);
+    padding-bottom: 5px;
+    transition: color 0.25s ease, border-color 0.25s ease;
+  }
+  .zone-row__link:hover { color: var(--color-brown-dark); border-color: var(--color-brown); }
 
-  /* FEATURED PACKAGE SPOTLIGHT */
-  .hot-promo {
-    background: linear-gradient(135deg, var(--color-ivory) 0%, var(--color-cream-warm) 100%);
-    color: var(--color-text);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
+  /* ─── FEATURED PACKAGE — premium band ─── */
+  .feat-band {
+    background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-cream-warm) 100%);
+    padding: var(--space-section) 20px;
+  }
+  .feat {
     display: grid;
     grid-template-columns: 1fr;
+    max-width: 1160px;
+    margin: 0 auto;
+    background: var(--color-ivory);
+    border-radius: 8px;
+    overflow: hidden;
     box-shadow: var(--shadow-lg);
     position: relative;
   }
-  .hot-promo__badge {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    z-index: 3;
-    background: rgba(255, 252, 247, 0.94);
-    color: var(--color-gold-dark);
-    border: 1px solid var(--color-gold-light);
-    padding: 7px 16px;
-    border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
+  @media (min-width: 880px) {
+    .feat { grid-template-columns: 1.15fr 1fr; }
+    .feat__img { min-height: 560px; aspect-ratio: auto; }
   }
-  .hot-promo__img { aspect-ratio: 16/10; position: relative; }
-  .hot-promo__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .hot-promo__img::after {
+  .feat__img { position: relative; aspect-ratio: 16 / 11; }
+  .feat__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .feat__img::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(92,69,52,0) 70%, rgba(92,69,52,0.22) 100%);
+    background: linear-gradient(180deg, rgba(46,34,24,0) 65%, rgba(46,34,24,0.25) 100%);
   }
-  .hot-promo__body {
-    padding: clamp(32px, 5vw, 56px) clamp(24px, 4vw, 48px);
+  .feat__badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 2;
+    background: rgba(255, 252, 247, 0.95);
+    color: var(--color-gold-dark);
+    border: 1px solid var(--color-gold-light);
+    padding: 7px 18px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .feat__body {
+    padding: clamp(36px, 5.5vw, 68px) clamp(26px, 4.5vw, 56px);
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-  .hot-promo__eyebrow {
+  .feat__eyebrow {
     font-family: var(--font-script);
     color: var(--color-gold);
-    font-size: 1.8rem;
+    font-size: clamp(1.7rem, 3vw, 2.1rem);
     line-height: 1;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
   }
-  .hot-promo__title {
+  .feat__title {
     font-family: var(--font-serif);
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
-    margin: 0 0 8px;
+    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    font-weight: 400;
+    margin: 0 0 12px;
     color: var(--color-brown-dark);
+    line-height: 1.18;
   }
-  .hot-promo__sub {
+  .feat__sub {
     color: var(--color-text-muted);
-    margin: 0 0 16px;
-    font-size: 0.95rem;
+    margin: 0 0 22px;
+    font-size: 0.98rem;
+    line-height: 1.85;
   }
-  .hot-promo__price-row {
+  .feat__price-row {
     display: flex;
     align-items: baseline;
-    gap: 16px;
-    margin: 8px 0 20px;
+    gap: 18px;
     flex-wrap: wrap;
+    padding-top: 20px;
+    margin-bottom: 22px;
+    border-top: 1px solid var(--color-line);
   }
-  .hot-promo__price {
+  .feat__price {
     font-family: var(--font-serif);
-    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    font-size: clamp(2.5rem, 5.5vw, 3.6rem);
     color: var(--color-gold-dark);
     line-height: 1;
   }
-  .hot-promo__price-meta {
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
-  }
-  .hot-promo__pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 20px;
-  }
-  .hot-promo__pill {
+  .feat__price-meta { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.6; }
+  .feat__pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+  .feat__pill {
     background: transparent;
     border: 1px solid var(--color-line);
-    padding: 5px 14px;
+    padding: 6px 16px;
     border-radius: 999px;
     font-size: 0.8rem;
     letter-spacing: 0.4px;
     color: var(--color-brown);
   }
-  .hot-promo__ctas { display: flex; gap: 10px; flex-wrap: wrap; }
-  @media (min-width: 720px) { .hot-promo { grid-template-columns: 1.1fr 1fr; } .hot-promo__img { aspect-ratio: auto; } }
+  .feat__ctas { display: flex; gap: 12px; flex-wrap: wrap; }
 
-  /* Category cards (minimal) */
-  .cat-grid {
+  /* ─── EXPLORE — minimal editorial list ─── */
+  .explore-cine { padding: var(--space-section) 20px; background: var(--color-cream); }
+  .explore-list {
+    max-width: 1160px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    max-width: 720px;
-    margin: 0 auto;
+    border-top: 1px solid var(--color-line);
+    border-left: 1px solid var(--color-line);
   }
-  @media (min-width: 720px) { .cat-grid { grid-template-columns: repeat(4, 1fr); } }
-  .cat-card {
+  @media (min-width: 880px) { .explore-list { grid-template-columns: repeat(4, 1fr); } }
+  .explore-item {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 28px 16px;
-    background: var(--color-ivory);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-lg);
-    transition: all 0.2s ease;
+    gap: 6px;
+    padding: clamp(26px, 4vw, 40px) clamp(18px, 3vw, 30px);
+    border-right: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+    background: transparent;
+    color: inherit;
     text-decoration: none;
-    color: inherit;
+    transition: background 0.3s ease;
+    position: relative;
   }
-  .cat-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--color-gold);
-    box-shadow: var(--shadow-md);
-    color: inherit;
-  }
-  .cat-card__icon {
-    width: 48px; height: 48px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--color-ivory);
-    border: 1px solid var(--color-gold-light);
-    border-radius: 50%;
+  .explore-item:hover { background: var(--color-ivory); color: inherit; }
+  .explore-item__icon { font-size: 1.15rem; filter: saturate(0.7); opacity: 0.9; }
+  .explore-item__title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    font-weight: 500;
     color: var(--color-brown-dark);
-    font-size: 1.3rem;
-    margin-bottom: 12px;
+    margin: 2px 0 0;
   }
-  .cat-card__title { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 500; color: var(--color-brown-dark); margin-bottom: 4px; }
-  .cat-card__hint { font-size: 0.78rem; color: var(--color-text-muted); margin: 0; }
+  .explore-item__hint { font-size: 0.82rem; color: var(--color-text-muted); margin: 0; }
+  .explore-item__arrow {
+    margin-top: 14px;
+    font-size: 0.95rem;
+    color: var(--color-gold);
+    transition: transform 0.3s ease;
+  }
+  .explore-item:hover .explore-item__arrow { transform: translateX(6px); }
 
-  .why-strip {
+  /* ─── GALLERY — full-bleed mosaic ─── */
+  .gal-cine {
+    background: var(--color-cream-warm);
+    padding: var(--space-section) 0;
+  }
+  .gal-grid {
+    display: grid;
+    gap: 10px;
+    padding: 0 12px;
+    max-width: 1480px;
+    margin: 0 auto;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 165px;
+  }
+  @media (min-width: 760px) {
+    .gal-grid {
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: clamp(220px, 24vw, 300px);
+      gap: 12px;
+    }
+  }
+  .gal-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--color-line);
+    display: block;
+  }
+  .gal-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+  .gal-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.001);
+    transition: transform 1.3s ease;
+  }
+  .gal-item:hover img { transform: scale(1.05); }
+  .gal-cta { text-align: center; margin-top: clamp(32px, 5vw, 48px); }
+
+  /* ─── WHY — cinematic stat band ─── */
+  .why-cine {
     background: var(--color-brown-dark);
     color: var(--color-cream);
-    padding: clamp(56px, 8vw, 88px) 16px;
+    padding: clamp(80px, 11vw, 130px) 20px;
   }
   .why-grid {
-    max-width: 960px;
+    max-width: 1000px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 44px;
     text-align: center;
   }
-  @media (min-width: 640px) { .why-grid { grid-template-columns: repeat(3, 1fr); } }
-  .why-num { font-family: var(--font-script); color: var(--color-gold-light); font-size: 3rem; line-height: 1; margin-bottom: 6px; }
-  .why-h { font-family: var(--font-serif); font-size: 1.2rem; color: #fff; margin-bottom: 6px; }
-  .why-p { color: rgba(251, 246, 239, 0.78); font-size: 0.95rem; margin: 0; line-height: 1.6; }
+  @media (min-width: 640px) { .why-grid { grid-template-columns: repeat(3, 1fr); gap: 36px; } }
+  .why-num {
+    font-family: var(--font-script);
+    color: var(--color-gold-light);
+    font-size: clamp(3.2rem, 6vw, 4.2rem);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .why-h {
+    font-family: var(--font-serif);
+    font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .why-p { color: rgba(251, 246, 239, 0.72); font-size: 0.95rem; margin: 0; line-height: 1.7; }
 
-  /* ---------- Booking Steps Timeline ---------- */
-  .booking-steps-section { background: var(--color-cream-warm); }
-
+  /* ─── BOOKING STEPS ─── */
+  .booking-steps-section { background: var(--color-cream); padding: var(--space-section) 0; }
   .booking-tabs {
     display: flex;
     justify-content: center;
     gap: 12px;
-    margin-bottom: 40px;
+    margin-bottom: 44px;
     flex-wrap: wrap;
   }
   .booking-tab {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 24px;
+    padding: 11px 26px;
+    min-height: 44px;
     border-radius: 999px;
-    border: 1.5px solid var(--color-gold-light);
+    border: 1px solid var(--color-gold-light);
     background: transparent;
     color: var(--color-brown);
     font-family: var(--font-sans);
     font-size: 0.95rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
   }
   .booking-tab:hover { border-color: var(--color-gold); color: var(--color-gold-dark); }
   .booking-tab.active { background: var(--color-gold); border-color: var(--color-gold); color: #fff; }
@@ -363,14 +508,14 @@
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    background: rgba(184,146,75,0.10);
+    background: rgba(184,146,75,0.08);
     border: 1px solid var(--color-gold-light);
     border-radius: 10px;
-    padding: 14px 20px;
-    margin-bottom: 40px;
+    padding: 16px 22px;
+    margin-bottom: 44px;
     color: var(--color-brown-dark);
     font-size: 0.92rem;
-    line-height: 1.6;
+    line-height: 1.7;
     max-width: 640px;
     margin-left: auto;
     margin-right: auto;
@@ -389,7 +534,7 @@
     top: 22px;
     left: calc(100% / 6);
     right: calc(100% / 6);
-    height: 2px;
+    height: 1px;
     background: linear-gradient(90deg, var(--color-gold-light), var(--color-gold), var(--color-gold-light));
     z-index: 0;
   }
@@ -407,88 +552,124 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: var(--color-cream-warm);
-    border: 2px solid var(--color-gold);
+    background: var(--color-cream);
+    border: 1px solid var(--color-gold);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     flex-shrink: 0;
   }
   .step-dot span {
-    font-family: var(--font-script);
-    font-size: 1.3rem;
-    color: var(--color-gold);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--color-gold-dark);
     line-height: 1;
   }
   .step-dot--highlight { background: var(--color-gold); border-color: var(--color-gold-dark); }
   .step-dot--highlight span { color: #fff; }
   .step-title {
     font-family: var(--font-serif);
-    font-size: 1rem;
+    font-size: 1.08rem;
     color: var(--color-brown-dark);
     font-weight: 600;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     line-height: 1.3;
   }
-  .step-desc { font-size: 0.83rem; color: var(--color-text-muted); line-height: 1.55; }
+  .step-desc { font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.6; }
   .step-tag {
     display: inline-block;
-    margin-top: 6px;
-    padding: 2px 10px;
-    background: var(--color-gold);
-    color: #fff;
+    margin-top: 8px;
+    padding: 3px 12px;
+    background: transparent;
+    border: 1px solid var(--color-gold);
+    color: var(--color-gold-dark);
     border-radius: 999px;
-    font-size: 0.75rem;
+    font-size: 0.76rem;
     font-weight: 600;
+    letter-spacing: 0.5px;
   }
 
   @media (max-width: 639px) {
     .timeline-steps { flex-direction: column; align-items: stretch; }
     .timeline-steps::before {
       top: 0; bottom: 0; left: 22px; right: auto;
-      width: 2px; height: auto;
+      width: 1px; height: auto;
     }
     .timeline-step {
       flex-direction: row;
       text-align: left;
       align-items: flex-start;
       gap: 16px;
-      padding: 0 0 28px 0;
+      padding: 0 0 30px 0;
     }
     .step-dot { margin-bottom: 0; flex-shrink: 0; }
     .step-content { padding-top: 8px; }
   }
 
-  /* ---------- Final CTA ---------- */
+  /* ─── FINAL CTA ─── */
+  .contact-cine {
+    background: linear-gradient(180deg, var(--color-cream-warm) 0%, var(--color-cream) 100%);
+    padding: clamp(88px, 12vw, 140px) 20px;
+    text-align: center;
+  }
+  .contact-cine__lead {
+    color: var(--color-text-muted);
+    margin: 0 auto 36px;
+    max-width: 480px;
+    line-height: 1.85;
+  }
   .final-ctas__primary {
     display: flex;
     gap: 12px;
     justify-content: center;
     flex-wrap: wrap;
   }
-  .final-ctas__map {
-    margin-top: 20px;
-    text-align: center;
-  }
+  .final-ctas__map { margin-top: 22px; text-align: center; }
   .final-ctas__map a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
     min-height: 44px;
-    padding: 10px 22px;
+    padding: 10px 24px;
     border: 1px solid var(--color-line);
     border-radius: 999px;
     color: var(--color-brown);
     font-size: 0.88rem;
     letter-spacing: 0.5px;
-    transition: border-color 0.2s ease, color 0.2s ease;
+    transition: border-color 0.25s ease, color 0.25s ease;
   }
   .final-ctas__map a:hover { border-color: var(--color-gold); color: var(--color-gold-dark); }
   @media (max-width: 639px) {
-    .final-ctas__primary { flex-direction: column; align-items: stretch; }
+    .final-ctas__primary { flex-direction: column; align-items: stretch; max-width: 360px; margin: 0 auto; }
     .final-ctas__primary .btn { width: 100%; }
+  }
+
+  /* section heading รุ่นใหม่ (โปร่ง บางเบา) */
+  .sec-head { text-align: center; margin-bottom: clamp(44px, 7vw, 72px); }
+  .sec-head .eyebrow {
+    display: block;
+    font-family: var(--font-script);
+    font-size: clamp(1.5rem, 2.6vw, 1.9rem);
+    color: var(--color-gold);
+    margin-bottom: 2px;
+  }
+  .sec-head h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.9rem, 4.6vw, 3rem);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin: 0;
+  }
+  .sec-head h2::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--color-gold-light);
+    margin: 18px auto 0;
   }
 </style>
 </head>
@@ -497,93 +678,95 @@
 <div id="nav-mount"></div>
 
 <!-- HERO -->
-<section class="hero-mini" id="heroSection">
-  <!-- Carousel (injected by JS) -->
+<section class="hero-cine" id="heroSection">
   <div class="hero-carousel" id="heroCarousel" aria-hidden="true">
     <div class="hero-carousel__slides" id="heroSlides"></div>
   </div>
-  <div class="hero-mini__content">
-    <div class="hero-mini__script">Chaan</div>
+  <div class="hero-cine__content">
+    <div class="hero-cine__script">Chaan</div>
     <h1>WEDDING VENUE</h1>
-    <p class="hero-mini__sub" id="heroSub">Chaan de Cafe &amp; Wedding · สถานที่จัดงานแต่งงาน 3 โซน 3 บรรยากาศ</p>
-    <div class="hero-mini__ctas">
+    <p class="hero-cine__sub" id="heroSub">Chaan de Cafe &amp; Wedding · สถานที่จัดงานแต่งงาน 3 โซน 3 บรรยากาศ</p>
+    <div class="hero-cine__ctas">
       <a href="#promo" class="btn btn--primary">ดู Essential จันทร์คุ้มครบ 99,999 →</a>
       <a href="./packages/" class="btn btn--light">แพ็คเกจทั้งหมด</a>
     </div>
   </div>
-  <!-- Dots -->
+  <div class="hero-cine__cue" aria-hidden="true"></div>
   <div class="hero-dots" id="heroDots"></div>
 </section>
 
-<!-- VENUE SPACES -->
-<section class="section" id="venueSpacesSection" style="display:none;">
-  <div class="container">
-    <div class="section-title">
-      <span class="eyebrow">Our Spaces</span>
-      <h2>โซนสถานที่</h2>
-    </div>
-    <div class="venue-spaces" id="venueSpacesGrid"></div>
+<!-- INTRO STATEMENT -->
+<section class="intro-state" id="introSection">
+  <div class="reveal">
+    <span class="intro-state__eyebrow" id="introEyebrow"></span>
+    <p class="intro-state__text" id="introStatement"></p>
+    <div class="intro-state__rule" aria-hidden="true"></div>
   </div>
 </section>
 
-<!-- FEATURED PACKAGE SPOTLIGHT -->
-<section class="section" id="promo">
-  <div class="container">
-    <div id="featuredMount" class="loading">กำลังโหลดโปรโมชั่น...</div>
+<!-- VENUE ZONES -->
+<section class="zones-cine" id="venueSpacesSection" style="display:none;">
+  <div class="sec-head reveal">
+    <span class="eyebrow">Our Spaces</span>
+    <h2>โซนสถานที่</h2>
+  </div>
+  <div class="zone-rows" id="venueSpacesGrid"></div>
+</section>
+
+<!-- FEATURED PACKAGE -->
+<section class="feat-band" id="promo">
+  <div id="featuredMount" class="loading">กำลังโหลดโปรโมชั่น...</div>
+</section>
+
+<!-- EXPLORE -->
+<section class="explore-cine">
+  <div class="sec-head reveal">
+    <span class="eyebrow">Explore</span>
+    <h2>เลือกข้อมูลที่คุณสนใจ</h2>
+  </div>
+  <div class="explore-list reveal">
+    <a href="./packages/" class="explore-item">
+      <span class="explore-item__icon">💐</span>
+      <div class="explore-item__title">แพ็คเกจ</div>
+      <p class="explore-item__hint">7 แพ็คเกจงานแต่ง + สัมมนา</p>
+      <span class="explore-item__arrow">→</span>
+    </a>
+    <a href="./venue-fees.html" class="explore-item">
+      <span class="explore-item__icon">🏛️</span>
+      <div class="explore-item__title">ค่าเช่า / บริการเสริม</div>
+      <p class="explore-item__hint">เช่าสถานที่ + add-on</p>
+      <span class="explore-item__arrow">→</span>
+    </a>
+    <a href="./menu/" class="explore-item">
+      <span class="explore-item__icon">🍽️</span>
+      <div class="explore-item__title">เมนูอาหาร</div>
+      <p class="explore-item__hint">บุฟเฟต์ · จีน · จันทร์</p>
+      <span class="explore-item__arrow">→</span>
+    </a>
+    <a href="./gallery/" class="explore-item">
+      <span class="explore-item__icon">📸</span>
+      <div class="explore-item__title">รูปภาพ</div>
+      <p class="explore-item__hint">3 โซน · 7 พิธี</p>
+      <span class="explore-item__arrow">→</span>
+    </a>
   </div>
 </section>
 
-<!-- QUICK NAVIGATION -->
-<section class="section--tight" style="background: var(--color-cream-warm);">
-  <div class="container">
-    <div class="section-title" style="margin-bottom: 24px;">
-      <span class="eyebrow">Explore</span>
-      <h2>เลือกข้อมูลที่คุณสนใจ</h2>
-    </div>
-    <div class="cat-grid">
-      <a href="./packages/" class="cat-card">
-        <span class="cat-card__icon">💐</span>
-        <div class="cat-card__title">แพ็คเกจ</div>
-        <p class="cat-card__hint">7 แพ็คเกจงานแต่ง + สัมมนา</p>
-      </a>
-      <a href="./venue-fees.html" class="cat-card">
-        <span class="cat-card__icon">🏛️</span>
-        <div class="cat-card__title">ค่าเช่า / บริการเสริม</div>
-        <p class="cat-card__hint">เช่าสถานที่ + add-on</p>
-      </a>
-      <a href="./menu/" class="cat-card">
-        <span class="cat-card__icon">🍽️</span>
-        <div class="cat-card__title">เมนูอาหาร</div>
-        <p class="cat-card__hint">บุฟเฟต์ · จีน · จันทร์</p>
-      </a>
-      <a href="./gallery/" class="cat-card">
-        <span class="cat-card__icon">📸</span>
-        <div class="cat-card__title">รูปภาพ</div>
-        <p class="cat-card__hint">3 โซน · 7 พิธี</p>
-      </a>
-    </div>
+<!-- GALLERY -->
+<section class="gal-cine">
+  <div class="sec-head reveal">
+    <span class="eyebrow">Gallery</span>
+    <h2>บรรยากาศสถานที่</h2>
   </div>
-</section>
-
-<!-- GALLERY PREVIEW -->
-<section class="gallery-preview">
-  <div class="container">
-    <div class="section-title">
-      <span class="eyebrow">Gallery</span>
-      <h2>บรรยากาศสถานที่</h2>
-    </div>
-    <div class="gallery-preview__grid" id="galleryPreviewGrid">
-      <!-- Injected by JS -->
-    </div>
-    <div class="gallery-preview__cta">
-      <a href="./gallery/" class="btn btn--ghost">คลิกเพื่อดูภาพทั้งหมด →</a>
-    </div>
+  <div class="gal-grid reveal" id="galleryPreviewGrid"></div>
+  <div class="gal-cta">
+    <a href="./gallery/" class="btn btn--ghost">คลิกเพื่อดูภาพทั้งหมด →</a>
   </div>
 </section>
 
 <!-- WHY US -->
-<section class="why-strip">
-  <div class="why-grid">
+<section class="why-cine">
+  <div class="why-grid reveal">
     <div>
       <div class="why-num">3</div>
       <div class="why-h">โซนสถานที่</div>
@@ -603,14 +786,13 @@
 </section>
 
 <!-- BOOKING STEPS -->
-<section class="section booking-steps-section">
+<section class="booking-steps-section">
   <div class="container" style="max-width: 960px;">
-    <div class="section-title">
+    <div class="sec-head reveal">
       <span class="eyebrow">How to Book</span>
       <h2>ขั้นตอนการจองและชำระเงิน</h2>
     </div>
 
-    <!-- Tab switch -->
     <div class="booking-tabs">
       <button class="booking-tab active" data-tab="same-year">จองภายในปี</button>
       <button class="booking-tab" data-tab="cross-year">จองข้ามปี <span class="tab-badge">ลด 20,000฿</span></button>
@@ -650,7 +832,7 @@
     <div class="booking-timeline" id="tab-cross-year" style="display:none;">
       <div class="booking-note">
         <span class="booking-note-icon">🎁</span>
-        <span>จองปีนี้ จัดงานปีหน้า — รับส่วนลดพิเศษ <strong>20,000 บาท</strong> สำหรับแพ็คเกจมาตรฐาน (All Year Long) ทุกรูปแบบ</span>
+        <span>จองปีนี้ จัดงานปีหน้า — รับส่วนลดพิเศษ <strong>20,000 บาท</strong> สำหรับแพ็คเกจ Signature จันทร์ครบเครื่อง</span>
       </div>
       <div class="timeline-steps">
         <div class="timeline-step">
@@ -691,13 +873,13 @@
 </section>
 
 <!-- FINAL CTA -->
-<section class="section text-center">
-  <div class="container" style="max-width: 600px;">
-    <div class="section-title">
+<section class="contact-cine">
+  <div class="reveal">
+    <div class="sec-head" style="margin-bottom: 28px;">
       <span class="eyebrow">Get in touch</span>
       <h2>พร้อมให้ปรึกษา</h2>
     </div>
-    <p style="color: var(--color-text-muted); margin-bottom: 24px;">สนใจสอบถามหรือจองเข้าชมสถานที่ ติดต่อทางช่องทางด้านล่าง</p>
+    <p class="contact-cine__lead">สนใจสอบถามหรือจองเข้าชมสถานที่ ติดต่อทางช่องทางด้านล่าง</p>
     <div id="finalCtas"></div>
   </div>
 </section>
@@ -710,11 +892,19 @@
   const data = await CW.mountChrome('home');
   if (!data) return;
 
-  if (data.site?.description) document.getElementById('heroSub').textContent = data.site.description;
+  // ── Intro statement (editorial) — ใช้ tagline + description เดิมจาก data ──
+  // (hero sub ใช้ข้อความ static เดิม — description ย้ายไปเป็น statement ใหญ่ด้านล่าง)
+  const introEyebrow = document.getElementById('introEyebrow');
+  const introStatement = document.getElementById('introStatement');
+  if (data.site?.tagline) introEyebrow.textContent = data.site.tagline;
+  if (data.site?.description) {
+    introStatement.textContent = data.site.description;
+  } else {
+    document.getElementById('introSection').style.display = 'none';
+  }
 
-  // ── Hero carousel ──
+  // ── Hero carousel (crossfade) ──
   const allPhotos = data.gallery?.photos || [];
-  // Shuffle
   const shuffled = [...allPhotos].sort(() => Math.random() - 0.5);
   const heroPhotos = shuffled.length ? shuffled : [];
   const slidesEl = document.getElementById('heroSlides');
@@ -724,14 +914,12 @@
   let heroTimer = null;
 
   if (heroPhotos.length > 0) {
-    // Build slides
     slidesEl.innerHTML = heroPhotos.map((p, i) => `
       <div class="hero-carousel__slide${i === 0 ? ' active' : ''}">
         <img src="${CW.escape(p.url)}" alt="${CW.escape(p.caption || '')}" loading="${i === 0 ? 'eager' : 'lazy'}" style="${CW.imgStyle(p)}">
       </div>
     `).join('');
 
-    // Build exactly 5 dot elements (or fewer if < 5 photos)
     const dotCount = Math.min(MAX_DOTS, heroPhotos.length);
     dotsEl.innerHTML = Array.from({ length: dotCount }, (_, i) =>
       `<span class="hero-dot" data-dist="2" data-i="${i}" role="button" aria-label="ภาพที่ ${i+1}"></span>`
@@ -740,16 +928,14 @@
     function updateDots(idx) {
       const total = heroPhotos.length;
       const dc = Math.min(MAX_DOTS, total);
-      // Sliding window: keep active dot as centered as possible
       const half = Math.floor(dc / 2);
       let winStart = idx - half;
       winStart = Math.max(0, Math.min(winStart, total - dc));
-
       dotsEl.querySelectorAll('.hero-dot').forEach((d, di) => {
         const mappedIdx = winStart + di;
         const dist = Math.abs(mappedIdx - idx);
         d.dataset.i = mappedIdx;
-        d.dataset.dist = Math.min(dist, 2); // 0=active, 1=adjacent, 2=far
+        d.dataset.dist = Math.min(dist, 2);
       });
     }
 
@@ -769,11 +955,10 @@
       heroTimer = setInterval(() => goTo(heroIdx + 1), 6000);
     });
 
-    // Auto-advance
     heroTimer = setInterval(() => goTo(heroIdx + 1), 6000);
     goTo(0);
 
-    // ── Swipe / drag support (attached to heroSection so content overlay doesn't block) ──
+    // Swipe / drag
     const heroSection = document.getElementById('heroSection');
     let touchStartX = 0;
     let touchStartY = 0;
@@ -803,7 +988,6 @@
       isDragging = false;
     }, { passive: true });
 
-    // Mouse drag support (desktop)
     let mouseStartX = 0;
     let mouseDown = false;
     heroSection.addEventListener('mousedown', (e) => { mouseStartX = e.clientX; mouseDown = true; });
@@ -819,20 +1003,19 @@
     });
     heroSection.addEventListener('mouseleave', () => { mouseDown = false; });
   } else {
-    // Fallback: plain gradient background (hide carousel)
     document.getElementById('heroCarousel').style.display = 'none';
     document.getElementById('heroSection').style.background = 'linear-gradient(180deg, #FFFCF7 0%, #FBF6EF 60%, #F4EBDC 100%)';
-    document.querySelector('.hero-mini__script').style.color = 'var(--color-gold)';
-    document.querySelector('.hero-mini h1').style.color = 'var(--color-brown-dark)';
-    document.querySelector('.hero-mini__sub').style.color = 'var(--color-text-muted)';
+    document.querySelector('.hero-cine__script').style.color = 'var(--color-gold)';
+    document.querySelector('.hero-cine h1').style.color = 'var(--color-gold-dark)';
+    document.querySelector('.hero-cine__sub').style.color = 'var(--color-text-muted)';
   }
 
-  // ── Gallery Preview Section ──
+  // ── Gallery mosaic (5 ภาพแรกเดิม) ──
   const previewGrid = document.getElementById('galleryPreviewGrid');
   if (previewGrid && allPhotos.length > 0) {
     const previewPhotos = allPhotos.slice(0, 5);
     previewGrid.innerHTML = previewPhotos.map(p => `
-      <a href="./gallery/" class="gallery-preview__item">
+      <a href="./gallery/" class="gal-item">
         <img src="${CW.escape(p.url)}" alt="${CW.escape(p.caption || 'บรรยากาศสถานที่')}" loading="lazy" style="${CW.imgStyle(p)}">
       </a>
     `).join('');
@@ -840,22 +1023,25 @@
     previewGrid.closest('section').style.display = 'none';
   }
 
-  // ── Venue spaces (from gallery zones) ──
+  // ── Venue zones — แถวสลับ editorial (ชื่อ/คำอธิบายเดิมจาก data) ──
   const zoneDefs = data.gallery?.zones || [];
   const zoneGrid = document.getElementById('venueSpacesGrid');
   if (zoneGrid && zoneDefs.length) {
-    const zoneCards = zoneDefs.map(z => {
+    const zoneCards = zoneDefs.map((z, zi) => {
       const photo = allPhotos.find(p => p.zone === z.id);
       if (!photo) return '';
       return `
-        <a href="./gallery/?zone=${encodeURIComponent(z.id)}" class="venue-space">
-          <img src="${CW.escape(photo.url)}" alt="${CW.escape(z.name)}" loading="lazy" style="${CW.imgStyle(photo)}">
-          <div class="venue-space__overlay">
-            <div class="venue-space__name">${CW.escape(z.name)}</div>
-            <p class="venue-space__desc">${CW.escape(z.description || '')}</p>
-            <span class="venue-space__link">ดูรูปภาพ →</span>
+        <div class="zone-row${zi % 2 ? ' zone-row--flip' : ''} reveal">
+          <a href="./gallery/?zone=${encodeURIComponent(z.id)}" class="zone-row__media">
+            <img src="${CW.escape(photo.url)}" alt="${CW.escape(z.name)}" loading="lazy" style="${CW.imgStyle(photo)}">
+          </a>
+          <div class="zone-row__body">
+            <span class="zone-row__num">${String(zi + 1).padStart(2, '0')}</span>
+            <h3 class="zone-row__name">${CW.escape(z.name)}</h3>
+            <p class="zone-row__desc">${CW.escape(z.description || '')}</p>
+            <a class="zone-row__link" href="./gallery/?zone=${encodeURIComponent(z.id)}">ดูรูปภาพ →</a>
           </div>
-        </a>`;
+        </div>`;
     }).join('');
     if (zoneCards.trim()) {
       zoneGrid.innerHTML = zoneCards;
@@ -863,7 +1049,7 @@
     }
   }
 
-  // Featured = the 99,999 promo by default
+  // ── Featured package (ข้อมูล/ราคา render เหมือนเดิมทุกอย่าง) ──
   const featuredId = data.featuredPackageId;
   const all = [...(data.packages?.wedding || []), ...(data.packages?.seminar || [])];
   const featured = all.find(p => p.id === featuredId) || all[0];
@@ -877,28 +1063,30 @@
     const slots = (data.timeSlots?.[cat] || []).filter(s => (featured.availableTimeSlots || []).includes(s.id));
 
     const isSignature = featured.tier === 'signature' || featured.id.startsWith('signature_');
-    const tierLabel = isSignature ? 'Signature \u0E08\u0E31\u0E19\u0E17\u0E23\u0E4C\u0E04\u0E23\u0E1A\u0E40\u0E04\u0E23\u0E37\u0E48\u0E2D\u0E07' : 'Essential \u0E08\u0E31\u0E19\u0E17\u0E23\u0E4C\u0E04\u0E38\u0E49\u0E21\u0E04\u0E23\u0E1A';
+    const tierLabel = isSignature ? 'Signature จันทร์ครบเครื่อง' : 'Essential จันทร์คุ้มครบ';
 
     featuredMount.classList.remove('loading');
     featuredMount.innerHTML = `
-      <div class="hot-promo">
-        <span class="hot-promo__badge">${isSignature ? 'Signature' : 'Essential'}</span>
-        <div class="hot-promo__img"><img src="${CW.escape(featured.image)}" alt="${CW.escape(featured.name)}" style="${CW.imgStyle(featured)}"></div>
-        <div class="hot-promo__body">
-          <span class="hot-promo__eyebrow">${CW.escape(featured.name)}</span>
-          <h2 class="hot-promo__title">${tierLabel}</h2>
-          <p class="hot-promo__sub">${CW.escape(featured.longDescription || featured.shortDescription || '')}</p>
-          <div class="hot-promo__price-row">
-            <div class="hot-promo__price">${CW.fmtBaht(price)}</div>
-            <div class="hot-promo__price-meta">
+      <div class="feat reveal">
+        <div class="feat__img">
+          <span class="feat__badge">${isSignature ? 'Signature' : 'Essential'}</span>
+          <img src="${CW.escape(featured.image)}" alt="${CW.escape(featured.name)}" style="${CW.imgStyle(featured)}">
+        </div>
+        <div class="feat__body">
+          <span class="feat__eyebrow">${CW.escape(featured.name)}</span>
+          <h2 class="feat__title">${tierLabel}</h2>
+          <p class="feat__sub">${CW.escape(featured.longDescription || featured.shortDescription || '')}</p>
+          <div class="feat__price-row">
+            <div class="feat__price">${CW.fmtBaht(price)}</div>
+            <div class="feat__price-meta">
               เริ่ม ${guestBase} ท่าน<br>
               <small>${CW.escape(featured.notes || '').split('·')[0]}</small>
             </div>
           </div>
-          <div class="hot-promo__pills">
-            ${slots.map(s => `<span class="hot-promo__pill">${CW.escape(s.name)} · ${CW.escape(s.hours)}</span>`).join('')}
+          <div class="feat__pills">
+            ${slots.map(s => `<span class="feat__pill">${CW.escape(s.name)} · ${CW.escape(s.hours)}</span>`).join('')}
           </div>
-          <div class="hot-promo__ctas">
+          <div class="feat__ctas">
             <a href="./packages/detail.html?id=${encodeURIComponent(featured.id)}" class="btn btn--primary">ดูรายละเอียดเต็ม →</a>
             <a href="./packages/" class="btn btn--ghost">แพ็คเกจอื่น ๆ</a>
           </div>
@@ -909,7 +1097,7 @@
     featuredMount.innerHTML = '<div class="empty-state">ยังไม่มีโปรโมชั่น</div>';
   }
 
-  // Final CTAs
+  // ── Final CTAs — แถวหลัก (โทร/LINE/Facebook) + แผนที่เป็น secondary ──
   const c = data.site?.contact || {};
   const ctas = [];
   if (c.phone) ctas.push(`<a href="tel:${CW.escape(c.phone.replace(/[^\d+]/g, ''))}" class="btn btn--primary">☎ ${CW.escape(c.phone)}</a>`);
@@ -933,6 +1121,22 @@
       if (target) target.style.display = '';
     });
   });
+
+  // ── Scroll reveal (หลังจาก inject เนื้อหา dynamic แล้ว) ──
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          en.target.classList.add('in-view');
+          obs.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
+    revealEls.forEach(el => obs.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in-view'));
+  }
 
 })();
 </script>
