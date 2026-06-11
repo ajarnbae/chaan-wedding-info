@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="../css/style.css?v=20260612b">
 <style>
   /* ── ธีม editorial (เข้าชุดหน้าแรก) — มุมคม, hairline, ไม่มี gradient ── */
-  .detail-hero { aspect-ratio: auto; min-height: clamp(380px, 62vh, 660px); }
+  .detail-hero { aspect-ratio: auto; min-height: clamp(380px, 62vh, 660px); position: relative; overflow: hidden; }
+  .detail-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .detail-hero__overlay {
     background: linear-gradient(180deg, rgba(30,18,8,0.04) 30%, rgba(30,18,8,0.66) 100%);
     padding: clamp(24px, 5vw, 56px);
@@ -181,6 +182,34 @@
   .calc-line .label { flex: 1; }
   .calc-line .amount { color: var(--color-gold-light); font-weight: 500; }
   .calc-line.deduct .amount { color: #FFB39E; }
+
+  /* ── checkbox/radio เหลี่ยมทั้งหมด ── */
+  #detailMount input[type="checkbox"],
+  #detailMount input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px; height: 18px;
+    min-width: 18px;
+    border: 1px solid var(--color-gold);
+    border-radius: 0;
+    background: transparent;
+    cursor: pointer;
+    display: inline-grid;
+    place-content: center;
+    margin: 0;
+    flex-shrink: 0;
+  }
+  #detailMount input[type="checkbox"]:checked,
+  #detailMount input[type="radio"]:checked {
+    background: var(--color-gold);
+  }
+  #detailMount input[type="checkbox"]:checked::before,
+  #detailMount input[type="radio"]:checked::before {
+    content: "✓";
+    color: #fff;
+    font-size: 11px;
+    line-height: 1;
+  }
 
   /* Gallery banner — hairline editorial */
   .gal-banner {

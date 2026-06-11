@@ -6,30 +6,111 @@
 <title>รูปภาพสถานที่ — Chaan Wedding</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Sarabun:wght@300;400;500;600&family=Trirong:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css?v=20260612b">
+<style>
+  /* ── ธีม editorial ร่วม (phero + dhead + chips) ── */
+  .phero { position: relative; height: clamp(260px, 46vh, 520px); }
+  .phero__media { position: absolute; inset: 0; overflow: hidden; background: var(--color-line); }
+  .phero__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .phero__media::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(30,18,8,0.2) 0%, rgba(30,18,8,0.06) 55%, rgba(30,18,8,0.22) 100%);
+  }
+  .phero__wordmark {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    transform: translateY(44%);
+    z-index: 2;
+    text-align: center;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(48px, 11.5vw, 180px);
+    line-height: 0.74;
+    letter-spacing: 0.05em;
+    color: var(--color-cream);
+    pointer-events: none;
+    user-select: none;
+  }
+  .dhead__en {
+    font-family: var(--font-serif);
+    font-size: clamp(2.1rem, 4.8vw, 3.6rem);
+    font-weight: 400;
+    line-height: 1.04;
+    letter-spacing: 0.5px;
+    color: var(--color-text);
+    margin: 0;
+  }
+  .dhead__en em { font-style: italic; }
+  .dhead__th {
+    font-family: var(--font-sans);
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    color: var(--color-text-muted);
+    margin: 12px 0 0;
+  }
+  .pintro {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: clamp(76px, 10vw, 150px) clamp(20px, 5vw, 64px) clamp(30px, 4vw, 52px);
+  }
+  .pintro__body {
+    max-width: 600px;
+    margin: clamp(20px, 3vw, 32px) 0 0;
+    color: var(--color-text-muted);
+    line-height: 1.95;
+    font-size: 0.95rem;
+  }
+  .pintro__body p { margin: 0; }
+  .section .container { max-width: 1240px; padding: 0 clamp(20px, 5vw, 64px); }
+  .chip { border-radius: 0; letter-spacing: 1px; font-size: 0.8rem; padding: 9px 16px; background: transparent; }
+
+  /* gallery grid — sharp + slow hover */
+  .gallery-grid { gap: 10px; }
+  @media (min-width: 640px) { .gallery-grid { gap: 14px; } }
+  .photo { border-radius: 0; }
+  .photo img { transition: transform 1s ease; }
+  .photo:hover img { transform: scale(1.04); }
+  .filter-label {
+    margin: 18px 0 8px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+  }
+</style>
 </head>
 <body>
 
 <div id="nav-mount"></div>
 
-<section class="section">
-  <div class="container">
-    <div class="breadcrumb"><a href="../index.html">หน้าแรก</a> <span>/</span> รูปภาพสถานที่</div>
-    <div class="section-title">
-      <span class="eyebrow">Gallery</span>
-      <h2>บรรยากาศสถานที่</h2>
-      <p class="text-center" style="color:var(--color-text-muted); max-width:640px; margin: 16px auto 0;">
-        เลือกชมรูปภาพตามโซนและประเภทพิธี (เฉพาะพิธีที่มีรูปในโซนนั้นเท่านั้น)
-      </p>
-    </div>
+<!-- PAGE HERO -->
+<section class="phero">
+  <div class="phero__media"><img id="pheroImg" alt="บรรยากาศสถานที่"></div>
+  <div class="phero__wordmark" aria-hidden="true">GALLERY</div>
+</section>
 
+<!-- INTRO -->
+<section class="pintro">
+  <div class="breadcrumb"><a href="../index.html">หน้าแรก</a> <span>/</span> รูปภาพสถานที่</div>
+  <h2 class="dhead__en"><em>Gallery</em></h2>
+  <p class="dhead__th">บรรยากาศสถานที่</p>
+  <div class="pintro__body">
+    <p>เลือกชมรูปภาพตามโซนและประเภทพิธี (เฉพาะพิธีที่มีรูปในโซนนั้นเท่านั้น)</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 0;">
+  <div class="container">
     <!-- Zone filter -->
-    <div style="margin-bottom: 8px; font-size:0.85rem; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:1px;">โซน</div>
+    <div class="filter-label">โซน</div>
     <div class="gallery-filters" id="zoneChips"></div>
 
     <!-- Ceremony filter -->
-    <div style="margin-bottom: 8px; font-size:0.85rem; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:1px;">ประเภทพิธี</div>
+    <div class="filter-label">ประเภทพิธี</div>
     <div class="gallery-filters" id="ceremonyChips"></div>
 
     <div id="photoCount" style="color:var(--color-text-muted); font-size:0.9rem; margin-bottom:16px;"></div>
@@ -51,6 +132,7 @@
   const data = await CW.mountChrome('gallery');
   if (!data) return;
   const photos = data.gallery?.photos || [];
+  if (photos[0]) document.getElementById('pheroImg').src = photos[0].url;
   const zones = data.gallery?.zones || [];
   const ceremonies = data.ceremonies || [];
 
