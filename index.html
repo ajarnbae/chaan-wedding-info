@@ -61,6 +61,26 @@
   .reveal.in-view { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
 
+  /* ─── Display heading แบบ Hillbrook ("Curated Services") ─── */
+  .dhead__en {
+    font-family: var(--font-serif);
+    font-size: clamp(2.3rem, 5.4vw, 3.9rem);
+    font-weight: 400;
+    line-height: 1.04;
+    letter-spacing: 0.5px;
+    color: var(--color-text);
+    margin: 0;
+  }
+  .dhead__en em { font-style: italic; }
+  .dhead__th {
+    font-family: var(--font-sans);
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    color: var(--color-text-muted);
+    margin: 12px 0 0;
+  }
+
   /* ─── HERO — wordmark ยักษ์เกยภาพ (Hillbrook) ─── */
   .hero {
     position: relative;
@@ -197,14 +217,7 @@
   .zones-head {
     max-width: 1500px;
     margin: 0 auto;
-    padding: 0 clamp(20px, 5vw, 64px) clamp(44px, 6vw, 80px);
-  }
-  .zones-head h2 {
-    font-family: var(--font-serif);
-    font-size: clamp(2.2rem, 5vw, 3.6rem);
-    font-weight: 400;
-    margin: 10px 0 0;
-    letter-spacing: 0.5px;
+    padding: 0 clamp(20px, 5vw, 64px) clamp(28px, 4vw, 52px);
   }
   .zone {
     display: grid;
@@ -214,8 +227,8 @@
   .zone__media {
     display: block;
     position: relative;
-    height: 58vh;
-    min-height: 320px;
+    height: 48vh;
+    min-height: 300px;
   }
   .zone__media img {
     position: absolute;
@@ -229,31 +242,39 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: clamp(48px, 8vw, 110px) clamp(24px, 5vw, 80px);
+    padding: clamp(36px, 6vw, 100px) clamp(24px, 5vw, 80px) clamp(30px, 5vw, 100px);
   }
-  .zone__kicker { margin-bottom: 20px; }
+  .zone__kicker { margin-bottom: 14px; }
   .zone__name {
     font-family: var(--font-serif);
-    font-size: clamp(2.2rem, 4.2vw, 3.5rem);
+    font-size: clamp(1.9rem, 3.6vw, 3.1rem);
     font-weight: 400;
     line-height: 1.12;
-    margin: 0 0 22px;
+    margin: 0 0 14px;
   }
   .zone__name em { font-style: italic; }
   .zone__desc {
     max-width: 46ch;
     color: var(--color-text-muted);
     font-size: 1rem;
-    line-height: 1.95;
-    margin: 0 0 36px;
+    line-height: 1.85;
+    margin: 0 0 22px;
   }
   @media (min-width: 900px) {
-    .zone { grid-template-columns: 42fr 58fr; min-height: 94vh; }
+    .zone { grid-template-columns: 42fr 58fr; min-height: 88vh; }
     .zone__media { height: auto; min-height: 100%; }
     .zone--flip .zone__media { order: -1; }
   }
+  @media (max-width: 899px) {
+    .zone + .zone { margin-top: clamp(44px, 10vw, 72px); }
+  }
 
   /* ─── FEATURED PACKAGE — split เต็มจอ โทนเดียวกับ zones ─── */
+  .feat-head {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: clamp(84px, 11vw, 150px) clamp(20px, 5vw, 64px) clamp(30px, 4vw, 56px);
+  }
   .feat {
     display: grid;
     grid-template-columns: 1fr;
@@ -340,12 +361,7 @@
     margin: 0 auto;
     padding: clamp(80px, 10vw, 140px) clamp(20px, 5vw, 64px);
   }
-  .explore h2 {
-    font-family: var(--font-serif);
-    font-size: clamp(2rem, 4.4vw, 3.2rem);
-    font-weight: 400;
-    margin: 10px 0 clamp(36px, 5vw, 56px);
-  }
+  .explore .idx { margin-top: clamp(36px, 5vw, 56px); }
   .idx { border-top: 1px solid var(--color-line); }
   .idx a {
     display: grid;
@@ -392,12 +408,6 @@
     justify-content: space-between;
     gap: 20px;
     padding: 0 clamp(20px, 5vw, 64px) clamp(36px, 5vw, 56px);
-  }
-  .gal__head h2 {
-    font-family: var(--font-serif);
-    font-size: clamp(2rem, 4.4vw, 3.2rem);
-    font-weight: 400;
-    margin: 10px 0 0;
   }
   .gal__track {
     display: flex;
@@ -497,133 +507,82 @@
   }
   .why-p { color: var(--color-text-muted); font-size: 0.94rem; margin: 0; line-height: 1.8; }
 
-  /* ─── BOOKING — โทนเรียบ + timeline เดิม ─── */
+  /* ─── BOOKING — two-column editorial plans ─── */
   .booking { background: var(--color-cream-warm); padding: clamp(80px, 10vw, 140px) 20px; }
-  .booking__inner { max-width: 960px; margin: 0 auto; }
-  .booking__inner h2 {
-    font-family: var(--font-serif);
-    font-size: clamp(2rem, 4.4vw, 3.2rem);
-    font-weight: 400;
-    margin: 10px 0 clamp(36px, 5vw, 52px);
+  .booking__inner { max-width: 1060px; margin: 0 auto; }
+  .booking__head { margin-bottom: clamp(40px, 6vw, 64px); }
+  .plans {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(44px, 7vw, 72px);
   }
-  .booking-tabs {
+  @media (min-width: 880px) { .plans { grid-template-columns: 1fr 1fr; gap: clamp(48px, 6vw, 88px); } }
+  .plan__head {
     display: flex;
-    gap: clamp(20px, 4vw, 40px);
-    margin-bottom: 44px;
-    flex-wrap: wrap;
-    border-bottom: 1px solid var(--color-line);
-  }
-  .booking-tab {
-    display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 12px 2px 16px;
-    min-height: 48px;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid transparent;
-    margin-bottom: -1px;
-    color: var(--color-text-muted);
-    font-family: var(--font-sans);
-    font-size: 0.92rem;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    cursor: pointer;
-    transition: color 0.25s ease, border-color 0.25s ease;
+    gap: 14px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--color-brown);
+    padding-bottom: 14px;
   }
-  .booking-tab:hover { color: var(--color-brown-dark); }
-  .booking-tab.active { color: var(--color-brown-dark); border-bottom-color: var(--color-gold); }
-  .tab-badge {
-    display: inline-block;
-    border: 1px solid var(--color-gold);
-    color: var(--color-gold-dark);
-    border-radius: 999px;
-    padding: 2px 10px;
+  .plan__head h3 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 2.4vw, 1.7rem);
+    font-weight: 500;
+    margin: 0;
+  }
+  .plan__badge {
     font-size: 0.74rem;
     font-weight: 600;
-  }
-  .booking-note {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    border-left: 2px solid var(--color-gold);
-    background: var(--color-cream);
-    padding: 16px 22px;
-    margin-bottom: 44px;
-    color: var(--color-brown-dark);
-    font-size: 0.92rem;
-    line-height: 1.7;
-    max-width: 640px;
-  }
-  .booking-note-icon { font-size: 1.15rem; flex-shrink: 0; margin-top: 1px; }
-
-  .timeline-steps { display: flex; align-items: flex-start; position: relative; gap: 0; }
-  .timeline-steps::before {
-    content: "";
-    position: absolute;
-    top: 22px;
-    left: calc(100% / 6);
-    right: calc(100% / 6);
-    height: 1px;
-    background: var(--color-gold-light);
-    z-index: 0;
-  }
-  .timeline-step {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-    padding: 0 8px;
-  }
-  .step-dot {
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    background: var(--color-cream-warm);
+    letter-spacing: 1.5px;
     border: 1px solid var(--color-gold);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 16px;
-    flex-shrink: 0;
+    color: var(--color-gold-dark);
+    padding: 3px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
   }
-  .step-dot span {
+  .plan__note {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: var(--color-brown-dark);
+    border-left: 2px solid var(--color-gold);
+    padding: 8px 0 8px 16px;
+    margin: 18px 0 0;
+  }
+  .plan__steps { list-style: none; margin: 0; padding: 0; }
+  .plan__steps li {
+    display: grid;
+    grid-template-columns: 34px 1fr auto;
+    gap: 14px;
+    align-items: start;
+    padding: 22px 2px;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .plan__num {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 1.15rem;
+    font-size: 1.3rem;
     color: var(--color-gold-dark);
-    line-height: 1;
-  }
-  .step-dot--highlight { background: var(--color-gold); border-color: var(--color-gold-dark); }
-  .step-dot--highlight span { color: #fff; }
-  .step-title {
-    font-family: var(--font-serif);
-    font-size: 1.08rem;
-    color: var(--color-brown-dark);
-    font-weight: 600;
-    margin-bottom: 6px;
     line-height: 1.3;
   }
-  .step-desc { font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.65; }
-  .step-tag {
-    display: inline-block;
-    margin-top: 10px;
+  .plan__title {
     font-family: var(--font-serif);
-    font-size: 0.95rem;
+    font-size: 1.08rem;
     font-weight: 600;
-    letter-spacing: 1px;
-    color: var(--color-gold-dark);
-    border-bottom: 1px solid var(--color-gold-light);
-    padding-bottom: 2px;
+    color: var(--color-brown-dark);
+    margin-bottom: 4px;
+    line-height: 1.35;
   }
-  @media (max-width: 639px) {
-    .timeline-steps { flex-direction: column; align-items: stretch; }
-    .timeline-steps::before { top: 0; bottom: 0; left: 22px; right: auto; width: 1px; height: auto; }
-    .timeline-step { flex-direction: row; text-align: left; align-items: flex-start; gap: 16px; padding: 0 0 30px 0; }
-    .step-dot { margin-bottom: 0; flex-shrink: 0; }
-    .step-content { padding-top: 8px; }
+  .plan__desc { font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.7; margin: 0; }
+  .plan__amt {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    color: var(--color-gold-dark);
+    white-space: nowrap;
+    padding-top: 3px;
   }
 
   /* ─── CONTACT — full-bleed image + ลิงก์ขีดเส้นใต้ (redesign) ─── */
@@ -726,22 +685,26 @@
 <!-- VENUE ZONES — full-screen scrolling sections -->
 <section id="venueSpacesSection" style="display:none;">
   <div class="zones-head reveal">
-    <span class="kicker">Our Spaces</span>
-    <h2>โซนสถานที่</h2>
+    <h2 class="dhead__en"><em>Our</em> Spaces</h2>
+    <p class="dhead__th">โซนสถานที่</p>
   </div>
   <div id="venueSpacesGrid"></div>
 </section>
 
 <!-- FEATURED PACKAGE -->
 <section id="promo">
+  <div class="feat-head reveal">
+    <h2 class="dhead__en">Recommended <em>Package</em></h2>
+    <p class="dhead__th">แพ็คเกจแนะนำ</p>
+  </div>
   <div id="featuredMount" class="loading">กำลังโหลดโปรโมชั่น...</div>
 </section>
 
 <!-- EXPLORE — editorial index -->
 <section class="explore">
   <div class="reveal">
-    <span class="kicker">Explore</span>
-    <h2>เลือกข้อมูลที่คุณสนใจ</h2>
+    <h2 class="dhead__en"><em>Explore</em></h2>
+    <p class="dhead__th">เลือกข้อมูลที่คุณสนใจ</p>
   </div>
   <div class="idx reveal">
     <a href="./packages/">
@@ -771,8 +734,8 @@
 <section class="gal">
   <div class="gal__head reveal">
     <div>
-      <span class="kicker">Gallery</span>
-      <h2>บรรยากาศสถานที่</h2>
+      <h2 class="dhead__en"><em>Gallery</em></h2>
+      <p class="dhead__th">บรรยากาศสถานที่</p>
     </div>
     <a href="./gallery/" class="lnk">คลิกเพื่อดูภาพทั้งหมด <span class="circ">→</span></a>
   </div>
@@ -807,85 +770,86 @@
 <!-- BOOKING STEPS -->
 <section class="booking">
   <div class="booking__inner">
-    <div class="reveal">
-      <span class="kicker">How to Book</span>
-      <h2>ขั้นตอนการจองและชำระเงิน</h2>
+    <div class="booking__head reveal">
+      <h2 class="dhead__en"><em>How</em> to Book</h2>
+      <p class="dhead__th">ขั้นตอนการจองและชำระเงิน</p>
     </div>
 
-    <div class="booking-tabs">
-      <button class="booking-tab active" data-tab="same-year">จองภายในปี</button>
-      <button class="booking-tab" data-tab="cross-year">จองข้ามปี <span class="tab-badge">ลด 20,000฿</span></button>
-    </div>
-
-    <!-- จองภายในปี -->
-    <div class="booking-timeline" id="tab-same-year">
-      <div class="timeline-steps">
-        <div class="timeline-step">
-          <div class="step-dot step-dot--highlight"><span>1</span></div>
-          <div class="step-content">
-            <div class="step-title">จองวันแต่งงาน</div>
-            <div class="step-desc">ชำระมัดจำ 10,000 บาท<br>เพื่อล็อควันงานทันที</div>
-            <span class="step-tag">10,000 ฿</span>
-          </div>
-        </div>
-        <div class="timeline-step">
-          <div class="step-dot"><span>2</span></div>
-          <div class="step-content">
-            <div class="step-title">2 เดือนก่อนงาน</div>
-            <div class="step-desc">ชำระ 50% แรก<br>ของราคาแพ็คเกจ</div>
-            <span class="step-tag">50%</span>
-          </div>
-        </div>
-        <div class="timeline-step">
-          <div class="step-dot"><span>3</span></div>
-          <div class="step-content">
-            <div class="step-title">1 วันก่อน / วันงาน</div>
-            <div class="step-desc">ชำระยอดที่เหลือ 50%<br>พร้อมรับวันแต่งงานในฝัน</div>
-            <span class="step-tag">50%</span>
-          </div>
-        </div>
+    <div class="plans">
+      <!-- จองภายในปี -->
+      <div class="plan reveal">
+        <header class="plan__head">
+          <h3>จองภายในปี</h3>
+        </header>
+        <ol class="plan__steps">
+          <li>
+            <span class="plan__num">1</span>
+            <div>
+              <div class="plan__title">จองวันแต่งงาน</div>
+              <p class="plan__desc">ชำระมัดจำ 10,000 บาท<br>เพื่อล็อควันงานทันที</p>
+            </div>
+            <span class="plan__amt">10,000 ฿</span>
+          </li>
+          <li>
+            <span class="plan__num">2</span>
+            <div>
+              <div class="plan__title">2 เดือนก่อนงาน</div>
+              <p class="plan__desc">ชำระ 50% แรก<br>ของราคาแพ็คเกจ</p>
+            </div>
+            <span class="plan__amt">50%</span>
+          </li>
+          <li>
+            <span class="plan__num">3</span>
+            <div>
+              <div class="plan__title">1 วันก่อน / วันงาน</div>
+              <p class="plan__desc">ชำระยอดที่เหลือ 50%<br>พร้อมรับวันแต่งงานในฝัน</p>
+            </div>
+            <span class="plan__amt">50%</span>
+          </li>
+        </ol>
       </div>
-    </div>
 
-    <!-- จองข้ามปี -->
-    <div class="booking-timeline" id="tab-cross-year" style="display:none;">
-      <div class="booking-note">
-        <span class="booking-note-icon">🎁</span>
-        <span>จองปีนี้ จัดงานปีหน้า — รับส่วนลดพิเศษ <strong>20,000 บาท</strong> สำหรับแพ็คเกจ Signature จันทร์ครบเครื่อง</span>
-      </div>
-      <div class="timeline-steps">
-        <div class="timeline-step">
-          <div class="step-dot step-dot--highlight"><span>1</span></div>
-          <div class="step-content">
-            <div class="step-title">จองวันแต่งงาน</div>
-            <div class="step-desc">ชำระมัดจำ 10,000 บาท<br>เพื่อล็อควันงานทันที</div>
-            <span class="step-tag">10,000 ฿</span>
-          </div>
-        </div>
-        <div class="timeline-step">
-          <div class="step-dot"><span>2</span></div>
-          <div class="step-content">
-            <div class="step-title">2 เดือนหลังจากจอง</div>
-            <div class="step-desc">ชำระ 25%<br>ของราคาแพ็คเกจ</div>
-            <span class="step-tag">25%</span>
-          </div>
-        </div>
-        <div class="timeline-step">
-          <div class="step-dot"><span>3</span></div>
-          <div class="step-content">
-            <div class="step-title">2 เดือนก่อนงาน</div>
-            <div class="step-desc">ชำระอีก 25%<br>ของราคาแพ็คเกจ</div>
-            <span class="step-tag">25%</span>
-          </div>
-        </div>
-        <div class="timeline-step">
-          <div class="step-dot"><span>4</span></div>
-          <div class="step-content">
-            <div class="step-title">1 วันก่อน / วันงาน</div>
-            <div class="step-desc">ชำระยอดที่เหลือ 50%<br>พร้อมรับวันแต่งงานในฝัน</div>
-            <span class="step-tag">50%</span>
-          </div>
-        </div>
+      <!-- จองข้ามปี -->
+      <div class="plan reveal">
+        <header class="plan__head">
+          <h3>จองข้ามปี</h3>
+          <span class="plan__badge">ลด 20,000฿</span>
+        </header>
+        <p class="plan__note"><span>🎁</span><span>จองปีนี้ จัดงานปีหน้า — รับส่วนลดพิเศษ <strong>20,000 บาท</strong> สำหรับแพ็คเกจ Signature จันทร์ครบเครื่อง</span></p>
+        <ol class="plan__steps">
+          <li>
+            <span class="plan__num">1</span>
+            <div>
+              <div class="plan__title">จองวันแต่งงาน</div>
+              <p class="plan__desc">ชำระมัดจำ 10,000 บาท<br>เพื่อล็อควันงานทันที</p>
+            </div>
+            <span class="plan__amt">10,000 ฿</span>
+          </li>
+          <li>
+            <span class="plan__num">2</span>
+            <div>
+              <div class="plan__title">2 เดือนหลังจากจอง</div>
+              <p class="plan__desc">ชำระ 25%<br>ของราคาแพ็คเกจ</p>
+            </div>
+            <span class="plan__amt">25%</span>
+          </li>
+          <li>
+            <span class="plan__num">3</span>
+            <div>
+              <div class="plan__title">2 เดือนก่อนงาน</div>
+              <p class="plan__desc">ชำระอีก 25%<br>ของราคาแพ็คเกจ</p>
+            </div>
+            <span class="plan__amt">25%</span>
+          </li>
+          <li>
+            <span class="plan__num">4</span>
+            <div>
+              <div class="plan__title">1 วันก่อน / วันงาน</div>
+              <p class="plan__desc">ชำระยอดที่เหลือ 50%<br>พร้อมรับวันแต่งงานในฝัน</p>
+            </div>
+            <span class="plan__amt">50%</span>
+          </li>
+        </ol>
       </div>
     </div>
   </div>
@@ -897,7 +861,7 @@
   <div class="contact__inner reveal">
     <span class="kicker">Get in touch</span>
     <h2>พร้อมให้ปรึกษา</h2>
-    <p class="contact__quote">ทุกเรื่องราวความรักมีจุดเริ่มต้น — เริ่มต้นเรื่องราวของคุณที่ ชาน</p>
+    <p class="contact__quote">ทุกเรื่องราวความรักมีจุดเริ่มต้น — เริ่มต้นเรื่องราวของคุณที่ จันทร์ เวดดิ้ง</p>
     <p class="contact__lead">สนใจสอบถามหรือจองเข้าชมสถานที่ ติดต่อทางช่องทางด้านล่าง</p>
     <div id="finalCtas" class="contact__links"></div>
   </div>
@@ -1062,7 +1026,7 @@
     featuredMount.innerHTML = `
       <div class="feat">
         <div class="feat__body reveal">
-          <span class="kicker feat__kicker">Recommended · ${isSignature ? 'Signature' : 'Essential'}</span>
+          <span class="kicker feat__kicker">${isSignature ? 'Signature' : 'Essential'}</span>
           <h2 class="feat__name">${tierLabel}</h2>
           <p class="feat__pkgname">${CW.escape(featured.name)}</p>
           <p class="feat__desc">${CW.escape(featured.longDescription || featured.shortDescription || '')}</p>
@@ -1125,18 +1089,6 @@
   if (c.facebook) ctas.push(`<a href="${CW.escape(c.facebook)}" class="clink" target="_blank">f Facebook</a>`);
   if (c.mapLink) ctas.push(`<a href="${CW.escape(c.mapLink)}" class="clink" target="_blank">📍 แผนที่</a>`);
   document.getElementById('finalCtas').innerHTML = ctas.join('');
-
-  // ── Booking tab switching ──
-  document.querySelectorAll('.booking-tab').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.booking-tab').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const tab = btn.dataset.tab;
-      document.querySelectorAll('.booking-timeline').forEach(el => el.style.display = 'none');
-      const target = document.getElementById('tab-' + tab);
-      if (target) target.style.display = '';
-    });
-  });
 
   // ── Scroll reveal ──
   const revealEls = document.querySelectorAll('.reveal');
