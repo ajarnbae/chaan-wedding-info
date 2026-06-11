@@ -16,7 +16,7 @@
     text-align: center;
     position: relative;
     overflow: hidden;
-    min-height: 420px;
+    min-height: clamp(520px, 74vh, 700px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -64,7 +64,7 @@
     z-index: 2;
     max-width: 720px;
     margin: 0 auto;
-    padding: 72px 16px 80px;
+    padding: clamp(80px, 12vh, 110px) 16px clamp(88px, 13vh, 120px);
   }
   .hero-mini__script {
     font-family: var(--font-script);
@@ -134,14 +134,14 @@
     display: grid;
     gap: 10px;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 200px 200px;
-    max-width: 900px;
+    grid-template-rows: 190px 190px;
+    max-width: 1000px;
     margin: 32px auto 28px;
   }
   @media (min-width: 640px) {
     .gallery-preview__grid {
       grid-template-columns: 1.6fr 1fr 1fr;
-      grid-template-rows: 220px 220px;
+      grid-template-rows: 260px 260px;
     }
   }
   .gallery-preview__item {
@@ -167,13 +167,14 @@
 
   /* FEATURED PACKAGE SPOTLIGHT */
   .hot-promo {
-    background: linear-gradient(135deg, #5C4534 0%, #8C6C2E 100%);
-    color: #fff;
+    background: linear-gradient(135deg, var(--color-ivory) 0%, var(--color-cream-warm) 100%);
+    color: var(--color-text);
+    border: 1px solid var(--color-line);
     border-radius: var(--radius-lg);
     overflow: hidden;
     display: grid;
     grid-template-columns: 1fr;
-    box-shadow: 0 20px 60px rgba(60, 38, 16, 0.25);
+    box-shadow: var(--shadow-lg);
     position: relative;
   }
   .hot-promo__badge {
@@ -196,7 +197,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(92,69,52,0) 50%, rgba(92,69,52,0.7) 100%);
+    background: linear-gradient(180deg, rgba(92,69,52,0) 70%, rgba(92,69,52,0.22) 100%);
   }
   .hot-promo__body {
     padding: 32px 28px;
@@ -206,7 +207,7 @@
   }
   .hot-promo__eyebrow {
     font-family: var(--font-script);
-    color: var(--color-gold-light);
+    color: var(--color-gold);
     font-size: 1.6rem;
     line-height: 1;
     margin-bottom: 4px;
@@ -215,10 +216,10 @@
     font-family: var(--font-serif);
     font-size: clamp(1.6rem, 4vw, 2.4rem);
     margin: 0 0 8px;
-    color: #fff;
+    color: var(--color-brown-dark);
   }
   .hot-promo__sub {
-    color: rgba(255,255,255,0.8);
+    color: var(--color-text-muted);
     margin: 0 0 16px;
     font-size: 0.95rem;
   }
@@ -232,12 +233,12 @@
   .hot-promo__price {
     font-family: var(--font-serif);
     font-size: clamp(2rem, 5vw, 3rem);
-    color: var(--color-gold-light);
+    color: var(--color-gold-dark);
     line-height: 1;
   }
   .hot-promo__price-meta {
     font-size: 0.9rem;
-    color: rgba(255,255,255,0.75);
+    color: var(--color-text-muted);
   }
   .hot-promo__pills {
     display: flex;
@@ -246,12 +247,12 @@
     margin-bottom: 20px;
   }
   .hot-promo__pill {
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.2);
+    background: var(--color-cream-warm);
+    border: 1px solid var(--color-line);
     padding: 4px 12px;
     border-radius: 999px;
     font-size: 0.8rem;
-    color: rgba(255,255,255,0.9);
+    color: var(--color-brown);
   }
   .hot-promo__ctas { display: flex; gap: 10px; flex-wrap: wrap; }
   @media (min-width: 720px) { .hot-promo { grid-template-columns: 1.1fr 1fr; } .hot-promo__img { aspect-ratio: auto; } }
@@ -476,6 +477,17 @@
   </div>
   <!-- Dots -->
   <div class="hero-dots" id="heroDots"></div>
+</section>
+
+<!-- VENUE SPACES -->
+<section class="section" id="venueSpacesSection" style="display:none;">
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow">Our Spaces</span>
+      <h2>โซนสถานที่</h2>
+    </div>
+    <div class="venue-spaces" id="venueSpacesGrid"></div>
+  </div>
 </section>
 
 <!-- FEATURED PACKAGE SPOTLIGHT -->
@@ -790,6 +802,29 @@
     previewGrid.closest('section').style.display = 'none';
   }
 
+  // ── Venue spaces (from gallery zones) ──
+  const zoneDefs = data.gallery?.zones || [];
+  const zoneGrid = document.getElementById('venueSpacesGrid');
+  if (zoneGrid && zoneDefs.length) {
+    const zoneCards = zoneDefs.map(z => {
+      const photo = allPhotos.find(p => p.zone === z.id);
+      if (!photo) return '';
+      return `
+        <a href="./gallery/?zone=${encodeURIComponent(z.id)}" class="venue-space">
+          <img src="${CW.escape(photo.url)}" alt="${CW.escape(z.name)}" loading="lazy" style="${CW.imgStyle(photo)}">
+          <div class="venue-space__overlay">
+            <div class="venue-space__name">${CW.escape(z.name)}</div>
+            <p class="venue-space__desc">${CW.escape(z.description || '')}</p>
+            <span class="venue-space__link">ดูรูปภาพ →</span>
+          </div>
+        </a>`;
+    }).join('');
+    if (zoneCards.trim()) {
+      zoneGrid.innerHTML = zoneCards;
+      document.getElementById('venueSpacesSection').style.display = '';
+    }
+  }
+
   // Featured = the 99,999 promo by default
   const featuredId = data.featuredPackageId;
   const all = [...(data.packages?.wedding || []), ...(data.packages?.seminar || [])];
@@ -827,7 +862,7 @@
           </div>
           <div class="hot-promo__ctas">
             <a href="./packages/detail.html?id=${encodeURIComponent(featured.id)}" class="btn btn--primary">ดูรายละเอียดเต็ม →</a>
-            <a href="./packages/" class="btn btn--ghost" style="border-color: var(--color-gold-light); color: var(--color-gold-light);">แพ็คเกจอื่น ๆ</a>
+            <a href="./packages/" class="btn btn--ghost">แพ็คเกจอื่น ๆ</a>
           </div>
         </div>
       </div>

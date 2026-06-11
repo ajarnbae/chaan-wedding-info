@@ -91,8 +91,12 @@ CW.findPackageCategory = function (data, pkgId) {
 };
 
 // Nav
-CW.renderNav = function (activePage = '') {
+CW.renderNav = function (activePage = '', data = null) {
   const base = CW.dataPath;
+  const c = data?.site?.contact || {};
+  const lineLink = c.line ? (c.line.startsWith('http') ? c.line : `https://line.me/R/ti/p/${encodeURIComponent(c.line)}`) : '';
+  const ctaHref = lineLink || (c.phone ? `tel:${CW.escape(c.phone.replace(/[^\d+]/g, ''))}` : base + 'packages/');
+  const ctaTarget = lineLink ? ' target="_blank"' : '';
   const links = [
     { href: base + 'index.html',       label: 'หน้าแรก',     key: 'home' },
     { href: base + 'packages/',        label: 'แพ็คเกจ',     key: 'packages' },
@@ -113,6 +117,7 @@ CW.renderNav = function (activePage = '') {
         <small>wedding venue</small>
       </a>
       <div class="nav__links">${linkHTML}</div>
+      <a class="nav__cta" href="${CW.escape(ctaHref)}"${ctaTarget}>💬 สอบถาม / จอง</a>
       <button class="nav__toggle" aria-label="menu" onclick="document.getElementById('navMobile').classList.toggle('open')">
         <span></span><span></span><span></span>
       </button>
@@ -159,14 +164,23 @@ CW.renderFooter = function (data) {
   </footer>
   ${lineLink
     ? `<a class="fab-contact" href="${CW.escape(lineLink)}" target="_blank">💬 สอบถาม / จอง</a>`
-    : (c.phone ? `<a class="fab-contact" href="tel:${CW.escape(c.phone.replace(/[^\d+]/g, ''))}">☎ ${CW.escape(c.phone)}</a>` : '')}`;
+    : (c.phone ? `<a class="fab-contact" href="tel:${CW.escape(c.phone.replace(/[^\d+]/g, ''))}">☎ ${CW.escape(c.phone)}</a>` : '')}
+  <nav class="cta-bar" aria-label="ติดต่อด่วน">
+    ${c.phone ? `<a class="cta-bar__primary" href="tel:${CW.escape(c.phone.replace(/[^\d+]/g, ''))}"><span class="ico">☎</span>โทร</a>` : ''}
+    <a href="${base}packages/"><span class="ico">💐</span>ดูแพ็คเกจ</a>
+    ${c.facebook ? `<a href="${CW.escape(c.facebook)}" target="_blank"><span class="ico">f</span>Facebook</a>` : ''}
+    ${lineLink ? `<a href="${CW.escape(lineLink)}" target="_blank"><span class="ico">💬</span>LINE</a>` : ''}
+  </nav>`;
 };
 
 CW.mountChrome = async function (activePage = '') {
   const data = await CW.loadData();
   const navMount = document.getElementById('nav-mount');
   const footMount = document.getElementById('footer-mount');
-  if (navMount) navMount.outerHTML = CW.renderNav(activePage);
-  if (footMount) footMount.outerHTML = CW.renderFooter(data || {});
+  if (navMount) navMount.outerHTML = CW.renderNav(activePage, data);
+  if (footMount) {
+    footMount.outerHTML = CW.renderFooter(data || {});
+    if (document.querySelector('.cta-bar')) document.body.classList.add('has-cta-bar');
+  }
   return data;
 };
